@@ -5,6 +5,22 @@
   },
   {
     "type": "p",
+    "content": "Calculating scores is the period in between the end of the previous round and the beginning of the new round. During this state, we are fetching all the scores and calculating the leaderboard. The new round will open as soon as all scores are in. Please note this usually takes between 1 and 3 hours. Please bear with us until the new round opens for you to see your scores reflect on the leaderboard and dive in to earn more SeaShells."
+  },
+  {
+    "type": "p",
+    "content": "Yes, all algo files uploaded before the round ends (see round times below) will be considered."
+  },
+  {
+    "type": "p",
+    "content": "If you upload a new file while your previous algo file is said to still being processed and the new file is accepted, you can consider the old file to be cancelled."
+  },
+  {
+    "type": "p",
+    "content": "When you upload an algo file and you get a \"contains errors\" message returned, this is not a server/platform issue, but it means your algo file contains errors which need to be fixed."
+  },
+  {
+    "type": "p",
     "content": "Participation is open to individuals who are 18 years or older and currently enrolled in an accredited college or university. We do not actively monitor participant eligibility during the sign-up phase or the challenge runtime. Registration is open until 22 April 2025. After this date, IMC will verify the identity and eligibility of prize-winning participants. If you or any of your teammates are under 18 or not currently enrolled in an accredited college or university or don’t fully reply to our request for verification , you will not be eligible for prizes."
   },
   {
@@ -82,9 +98,5 @@
         "level": 0
       }
     ]
-  },
-  {
-    "type": "p",
-    "content": "Calculating scores is the period in between the end of the previous round and the beginning of the new round. During this state, we are fetching all the scores and calculating the leaderboard. The new round will open as soon as all scores are in. Please note this usually takes between 1 and 2 hours. Please bear with us until the new round opens for you to see your scores reflect on the leaderboard and dive in to earn more SeaShells."
   }
 ]

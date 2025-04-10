@@ -1,55 +1,5 @@
 [
   {
-    "title": "Tutorial",
-    "path": "about_prosperity/tutorial.json",
-    "source_url": "https://imc-prosperity.notion.site/Tutorial-19ee8453a093812dac38c637d1e26c9d"
-  },
-  {
-    "title": "Game mechanics overview",
-    "path": "about_prosperity/game_mechanics_overview.json",
-    "source_url": "https://imc-prosperity.notion.site/Game-mechanics-overview-19ee8453a0938117aa68e81abde3c103"
-  },
-  {
-    "title": "High-level storyline",
-    "path": "about_prosperity/high-level_storyline.json",
-    "source_url": "https://imc-prosperity.notion.site/High-level-storyline-19ee8453a09381c698add4418f31c788"
-  },
-  {
-    "title": "Round 4",
-    "path": "rounds/round_4.json",
-    "source_url": "https://imc-prosperity.notion.site/Round-4-19ee8453a0938112aa5fd7f0d060ffe6"
-  },
-  {
-    "title": "Round 3",
-    "path": "rounds/round_3.json",
-    "source_url": "https://imc-prosperity.notion.site/Round-3-19ee8453a093811082dbcdd1f6c1cd0f"
-  },
-  {
-    "title": "FAQ",
-    "path": "about_prosperity/faq.json",
-    "source_url": "https://imc-prosperity.notion.site/FAQ-19ee8453a09381319f09fc2dad563867"
-  },
-  {
-    "title": "Trading glossary",
-    "path": "e-learning_center/trading_glossary.json",
-    "source_url": "https://imc-prosperity.notion.site/Trading-glossary-19ee8453a09381478d7ce4e322dcaff4"
-  },
-  {
-    "title": "Round 2",
-    "path": "rounds/round_2.json",
-    "source_url": "https://imc-prosperity.notion.site/Round-2-19ee8453a09381a580cdf9c0468e9bc8"
-  },
-  {
-    "title": "Round 1",
-    "path": "rounds/round_1.json",
-    "source_url": "https://imc-prosperity.notion.site/Round-1-19ee8453a09381d18b78cf3c21e5d916"
-  },
-  {
-    "title": "Who is IMC?",
-    "path": "about_prosperity/who_is_imc?.json",
-    "source_url": "https://imc-prosperity.notion.site/Who-is-IMC-19ee8453a09381a4a2d1d4fa5a768013"
-  },
-  {
     "title": "Rules",
     "path": "about_prosperity/rules.json",
     "source_url": "https://imc-prosperity.notion.site/Rules-19ee8453a093802fba08d6c112c29ff4"
@@ -60,14 +10,44 @@
     "source_url": "https://imc-prosperity.notion.site/Tutorial-round-19ee8453a093813b81bfc2749b881a94"
   },
   {
-    "title": "Writing an Algorithm in Python",
-    "path": "e-learning_center/writing_an_algorithm_in_python.json",
-    "source_url": "https://imc-prosperity.notion.site/Writing-an-Algorithm-in-Python-19ee8453a0938114a15eca1124bf28a1"
+    "title": "Tutorial",
+    "path": "about_prosperity/tutorial.json",
+    "source_url": "https://imc-prosperity.notion.site/Tutorial-19ee8453a093812dac38c637d1e26c9d"
   },
   {
-    "title": "Programming resources",
-    "path": "e-learning_center/programming_resources.json",
-    "source_url": "https://imc-prosperity.notion.site/Programming-resources-19ee8453a09381e4b841f09d4add277d"
+    "title": "Round 3",
+    "path": "rounds/round_3.json",
+    "source_url": "https://imc-prosperity.notion.site/Round-3-19ee8453a093811082dbcdd1f6c1cd0f"
+  },
+  {
+    "title": "Round 5",
+    "path": "rounds/round_5.json",
+    "source_url": "https://imc-prosperity.notion.site/Round-5-19ee8453a0938154bd42d50839bbccee"
+  },
+  {
+    "title": "Game mechanics overview",
+    "path": "about_prosperity/game_mechanics_overview.json",
+    "source_url": "https://imc-prosperity.notion.site/Game-mechanics-overview-19ee8453a0938117aa68e81abde3c103"
+  },
+  {
+    "title": "FAQ",
+    "path": "about_prosperity/faq.json",
+    "source_url": "https://imc-prosperity.notion.site/FAQ-19ee8453a09381319f09fc2dad563867"
+  },
+  {
+    "title": "Round 2",
+    "path": "rounds/round_2.json",
+    "source_url": "https://imc-prosperity.notion.site/Round-2-19ee8453a09381a580cdf9c0468e9bc8"
+  },
+  {
+    "title": "Who is IMC?",
+    "path": "about_prosperity/who_is_imc?.json",
+    "source_url": "https://imc-prosperity.notion.site/Who-is-IMC-19ee8453a09381a4a2d1d4fa5a768013"
+  },
+  {
+    "title": "Round 4",
+    "path": "rounds/round_4.json",
+    "source_url": "https://imc-prosperity.notion.site/Round-4-19ee8453a0938112aa5fd7f0d060ffe6"
   },
   {
     "title": "What is Prosperity?",
@@ -75,8 +55,33 @@
     "source_url": "https://imc-prosperity.notion.site/What-is-Prosperity-19ee8453a093815fbcbef6761c9ed944"
   },
   {
-    "title": "Round 5",
-    "path": "rounds/round_5.json",
-    "source_url": "https://imc-prosperity.notion.site/Round-5-19ee8453a0938154bd42d50839bbccee"
+    "title": "Programming resources",
+    "path": "e-learning_center/programming_resources.json",
+    "source_url": "https://imc-prosperity.notion.site/Programming-resources-19ee8453a09381e4b841f09d4add277d"
+  },
+  {
+    "title": "High-level storyline",
+    "path": "about_prosperity/high-level_storyline.json",
+    "source_url": "https://imc-prosperity.notion.site/High-level-storyline-19ee8453a09381c698add4418f31c788"
+  },
+  {
+    "title": "Writing an Algorithm in Python",
+    "path": "e-learning_center/writing_an_algorithm_in_python.json",
+    "source_url": "https://imc-prosperity.notion.site/Writing-an-Algorithm-in-Python-19ee8453a0938114a15eca1124bf28a1"
+  },
+  {
+    "title": "Trading glossary",
+    "path": "e-learning_center/trading_glossary.json",
+    "source_url": "https://imc-prosperity.notion.site/Trading-glossary-19ee8453a09381478d7ce4e322dcaff4"
+  },
+  {
+    "title": "Round 1",
+    "path": "rounds/round_1.json",
+    "source_url": "https://imc-prosperity.notion.site/Round-1-19ee8453a09381d18b78cf3c21e5d916"
+  },
+  {
+    "title": "Announcements",
+    "path": "about_prosperity/announcements.json",
+    "source_url": "https://imc-prosperity.notion.site/Announcements-1d1e8453a093800e8767c3639c0f017d"
   }
 ]

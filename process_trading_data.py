@@ -20,69 +20,147 @@ def process_trading_csv(file_path, output_dir):
     """
     print(f"Processing {file_path}...")
     
-    # Read the CSV using semicolon delimiter
-    df = pd.read_csv(file_path, sep=';')
-    
-    # Clean up column names (strip whitespace)
-    df.columns = df.columns.str.strip()
-    
-    # Create directory if it doesn't exist
-    os.makedirs(output_dir, exist_ok=True)
-    
-    documents = []
-    
-    # Group by day and product
-    if 'product' in df.columns:
-        for (day, product), group in df.groupby(['day', 'product']):
-            # Create product-specific directory
-            product_dir = Path(output_dir) / product.lower()
-            os.makedirs(product_dir, exist_ok=True)
-            
-            # Calculate trading metrics
-            metrics = calculate_trading_metrics(group)
-            
-            # Create document content
-            content = f"Trading data for {product} on day {day}:\n"
-            
-            if 'mid_price' in group.columns:
-                content += f"Average mid price: {group['mid_price'].mean():.2f}\n"
-                content += f"Price range: {group['mid_price'].min():.2f} to {group['mid_price'].max():.2f}\n"
-            
-            content += f"Data points: {len(group)}\n\n"
-            
-            # Add calculated metrics
-            content += "Trading metrics:\n"
-            for metric_name, metric_value in metrics.items():
-                if isinstance(metric_value, (int, float)) and not np.isnan(metric_value):
-                    content += f"{metric_name}: {metric_value:.4f}\n"
-            
-            # Extract round information from file path
-            round_match = re.search(r'round_(\d+)', str(file_path), re.IGNORECASE)
-            round_info = f"round_{round_match.group(1)}" if round_match else "unknown_round"
-            
-            # Create document with metadata
-            document = {
-                "metadata": {
-                    "source": os.path.basename(file_path),
-                    "day": int(day),
-                    "product": product,
-                    "type": "trading_data",
-                    "file_type": "price" if "prices" in str(file_path).lower() else "trade",
-                    "round": round_info,
-                    "basket": get_basket_info(file_path)
-                },
-                "content": content
-            }
-            
-            documents.append(document)
-            
-            # Save individual document
-            file_base = os.path.basename(file_path).replace('.csv', '.json')
-            doc_filename = product_dir / f"{product}_day_{day}_{file_base}"
-            with open(doc_filename, 'w') as f:
-                json.dump(document, f, indent=2)
+    try:
+        # Read the CSV using semicolon delimiter
+        df = pd.read_csv(file_path, sep=';')
+        
+        # Clean up column names (strip whitespace)
+        df.columns = df.columns.str.strip()
+        
+        # Create directory if it doesn't exist
+        os.makedirs(output_dir, exist_ok=True)
+        
+        documents = []
+        
+        # Extract file type (trades or prices)
+        file_type = "trade" if "trades" in str(file_path).lower() else "price"
+        
+        # Extract day from filename if needed
+        file_name = os.path.basename(file_path)
+        day_match = re.search(r'day_(-?\d+)', file_name)
+        file_day = int(day_match.group(1)) if day_match else None
+        
+        # Extract round information from file path
+        round_match = re.search(r'round_(\d+)', str(file_path), re.IGNORECASE)
+        round_info = f"round_{round_match.group(1)}" if round_match else "unknown_round"
+        
+        # Handle different file formats
+        if 'product' in df.columns and 'day' in df.columns:
+            # Standard market data format
+            for (day, product), group in df.groupby(['day', 'product']):
+                process_market_data_group(day, product, group, file_path, output_dir, documents, file_type, round_info)
                 
-    return documents
+        elif 'symbol' in df.columns:
+            # Trade data format
+            for symbol, group in df.groupby('symbol'):
+                # Use symbol as product and day from filename
+                if file_day is not None:
+                    process_trade_data_group(file_day, symbol, group, file_path, output_dir, documents, file_type, round_info)
+                else:
+                    print(f"Warning: Could not determine day for {file_path}, skipping")
+        else:
+            print(f"Warning: Unrecognized CSV format for {file_path}, skipping")
+            
+        return documents
+        
+    except Exception as e:
+        print(f"Error processing {file_path}: {e}")
+        return []
+
+def process_market_data_group(day, product, group, file_path, output_dir, documents, file_type, round_info):
+    """Process a group of market data rows"""
+    product_dir = Path(output_dir) / product.lower()
+    os.makedirs(product_dir, exist_ok=True)
+    
+    # Calculate trading metrics
+    metrics = calculate_trading_metrics(group)
+    
+    # Create document content
+    content = f"Trading data for {product} on day {day}:\n"
+    
+    if 'mid_price' in group.columns:
+        content += f"Average mid price: {group['mid_price'].mean():.2f}\n"
+        content += f"Price range: {group['mid_price'].min():.2f} to {group['mid_price'].max():.2f}\n"
+    
+    content += f"Data points: {len(group)}\n\n"
+    
+    # Add calculated metrics
+    content += "Trading metrics:\n"
+    for metric_name, metric_value in metrics.items():
+        if isinstance(metric_value, (int, float)) and not np.isnan(metric_value):
+            content += f"{metric_name}: {metric_value:.4f}\n"
+    
+    # Create document with metadata
+    document = {
+        "metadata": {
+            "source": os.path.basename(file_path),
+            "day": int(day),
+            "product": product,
+            "type": "trading_data",
+            "file_type": file_type,
+            "round": round_info,
+            "basket": get_basket_info(file_path)
+        },
+        "content": content
+    }
+    
+    documents.append(document)
+    
+    # Save individual document
+    file_base = os.path.basename(file_path).replace('.csv', '.json')
+    doc_filename = product_dir / f"{product}_day_{day}_{file_base}"
+    with open(doc_filename, 'w') as f:
+        json.dump(document, f, indent=2)
+
+def process_trade_data_group(day, symbol, group, file_path, output_dir, documents, file_type, round_info):
+    """Process a group of trade data rows"""
+    product_dir = Path(output_dir) / symbol.lower()
+    os.makedirs(product_dir, exist_ok=True)
+    
+    # Calculate trade-specific metrics
+    metrics = calculate_trade_metrics(group)
+    
+    # Create document content
+    content = f"Trade data for {symbol} on day {day}:\n"
+    
+    if 'price' in group.columns:
+        content += f"Average price: {group['price'].mean():.2f}\n"
+        content += f"Price range: {group['price'].min():.2f} to {group['price'].max():.2f}\n"
+    
+    if 'timestamp' in group.columns:
+        content += f"Timestamp range: {group['timestamp'].min()} to {group['timestamp'].max()}\n"
+    
+    content += f"Number of trades: {len(group)}\n"
+    
+    if 'quantity' in group.columns:
+        content += f"Total quantity traded: {group['quantity'].sum()}\n"
+    
+    content += "\nTrade metrics:\n"
+    for metric_name, metric_value in metrics.items():
+        if isinstance(metric_value, (int, float)) and not np.isnan(metric_value):
+            content += f"{metric_name}: {metric_value:.4f}\n"
+    
+    # Create document with metadata
+    document = {
+        "metadata": {
+            "source": os.path.basename(file_path),
+            "day": int(day),
+            "product": symbol,
+            "type": "trading_data",
+            "file_type": file_type,
+            "round": round_info,
+            "basket": get_basket_info(file_path)
+        },
+        "content": content
+    }
+    
+    documents.append(document)
+    
+    # Save individual document
+    file_base = os.path.basename(file_path).replace('.csv', '.json')
+    doc_filename = product_dir / f"{symbol}_day_{day}_{file_base}"
+    with open(doc_filename, 'w') as f:
+        json.dump(document, f, indent=2)
 
 def get_basket_info(file_path):
     """Extract basket information from the file path if available"""
@@ -97,10 +175,10 @@ def get_basket_info(file_path):
 
 def calculate_trading_metrics(df):
     """
-    Calculate additional trading metrics for a product.
+    Calculate additional trading metrics for market data.
     
     Args:
-        df: DataFrame containing trading data for a specific product and day
+        df: DataFrame containing market data for a specific product and day
     
     Returns:
         Dict of calculated metrics
@@ -139,6 +217,67 @@ def calculate_trading_metrics(df):
     depth_columns = sum(1 for col in df.columns if 'bid_volume' in col or 'ask_volume' in col)
     if depth_columns > 0:
         metrics["market_depth"] = depth_columns // 2  # Divide by 2 to get depth on each side
+    
+    return metrics
+
+def calculate_trade_metrics(df):
+    """
+    Calculate metrics for trade data.
+    
+    Args:
+        df: DataFrame containing trade data for a specific symbol and day
+    
+    Returns:
+        Dict of calculated metrics
+    """
+    metrics = {}
+    
+    # Trade volume metrics
+    if 'quantity' in df.columns:
+        metrics["total_volume"] = df["quantity"].sum()
+        metrics["avg_trade_size"] = df["quantity"].mean()
+        metrics["max_trade_size"] = df["quantity"].max()
+        metrics["min_trade_size"] = df["quantity"].min()
+    
+    # Price metrics
+    if 'price' in df.columns:
+        metrics["price_volatility"] = df["price"].std()
+        metrics["price_mean"] = df["price"].mean()
+    
+    # Calculate VWAP (Volume-Weighted Average Price)
+    if 'price' in df.columns and 'quantity' in df.columns:
+        metrics["vwap"] = (df["price"] * df["quantity"]).sum() / df["quantity"].sum()
+    
+    # Time-based metrics
+    if 'timestamp' in df.columns and len(df) > 1:
+        metrics["time_span"] = df["timestamp"].max() - df["timestamp"].min()
+        
+        # Calculate average time between trades
+        if metrics["time_span"] > 0:
+            metrics["avg_time_between_trades"] = metrics["time_span"] / (len(df) - 1)
+            metrics["trade_frequency"] = len(df) / metrics["time_span"] if metrics["time_span"] > 0 else 0
+    
+    # Price trend analysis
+    if 'price' in df.columns and 'timestamp' in df.columns and len(df) > 1:
+        # Sort by timestamp to ensure proper calculation
+        df_sorted = df.sort_values('timestamp')
+        
+        first_price = df_sorted['price'].iloc[0]
+        last_price = df_sorted['price'].iloc[-1]
+        
+        metrics["price_change"] = last_price - first_price
+        metrics["price_change_pct"] = ((last_price / first_price) - 1) * 100 if first_price > 0 else 0
+        
+    # Count trades with same buyer/seller if that data exists
+    if 'buyer' in df.columns and 'seller' in df.columns:
+        non_empty_buyers = df['buyer'].dropna().astype(str)
+        non_empty_sellers = df['seller'].dropna().astype(str)
+        
+        if len(non_empty_buyers) > 0:
+            metrics["unique_buyers"] = non_empty_buyers.nunique()
+        
+        if len(non_empty_sellers) > 0:  
+            metrics["unique_sellers"] = non_empty_sellers.nunique()
     
     return metrics
 

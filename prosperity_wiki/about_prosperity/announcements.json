@@ -1,0 +1,62 @@
+[
+  {
+    "type": "h1",
+    "content": "Announcements"
+  },
+  {
+    "type": "p",
+    "content": "Hello dear Traders,"
+  },
+  {
+    "type": "p",
+    "content": "Unfortunately we encountered 2 errors in performing Round 1 Algorithmic trading challenge simulation for which we want to share an update. Please read carefully."
+  },
+  {
+    "type": "p",
+    "content": "What happened?"
+  },
+  {
+    "type": "list",
+    "style": "bulleted",
+    "items": [
+      {
+        "content": "Round 1 price data (Day 1) was mistakenly published in “Data in a bottle” for a short period of time, causing some teams to gain an advantage by writing their algorithmic trades based on known Day 1 simulation data. The current scores in the leaderboard shows this unfair advantage.",
+        "level": 0
+      },
+      {
+        "content": "Some teams only received simulation up to the first 100k timestamps instead of the complete 1M timestamps causing incomplete simulation seen in the scores on the leaderboard.",
+        "level": 0
+      }
+    ]
+  },
+  {
+    "type": "p",
+    "content": "What will we do to resolve this?"
+  },
+  {
+    "type": "list",
+    "style": "bulleted",
+    "items": [
+      {
+        "content": "We will use a fresh price data for Day_1 to evaluate Round 1 performance using your already uploaded algorithm scripts. No new submission for Round 1 will be allowed. The price data for Day -2, Day -1, and Day 0 on which you have based your trades when writing your scripts, will of course stay the same.",
+        "level": 0
+      },
+      {
+        "content": "We will also fix the bug causing partial simulation and ensure running an entire simulation for all teams, so everyone’s last uploaded algo file will be evaluated based on the complete 1M timestamps.",
+        "level": 0
+      }
+    ]
+  },
+  {
+    "type": "p",
+    "content": "When and how will this happen?"
+  },
+  {
+    "type": "p",
+    "content": "We will perform above changes during a short maintenance break during the current Round 2. We will let you know closer to the time we expect the platform to be down (this will at least not be in the next 16 hours). During this maintenance, we will update the leaderboard and Archipelago island with the new scores. You can continue making progress with Round 2 and find ideas to make more SeaShells trading the Picnic Baskets. \n\nWe apologize for the inconvenience. We are working to ensure the gameplay is a fair and a pleasant experience for everyone and we appreciate all your efforts so far!\n\nPlease keep a look out at the ⁠announcements channel for more information on the upcoming maintenance mode."
+  },
+  {
+    "type": "p",
+    "content": "/ End of announcement"
+  }
+]
