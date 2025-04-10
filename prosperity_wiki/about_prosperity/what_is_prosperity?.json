@@ -1,0 +1,18 @@
+[
+  {
+    "type": "h1",
+    "content": "What is Prosperity?"
+  },
+  {
+    "type": "p",
+    "content": "Prosperity is a 15-day long trading challenge happening somewhere in a near - utopian - future. You’re in control of an island in an archipelago and your goal is to bring your island to prosperity. You do so by earning as many SeaShells as possible; the main currency in the archipelago. The more SeaShells you earn, the more your island will prosper."
+  },
+  {
+    "type": "p",
+    "content": "During your 15 days on the island, your trading abilities will be tested through a variety of trading challenges. It’s up to you to develop a successful trading strategy. You will be working on a Python script to handle algorithmic trades on your behalf. Every round also presents a manual trading challenge; a one off challenge that is separate from your algorithmic trading and could yield some additional profits. Your success depends on both these algorithmic and manual trades."
+  },
+  {
+    "type": "p",
+    "content": "Take a deep breath and smell the opportunities drifting by with the ocean breeze. It’s up to you to seize those opportunities and lead your island into prosperity. At times, it will be challenging. Hard even. But for those who know how to work the market to their favor, the reward will be bountiful."
+  }
+]

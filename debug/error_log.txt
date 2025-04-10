@@ -1,0 +1,4 @@
+Error loading page: Page.screenshot: Timeout 30000ms exceeded.
+Call log:
+  - taking page screenshot
+  -   - waiting for fonts to load...

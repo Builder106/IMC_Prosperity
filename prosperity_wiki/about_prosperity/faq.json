@@ -1,0 +1,90 @@
+[
+  {
+    "type": "h1",
+    "content": "FAQ"
+  },
+  {
+    "type": "p",
+    "content": "Participation is open to individuals who are 18 years or older and currently enrolled in an accredited college or university. We do not actively monitor participant eligibility during the sign-up phase or the challenge runtime. Registration is open until 22 April 2025. After this date, IMC will verify the identity and eligibility of prize-winning participants. If you or any of your teammates are under 18 or not currently enrolled in an accredited college or university or don’t fully reply to our request for verification , you will not be eligible for prizes."
+  },
+  {
+    "type": "p",
+    "content": "Additionally, the following participants are ineligible for prizes *:"
+  },
+  {
+    "type": "list",
+    "style": "bulleted",
+    "items": [
+      {
+        "content": "Staff of IMC or its affiliates, employees of IMC competitors, and individuals from companies involved in market making, high-frequency trading, or proprietary trading, as well as organizations that contributed to the development of the IMC Prosperity Global Trading Challenge.",
+        "level": 0
+      },
+      {
+        "content": "Participants who ranked in the top 10 during the 2024 edition of the IMC Prosperity Global Trading Challenge are also excluded from winning prizes.",
+        "level": 0
+      }
+    ]
+  },
+  {
+    "type": "p",
+    "content": "* For more information, please refer to the terms and conditions available at https://prosperity.imc.com/terms-and-conditions."
+  },
+  {
+    "type": "p",
+    "content": "There is elaborate documentation on the 💻Writing an Algorithm in Python  page. Check it out to see how to write a program. Still have questions? Our Discord server is a good place to ask questions."
+  },
+  {
+    "type": "p",
+    "content": "Islands cannot be renamed. During island creation you can choose your island name. Once you have created your island it cannot be changed anymore, so choose wisely."
+  },
+  {
+    "type": "p",
+    "content": "You can invite team members while creating an island. If you’ve already created an island, you can invite team members by going to menu > settings. You can add and remove teammates in the ‘Island settings’ tab. Inviting team members is possible until the end of round 2. Once round 3 starts, the teams will be locked and inviting new team members is no longer possible."
+  },
+  {
+    "type": "p",
+    "content": "You can switch teams until the end of round 2. If you want to switch teams, you need to be invited by the admin of the new team via an invitation link. This team should not yet have reached the maximum number of players. Accepting the new team’s invite link will automatically remove you from your old team."
+  },
+  {
+    "type": "p",
+    "content": "After round 2 has ended, you cannot switch teams anymore. The Prosperity admins will not be able to manually move players between teams at any point the trading challenge is active."
+  },
+  {
+    "type": "p",
+    "content": "The challenge will start on April 7th, 2025 at 13:00 PM CET. There are five rounds and each round lasts 72 hours."
+  },
+  {
+    "type": "list",
+    "style": "bulleted",
+    "items": [
+      {
+        "content": "Tutorial: February 24, 13:00 → April 7, 13:00",
+        "level": 0
+      },
+      {
+        "content": "Round 1: April 7, 13:00 → April 10, 13:00",
+        "level": 0
+      },
+      {
+        "content": "Round 2: April 10, 13:00 → April 13, 13:00",
+        "level": 0
+      },
+      {
+        "content": "Round 3: April 13, 13:00 → April 16, 13:00",
+        "level": 0
+      },
+      {
+        "content": "Round 4: April 16, 13:00 → April 19, 13:00",
+        "level": 0
+      },
+      {
+        "content": "Round 5: April 19, 13:00 → April 22, 13:00",
+        "level": 0
+      }
+    ]
+  },
+  {
+    "type": "p",
+    "content": "Calculating scores is the period in between the end of the previous round and the beginning of the new round. During this state, we are fetching all the scores and calculating the leaderboard. The new round will open as soon as all scores are in. Please note this usually takes between 1 and 2 hours. Please bear with us until the new round opens for you to see your scores reflect on the leaderboard and dive in to earn more SeaShells."
+  }
+]

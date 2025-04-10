@@ -1,0 +1,18 @@
+[
+  {
+    "type": "h1",
+    "content": "Tutorial"
+  },
+  {
+    "type": "p",
+    "content": "Before the actual trading challenge starts, a tutorial round will be open for you to explore the game. This is the time for you to discover all the different aspects of the game: the interface, the dashboard, the leaderboard and Tropical TV. You can even try uploading your first Python program to get familiar with it."
+  },
+  {
+    "type": "p",
+    "content": "During this tutorial round, you can upload as many Python programs as you please, to get familiar with the controls and dynamics. All algorithms uploaded in the tutorial round will be processed and generate results, so you can experiment with different programs and strategies."
+  },
+  {
+    "type": "p",
+    "content": "Take advantage of this pre-game playground and prepare yourself in the best way possible for when it really matters: when round 1 begins."
+  }
+]
