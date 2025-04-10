@@ -12,15 +12,14 @@ from langchain.chains import RetrievalQA
 from langchain_google_genai import ChatGoogleGenerativeAI
 from langchain.prompts import PromptTemplate
 from dotenv import load_dotenv
-from process_trading_data import process_all_csv_files
+from process_trading_data import process_round_data, discover_rounds
 
 # Load environment variables (for OpenAI API key)
 load_dotenv()
 
 # Directory settings
 NOTION_WIKI_DIR = "prosperity_wiki"
-TRADING_DATA_DIR = "round_1_island_data"
-PROCESSED_TRADING_DATA_DIR = "processed_trading_data"
+TRADING_DATA_DIR = "trading_data"  # Updated to the main trading_data directory
 VECTOR_DB_DIR = "vectordb"
 
 def process_notion_wiki_data(wiki_dir=NOTION_WIKI_DIR):
@@ -57,18 +56,27 @@ def process_notion_wiki_data(wiki_dir=NOTION_WIKI_DIR):
                 # Extract content from the JSON structure
                 content = ""
                 
-                # Check if data is a list or dict and handle accordingly
+                # Process the list structure with proper type handling
                 if isinstance(data, list):
-                    # Handle list structure
                     for item in data:
                         if isinstance(item, dict):
-                            if "title" in item:
-                                content += f"# {item['title']}\n\n"
-                            if "content" in item:
+                            # Handle different content types
+                            if "type" in item:
+                                if item["type"].startswith("h"):
+                                    # Handle headings (h1, h2, h3, etc.)
+                                    heading_level = item["type"][1:]
+                                    content += f"{'#' * int(heading_level)} {item['content']}\n\n"
+                                elif item["type"] == "p":
+                                    # Handle paragraphs
+                                    content += f"{item['content']}\n\n"
+                                elif item["type"] == "list" and "items" in item:
+                                    # Handle lists with nested items
+                                    content += process_list_items(item["items"], item.get("style", "bulleted"))
+                            # Fallback for any other structure
+                            elif "content" in item:
                                 content += f"{item['content']}\n\n"
-                            # Add other fields as needed
                 else:
-                    # Original code for dictionary structure
+                    # Handle dictionary structure (if exists)
                     if "title" in data:
                         content += f"# {data['title']}\n\n"
                     
@@ -86,7 +94,7 @@ def process_notion_wiki_data(wiki_dir=NOTION_WIKI_DIR):
                         "source": str(json_file),
                         "category": category,
                         "type": "notion_wiki",
-                        "title": data.get("title", "") if isinstance(data, dict) else ""
+                        "title": extract_title(data)
                     }
                 )
                 
@@ -99,6 +107,30 @@ def process_notion_wiki_data(wiki_dir=NOTION_WIKI_DIR):
     print(f"Processed {len(documents)} Notion Wiki documents")
     return documents
 
+def process_list_items(items, style="bulleted"):
+    """Process nested list items and return formatted content"""
+    result = ""
+    for item in items:
+        if isinstance(item, dict) and "content" in item:
+            # Calculate indentation based on nesting level
+            indent = "  " * (item.get("level", 0))
+            # Add appropriate marker based on list style
+            marker = "- " if style == "bulleted" else f"1. "
+            result += f"{indent}{marker}{item['content']}\n"
+    result += "\n"  # Add extra line after list
+    return result
+
+def extract_title(data):
+    """Extract title from the data structure"""
+    if isinstance(data, list):
+        # Look for the first h1 element as title
+        for item in data:
+            if isinstance(item, dict) and item.get("type") == "h1" and "content" in item:
+                return item["content"]
+    elif isinstance(data, dict) and "title" in data:
+        return data["title"]
+    return ""
+
 def process_trading_data():
     """
     Process trading data CSV files into documents
@@ -106,21 +138,29 @@ def process_trading_data():
     Returns:
         List of Document objects from trading data
     """
-    # First process CSVs to create JSON documents
     print(f"Processing trading data from {TRADING_DATA_DIR}...")
-    json_documents = process_all_csv_files(TRADING_DATA_DIR, PROCESSED_TRADING_DATA_DIR)
     
-    # Convert to LangChain Documents
-    documents = []
-    for json_doc in json_documents:
-        doc = Document(
-            page_content=json_doc["content"],
-            metadata=json_doc["metadata"]
-        )
-        documents.append(doc)
+    all_documents = []
     
-    print(f"Processed {len(documents)} trading data documents")
-    return documents
+    # Discover available rounds
+    available_rounds = discover_rounds(TRADING_DATA_DIR)
+    print(f"Discovered rounds: {available_rounds}")
+    
+    # Process each available round
+    for round_name in available_rounds:
+        print(f"Processing {round_name}...")
+        json_documents = process_round_data(round_name, TRADING_DATA_DIR)
+        
+        # Convert JSON documents to LangChain Document objects
+        for json_doc in json_documents:
+            doc = Document(
+                page_content=json_doc["content"],
+                metadata=json_doc["metadata"]
+            )
+            all_documents.append(doc)
+    
+    print(f"Processed a total of {len(all_documents)} trading data documents")
+    return all_documents
 
 def create_vector_stores(notion_documents, trading_documents):
     """

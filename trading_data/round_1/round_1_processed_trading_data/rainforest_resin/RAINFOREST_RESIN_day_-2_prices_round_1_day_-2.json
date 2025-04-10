@@ -1,0 +1,10 @@
+{
+  "metadata": {
+    "source": "prices_round_1_day_-2.csv",
+    "day": -2,
+    "product": "RAINFOREST_RESIN",
+    "type": "trading_data",
+    "file_type": "price"
+  },
+  "content": "Trading data for RAINFOREST_RESIN on day -2:\nAverage mid price: 10000.00\nPrice range: 9996.50 to 10003.50\nData points: 10000\n\nTrading metrics:\nvolatility: 1.5138\nprice_momentum: 0.0000\nvolume_weighted_price: 9999.9911\ntrading_activity: 10000.0000\navg_spread: 6.7288\nmarket_depth: 3.0000\n"
+}
