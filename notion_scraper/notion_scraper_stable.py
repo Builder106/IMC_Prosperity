@@ -8,6 +8,8 @@ from playwright.sync_api import sync_playwright
 BASE_URL = "https://imc-prosperity.notion.site/Prosperity-3-Wiki-19ee8453a09380529731c4e6fb697ea4"
 # Directory to save the JSON files
 SAVE_DIR = "prosperity_wiki"
+# Directory to save code files
+CODE_DIR = "prosperity_wiki/code"
 
 def save_json(data, folder, filename):
     """Save data to a JSON file."""
@@ -31,9 +33,32 @@ def determine_category(title, content_blocks):
     # Default to about_prosperity for general information
     return "about_prosperity"
 
-def extract_content(soup):
+def save_code_file(code_content, language, page_title, code_id):
+    """Save code to a separate file and return the file path."""
+    # Create sanitized file name base
+    sanitized_title = page_title.lower().replace(" ", "_").replace("/", "_")
+    
+    # Determine file extension based on language
+    extension = ".py" if language.lower() == "python" else ".txt"
+    
+    # Create filename
+    filename = f"{sanitized_title}_{code_id}{extension}"
+    
+    # Ensure code directory exists
+    os.makedirs(CODE_DIR, exist_ok=True)
+    
+    # Save the code file
+    file_path = os.path.join(CODE_DIR, filename)
+    with open(file_path, "w", encoding="utf-8") as f:
+        f.write(code_content)
+    
+    # Return the relative path from the project root
+    return os.path.join("code", filename)
+
+def extract_content(soup, page_title):
     """Extract content blocks from the Notion page in their natural order."""
     blocks = []
+    code_block_counter = 1  # Counter for code blocks
     
     # First get the page title (h1) which is special
     title_div = soup.select_one(".notion-page-block h1")
@@ -116,10 +141,30 @@ def extract_content(soup):
             # Handle code blocks
             code = element.get_text().strip()
             if code:
+                # Generate a unique ID for this code block
+                code_id = f"code_{code_block_counter}"
+                code_block_counter += 1
+                
+                # Determine language (default to Python if not specified)
+                language = "python"  # Default language
+                
+                # Try to detect language from class or content
+                for cls in class_name:
+                    lang_match = re.search(r'language-(\w+)', cls)
+                    if lang_match:
+                        language = lang_match.group(1)
+                        break
+                
+                # Save the code to a separate file
+                file_path = save_code_file(code, language, page_title, code_id)
+                
+                # Add reference to the code file in the JSON
                 blocks.append({
                     "type": "code",
-                    "language": "python",
-                    "content": code
+                    "language": language,
+                    "code_id": code_id,
+                    "file_path": file_path,
+                    "preview": code[:50] + ("..." if len(code) > 50 else "")  # Short preview
                 })
     
     # Don't forget to add any remaining list items
@@ -315,7 +360,9 @@ def scrape_notion_wiki():
             
             title_tag = soup.find("title")
             title = title_tag.text.strip() if title_tag else "Untitled"
-            content_blocks = extract_content(soup)
+            
+            # Pass the page title to extract_content for code file naming
+            content_blocks = extract_content(soup, title)
 
             # Generate a filename based on the page title
             file_name = title.lower().replace(" ", "_").replace("/", "_") + ".json"

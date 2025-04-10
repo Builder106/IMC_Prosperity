@@ -1,5 +1,6 @@
 import os
 import json
+import re
 from pathlib import Path
 import pandas as pd
 from langchain_google_genai import GoogleGenerativeAIEmbeddings
@@ -33,6 +34,38 @@ def process_notion_wiki_data(wiki_dir=NOTION_WIKI_DIR):
         List of Document objects suitable for vector store
     """
     print(f"Processing Notion Wiki data from {wiki_dir}...")
+    
+    def load_code_file(file_path):
+        """Load code from external file referenced in the JSON"""
+        full_path = os.path.join(wiki_dir, file_path)
+        try:
+            if os.path.exists(full_path):
+                with open(full_path, 'r', encoding='utf-8') as f:
+                    return f.read()
+            else:
+                print(f"Warning: Referenced code file not found: {full_path}")
+                return None
+        except Exception as e:
+            print(f"Error loading code file {full_path}: {e}")
+            return None
+    
+    def extract_code_languages(data):
+        """Extract programming languages used in code blocks"""
+        languages = set()
+        
+        # Handle list structure
+        if isinstance(data, list):
+            for item in data:
+                if isinstance(item, dict) and item.get("type") == "code" and "language" in item:
+                    languages.add(item["language"])
+        
+        # Handle dictionary structure
+        elif isinstance(data, dict) and "content_blocks" in data:
+            for block in data["content_blocks"]:
+                if "code" in block and "language" in block:
+                    languages.add(block["language"])
+                    
+        return list(languages) if languages else []
     
     wiki_path = Path(wiki_dir)
     documents = []
@@ -72,6 +105,21 @@ def process_notion_wiki_data(wiki_dir=NOTION_WIKI_DIR):
                                 elif item["type"] == "list" and "items" in item:
                                     # Handle lists with nested items
                                     content += process_list_items(item["items"], item.get("style", "bulleted"))
+                                elif item["type"] == "code" and "file_path" in item:
+                                    # Load external code file
+                                    code_content = load_code_file(item["file_path"])
+                                    if code_content:
+                                        language = item.get("language", "")
+                                        content += f"```{language}\n{code_content}\n```\n\n"
+                                    else:
+                                        # Fallback to preview if available
+                                        preview = item.get("preview", "Code content unavailable")
+                                        content += f"```\n{preview}\n```\n\n"
+                                elif item["type"] == "code":
+                                    # Handle inline code
+                                    code = item.get("code", "")
+                                    language = item.get("language", "")
+                                    content += f"```{language}\n{code}\n```\n\n"
                             # Fallback for any other structure
                             elif "content" in item:
                                 content += f"{item['content']}\n\n"
@@ -85,16 +133,29 @@ def process_notion_wiki_data(wiki_dir=NOTION_WIKI_DIR):
                             if "text" in block:
                                 content += f"{block['text']}\n\n"
                             elif "code" in block:
-                                content += f"```\n{block['code']}\n```\n\n"
+                                language = block.get("language", "")
+                                content += f"```{language}\n{block['code']}\n```\n\n"
+                            elif "file_path" in block:
+                                # Load external code file
+                                code_content = load_code_file(block["file_path"])
+                                if code_content:
+                                    language = block.get("language", "")
+                                    content += f"```{language}\n{code_content}\n```\n\n"
+                                else:
+                                    # Fallback to preview if available
+                                    preview = block.get("preview", "Code content unavailable")
+                                    content += f"```\n{preview}\n```\n\n"
                 
-                # Create Document with metadata
+                # Create Document with enhanced metadata
                 doc = Document(
                     page_content=content,
                     metadata={
                         "source": str(json_file),
                         "category": category,
                         "type": "notion_wiki",
-                        "title": extract_title(data)
+                        "title": extract_title(data),
+                        "contains_code": "```" in content,
+                        "code_languages": extract_code_languages(data)
                     }
                 )
                 
@@ -130,6 +191,38 @@ def extract_title(data):
     elif isinstance(data, dict) and "title" in data:
         return data["title"]
     return ""
+
+def extract_code_blocks(documents):
+    """
+    Extract code blocks from documents for specialized code search
+    
+    Args:
+        documents: List of Document objects
+        
+    Returns:
+        List of Document objects containing only code blocks
+    """
+    code_docs = []
+    code_pattern = r'```(?:(\w+))?\n(.*?)\n```'
+    
+    for doc in documents:
+        # Use regex to find code blocks with optional language specification
+        matches = re.findall(code_pattern, doc.page_content, re.DOTALL)
+        
+        if matches:
+            for i, (language, code) in enumerate(matches):
+                if code.strip():  # Only add non-empty code blocks
+                    code_docs.append(Document(
+                        page_content=code,
+                        metadata={
+                            **doc.metadata,
+                            "content_type": "code_block",
+                            "language": language if language else "unknown",
+                            "block_index": i
+                        }
+                    ))
+    
+    return code_docs
 
 def process_trading_data():
     """
@@ -171,7 +264,7 @@ def create_vector_stores(notion_documents, trading_documents):
         trading_documents: List of trading data documents
         
     Returns:
-        Tuple of (notion_vectorstore, trading_vectorstore)
+        Tuple of (notion_vectorstore, trading_vectorstore, code_vectorstore)
     """
     print("Creating vector stores...")
     
@@ -183,16 +276,20 @@ def create_vector_stores(notion_documents, trading_documents):
     # Create directories for vector stores
     os.makedirs(f"{VECTOR_DB_DIR}/notion", exist_ok=True)
     os.makedirs(f"{VECTOR_DB_DIR}/trading", exist_ok=True)
+    os.makedirs(f"{VECTOR_DB_DIR}/code", exist_ok=True)
     
-    # Create text splitter for longer documents
-    text_splitter = RecursiveCharacterTextSplitter(
+    # Create text splitter optimized for code and general content
+    text_splitter = RecursiveCharacterTextSplitter.from_language(
+        language="python",  # Default to Python handling
         chunk_size=1000,
-        chunk_overlap=100
+        chunk_overlap=100,
+        separators=["\n\n", "\n", " ", ""]
     )
     
     # Initialize vector stores as None
     notion_vectorstore = None
     trading_vectorstore = None
+    code_vectorstore = None
     
     # Only create notion vector store if there are documents
     if notion_documents:
@@ -207,6 +304,16 @@ def create_vector_stores(notion_documents, trading_documents):
                 embedding=embeddings,
                 persist_directory=f"{VECTOR_DB_DIR}/notion"
             )
+            
+            # Extract code blocks for specialized code search
+            code_blocks = extract_code_blocks(notion_documents)
+            if code_blocks:
+                print(f"Creating specialized code vector store with {len(code_blocks)} code blocks")
+                code_vectorstore = Chroma.from_documents(
+                    documents=code_blocks,
+                    embedding=embeddings,
+                    persist_directory=f"{VECTOR_DB_DIR}/code"
+                )
     else:
         print("No notion documents to process")
     
@@ -227,11 +334,13 @@ def create_vector_stores(notion_documents, trading_documents):
         notion_vectorstore.persist()
     if trading_vectorstore:
         trading_vectorstore.persist()
+    if code_vectorstore:
+        code_vectorstore.persist()
     
     print("Vector stores created and persisted")
-    return notion_vectorstore, trading_vectorstore
+    return notion_vectorstore, trading_vectorstore, code_vectorstore
 
-def create_combined_retriever(notion_vectorstore, trading_vectorstore):
+def create_combined_retriever(notion_vectorstore, trading_vectorstore, code_vectorstore=None):
     print("Creating combined retriever...")
     
     # Handle case where one or both vector stores might be None
@@ -241,12 +350,17 @@ def create_combined_retriever(notion_vectorstore, trading_vectorstore):
     if notion_vectorstore:
         notion_retriever = notion_vectorstore.as_retriever(search_kwargs={"k": 3})
         retrievers.append(notion_retriever)
-        weights.append(0.7)
+        weights.append(0.6)
     
     if trading_vectorstore:
         trading_retriever = trading_vectorstore.as_retriever(search_kwargs={"k": 2})
         retrievers.append(trading_retriever)
         weights.append(0.3)
+        
+    if code_vectorstore:
+        code_retriever = code_vectorstore.as_retriever(search_kwargs={"k": 2})
+        retrievers.append(code_retriever)
+        weights.append(0.1)
     
     # Normalize weights if we have at least one retriever
     if retrievers:
@@ -275,11 +389,14 @@ def create_rag_chain(retriever):
     """
     print("Creating RAG chain...")
     
-    # Create a prompt template
+    # Create a prompt template with code-specific instructions
     rag_prompt_template = """
     You are a financial analysis assistant with expertise in trading data for IMC Prosperity.
     Use the following retrieved information to answer the user's question.
     If you can't answer based on the retrieved information, say so.
+    
+    When explaining code examples, be clear and detailed. When code is referenced or included 
+    in the retrieved information, explain what it does and how it relates to the question.
 
     Retrieved information:
     {context}
@@ -320,14 +437,14 @@ def main():
     trading_documents = process_trading_data()
     
     # 3. Create vector stores
-    notion_vectorstore, trading_vectorstore = create_vector_stores(
+    notion_vectorstore, trading_vectorstore, code_vectorstore = create_vector_stores(
         notion_documents, trading_documents
     )
     
     # 4. Create combined retriever if possible
     retriever = None
-    if notion_vectorstore or trading_vectorstore:
-        retriever = create_combined_retriever(notion_vectorstore, trading_vectorstore)
+    if notion_vectorstore or trading_vectorstore or code_vectorstore:
+        retriever = create_combined_retriever(notion_vectorstore, trading_vectorstore, code_vectorstore)
     
     # 5. Create RAG chain and start interactive query session if retriever exists
     if retriever:
