@@ -2,10 +2,10 @@ import os
 import json
 from pathlib import Path
 import pandas as pd
-from langchain.embeddings import GoogleGenerativeAIEmbeddings
-from langchain.vectorstores import Chroma
+from langchain_google_genai import GoogleGenerativeAIEmbeddings
+from langchain_community.vectorstores import Chroma
 from langchain.text_splitter import RecursiveCharacterTextSplitter
-from langchain.document_loaders import JSONLoader
+from langchain_community.document_loaders import JSONLoader
 from langchain.retrievers import EnsembleRetriever
 from langchain.schema import Document
 from langchain.chains import RetrievalQA
