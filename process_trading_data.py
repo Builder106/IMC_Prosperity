@@ -57,7 +57,7 @@ def process_trading_csv(file_path, output_dir="processed_trading_data"):
                     "day": int(day),
                     "product": product,
                     "type": "trading_data",
-                    "file_type": "price" if "prices" in file_path.lower() else "trade"
+                    "file_type": "price" if "prices" in str(file_path).lower() else "trade"
                 },
                 "content": content
             }

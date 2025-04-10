@@ -182,36 +182,46 @@ def create_vector_stores(notion_documents, trading_documents):
     else:
         print("No trading documents to process")
     
-    # Persist the vector stores
-    notion_vectorstore.persist()
-    trading_vectorstore.persist()
+    # Only persist vector stores if they exist
+    if notion_vectorstore:
+        notion_vectorstore.persist()
+    if trading_vectorstore:
+        trading_vectorstore.persist()
     
     print("Vector stores created and persisted")
     return notion_vectorstore, trading_vectorstore
 
 def create_combined_retriever(notion_vectorstore, trading_vectorstore):
-    """
-    Create an ensemble retriever that combines both vector stores
-    
-    Args:
-        notion_vectorstore: Vector store for Notion Wiki data
-        trading_vectorstore: Vector store for trading data
-        
-    Returns:
-        Ensemble retriever
-    """
     print("Creating combined retriever...")
     
-    notion_retriever = notion_vectorstore.as_retriever(search_kwargs={"k": 3})
-    trading_retriever = trading_vectorstore.as_retriever(search_kwargs={"k": 2})
+    # Handle case where one or both vector stores might be None
+    retrievers = []
+    weights = []
     
-    # Create an ensemble retriever with weights
-    ensemble_retriever = EnsembleRetriever(
-        retrievers=[notion_retriever, trading_retriever],
-        weights=[0.7, 0.3]  # Adjust the weights as needed
-    )
+    if notion_vectorstore:
+        notion_retriever = notion_vectorstore.as_retriever(search_kwargs={"k": 3})
+        retrievers.append(notion_retriever)
+        weights.append(0.7)
     
-    return ensemble_retriever
+    if trading_vectorstore:
+        trading_retriever = trading_vectorstore.as_retriever(search_kwargs={"k": 2})
+        retrievers.append(trading_retriever)
+        weights.append(0.3)
+    
+    # Normalize weights if we have at least one retriever
+    if retrievers:
+        total_weight = sum(weights)
+        weights = [w/total_weight for w in weights]
+        
+        # Create an ensemble retriever with weights
+        ensemble_retriever = EnsembleRetriever(
+            retrievers=retrievers,
+            weights=weights
+        )
+        return ensemble_retriever
+    else:
+        print("Warning: No retrievers available. Cannot create ensemble retriever.")
+        return None
 
 def create_rag_chain(retriever):
     """
@@ -246,7 +256,7 @@ def create_rag_chain(retriever):
     
     # Initialize Google Gemini model
     llm = ChatGoogleGenerativeAI(
-        model="gemini-pro",
+        model="gemini-2.5-pro-exp-03-25",
         temperature=0.0,
         convert_system_message_to_human=True
     )
@@ -274,22 +284,44 @@ def main():
         notion_documents, trading_documents
     )
     
-    # 4. Create combined retriever
-    retriever = create_combined_retriever(notion_vectorstore, trading_vectorstore)
+    # 4. Create combined retriever if possible
+    retriever = None
+    if notion_vectorstore or trading_vectorstore:
+        retriever = create_combined_retriever(notion_vectorstore, trading_vectorstore)
     
-    # 5. Create RAG chain
-    rag_chain = create_rag_chain(retriever)
-    
-    # 6. Example query
-    print("\nTesting the RAG system with an example query...")
-    query = "What was the price trend for RAINFOREST_RESIN on day -1?"
-    result = rag_chain.run(query)
-    
-    print("\nQuery:", query)
-    print("\nResult:", result)
-    
-    print("\nRAG system is ready for use!")
-    print("You can now query it with your own questions about IMC Prosperity trading data and Notion Wiki.")
+    # 5. Create RAG chain and start interactive query session if retriever exists
+    if retriever:
+        rag_chain = create_rag_chain(retriever)
+        
+        print("\nRAG system is ready for use!")
+        print("You can now query it with your own questions about IMC Prosperity trading data and Notion Wiki.")
+        print("Enter 'quit', 'exit', or 'q' to end the session.")
+        
+        # Interactive query loop
+        while True:
+            query = input("\nEnter your question: ")
+            
+            # Check for exit commands
+            if query.lower() in ["quit", "exit", "q"]:
+                print("Exiting RAG query session. Goodbye!")
+                break
+                
+            if not query.strip():
+                print("Please enter a valid question.")
+                continue
+                
+            # Process the query
+            try:
+                print("\nProcessing your question...")
+                result = rag_chain.run(query)
+                
+                print("\nAnswer:")
+                print(result)
+            except Exception as e:
+                print(f"\nError processing your question: {e}")
+                print("Please try again with a different question.")
+    else:
+        print("\nCould not create RAG system: No retrievers available")
 
 if __name__ == "__main__":
     main()
