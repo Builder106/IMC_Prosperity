@@ -57,17 +57,27 @@ def process_notion_wiki_data(wiki_dir=NOTION_WIKI_DIR):
                 # Extract content from the JSON structure
                 content = ""
                 
-                # Add title if present
-                if "title" in data:
-                    content += f"# {data['title']}\n\n"
-                
-                # Add content blocks if present
-                if "content_blocks" in data:
-                    for block in data["content_blocks"]:
-                        if "text" in block:
-                            content += f"{block['text']}\n\n"
-                        elif "code" in block:
-                            content += f"```\n{block['code']}\n```\n\n"
+                # Check if data is a list or dict and handle accordingly
+                if isinstance(data, list):
+                    # Handle list structure
+                    for item in data:
+                        if isinstance(item, dict):
+                            if "title" in item:
+                                content += f"# {item['title']}\n\n"
+                            if "content" in item:
+                                content += f"{item['content']}\n\n"
+                            # Add other fields as needed
+                else:
+                    # Original code for dictionary structure
+                    if "title" in data:
+                        content += f"# {data['title']}\n\n"
+                    
+                    if "content_blocks" in data:
+                        for block in data["content_blocks"]:
+                            if "text" in block:
+                                content += f"{block['text']}\n\n"
+                            elif "code" in block:
+                                content += f"```\n{block['code']}\n```\n\n"
                 
                 # Create Document with metadata
                 doc = Document(

@@ -19,7 +19,7 @@ def process_trading_csv(file_path, output_dir="processed_trading_data"):
     print(f"Processing {file_path}...")
     
     # Read the CSV using semicolon delimiter
-    df = pd.read_csv(file_path, sep=';', comment='//')
+    df = pd.read_csv(file_path, sep=';')
     
     # Clean up column names (strip whitespace)
     df.columns = df.columns.str.strip()
