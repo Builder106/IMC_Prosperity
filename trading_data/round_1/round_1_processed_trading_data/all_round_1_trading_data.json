@@ -1,0 +1,110 @@
+[
+  {
+    "metadata": {
+      "source": "prices_round_1_day_-1.csv",
+      "day": -1,
+      "product": "KELP",
+      "type": "trading_data",
+      "file_type": "price",
+      "round": "round_1",
+      "basket": null
+    },
+    "content": "Trading data for KELP on day -1:\nAverage mid price: 2024.12\nPrice range: 2011.00 to 2036.50\nData points: 10000\n\nTrading metrics:\nvolatility: 4.3308\nprice_momentum: 0.0001\nvolume_weighted_price: 2024.0838\ntrading_activity: 10000.0000\navg_spread: 2.7152\nmarket_depth: 3.0000\n"
+  },
+  {
+    "metadata": {
+      "source": "prices_round_1_day_-1.csv",
+      "day": -1,
+      "product": "RAINFOREST_RESIN",
+      "type": "trading_data",
+      "file_type": "price",
+      "round": "round_1",
+      "basket": null
+    },
+    "content": "Trading data for RAINFOREST_RESIN on day -1:\nAverage mid price: 9999.99\nPrice range: 9996.50 to 10003.50\nData points: 10000\n\nTrading metrics:\nvolatility: 1.4796\nprice_momentum: -0.0003\nvolume_weighted_price: 9999.9814\ntrading_activity: 10000.0000\navg_spread: 6.8160\nmarket_depth: 3.0000\n"
+  },
+  {
+    "metadata": {
+      "source": "prices_round_1_day_-1.csv",
+      "day": -1,
+      "product": "SQUID_INK",
+      "type": "trading_data",
+      "file_type": "price",
+      "round": "round_1",
+      "basket": null
+    },
+    "content": "Trading data for SQUID_INK on day -1:\nAverage mid price: 1971.55\nPrice range: 1832.00 to 2045.50\nData points: 10000\n\nTrading metrics:\nvolatility: 25.8323\nprice_momentum: -0.0034\nvolume_weighted_price: 1971.5369\ntrading_activity: 10000.0000\navg_spread: 2.6608\nmarket_depth: 3.0000\n"
+  },
+  {
+    "metadata": {
+      "source": "prices_round_1_day_-2.csv",
+      "day": -2,
+      "product": "KELP",
+      "type": "trading_data",
+      "file_type": "price",
+      "round": "round_1",
+      "basket": null
+    },
+    "content": "Trading data for KELP on day -2:\nAverage mid price: 2011.76\nPrice range: 1997.00 to 2034.00\nData points: 10000\n\nTrading metrics:\nvolatility: 8.4495\nprice_momentum: 0.0028\nvolume_weighted_price: 2011.7331\ntrading_activity: 10000.0000\navg_spread: 2.6922\nmarket_depth: 3.0000\n"
+  },
+  {
+    "metadata": {
+      "source": "prices_round_1_day_-2.csv",
+      "day": -2,
+      "product": "RAINFOREST_RESIN",
+      "type": "trading_data",
+      "file_type": "price",
+      "round": "round_1",
+      "basket": null
+    },
+    "content": "Trading data for RAINFOREST_RESIN on day -2:\nAverage mid price: 10000.00\nPrice range: 9996.50 to 10003.50\nData points: 10000\n\nTrading metrics:\nvolatility: 1.5138\nprice_momentum: 0.0000\nvolume_weighted_price: 9999.9911\ntrading_activity: 10000.0000\navg_spread: 6.7288\nmarket_depth: 3.0000\n"
+  },
+  {
+    "metadata": {
+      "source": "prices_round_1_day_-2.csv",
+      "day": -2,
+      "product": "SQUID_INK",
+      "type": "trading_data",
+      "file_type": "price",
+      "round": "round_1",
+      "basket": null
+    },
+    "content": "Trading data for SQUID_INK on day -2:\nAverage mid price: 2033.95\nPrice range: 1953.00 to 2187.50\nData points: 10000\n\nTrading metrics:\nvolatility: 58.2302\nprice_momentum: 0.0004\nvolume_weighted_price: 2033.9279\ntrading_activity: 10000.0000\navg_spread: 2.7177\nmarket_depth: 3.0000\n"
+  },
+  {
+    "metadata": {
+      "source": "prices_round_1_day_0.csv",
+      "day": 0,
+      "product": "KELP",
+      "type": "trading_data",
+      "file_type": "price",
+      "round": "round_1",
+      "basket": null
+    },
+    "content": "Trading data for KELP on day 0:\nAverage mid price: 2034.55\nPrice range: 2024.50 to 2044.50\nData points: 10000\n\nTrading metrics:\nvolatility: 2.4203\nprice_momentum: 0.0004\nvolume_weighted_price: 2034.5274\ntrading_activity: 10000.0000\navg_spread: 2.7292\nmarket_depth: 3.0000\n"
+  },
+  {
+    "metadata": {
+      "source": "prices_round_1_day_0.csv",
+      "day": 0,
+      "product": "RAINFOREST_RESIN",
+      "type": "trading_data",
+      "file_type": "price",
+      "round": "round_1",
+      "basket": null
+    },
+    "content": "Trading data for RAINFOREST_RESIN on day 0:\nAverage mid price: 10000.00\nPrice range: 9996.50 to 10003.50\nData points: 10000\n\nTrading metrics:\nvolatility: 1.4962\nprice_momentum: -0.0002\nvolume_weighted_price: 9999.9990\ntrading_activity: 10000.0000\navg_spread: 6.7767\nmarket_depth: 3.0000\n"
+  },
+  {
+    "metadata": {
+      "source": "prices_round_1_day_0.csv",
+      "day": 0,
+      "product": "SQUID_INK",
+      "type": "trading_data",
+      "file_type": "price",
+      "round": "round_1",
+      "basket": null
+    },
+    "content": "Trading data for SQUID_INK on day 0:\nAverage mid price: 1907.84\nPrice range: 1810.50 to 1986.50\nData points: 10000\n\nTrading metrics:\nvolatility: 42.6576\nprice_momentum: -0.0130\nvolume_weighted_price: 1907.8119\ntrading_activity: 10000.0000\navg_spread: 2.6187\nmarket_depth: 3.0000\n"
+  }
+]
