@@ -136,7 +136,7 @@ def process_all_csv_files(data_dir="round_1_island_data", output_dir="processed_
     for file_pattern in ["prices_*.csv", "trades_*.csv"]:
         for csv_file in sorted(data_path.glob(file_pattern)):
             try:
-                documents = process_trading_csv(csv_file, output_dir)
+                documents = process_trading_csv(str(csv_file), output_dir)
                 all_documents.extend(documents)
                 print(f"Processed {len(documents)} documents from {csv_file}")
             except Exception as e:

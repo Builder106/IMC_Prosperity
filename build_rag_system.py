@@ -86,7 +86,7 @@ def process_notion_wiki_data(wiki_dir=NOTION_WIKI_DIR):
                         "source": str(json_file),
                         "category": category,
                         "type": "notion_wiki",
-                        "title": data.get("title", "")
+                        "title": data.get("title", "") if isinstance(data, dict) else ""
                     }
                 )
                 
@@ -150,22 +150,37 @@ def create_vector_stores(notion_documents, trading_documents):
         chunk_overlap=100
     )
     
-    # Split notion documents if needed
-    split_notion_docs = text_splitter.split_documents(notion_documents)
+    # Initialize vector stores as None
+    notion_vectorstore = None
+    trading_vectorstore = None
     
-    # Create notion vector store
-    notion_vectorstore = Chroma.from_documents(
-        documents=split_notion_docs,
-        embedding=embeddings,
-        persist_directory=f"{VECTOR_DB_DIR}/notion"
-    )
+    # Only create notion vector store if there are documents
+    if notion_documents:
+        # Split notion documents if needed
+        split_notion_docs = text_splitter.split_documents(notion_documents)
+        
+        if split_notion_docs:
+            print(f"Creating notion vector store with {len(split_notion_docs)} documents")
+            # Create notion vector store
+            notion_vectorstore = Chroma.from_documents(
+                documents=split_notion_docs,
+                embedding=embeddings,
+                persist_directory=f"{VECTOR_DB_DIR}/notion"
+            )
+    else:
+        print("No notion documents to process")
     
-    # Create trading data vector store
-    trading_vectorstore = Chroma.from_documents(
-        documents=trading_documents,
-        embedding=embeddings,
-        persist_directory=f"{VECTOR_DB_DIR}/trading"
-    )
+    # Only create trading vector store if there are documents
+    if trading_documents:
+        print(f"Creating trading vector store with {len(trading_documents)} documents")
+        # Create trading data vector store
+        trading_vectorstore = Chroma.from_documents(
+            documents=trading_documents,
+            embedding=embeddings,
+            persist_directory=f"{VECTOR_DB_DIR}/trading"
+        )
+    else:
+        print("No trading documents to process")
     
     # Persist the vector stores
     notion_vectorstore.persist()
