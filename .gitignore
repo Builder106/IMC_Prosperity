@@ -3,3 +3,4 @@ venv
 __pycache__
 vectordb
 .DS_Store
+processed_data

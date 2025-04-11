@@ -462,17 +462,17 @@ def create_combined_retriever(notion_vectorstore, trading_vectorstore, code_vect
     weights = []
     
     if notion_vectorstore:
-        notion_retriever = notion_vectorstore.as_retriever(search_kwargs={"k": 5})
+        notion_retriever = notion_vectorstore.as_retriever(search_kwargs={"k": 45})
         retrievers.append(notion_retriever)
         weights.append(0.2)
     
     if trading_vectorstore:
-        trading_retriever = trading_vectorstore.as_retriever(search_kwargs={"k": 5})
+        trading_retriever = trading_vectorstore.as_retriever(search_kwargs={"k": 65})
         retrievers.append(trading_retriever)
         weights.append(0.3)
         
     if code_vectorstore:
-        code_retriever = code_vectorstore.as_retriever(search_kwargs={"k": 10})
+        code_retriever = code_vectorstore.as_retriever(search_kwargs={"k": 50})
         retrievers.append(code_retriever)
         weights.append(0.5)
     
@@ -509,6 +509,12 @@ def create_rag_chain(retriever):
     Use the following retrieved information to answer the user's question.
     If you can't answer based on the retrieved information, say so.
     
+    IMPORTANT: When asked about trading algorithms, prioritize finding and sharing:
+    1. Specific trader class implementations
+    2. Trading strategies for products
+    3. Position limit information
+    4. Order placement examples
+
     When explaining code examples, be clear and detailed. When code is referenced or included 
     in the retrieved information, explain what it does and how it relates to the question.
 
