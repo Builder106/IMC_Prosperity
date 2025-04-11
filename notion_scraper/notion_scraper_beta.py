@@ -217,17 +217,44 @@ def extract_content(soup, page_title):
     """Extract content blocks from the Notion page in their natural order."""
     blocks = []
     code_block_counter = 1  # Counter for code blocks
+    seen_content = set()  # Track seen content to avoid duplicates
     
     # First get the page title (h1) which is special
     title_div = soup.select_one(".notion-page-block h1")
     if title_div:
-        blocks.append({
-            "type": "h1",
-            "content": title_div.get_text().strip()
-        })
+        title_text = title_div.get_text().strip()
+        if title_text and title_text not in seen_content:
+            blocks.append({
+                "type": "h1",
+                "content": title_text
+            })
+            seen_content.add(title_text)
     
-    # Get the main content container
-    content_container = soup.select_one(".notion-page-content")
+    # Try multiple strategies to find the main content container
+    content_containers = [
+        # Strategy 1: Standard Notion class
+        soup.select_one(".notion-page-content"),
+        # Strategy 2: Try to find content inside a transclusion block
+        soup.select_one(".notion-transclusion_reference-block"),
+        # Strategy 3: Look for main body content
+        soup.select_one("main")
+    ]
+    
+    content_container = None
+    for container in content_containers:
+        if container:
+            content_container = container
+            break
+            
+    # If we still don't have a container, try a broader approach
+    if not content_container:
+        # Look for any div that might contain our content blocks
+        content_container = soup.find('div', {'class': lambda x: x and ('notion-' in x)})
+        
+    if not content_container:
+        # As a last resort, try to get the body
+        content_container = soup.body
+    
     if not content_container:
         return blocks  # Early return if no content found
     
@@ -235,108 +262,172 @@ def extract_content(soup, page_title):
     current_list_type = None
     current_list_items = []
     
-    # Process each child element in order
-    for element in content_container.find_all(class_=True, recursive=False):
-        class_name = element.get("class", [])
-        class_name_str = " ".join(class_name)
-        
-        # Determine element type based on class
-        is_bulleted_list = "notion-bulleted-list" in class_name or "notion-bulleted_list" in class_name_str
-        is_numbered_list = "notion-numbered-list" in class_name or "notion-numbered_list" in class_name_str
-        
-        # Check if this is any kind of list element
-        is_list_element = is_bulleted_list or is_numbered_list
-        list_style = "bulleted" if is_bulleted_list else "numbered" if is_numbered_list else None
-        
-        # If encountering a new type of element or different list style, 
-        # flush the current list if we've been building one
-        if (not is_list_element or list_style != current_list_type) and current_list_items:
-            blocks.append({
-                "type": "list",
-                "style": current_list_type,
-                "items": current_list_items
-            })
-            current_list_items = []
-            current_list_type = None
-        
-        # Process based on element type
-        if is_list_element:
-            # This is a list element - extract and add to current items
-            extracted_items = extract_list_items(element, list_style)
-            if extracted_items:
-                current_list_type = list_style
-                current_list_items.extend(extracted_items)
-                
-        elif "notion-header-block" in class_name or "notion-sub_header-block" in class_name:
-            # Handle headings
-            style = element.get('style', '')
-            if 'font-size: 1.5em' in style or 'font-weight: 700' in style or 'font-size: 1.5em' in style or 'font-weight: 600' in style:
-                heading_type = "h2"
-            elif 'font-size: 1.25em' in style or 'font-weight: 600' in style:
-                heading_type = "h3"
-            elif 'font-size: 1em' in style or 'font-weight: 500' in style:
-                heading_type = "h4"
-            else:
-                heading_type = "h3"
-            
-            heading_text = element.get_text().strip()
-            if heading_text:
-                blocks.append({
-                    "type": heading_type,
-                    "content": heading_text
-                })
-                
-        elif "notion-text-block" in class_name:
-            # Handle paragraphs
-            text = element.get_text().strip()
-            if text:
-                blocks.append({
-                    "type": "p",
-                    "content": text
-                })
-                
-        elif "notion-code-block" in class_name:
-            # Handle code blocks
-            code = element.get_text().strip()
-            if code:
-                # Remove "PythonCopy" prefix if present
-                code = re.sub(r'^PythonCopy', '', code).strip()
-                
-                # Generate a unique ID for this code block
-                code_id = f"code_{code_block_counter}"
-                code_block_counter += 1
-                
-                # Determine language (default to Python if not specified)
-                language = "python"  # Default language
-                
-                # Try to detect language from class or content
-                for cls in class_name:
-                    lang_match = re.search(r'language-(\w+)', cls)
-                    if lang_match:
-                        language = lang_match.group(1)
-                        break
-                
-                # Save the code to a separate file
-                file_path = save_code_file(code, language, page_title, code_id)
-                
-                # Add reference to the code file in the JSON
-                blocks.append({
-                    "type": "code",
-                    "language": language,
-                    "code_id": code_id,
-                    "file_path": file_path,
-                    "preview": code[:50] + ("..." if len(code) > 50 else "")  # Short preview
-                })
+    # First, try to find all the header blocks (h2) in the document
+    header_blocks = content_container.find_all(
+        lambda tag: tag.name == 'h2' or 
+                    (tag.get('class') and any('header-block' in c for c in tag.get('class'))) or
+                    (tag.find('div', style=lambda s: s and 'font-weight: 600' in s))
+    )
     
-    # Don't forget to add any remaining list items
-    if current_list_items:
+    # Then find all text blocks
+    text_blocks = content_container.find_all(
+        lambda tag: (tag.get('class') and any('text-block' in c for c in tag.get('class'))) or
+                    (tag.find('div', spellcheck="true"))
+    )
+    
+    # Process the blocks found
+    processed_blocks = []
+    
+    # First process headers
+    for header in header_blocks:
+        header_text = header.get_text().strip()
+        if header_text and header_text not in seen_content:
+            processed_blocks.append({
+                "tag": header,
+                "type": "h2",
+                "content": header_text,
+                "position": get_element_position(header)
+            })
+            seen_content.add(header_text)
+    
+    # Then process text blocks
+    for text_block in text_blocks:
+        text = text_block.get_text().strip()
+        if text and text not in seen_content:
+            # Check if this appears to be a header by style or context
+            if (text_block.get('style') and 'font-weight: 600' in text_block.get('style')) or \
+               (len(text) < 30 and text.strip().endswith(':')):
+                processed_blocks.append({
+                    "tag": text_block,
+                    "type": "h3", 
+                    "content": text,
+                    "position": get_element_position(text_block)
+                })
+            else:
+                processed_blocks.append({
+                    "tag": text_block, 
+                    "type": "p",
+                    "content": text,
+                    "position": get_element_position(text_block)
+                })
+            seen_content.add(text)
+    
+    # Sort blocks by their position in the document
+    processed_blocks.sort(key=lambda x: x["position"])
+    
+    # Convert to our final format
+    for block in processed_blocks:
         blocks.append({
-            "type": "list",
-            "style": current_list_type,
-            "items": current_list_items
+            "type": block["type"],
+            "content": block["content"]
         })
     
+    # If we found no blocks but we have a content container, try direct extraction
+    if not blocks and content_container:
+        # Try to extract all text content directly
+        direct_extraction = extract_text_content_from_container(content_container)
+        if direct_extraction:
+            for block in direct_extraction:
+                content = block.get('content', '')
+                if content and content not in seen_content:
+                    blocks.append(block)
+                    seen_content.add(content)
+    
     return blocks
+
+def get_element_position(element):
+    """
+    Calculate the approximate position of an element in the document.
+    This helps us maintain the natural reading order.
+    """
+    # Try to find the element's position using its parents
+    parents = list(element.parents)
+    
+    # Count how far down the element is in the document
+    position = 0
+    for i, parent in enumerate(parents):
+        # Count previous siblings to get a sense of position
+        position += len(list(parent.previous_siblings)) * (100 / (i + 1))
+        
+    # Add direct position from siblings
+    position += len(list(element.previous_siblings)) * 100
+    
+    return position
+
+def extract_text_content_from_container(container):
+    """Extract text content directly from a container, as a fallback method."""
+    blocks = []
+    
+    # Try to find heading elements first
+    headings = container.find_all(['h1', 'h2', 'h3', 'h4', 'h5', 'h6'])
+    for heading in headings:
+        heading_text = heading.get_text().strip()
+        if heading_text:
+            heading_type = heading.name  # Use the actual heading type (h1, h2, etc.)
+            blocks.append({
+                "type": heading_type,
+                "content": heading_text
+            })
+    
+    # Find div blocks that look like paragraphs (have text content)
+    # We're looking for blocks that contain text but aren't just container elements
+    potential_paragraphs = container.find_all('div', recursive=True)
+    
+    for div in potential_paragraphs:
+        # Skip if this div contains other content-bearing elements
+        if div.find(['div', 'h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'p', 'ul', 'ol']):
+            continue
+            
+        # Skip if this is a utility element or container
+        class_attr = div.get('class', [])
+        if class_attr and any(c in ' '.join(class_attr) for c in ['container', 'wrapper', 'layout']):
+            continue
+            
+        # Get the text content
+        text = div.get_text().strip()
+        
+        # Skip empty or very short divs (likely spacers)
+        if not text or len(text) < 5:
+            continue
+            
+        # Check if this looks like a heading
+        if (len(text) < 50 and (
+                div.get('style') and ('font-weight:' in div.get('style') or 'font-size:' in div.get('style')) or
+                text.strip().endswith(':'))):
+            blocks.append({
+                "type": "h3",  # Assume it's a subheading
+                "content": text
+            })
+        else:
+            blocks.append({
+                "type": "p", 
+                "content": text
+            })
+    
+    # Process all links
+    links = container.find_all('a')
+    for link in links:
+        href = link.get('href')
+        if href and not href.startswith('#'):  # Skip internal page links
+            text = link.get_text().strip()
+            if text and len(text) > 1:
+                blocks.append({
+                    "type": "link",
+                    "content": text,
+                    "href": href
+                })
+    
+    # Deduplicate blocks with the same content
+    seen_content = set()
+    unique_blocks = []
+    
+    for block in blocks:
+        content = block.get('content', '')
+        if content and content not in seen_content:
+            seen_content.add(content)
+            unique_blocks.append(block)
+    
+    return unique_blocks
 
 def extract_list_items(list_element, list_style):
     """Extract items from a list element with proper nesting level."""

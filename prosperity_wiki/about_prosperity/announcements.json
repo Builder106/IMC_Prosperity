@@ -4,7 +4,7 @@
     "content": "Announcements"
   },
   {
-    "type": "h3",
+    "type": "h2",
     "content": "Announcement 11 April, 13:52 CET"
   },
   {
@@ -16,22 +16,16 @@
     "content": "We have good news to share!"
   },
   {
-    "type": "list",
-    "style": "bulleted",
-    "items": [
-      {
-        "content": "We have replaced the Round 1 performance evaluation data with fresh price data for Day 1.",
-        "level": 0
-      },
-      {
-        "content": "We have also fixed the problem causing the short simulation instead of the full simulation against 1M timestamps for some of you.",
-        "level": 0
-      },
-      {
-        "content": "Along with addressing the two issues mentioned above, it was brought to our attention that RAINFOREST_RESIN trader bots are behaving identically to AMETHYSTS trader bots from Prosperity 2. We have addressed this issue as well, by making sure RAINFOREST_RESIN trader bots will behave in a fresh and new way starting from Round 1 evaluation.",
-        "level": 0
-      }
-    ]
+    "type": "p",
+    "content": "We have replaced the Round 1 performance evaluation data with fresh price data for Day 1."
+  },
+  {
+    "type": "p",
+    "content": "We have also fixed the problem causing the short simulation instead of the full simulation against 1M timestamps for some of you."
+  },
+  {
+    "type": "p",
+    "content": "Along with addressing the two issues mentioned above, it was brought to our attention that RAINFOREST_RESIN trader bots are behaving identically to AMETHYSTS trader bots from Prosperity 2. We have addressed this issue as well, by making sure RAINFOREST_RESIN trader bots will behave in a fresh and new way starting from Round 1 evaluation."
   },
   {
     "type": "p",
@@ -42,12 +36,8 @@
     "content": "/end of announcement"
   },
   {
-    "type": "h3",
+    "type": "h2",
     "content": "Announcement 10 April, 18:04 CET"
-  },
-  {
-    "type": "p",
-    "content": "Hello dear Traders,"
   },
   {
     "type": "p",
@@ -58,36 +48,24 @@
     "content": "What happened?"
   },
   {
-    "type": "list",
-    "style": "bulleted",
-    "items": [
-      {
-        "content": "Round 1 price data (Day 1) was mistakenly published in “Data in a bottle” for a short period of time, causing some teams to gain an advantage by writing their algorithmic trades based on known Day 1 simulation data. The current scores in the leaderboard shows this unfair advantage.",
-        "level": 0
-      },
-      {
-        "content": "Some teams only received simulation up to the first 100k timestamps instead of the complete 1M timestamps causing incomplete simulation seen in the scores on the leaderboard.",
-        "level": 0
-      }
-    ]
+    "type": "p",
+    "content": "Round 1 price data (Day 1) was mistakenly published in “Data in a bottle” for a short period of time, causing some teams to gain an advantage by writing their algorithmic trades based on known Day 1 simulation data. The current scores in the leaderboard shows this unfair advantage."
+  },
+  {
+    "type": "p",
+    "content": "Some teams only received simulation up to the first 100k timestamps instead of the complete 1M timestamps causing incomplete simulation seen in the scores on the leaderboard."
   },
   {
     "type": "p",
     "content": "What will we do to resolve this?"
   },
   {
-    "type": "list",
-    "style": "bulleted",
-    "items": [
-      {
-        "content": "We will use a fresh price data for Day_1 to evaluate Round 1 performance using your already uploaded algorithm scripts. No new submission for Round 1 will be allowed. The price data for Day -2, Day -1, and Day 0 on which you have based your trades when writing your scripts, will of course stay the same.",
-        "level": 0
-      },
-      {
-        "content": "We will also fix the bug causing partial simulation and ensure running an entire simulation for all teams, so everyone’s last uploaded algo file will be evaluated based on the complete 1M timestamps.",
-        "level": 0
-      }
-    ]
+    "type": "p",
+    "content": "We will use a fresh price data for Day_1 to evaluate Round 1 performance using your already uploaded algorithm scripts. No new submission for Round 1 will be allowed. The price data for Day -2, Day -1, and Day 0 on which you have based your trades when writing your scripts, will of course stay the same."
+  },
+  {
+    "type": "p",
+    "content": "We will also fix the bug causing partial simulation and ensure running an entire simulation for all teams, so everyone’s last uploaded algo file will be evaluated based on the complete 1M timestamps."
   },
   {
     "type": "p",

@@ -4,7 +4,7 @@
     "content": "Round 2"
   },
   {
-    "type": "h3",
+    "type": "h2",
     "content": "Algorithm challenge"
   },
   {
@@ -16,40 +16,28 @@
     "content": "PICNIC_BASKET1 contains three products:"
   },
   {
-    "type": "list",
-    "style": "numbered",
-    "items": [
-      {
-        "content": "Six (6) CROISSANTS",
-        "level": 0
-      },
-      {
-        "content": "Three (3) JAMS",
-        "level": 0
-      },
-      {
-        "content": "One (1) DJEMBE",
-        "level": 0
-      }
-    ]
+    "type": "p",
+    "content": "Six (6) CROISSANTS"
+  },
+  {
+    "type": "p",
+    "content": "Three (3) JAMS"
+  },
+  {
+    "type": "p",
+    "content": "One (1) DJEMBE"
   },
   {
     "type": "p",
     "content": "PICNIC_BASKET2 contains just two products:"
   },
   {
-    "type": "list",
-    "style": "numbered",
-    "items": [
-      {
-        "content": "Four (4) CROISSANTS",
-        "level": 0
-      },
-      {
-        "content": "Two (2) JAMS",
-        "level": 0
-      }
-    ]
+    "type": "p",
+    "content": "Four (4) CROISSANTS"
+  },
+  {
+    "type": "p",
+    "content": "Two (2) JAMS"
   },
   {
     "type": "p",
@@ -60,33 +48,27 @@
     "content": "Position limits for the newly introduced products:"
   },
   {
-    "type": "list",
-    "style": "bulleted",
-    "items": [
-      {
-        "content": "CROISSANT: 250",
-        "level": 0
-      },
-      {
-        "content": "JAM: 350",
-        "level": 0
-      },
-      {
-        "content": "DJEMBE: 60",
-        "level": 0
-      },
-      {
-        "content": "PICNIC_BASKET1: 60",
-        "level": 0
-      },
-      {
-        "content": "PICNIC_BASKET2: 100",
-        "level": 0
-      }
-    ]
+    "type": "p",
+    "content": "CROISSANT: 250"
   },
   {
-    "type": "h3",
+    "type": "p",
+    "content": "JAM: 350"
+  },
+  {
+    "type": "p",
+    "content": "DJEMBE: 60"
+  },
+  {
+    "type": "p",
+    "content": "PICNIC_BASKET1: 60"
+  },
+  {
+    "type": "p",
+    "content": "PICNIC_BASKET2: 100"
+  },
+  {
+    "type": "h2",
     "content": "Manual challenge"
   },
   {

@@ -4,7 +4,7 @@
     "content": "Round 1"
   },
   {
-    "type": "h3",
+    "type": "h2",
     "content": "Algorithm challenge"
   },
   {
@@ -16,22 +16,20 @@
     "content": "Position limits for the newly introduced products:"
   },
   {
-    "type": "list",
-    "style": "bulleted",
-    "items": [
-      {
-        "content": "RAINFOREST_RESIN: 50",
-        "level": 0
-      },
-      {
-        "content": "KELP: 50",
-        "level": 0
-      },
-      {
-        "content": "SQUID_INK: 50",
-        "level": 0
-      }
-    ]
+    "type": "p",
+    "content": "RAINFOREST_RESIN: 50"
+  },
+  {
+    "type": "p",
+    "content": "KELP: 50"
+  },
+  {
+    "type": "p",
+    "content": "SQUID_INK: 50"
+  },
+  {
+    "type": "h2",
+    "content": "Hint"
   },
   {
     "type": "p",
@@ -42,7 +40,7 @@
     "content": "A metric to keep track of the size of deviation/swing from recent average could help in trading profitable positions."
   },
   {
-    "type": "h3",
+    "type": "h2",
     "content": "Manual challenge"
   },
   {

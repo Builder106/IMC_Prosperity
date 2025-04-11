@@ -8,7 +8,7 @@
     "content": "The explanation below assumes familiarity with the basics of Object-Oriented Programming in Python. To refresh this knowledge you can have a look at the source provided on the 🎓Programming resources."
   },
   {
-    "type": "h3",
+    "type": "h2",
     "content": "The Challenge"
   },
   {
@@ -28,19 +28,12 @@
     "content": "In the first section, the general outline of the Trader class that the player will be creating is outlined."
   },
   {
-    "type": "h3",
+    "type": "h2",
     "content": "Overview of the Trader class"
   },
   {
     "type": "p",
     "content": "Below an abstract representation of what the trader class should look like is shown. The class only requires a single method called run, which is called by the simulation every time a new TraderState is available. The logic within this run method is written by the player and determines the behaviour of the algorithm. The output of the method is a dictionary named result, which contains all the orders that the algorithm decides to send based on this logic."
-  },
-  {
-    "type": "code",
-    "language": "python",
-    "code_id": "code_1",
-    "file_path": "code/overview_of_trader_class.py",
-    "preview": "from datamodel import OrderDepth, UserId, TradingS..."
   },
   {
     "type": "p",
@@ -59,7 +52,7 @@
     "content": "To get a better feel for what this TradingState object is exactly and how players can use it, a description of the class is provided below."
   },
   {
-    "type": "h3",
+    "type": "h2",
     "content": "Overview of the TradingState class"
   },
   {
@@ -67,40 +60,27 @@
     "content": "The TradingState class holds all the important market information that an algorithm needs to make decisions about which orders to send. Below the definition is provided for the TradingState class:"
   },
   {
-    "type": "code",
-    "language": "python",
-    "code_id": "code_2",
-    "file_path": "code/overview_of_tradingstate_class.py",
-    "preview": "Time = int\nSymbol = str\nProduct = str\nPosition = i..."
-  },
-  {
     "type": "p",
     "content": "The most important properties"
   },
   {
-    "type": "list",
-    "style": "bulleted",
-    "items": [
-      {
-        "content": "own_trades: the trades the algorithm itself has done since the last TradingState came in. This property is a dictionary of Trade objects with key being a product name. The definition of the Trade class is provided in the subsections below.",
-        "level": 0
-      },
-      {
-        "content": "market_trades: the trades that other market participants have done since the last TradingState came in. This property is also a dictionary of Trade objects with key being a product name.",
-        "level": 0
-      },
-      {
-        "content": "position: the long or short position that the player holds in every tradable product. This property is a dictionary with the product as the key for which the value is a signed integer denoting the position.",
-        "level": 0
-      },
-      {
-        "content": "order_depths: all the buy and sell orders per product that other market participants have sent and that the algorithm is able to trade with. This property is a dict where the keys are the products and the corresponding values are instances of the OrderDepth class. This OrderDepth class then contains all the buy and sell orders. An overview of the OrderDepth class is also provided in the subsections below.",
-        "level": 0
-      }
-    ]
+    "type": "p",
+    "content": "own_trades: the trades the algorithm itself has done since the last TradingState came in. This property is a dictionary of Trade objects with key being a product name. The definition of the Trade class is provided in the subsections below."
   },
   {
-    "type": "h3",
+    "type": "p",
+    "content": "market_trades: the trades that other market participants have done since the last TradingState came in. This property is also a dictionary of Trade objects with key being a product name."
+  },
+  {
+    "type": "p",
+    "content": "position: the long or short position that the player holds in every tradable product. This property is a dictionary with the product as the key for which the value is a signed integer denoting the position."
+  },
+  {
+    "type": "p",
+    "content": "order_depths: all the buy and sell orders per product that other market participants have sent and that the algorithm is able to trade with. This property is a dict where the keys are the products and the corresponding values are instances of the OrderDepth class. This OrderDepth class then contains all the buy and sell orders. An overview of the OrderDepth class is also provided in the subsections below."
+  },
+  {
+    "type": "h2",
     "content": "Trade class"
   },
   {
@@ -108,60 +88,52 @@
     "content": "Both the own_trades property and the market_trades property provide the traders with a list of trades per products. Every individual trade in each of these lists is an instance of the Trade class."
   },
   {
-    "type": "code",
-    "language": "python",
-    "code_id": "code_3",
-    "file_path": "code/trade_class.py",
-    "preview": "Symbol = str\nUserId = str\nclass Trade:\ndef __init_..."
+    "type": "p",
+    "content": "For every new product introduced several days of sample data are provided. For each of these days two .csv’s are available, one containing a list of all the trades done on that day, and one showing the market orders at every time step. Examples of the file formats:"
   },
   {
     "type": "p",
     "content": "These trades have five distinct properties:"
   },
   {
-    "type": "list",
-    "style": "numbered",
-    "items": [
-      {
-        "content": "The symbol/product that the trade corresponds to (i.e. are we exchanging apples or oranges)",
-        "level": 0
-      },
-      {
-        "content": "The price at which the product was exchanged",
-        "level": 0
-      },
-      {
-        "content": "The quantity that was exchanged",
-        "level": 0
-      },
-      {
-        "content": "The identity of the buyer in the transaction",
-        "level": 0
-      },
-      {
-        "content": "The identity of the seller in this transaction",
-        "level": 0
-      }
-    ]
+    "type": "p",
+    "content": ".csv file with trade example"
+  },
+  {
+    "type": "p",
+    "content": "The symbol/product that the trade corresponds to (i.e. are we exchanging apples or oranges)"
+  },
+  {
+    "type": "p",
+    "content": ".csv file with market orders example"
+  },
+  {
+    "type": "p",
+    "content": "The price at which the product was exchanged"
+  },
+  {
+    "type": "p",
+    "content": "The quantity that was exchanged"
+  },
+  {
+    "type": "p",
+    "content": "The identity of the buyer in the transaction"
+  },
+  {
+    "type": "p",
+    "content": "The identity of the seller in this transaction"
   },
   {
     "type": "p",
     "content": "On the island exchange, like on most real-world exchanges, counterparty information is typically not disclosed. Therefore properties 4 and 5 will only be non-empty strings if the algorithm itself is the buyer (4 will be “SUBMISSION”) or the seller (5 will be “SUBMISSION”)."
   },
   {
-    "type": "h3",
+    "type": "h2",
     "content": "OrderDepth class"
   },
   {
     "type": "p",
     "content": "Provided by the TradingState class is also the OrderDepth per symbol. This object contains the collection of all outstanding buy and sell orders, or “quotes” that were sent by the trading bots, for a certain symbol."
-  },
-  {
-    "type": "code",
-    "language": "python",
-    "code_id": "code_4",
-    "file_path": "code/orderdepth_class.py",
-    "preview": "class OrderDepth:\ndef __init__(self):\n        self..."
   },
   {
     "type": "p",
@@ -172,7 +144,7 @@
     "content": "Every price level at which there are buy orders should always be strictly lower than all the levels at which there are sell orders. If not, then there is a potential match between buy and sell orders, and a trade between the bots should have happened."
   },
   {
-    "type": "h3",
+    "type": "h2",
     "content": "Observation class"
   },
   {
@@ -180,58 +152,39 @@
     "content": "Observation details help to decide on eventual orders or conversion requests. There are two items delivered inside the TradingState instance:"
   },
   {
-    "type": "list",
-    "style": "numbered",
-    "items": [
-      {
-        "content": "Simple product to value dictionary inside plainValueObservations",
-        "level": 0
-      },
-      {
-        "content": "Dictionary of complex ConversionObservation values for respective products. Used to place conversion requests from Trader class. Structure visible below.",
-        "level": 0
-      }
-    ]
+    "type": "p",
+    "content": "Simple product to value dictionary inside plainValueObservations"
   },
   {
-    "type": "code",
-    "language": "python",
-    "code_id": "code_5",
-    "file_path": "code/observation_class.py",
-    "preview": "class ConversionObservation:\ndef __init__(self, bi..."
+    "type": "p",
+    "content": "Dictionary of complex ConversionObservation values for respective products. Used to place conversion requests from Trader class. Structure visible below."
   },
   {
     "type": "p",
     "content": "In case you decide to place conversion request on product listed integer number should be returned as “conversions” value from run() method. Based on logic defined inside Prosperity container it will convert positions acquired by submitted code. There is a number of conditions for conversion to  happen:"
   },
   {
-    "type": "list",
-    "style": "bulleted",
-    "items": [
-      {
-        "content": "You need to obtain either long or short position earlier.",
-        "level": 0
-      },
-      {
-        "content": "Conversion request cannot exceed the minimum of possessed items count and conversion limit.",
-        "level": 0
-      },
-      {
-        "content": "In case you have 10 items short (-10) and conversion limit is 5, you can only request from 1 to 5. Request for 6 or more will be fully ignored.",
-        "level": 0
-      },
-      {
-        "content": "While conversion happens you will need to cover transportation and import/export tariff.",
-        "level": 0
-      },
-      {
-        "content": "Conversion request is not mandatory. You can send 0 or None as value.",
-        "level": 0
-      }
-    ]
+    "type": "p",
+    "content": "You need to obtain either long or short position earlier."
   },
   {
-    "type": "h3",
+    "type": "p",
+    "content": "Conversion request cannot exceed the minimum of possessed items count and conversion limit."
+  },
+  {
+    "type": "p",
+    "content": "In case you have 10 items short (-10) and conversion limit is 5, you can only request from 1 to 5. Request for 6 or more will be fully ignored."
+  },
+  {
+    "type": "p",
+    "content": "While conversion happens you will need to cover transportation and import/export tariff."
+  },
+  {
+    "type": "p",
+    "content": "Conversion request is not mandatory. You can send 0 or None as value."
+  },
+  {
+    "type": "h2",
     "content": "How to send orders using the Order class"
   },
   {
@@ -239,29 +192,16 @@
     "content": "After performing logic on the incoming order state, the run method defined by the player should output a dictionary containing the orders that the algorithm wants to send. The keys of this dictionary should be all the products that the algorithm wishes to send orders for. These orders should be instances of the Order class. Each order has three important properties. These are:"
   },
   {
-    "type": "list",
-    "style": "numbered",
-    "items": [
-      {
-        "content": "The symbol of the product for which the order is sent.",
-        "level": 0
-      },
-      {
-        "content": "The price of the order: the maximum price at which the algorithm wants to buy in case of a BUY order, or the minimum price at which the algorithm wants to sell in case of a SELL order.",
-        "level": 0
-      },
-      {
-        "content": "The quantity of the order: the maximum quantity that the algorithm wishes to buy or sell. If the sign of the quantity is positive, the order is a buy order, if the sign of the quantity is negative it is a sell order.",
-        "level": 0
-      }
-    ]
+    "type": "p",
+    "content": "The symbol of the product for which the order is sent."
   },
   {
-    "type": "code",
-    "language": "python",
-    "code_id": "code_6",
-    "file_path": "code/send_orders_using_order_class.py",
-    "preview": "Symbol = str\nclass Order:\ndef __init__(self, symbo..."
+    "type": "p",
+    "content": "The price of the order: the maximum price at which the algorithm wants to buy in case of a BUY order, or the minimum price at which the algorithm wants to sell in case of a SELL order."
+  },
+  {
+    "type": "p",
+    "content": "The quantity of the order: the maximum quantity that the algorithm wishes to buy or sell. If the sign of the quantity is positive, the order is a buy order, if the sign of the quantity is negative it is a sell order."
   },
   {
     "type": "p",
@@ -272,7 +212,7 @@
     "content": "See Trading Glossary for a more elaborate explanation of order execution in financial markets."
   },
   {
-    "type": "h3",
+    "type": "h2",
     "content": "Position Limits"
   },
   {
@@ -288,7 +228,7 @@
     "content": "Below two example iterations are provided to give an idea what the simulation behaviour looks like."
   },
   {
-    "type": "h3",
+    "type": "h2",
     "content": "Example of Trading"
   },
   {
@@ -296,112 +236,67 @@
     "content": "For the following example we assume a situation with two products:"
   },
   {
-    "type": "list",
-    "style": "bulleted",
-    "items": [
-      {
-        "content": "PRODUCT1 with position limit 10",
-        "level": 0
-      },
-      {
-        "content": "PRODUCT2 with position limit 20",
-        "level": 0
-      }
-    ]
+    "type": "p",
+    "content": "PRODUCT1 with position limit 10"
+  },
+  {
+    "type": "p",
+    "content": "PRODUCT2 with position limit 20"
   },
   {
     "type": "p",
     "content": "At the start of the first iteration the run method is called with the TradingState generated by the below code. Note: the datamodel.py file from which the classes are imported is provided in Appendix B. The code can also be used to test algorithms locally."
   },
   {
-    "type": "code",
-    "language": "python",
-    "code_id": "code_7",
-    "file_path": "code/tradingexample-initial_tradingstate_setup.py",
-    "preview": "from datamodel import Listing, OrderDepth, Trade, ..."
-  },
-  {
     "type": "p",
     "content": "Let’s say that at this point in the simulation, the algorithm has the following convictions:"
   },
   {
-    "type": "list",
-    "style": "numbered",
-    "items": [
-      {
-        "content": "PRODUCT1 is worth 13",
-        "level": 0
-      },
-      {
-        "content": "PRODUCT2 is worth 142",
-        "level": 0
-      }
-    ]
+    "type": "p",
+    "content": "PRODUCT1 is worth 13"
+  },
+  {
+    "type": "p",
+    "content": "PRODUCT2 is worth 142"
   },
   {
     "type": "p",
     "content": "It could then potentially decide on the following"
   },
   {
-    "type": "list",
-    "style": "numbered",
-    "items": [
-      {
-        "content": "Since the sell orders in PRODUCT1 at price 11 (qty 4) and price 12 (qty 8) are both below the algorithms calculated fair value, it would like to send a buy order to trade with these sell orders. Given that the position in PRODUCT2 is already 3 long and the position limit is set at 10, sending one or more buy orders with an aggregated quantity of >7 would result in rejection of all buy orders, the algorithm sends a buy order with quantity 7 and a price of 12.",
-        "level": 0
-      },
-      {
-        "content": "Versus the fair value of 142 neither the sell orders nor the buy orders look profitable. The algorithm therefore decides to see if any of the bots is willing to buy at 143, and sends a sell order of quantity 5 at that price level.",
-        "level": 0
-      }
-    ]
+    "type": "p",
+    "content": "Since the sell orders in PRODUCT1 at price 11 (qty 4) and price 12 (qty 8) are both below the algorithms calculated fair value, it would like to send a buy order to trade with these sell orders. Given that the position in PRODUCT2 is already 3 long and the position limit is set at 10, sending one or more buy orders with an aggregated quantity of >7 would result in rejection of all buy orders, the algorithm sends a buy order with quantity 7 and a price of 12."
+  },
+  {
+    "type": "p",
+    "content": "Versus the fair value of 142 neither the sell orders nor the buy orders look profitable. The algorithm therefore decides to see if any of the bots is willing to buy at 143, and sends a sell order of quantity 5 at that price level."
   },
   {
     "type": "p",
     "content": "Based on the above the run method output would then be generated as shown below:"
   },
   {
-    "type": "code",
-    "language": "python",
-    "code_id": "code_8",
-    "file_path": "code/tradingexample-example_algorithm_output-run_method_result.py",
-    "preview": "result[\"PRODUCT1\"] = [Order(\"PRODUCT1\", 12, 7)]\nre..."
-  },
-  {
     "type": "p",
     "content": "An example of what the next TradingState will look like is generated by the code below."
-  },
-  {
-    "type": "code",
-    "language": "python",
-    "code_id": "code_9",
-    "file_path": "code/tradingexample-next_tradingstate_after_execution.py",
-    "preview": "from datamodel import Listing, OrderDepth, Trade, ..."
   },
   {
     "type": "p",
     "content": "A few observations can be made from this TradingState's properties:"
   },
   {
-    "type": "list",
-    "style": "numbered",
-    "items": [
-      {
-        "content": "The algorithm’s buy orders for “PRODUCT1” matched first with the full quantity of the sell order at price 11. As a result the order is now gone from the order_depths and a corresponding own_trade is created.",
-        "level": 0
-      },
-      {
-        "content": "The remaining order quantity of 3 then matched with part of the order at price 12, resulting in a second trade at price 12. As can be seen in the order_depths the quantity of the corresponding sell order is now reduced by 3 as well.",
-        "level": 0
-      },
-      {
-        "content": "For “PRODUCT2” a trade at price 143 with a quantity 2 can be observed, which indicates that one of the bots decided to send a buy order of quantity 2 as a reaction to the player’s sell order at that price level. For the player’s initial order this means that a quantity of 3 of the 5 total remains unexecuted. None of the bots decides to trade against this order, and the full order quantity is automatically cancelled.",
-        "level": 0
-      }
-    ]
+    "type": "p",
+    "content": "The algorithm’s buy orders for “PRODUCT1” matched first with the full quantity of the sell order at price 11. As a result the order is now gone from the order_depths and a corresponding own_trade is created."
   },
   {
-    "type": "h3",
+    "type": "p",
+    "content": "The remaining order quantity of 3 then matched with part of the order at price 12, resulting in a second trade at price 12. As can be seen in the order_depths the quantity of the corresponding sell order is now reduced by 3 as well."
+  },
+  {
+    "type": "p",
+    "content": "For “PRODUCT2” a trade at price 143 with a quantity 2 can be observed, which indicates that one of the bots decided to send a buy order of quantity 2 as a reaction to the player’s sell order at that price level. For the player’s initial order this means that a quantity of 3 of the 5 total remains unexecuted. None of the bots decides to trade against this order, and the full order quantity is automatically cancelled."
+  },
+  {
+    "type": "h2",
     "content": "Technical Notes"
   },
   {
@@ -409,21 +304,15 @@
     "content": "There are a few technicalities that players should take into account when writing an algorithms:"
   },
   {
-    "type": "list",
-    "style": "numbered",
-    "items": [
-      {
-        "content": "Only the libraries noted at the bottom of this page under “Supported Libraries” are allowed to be used by the algorithm. These are listed in Appendix C.",
-        "level": 0
-      },
-      {
-        "content": "Each time the “run” method is called, it should generate a response in <900ms, otherwise the function call will time out. Players should make sure that their algorithms are sufficiently lightweight to make sure this requirement is met.",
-        "level": 0
-      }
-    ]
+    "type": "p",
+    "content": "Only the libraries noted at the bottom of this page under “Supported Libraries” are allowed to be used by the algorithm. These are listed in Appendix C."
   },
   {
-    "type": "h3",
+    "type": "p",
+    "content": "Each time the “run” method is called, it should generate a response in <900ms, otherwise the function call will time out. Players should make sure that their algorithms are sufficiently lightweight to make sure this requirement is met."
+  },
+  {
+    "type": "h2",
     "content": "Available Resources to Help Build the Algorithm"
   },
   {
@@ -431,25 +320,15 @@
     "content": "To aid players in building the algorithm several resources are made available:"
   },
   {
-    "type": "list",
-    "style": "numbered",
-    "items": [
-      {
-        "content": ".csv file with trade example",
-        "level": 0
-      },
-      {
-        "content": ".csv file with market orders example",
-        "level": 0
-      },
-      {
-        "content": "When players upload their algorithms on the Prosperity platform, the algorithm is tested for 1000 iterations using data from a sample day (different than the actual day that will be used for the challenge). After the run a log file is provided which can aid players in debugging their algorithms. To aid debugging, the log file also contains the output of any print statements that players put within the run method of their trading class.",
-        "level": 0
-      }
-    ]
+    "type": "p",
+    "content": "For every new product introduced several days of sample data are provided. For each of these days two .csv’s are available, one containing a list of all the trades done on that day, and one showing the market orders at every time step. Examples of the file formats:.csv file with trade example.csv file with market orders example"
   },
   {
-    "type": "h3",
+    "type": "p",
+    "content": "When players upload their algorithms on the Prosperity platform, the algorithm is tested for 1000 iterations using data from a sample day (different than the actual day that will be used for the challenge). After the run a log file is provided which can aid players in debugging their algorithms. To aid debugging, the log file also contains the output of any print statements that players put within the run method of their trading class."
+  },
+  {
+    "type": "h2",
     "content": "Appendix A: Trader Class Example"
   },
   {
@@ -461,25 +340,11 @@
     "content": "⬇️ Download"
   },
   {
-    "type": "code",
-    "language": "python",
-    "code_id": "code_10",
-    "file_path": "code/appendix_A_trader_class_example.py",
-    "preview": "from datamodel import OrderDepth, UserId, TradingS..."
-  },
-  {
-    "type": "h3",
+    "type": "h2",
     "content": "Appendix B: datamodel.py file"
   },
   {
-    "type": "code",
-    "language": "python",
-    "code_id": "code_11",
-    "file_path": "code/datamodel.py",
-    "preview": "import json\nfrom typing import Dict, List\nfrom jso..."
-  },
-  {
-    "type": "h3",
+    "type": "h2",
     "content": "Appendix C: Supported libraries"
   },
   {
