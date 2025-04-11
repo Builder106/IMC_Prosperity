@@ -282,8 +282,8 @@ def create_vector_stores(notion_documents, trading_documents):
     # Create text splitter optimized for code and general content
     text_splitter = RecursiveCharacterTextSplitter.from_language(
         language="python",  # Default to Python handling
-        chunk_size=1000,
-        chunk_overlap=100,
+        chunk_size=1500,
+        chunk_overlap=200,
     )
     
     # Initialize vector stores as None
@@ -313,8 +313,11 @@ def create_vector_stores(notion_documents, trading_documents):
     def clean_metadata(metadata):
         cleaned = {}
         for key, value in metadata.items():
-            if isinstance(value, (str, int, float, bool)) or value is None:
-                # Allow primitive types and None
+            if value is None:
+                # Convert None to empty string
+                cleaned[key] = ""
+            elif isinstance(value, (str, int, float, bool)):
+                # Allow other primitive types as is
                 cleaned[key] = value
             elif isinstance(value, list):
                 # Convert lists to comma-separated strings
@@ -324,7 +327,7 @@ def create_vector_stores(notion_documents, trading_documents):
                 cleaned[key] = str(value)
             else:
                 # Convert any other type to string
-                cleaned[key] = str(value) if value is not None else ""
+                cleaned[key] = str(value)
         return cleaned
     
     # Only create notion vector store if there are documents
@@ -445,15 +448,10 @@ def create_vector_stores(notion_documents, trading_documents):
     else:
         print("No trading documents to process")
     
-    # Only persist vector stores if they exist
-    if notion_vectorstore:
-        notion_vectorstore.persist()
-    if trading_vectorstore:
-        trading_vectorstore.persist()
-    if code_vectorstore:
-        code_vectorstore.persist()
+    # Documents are automatically persisted in Chroma 0.4.x+
+    # No need to call persist() method anymore
     
-    print("Vector stores created and persisted")
+    print("Vector stores created and persisted automatically")
     return notion_vectorstore, trading_vectorstore, code_vectorstore
 
 def create_combined_retriever(notion_vectorstore, trading_vectorstore, code_vectorstore=None):
@@ -464,19 +462,19 @@ def create_combined_retriever(notion_vectorstore, trading_vectorstore, code_vect
     weights = []
     
     if notion_vectorstore:
-        notion_retriever = notion_vectorstore.as_retriever(search_kwargs={"k": 3})
+        notion_retriever = notion_vectorstore.as_retriever(search_kwargs={"k": 5})
         retrievers.append(notion_retriever)
-        weights.append(0.4)
+        weights.append(0.2)
     
     if trading_vectorstore:
-        trading_retriever = trading_vectorstore.as_retriever(search_kwargs={"k": 2})
+        trading_retriever = trading_vectorstore.as_retriever(search_kwargs={"k": 5})
         retrievers.append(trading_retriever)
         weights.append(0.3)
         
     if code_vectorstore:
-        code_retriever = code_vectorstore.as_retriever(search_kwargs={"k": 2})
+        code_retriever = code_vectorstore.as_retriever(search_kwargs={"k": 10})
         retrievers.append(code_retriever)
-        weights.append(0.3)
+        weights.append(0.5)
     
     # Normalize weights if we have at least one retriever
     if retrievers:
@@ -530,8 +528,8 @@ def create_rag_chain(retriever):
     # Initialize Google Gemini model
     llm = ChatGoogleGenerativeAI(
         model="gemini-2.5-pro-exp-03-25",
-        temperature=0.0,
-        convert_system_message_to_human=True
+        temperature=0.0
+        # Removed deprecated parameter: convert_system_message_to_human=True
     )
     
     # Create the RAG chain
@@ -586,7 +584,9 @@ def main():
             # Process the query
             try:
                 print("\nProcessing your question...")
-                result = rag_chain.run(query)
+                # Using invoke() instead of run() to address deprecation warning
+                response = rag_chain.invoke({"query": query})
+                result = response.get("result", "No result found")
                 
                 print("\nAnswer:")
                 print(result)
