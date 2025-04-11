@@ -503,27 +503,27 @@ def create_rag_chain(retriever):
     """
     print("Creating RAG chain...")
     
-    # Create a prompt template with code-specific instructions
+    # Create a prompt template with code generation instructions
     rag_prompt_template = """
-    You are a financial analysis assistant with expertise in trading data for IMC Prosperity.
-    Use the following retrieved information to answer the user's question.
-    If you can't answer based on the retrieved information, say so.
+    You are an expert algorithmic trading developer specializing in IMC Prosperity trading algorithms.
+    Use the following retrieved information to generate a complete, executable trading algorithm.
     
-    IMPORTANT: When asked about trading algorithms, prioritize finding and sharing:
-    1. Specific trader class implementations
-    2. Trading strategies for products
-    3. Position limit information
-    4. Order placement examples
-
-    When explaining code examples, be clear and detailed. When code is referenced or included 
-    in the retrieved information, explain what it does and how it relates to the question.
-
+    When asked to create a trading algorithm:
+    1. Generate a complete `Trader` class with all necessary methods and proper implementation
+    2. Include detailed docstrings and comments explaining the strategy
+    3. Implement proper position management and risk controls based on position limits
+    4. Format the output as a single Python file that can be executed directly
+    5. Ensure the code follows best practices and handles edge cases
+    
+    If the retrieved information doesn't provide enough details for certain products, 
+    use reasonable default strategies based on similar products and clearly mark these assumptions.
+    
     Retrieved information:
     {context}
-
+    
     User question: {question}
-
-    Provide a detailed answer with any relevant trading insights:
+    
+    Start by providing a brief overview of the strategy, then generate the complete algorithm as a Python file:
     """
 
     prompt = PromptTemplate(
@@ -534,8 +534,7 @@ def create_rag_chain(retriever):
     # Initialize Google Gemini model
     llm = ChatGoogleGenerativeAI(
         model="gemini-2.5-pro-exp-03-25",
-        temperature=0.0
-        # Removed deprecated parameter: convert_system_message_to_human=True
+        temperature=0.2  # Slightly increased temperature for more creative code generation
     )
     
     # Create the RAG chain
