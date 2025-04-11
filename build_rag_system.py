@@ -5,6 +5,7 @@ from pathlib import Path
 import pandas as pd
 from langchain_google_genai import GoogleGenerativeAIEmbeddings
 from langchain_community.vectorstores import Chroma
+from langchain_community.vectorstores.utils import filter_complex_metadata
 from langchain.text_splitter import RecursiveCharacterTextSplitter
 from langchain_community.document_loaders import JSONLoader
 from langchain.retrievers import EnsembleRetriever
@@ -283,7 +284,6 @@ def create_vector_stores(notion_documents, trading_documents):
         language="python",  # Default to Python handling
         chunk_size=1000,
         chunk_overlap=100,
-        separators=["\n\n", "\n", " ", ""]
     )
     
     # Initialize vector stores as None
@@ -291,41 +291,157 @@ def create_vector_stores(notion_documents, trading_documents):
     trading_vectorstore = None
     code_vectorstore = None
     
+    # Helper function to ensure document is a proper Document object
+    def ensure_document(item):
+        if isinstance(item, Document):
+            return item
+        elif isinstance(item, tuple):
+            # Handle tuple case - careful with extraction
+            if len(item) >= 1:
+                content = str(item[0]) if item[0] is not None else ""
+                metadata = item[1] if len(item) > 1 and isinstance(item[1], dict) else {}
+                return Document(page_content=content, metadata=metadata)
+        elif hasattr(item, 'page_content'):
+            # Handle case where it has page_content but isn't a Document instance
+            metadata = item.metadata if hasattr(item, 'metadata') else {}
+            return Document(page_content=item.page_content, metadata=metadata)
+        else:
+            # Last resort - convert to string
+            return Document(page_content=str(item), metadata={})
+    
+    # Helper function to clean metadata to ensure it only contains simple types
+    def clean_metadata(metadata):
+        cleaned = {}
+        for key, value in metadata.items():
+            if isinstance(value, (str, int, float, bool)) or value is None:
+                # Allow primitive types and None
+                cleaned[key] = value
+            elif isinstance(value, list):
+                # Convert lists to comma-separated strings
+                cleaned[key] = ", ".join(str(v) for v in value if v is not None)
+            elif isinstance(value, dict):
+                # Convert dictionaries to string representation
+                cleaned[key] = str(value)
+            else:
+                # Convert any other type to string
+                cleaned[key] = str(value) if value is not None else ""
+        return cleaned
+    
     # Only create notion vector store if there are documents
     if notion_documents:
-        # Split notion documents if needed
-        split_notion_docs = text_splitter.split_documents(notion_documents)
-        
-        if split_notion_docs:
-            print(f"Creating notion vector store with {len(split_notion_docs)} documents")
-            # Create notion vector store
-            notion_vectorstore = Chroma.from_documents(
-                documents=split_notion_docs,
-                embedding=embeddings,
-                persist_directory=f"{VECTOR_DB_DIR}/notion"
-            )
+        try:
+            # Split notion documents if needed
+            split_notion_docs = text_splitter.split_documents(notion_documents)
             
-            # Extract code blocks for specialized code search
-            code_blocks = extract_code_blocks(notion_documents)
-            if code_blocks:
-                print(f"Creating specialized code vector store with {len(code_blocks)} code blocks")
-                code_vectorstore = Chroma.from_documents(
-                    documents=code_blocks,
+            if split_notion_docs:
+                # Process all documents to ensure they're valid Document objects
+                valid_notion_docs = []
+                for item in split_notion_docs:
+                    try:
+                        doc = ensure_document(item)
+                        valid_notion_docs.append(doc)
+                    except Exception as e:
+                        print(f"Error processing notion document: {e}")
+                
+                # Now clean and normalize the metadata
+                filtered_notion_docs = []
+                for doc in valid_notion_docs:
+                    try:
+                        # First create a document with cleaned metadata
+                        cleaned_doc = Document(
+                            page_content=doc.page_content,
+                            metadata=clean_metadata(doc.metadata)
+                        )
+                        filtered_notion_docs.append(cleaned_doc)
+                    except Exception as e:
+                        print(f"Error cleaning notion document metadata: {e}")
+                        # If cleaning fails, try filter_complex_metadata as fallback
+                        try:
+                            filtered_doc = filter_complex_metadata(doc)
+                            filtered_notion_docs.append(filtered_doc)
+                        except Exception as e2:
+                            print(f"Error filtering notion document metadata: {e2}")
+                            # Last resort: create a document with minimal metadata
+                            minimal_metadata = {"source": doc.metadata.get("source", "unknown")} if hasattr(doc, "metadata") else {}
+                            filtered_notion_docs.append(Document(page_content=doc.page_content, metadata=minimal_metadata))
+                
+                print(f"Creating notion vector store with {len(filtered_notion_docs)} documents")
+                # Create notion vector store
+                notion_vectorstore = Chroma.from_documents(
+                    documents=filtered_notion_docs,
                     embedding=embeddings,
-                    persist_directory=f"{VECTOR_DB_DIR}/code"
+                    persist_directory=f"{VECTOR_DB_DIR}/notion"
                 )
+                
+                # Extract code blocks for specialized code search
+                code_blocks = extract_code_blocks(notion_documents)
+                if code_blocks:
+                    # Filter complex metadata structures from code blocks
+                    filtered_code_blocks = []
+                    for doc in code_blocks:
+                        try:
+                            filtered_code_blocks.append(filter_complex_metadata(ensure_document(doc)))
+                        except Exception as e:
+                            print(f"Error filtering code block metadata: {e}")
+                    
+                    print(f"Creating specialized code vector store with {len(filtered_code_blocks)} code blocks")
+                    code_vectorstore = Chroma.from_documents(
+                        documents=filtered_code_blocks,
+                        embedding=embeddings,
+                        persist_directory=f"{VECTOR_DB_DIR}/code"
+                    )
+        except Exception as e:
+            print(f"Error processing notion documents: {e}")
     else:
         print("No notion documents to process")
     
     # Only create trading vector store if there are documents
     if trading_documents:
-        print(f"Creating trading vector store with {len(trading_documents)} documents")
-        # Create trading data vector store
-        trading_vectorstore = Chroma.from_documents(
-            documents=trading_documents,
-            embedding=embeddings,
-            persist_directory=f"{VECTOR_DB_DIR}/trading"
-        )
+        try:
+            # Split trading documents if needed
+            split_trading_docs = text_splitter.split_documents(trading_documents)
+            
+            if split_trading_docs:
+                # Process all documents to ensure they're valid Document objects
+                valid_trading_docs = []
+                for item in split_trading_docs:
+                    try:
+                        doc = ensure_document(item)
+                        valid_trading_docs.append(doc)
+                    except Exception as e:
+                        print(f"Error processing trading document: {e}")
+                
+                # Now clean and normalize the metadata
+                filtered_trading_docs = []
+                for doc in valid_trading_docs:
+                    try:
+                        # First create a document with cleaned metadata
+                        cleaned_doc = Document(
+                            page_content=doc.page_content,
+                            metadata=clean_metadata(doc.metadata)
+                        )
+                        filtered_trading_docs.append(cleaned_doc)
+                    except Exception as e:
+                        print(f"Error cleaning trading document metadata: {e}")
+                        # If cleaning fails, try filter_complex_metadata as fallback
+                        try:
+                            filtered_doc = filter_complex_metadata(doc)
+                            filtered_trading_docs.append(filtered_doc)
+                        except Exception as e2:
+                            print(f"Error filtering trading document metadata: {e2}")
+                            # Last resort: create a document with minimal metadata
+                            minimal_metadata = {"source": doc.metadata.get("source", "unknown")} if hasattr(doc, "metadata") else {}
+                            filtered_trading_docs.append(Document(page_content=doc.page_content, metadata=minimal_metadata))
+                
+                print(f"Creating trading vector store with {len(filtered_trading_docs)} documents")
+                # Create trading data vector store
+                trading_vectorstore = Chroma.from_documents(
+                    documents=filtered_trading_docs,
+                    embedding=embeddings,
+                    persist_directory=f"{VECTOR_DB_DIR}/trading"
+                )
+        except Exception as e:
+            print(f"Error processing trading documents: {e}")
     else:
         print("No trading documents to process")
     
@@ -350,7 +466,7 @@ def create_combined_retriever(notion_vectorstore, trading_vectorstore, code_vect
     if notion_vectorstore:
         notion_retriever = notion_vectorstore.as_retriever(search_kwargs={"k": 3})
         retrievers.append(notion_retriever)
-        weights.append(0.6)
+        weights.append(0.4)
     
     if trading_vectorstore:
         trading_retriever = trading_vectorstore.as_retriever(search_kwargs={"k": 2})
@@ -360,7 +476,7 @@ def create_combined_retriever(notion_vectorstore, trading_vectorstore, code_vect
     if code_vectorstore:
         code_retriever = code_vectorstore.as_retriever(search_kwargs={"k": 2})
         retrievers.append(code_retriever)
-        weights.append(0.1)
+        weights.append(0.3)
     
     # Normalize weights if we have at least one retriever
     if retrievers:

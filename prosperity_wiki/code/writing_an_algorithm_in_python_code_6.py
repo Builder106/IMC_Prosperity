@@ -1,4 +1,4 @@
-PythonCopySymbol = str
+Symbol = str
 class Order:
 def __init__(self, symbol: Symbol, price: int, quantity: int) -> None:
         self.symbol = symbol

@@ -1,0 +1,12 @@
+{
+  "metadata": {
+    "source": "prices_round_2_day_-1.csv",
+    "day": -1,
+    "product": "CROISSANTS",
+    "type": "trading_data",
+    "file_type": "price",
+    "round": "round_2",
+    "basket": null
+  },
+  "content": "Trading data for CROISSANTS on day -1:\nAverage mid price: 4318.70\nPrice range: 4302.50 to 4340.50\nData points: 10000\n\nTrading metrics:\nvolatility: 7.9410\nprice_momentum: 0.0017\nvolume_weighted_price: 4318.6984\ntrading_activity: 10000.0000\navg_spread: 1.2054\nmarket_depth: 3.0000\n"
+}

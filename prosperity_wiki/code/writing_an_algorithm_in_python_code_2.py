@@ -1,4 +1,4 @@
-PythonCopyTime = int
+Time = int
 Symbol = str
 Product = str
 Position = int

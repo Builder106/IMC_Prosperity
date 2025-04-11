@@ -7,9 +7,9 @@ from playwright.sync_api import sync_playwright
 # Base URL of the Notion wiki
 BASE_URL = "https://imc-prosperity.notion.site/Prosperity-3-Wiki-19ee8453a09380529731c4e6fb697ea4"
 # Directory to save the JSON files
-SAVE_DIR = "prosperity_wiki"
+SAVE_DIR = "../prosperity_wiki"
 # Directory to save code files
-CODE_DIR = "prosperity_wiki/code"
+CODE_DIR = "../prosperity_wiki/code"
 
 def save_json(data, folder, filename):
     """Save data to a JSON file."""
@@ -141,6 +141,9 @@ def extract_content(soup, page_title):
             # Handle code blocks
             code = element.get_text().strip()
             if code:
+                # Remove "PythonCopy" prefix if present
+                code = re.sub(r'^PythonCopy', '', code).strip()
+                
                 # Generate a unique ID for this code block
                 code_id = f"code_{code_block_counter}"
                 code_block_counter += 1

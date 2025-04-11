@@ -1,4 +1,4 @@
-PythonCopySymbol = str
+Symbol = str
 UserId = str
 class Trade:
 def __init__(self, symbol: Symbol, price: int, quantity: int, buyer: UserId = None, seller: UserId = None, timestamp: int = 0) -> None:

@@ -1,4 +1,4 @@
-PythonCopyclass ConversionObservation:
+class ConversionObservation:
 def __init__(self, bidPrice: float, askPrice: float, transportFees: float, exportTariff: float, importTariff: float, sugarPrice: float, sunlightIndex: float):
         self.bidPrice = bidPrice
         self.askPrice = askPrice
