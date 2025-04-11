@@ -136,6 +136,9 @@ def process_code_content(code_content, language):
     if not code_content:
         return ""
     
+    # Remove invisible zero-width space characters (U+200B)
+    code_content = code_content.replace('\u200b', '')
+    
     # Remove language indicator and "Copy" text that sometimes appear at the start
     code_content = re.sub(r'^(Python|JavaScript|HTML|CSS|JSON|TypeScript|Java|C\+\+|C#|Go|Rust|SQL|Bash|Shell)?\s*Copy\s*', '', code_content)
     

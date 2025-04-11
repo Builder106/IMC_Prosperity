@@ -9,4 +9,3 @@ class Order:
             return "(" + self.symbol + ", " + str(self.price) + ", " + str(self.quantity) + ")"
         def __repr__(self) -> str:
             return "(" + self.symbol + ", " + str(self.price) + ", " + str(self.quantity) + ")"
-        ​

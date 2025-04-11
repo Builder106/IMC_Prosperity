@@ -116,17 +116,102 @@ def save_code_file(code_content, language, page_title, code_id):
     # Ensure code directory exists
     os.makedirs(CODE_DIR, exist_ok=True)
     
+    # Process code content to fix indentation issues
+    processed_code = process_code_content(code_content, language)
+    
     # Save the code file with the correct filename
     file_path = os.path.join(CODE_DIR, filename)
     try:
         with open(file_path, "w", encoding="utf-8") as f:
-            f.write(code_content)
+            f.write(processed_code)
         print(f"Successfully saved code file to: {file_path}")
     except Exception as e:
         print(f"Error saving code file: {e}")
     
     # Return the relative path from the project root
     return os.path.join("code", filename)
+
+def process_code_content(code_content, language):
+    """Process code content to fix indentation and formatting issues"""
+    if not code_content:
+        return ""
+    
+    # Remove invisible zero-width space characters (U+200B)
+    code_content = code_content.replace('\u200b', '')
+    
+    # Remove language indicator and "Copy" text that sometimes appear at the start
+    code_content = re.sub(r'^(Python|JavaScript|HTML|CSS|JSON|TypeScript|Java|C\+\+|C#|Go|Rust|SQL|Bash|Shell)?\s*Copy\s*', '', code_content)
+    
+    if language.lower() == "python":
+        # Python specific processing
+        
+        # Split into lines
+        lines = code_content.split('\n')
+        processed_lines = []
+        
+        # Track current indentation level
+        current_indent = 0
+        indent_size = 4  # Standard Python indentation
+        
+        # Keywords that typically increase indentation level for the next line
+        indent_keywords = ["if", "else:", "elif", "for", "while", "def", "class", "with", "try:", "except:", "finally:"]
+        # Keywords that typically decrease indentation level
+        dedent_keywords = ["else:", "elif", "except:", "finally:"]
+        
+        for i, line in enumerate(lines):
+            # Remove excess whitespace but track if the line had content
+            stripped_line = line.strip()
+            if not stripped_line:
+                # Keep empty lines
+                processed_lines.append("")
+                continue
+                
+            # Check if the line is broken into separate tokens
+            if re.search(r'(\w+)\s+(\w+)', stripped_line) and ":" in stripped_line:
+                # This is a line with control flow that might need indentation fixing
+                # Try to clean up the excessive spacing
+                cleaned_line = re.sub(r'\s+', ' ', stripped_line)
+                # Special handling for indentation keywords
+                
+                # Adjust indentation for this line
+                if any(keyword in stripped_line for keyword in dedent_keywords):
+                    # This is a continuation line like "else:", reduce indentation
+                    current_indent = max(0, current_indent - indent_size)
+                    
+                indented_line = ' ' * current_indent + cleaned_line
+                processed_lines.append(indented_line)
+                
+                # Adjust indentation for next line if needed
+                if any(keyword in stripped_line for keyword in indent_keywords) and stripped_line.endswith(':'):
+                    current_indent += indent_size
+            else:
+                # Regular code line
+                indented_line = ' ' * current_indent + stripped_line
+                processed_lines.append(indented_line)
+                
+                # Check for end of blocks (like return, pass, etc.) to decrease indentation
+                if stripped_line.startswith("return ") or stripped_line == "return" or stripped_line == "pass" or stripped_line == "break" or stripped_line == "continue":
+                    # These might signal the end of a block
+                    if i+1 < len(lines) and lines[i+1].strip() and not lines[i+1].strip().startswith(("else:", "elif", "except:", "finally:")):
+                        current_indent = max(0, current_indent - indent_size)
+        
+        return '\n'.join(processed_lines)
+    else:
+        # For other languages, just clean up excess whitespace
+        # We could add more language-specific formatting here
+        lines = code_content.split('\n')
+        processed_lines = []
+        
+        for line in lines:
+            stripped_line = line.strip()
+            if stripped_line:
+                # Simplify excess whitespace between tokens
+                cleaned_line = re.sub(r'\s+', ' ', stripped_line)
+                processed_lines.append(cleaned_line)
+            else:
+                processed_lines.append("")
+                
+        return '\n'.join(processed_lines)
 
 def extract_content(soup, page_title):
     """Extract content blocks from the Notion page in their natural order."""
