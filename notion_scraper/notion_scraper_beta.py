@@ -11,6 +11,50 @@ SAVE_DIR = "../prosperity_wiki"
 # Directory to save code files
 CODE_DIR = "../prosperity_wiki/code"
 
+# Make absolute paths for directories
+current_dir = os.path.dirname(os.path.abspath(__file__))
+SAVE_DIR = os.path.abspath(os.path.join(current_dir, SAVE_DIR))
+CODE_DIR = os.path.abspath(os.path.join(current_dir, CODE_DIR))
+
+def load_code_file_mapping(mapping_file="codefile_names.md"):
+    """Load the code file mapping from markdown file"""
+    mapping = {}
+    try:
+        current_dir = os.path.dirname(os.path.abspath(__file__))
+        full_path = os.path.join(current_dir, mapping_file)
+        
+        if not os.path.exists(full_path):
+            print(f"Warning: Code file mapping not found at {full_path}")
+            return mapping
+            
+        with open(full_path, 'r', encoding='utf-8') as f:
+            lines = f.readlines()
+            
+        # Skip header rows (first two lines)
+        for line in lines[2:]:
+            if '|' not in line:
+                continue
+                
+            parts = line.strip().split('|')
+            if len(parts) >= 4:  # With proper formatting, we should have ['', 'code_X', 'Description', '']
+                code_id = parts[1].strip()
+                description = parts[2].strip()
+                # Use the description as the filename, with a .py extension
+                # Replace non-alphanumeric characters (except spaces and hyphens) with underscores
+                safe_filename = re.sub(r'[^\w\s\-]', '_', description) + '.py'
+                # Store with code_id as the key (like "code_1")
+                mapping[code_id] = safe_filename
+                print(f"Loaded mapping: {code_id} -> {safe_filename}")
+        
+        print(f"Loaded {len(mapping)} code file mappings")
+    except Exception as e:
+        print(f"Error loading code file mapping: {e}")
+    
+    return mapping
+
+# Load the code file mapping
+CODE_FILE_MAPPING = load_code_file_mapping()
+
 def save_json(data, folder, filename):
     """Save data to a JSON file."""
     os.makedirs(folder, exist_ok=True)
@@ -35,22 +79,51 @@ def determine_category(title, content_blocks):
 
 def save_code_file(code_content, language, page_title, code_id):
     """Save code to a separate file and return the file path."""
-    # Create sanitized file name base
-    sanitized_title = page_title.lower().replace(" ", "_").replace("/", "_")
+    filename = None
     
-    # Determine file extension based on language
-    extension = ".py" if language.lower() == "python" else ".txt"
+    # If the page is "Writing an Algorithm in Python" 
+    if "algorithm" in page_title.lower() and "python" in page_title.lower():
+        # Simply look up the code_id directly in our mapping
+        if code_id in CODE_FILE_MAPPING:
+            filename = CODE_FILE_MAPPING[code_id]
+            print(f"Mapped code block {code_id} to: {filename}")
+        # Additional check for strange cases where the code_id might be different format
+        else:
+            # Extract the code block number from the code_id (format: code_X)
+            code_number_match = re.search(r'code_(\d+)', code_id)
+            if code_number_match:
+                simple_code_id = f"code_{code_number_match.group(1)}"
+                if simple_code_id in CODE_FILE_MAPPING:
+                    filename = CODE_FILE_MAPPING[simple_code_id]
+                    print(f"Mapped code block {code_id} to: {filename}")
     
-    # Create filename
-    filename = f"{sanitized_title}_{code_id}{extension}"
+    # Debug output
+    if filename:
+        print(f"Using mapped filename: {filename}")
+    
+    # If no match is found, use the default naming scheme
+    if not filename:
+        # Create sanitized file name base
+        sanitized_title = page_title.lower().replace(" ", "_").replace("/", "_")
+        
+        # Determine file extension based on language
+        extension = ".py" if language.lower() == "python" else ".txt"
+        
+        # Create filename
+        filename = f"{sanitized_title}_{code_id}{extension}"
+        print(f"Using default naming for {code_id}: {filename}")
     
     # Ensure code directory exists
     os.makedirs(CODE_DIR, exist_ok=True)
     
-    # Save the code file
+    # Save the code file with the correct filename
     file_path = os.path.join(CODE_DIR, filename)
-    with open(file_path, "w", encoding="utf-8") as f:
-        f.write(code_content)
+    try:
+        with open(file_path, "w", encoding="utf-8") as f:
+            f.write(code_content)
+        print(f"Successfully saved code file to: {file_path}")
+    except Exception as e:
+        print(f"Error saving code file: {e}")
     
     # Return the relative path from the project root
     return os.path.join("code", filename)
@@ -346,7 +419,7 @@ def scrape_notion_wiki():
         
         print(f"Found {len(internal_links)} internal pages.")
         
-        # Debug: If still no links, print the page content
+        # Debug: If still no links found, print the page content
         if len(internal_links) == 0:
             print("No links found. Saving page HTML for debugging...")
             with open("notion_debug.html", "w", encoding="utf-8") as f:

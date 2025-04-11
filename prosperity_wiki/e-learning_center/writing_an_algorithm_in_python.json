@@ -39,7 +39,7 @@
     "type": "code",
     "language": "python",
     "code_id": "code_1",
-    "file_path": "code/writing_an_algorithm_in_python_code_1.py",
+    "file_path": "code/overview_of_trader_class.py",
     "preview": "from datamodel import OrderDepth, UserId, TradingS..."
   },
   {
@@ -70,7 +70,7 @@
     "type": "code",
     "language": "python",
     "code_id": "code_2",
-    "file_path": "code/writing_an_algorithm_in_python_code_2.py",
+    "file_path": "code/overview_of_tradingstate_class.py",
     "preview": "Time = int\nSymbol = str\nProduct = str\nPosition = i..."
   },
   {
@@ -107,7 +107,7 @@
     "type": "code",
     "language": "python",
     "code_id": "code_3",
-    "file_path": "code/writing_an_algorithm_in_python_code_3.py",
+    "file_path": "code/trade_class.py",
     "preview": "Symbol = str\nUserId = str\nclass Trade:\ndef __init_..."
   },
   {
@@ -152,7 +152,7 @@
     "type": "code",
     "language": "python",
     "code_id": "code_4",
-    "file_path": "code/writing_an_algorithm_in_python_code_4.py",
+    "file_path": "code/orderdepth_class.py",
     "preview": "class OrderDepth:\ndef __init__(self):\n        self..."
   },
   {
@@ -185,7 +185,7 @@
     "type": "code",
     "language": "python",
     "code_id": "code_5",
-    "file_path": "code/writing_an_algorithm_in_python_code_5.py",
+    "file_path": "code/observation_class.py",
     "preview": "class ConversionObservation:\ndef __init__(self, bi..."
   },
   {
@@ -248,7 +248,7 @@
     "type": "code",
     "language": "python",
     "code_id": "code_6",
-    "file_path": "code/writing_an_algorithm_in_python_code_6.py",
+    "file_path": "code/send_orders_using_order_class.py",
     "preview": "Symbol = str\nclass Order:\ndef __init__(self, symbo..."
   },
   {
@@ -301,7 +301,7 @@
     "type": "code",
     "language": "python",
     "code_id": "code_7",
-    "file_path": "code/writing_an_algorithm_in_python_code_7.py",
+    "file_path": "code/tradingexample-initial_tradingstate_setup.py",
     "preview": "from datamodel import Listing, OrderDepth, Trade, ..."
   },
   {
@@ -348,7 +348,7 @@
     "type": "code",
     "language": "python",
     "code_id": "code_8",
-    "file_path": "code/writing_an_algorithm_in_python_code_8.py",
+    "file_path": "code/tradingexample-example_algorithm_output-run_method_result.py",
     "preview": "result[\"PRODUCT1\"] = [Order(\"PRODUCT1\", 12, 7)]\nre..."
   },
   {
@@ -359,7 +359,7 @@
     "type": "code",
     "language": "python",
     "code_id": "code_9",
-    "file_path": "code/writing_an_algorithm_in_python_code_9.py",
+    "file_path": "code/tradingexample-next_tradingstate_after_execution.py",
     "preview": "from datamodel import Listing, OrderDepth, Trade, ..."
   },
   {
@@ -448,7 +448,7 @@
     "type": "code",
     "language": "python",
     "code_id": "code_10",
-    "file_path": "code/writing_an_algorithm_in_python_code_10.py",
+    "file_path": "code/appendix_A_trader_class_example.py",
     "preview": "from datamodel import OrderDepth, UserId, TradingS..."
   },
   {
@@ -459,7 +459,7 @@
     "type": "code",
     "language": "python",
     "code_id": "code_11",
-    "file_path": "code/writing_an_algorithm_in_python_code_11.py",
+    "file_path": "code/appendix_B-datamodel_py.py",
     "preview": "import json\nfrom typing import Dict, List\nfrom jso..."
   },
   {
