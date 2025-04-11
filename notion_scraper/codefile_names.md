@@ -10,4 +10,4 @@
 |  code_8  |tradingexample-example_algorithm_output-run_method_result|
 |  code_9  |tradingexample-next_tradingstate_after_execution|
 |  code_10 |appendix_A_trader_class_example|
-|  code_11 |appendix_B-datamodel_py|
+|  code_11 |datamodel|
