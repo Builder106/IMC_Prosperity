@@ -267,10 +267,10 @@ def extract_content(soup, page_title):
                 current_list_type = list_style
                 current_list_items.extend(extracted_items)
                 
-        elif "notion-header-block" in class_name:
+        elif "notion-header-block" in class_name or "notion-sub_header-block" in class_name:
             # Handle headings
             style = element.get('style', '')
-            if 'font-size: 1.5em' in style or 'font-weight: 700' in style:
+            if 'font-size: 1.5em' in style or 'font-weight: 700' in style or 'font-size: 1.5em' in style or 'font-weight: 600' in style:
                 heading_type = "h2"
             elif 'font-size: 1.25em' in style or 'font-weight: 600' in style:
                 heading_type = "h3"

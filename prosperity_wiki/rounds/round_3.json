@@ -2,5 +2,13 @@
   {
     "type": "h1",
     "content": "Round 3"
+  },
+  {
+    "type": "h3",
+    "content": "Algorithm challenge"
+  },
+  {
+    "type": "h3",
+    "content": "Manual challenge"
   }
 ]

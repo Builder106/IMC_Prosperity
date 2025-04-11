@@ -4,6 +4,10 @@
     "content": "Announcements"
   },
   {
+    "type": "h3",
+    "content": "Announcement 11 April, 13:52 CET"
+  },
+  {
     "type": "p",
     "content": "Hello dear Traders,"
   },
@@ -36,6 +40,10 @@
   {
     "type": "p",
     "content": "/end of announcement"
+  },
+  {
+    "type": "h3",
+    "content": "Announcement 10 April, 18:04 CET"
   },
   {
     "type": "p",

@@ -58,12 +58,20 @@
     "content": "Dashboard"
   },
   {
+    "type": "h3",
+    "content": "Algorithmic trading submissions"
+  },
+  {
     "type": "p",
     "content": "Submitting your algorithmic trading program (your Python script) is easily done through the dashboard, by clicking the “Upload algorithm” button. A window will open where you can drag & drop your file or search for it through a file browser. Here, you can also find all the previously uploaded programs with their respective status and who uploaded them. You can even download the debug logs. Handy!"
   },
   {
     "type": "p",
     "content": "You and your team can upload as many Python programs as you please, but only the one active algorithm will be processed and executed at the end of the round."
+  },
+  {
+    "type": "h3",
+    "content": "Manual trading submissions"
   },
   {
     "type": "p",

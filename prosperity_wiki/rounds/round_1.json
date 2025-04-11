@@ -4,6 +4,10 @@
     "content": "Round 1"
   },
   {
+    "type": "h3",
+    "content": "Algorithm challenge"
+  },
+  {
     "type": "p",
     "content": "The first three tradable products are introduced: : Rainforest Resin , Kelp, and Squid Ink. The value of the Rainforest Resin has been stable throughout the history of the archipelago, the value of Kelp has been going up and down over time, and the value of Squid Ink can also swing a bit, but some say there is a pattern to be discovered in its prize progression. All algorithms uploaded in the tutorial round will be processed and generate results instantly, so you can experiment with different programs and strategies."
   },
@@ -36,6 +40,10 @@
   {
     "type": "p",
     "content": "A metric to keep track of the size of deviation/swing from recent average could help in trading profitable positions."
+  },
+  {
+    "type": "h3",
+    "content": "Manual challenge"
   },
   {
     "type": "p",

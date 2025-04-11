@@ -12,8 +12,16 @@
     "content": "To be able to participate in algorithmic trading you will need to have some programming skills. Python programming, specifically. Here you will find some resources that will help you get started on programming in Python."
   },
   {
+    "type": "h3",
+    "content": "IMC Trading | Python for beginners"
+  },
+  {
     "type": "p",
     "content": "Get it straight from the source. Follow IMC’s excellent Python for beginners videos to get up to speed and learn how to get started with Python specifically for trading."
+  },
+  {
+    "type": "h3",
+    "content": "Object-Oriented Programming in Python 3"
   },
   {
     "type": "p",

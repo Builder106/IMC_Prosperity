@@ -4,6 +4,10 @@
     "content": "Round 2"
   },
   {
+    "type": "h3",
+    "content": "Algorithm challenge"
+  },
+  {
     "type": "p",
     "content": "In this second round, you’ll find that everybody on the archipelago loves to picnic. Therefore, in addition to the products from round one, two Picnic Baskets are now available as a tradable good."
   },
@@ -80,6 +84,10 @@
         "level": 0
       }
     ]
+  },
+  {
+    "type": "h3",
+    "content": "Manual challenge"
   },
   {
     "type": "p",
