@@ -162,6 +162,41 @@ def calculate_metrics(df):
             metrics["avg_bid_top_concentration"] = df['bid_top_concentration'].mean()
             metrics["avg_ask_top_concentration"] = df['ask_top_concentration'].mean()
     
+    # Profit and Loss metrics
+    if 'profit_and_loss' in df.columns:
+        # Basic P&L statistics
+        metrics["total_pnl"] = df['profit_and_loss'].sum()
+        metrics["avg_pnl"] = df['profit_and_loss'].mean()
+        metrics["pnl_volatility"] = df['profit_and_loss'].std()
+        
+        # Min/Max P&L values
+        metrics["max_pnl"] = df['profit_and_loss'].max()
+        metrics["min_pnl"] = df['profit_and_loss'].min()
+        
+        # Sort by timestamp for cumulative calculations if available
+        if 'timestamp' in df.columns:
+            df_sorted = df.sort_values('timestamp')
+        else:
+            df_sorted = df
+            
+        # Cumulative P&L
+        df_sorted['cum_pnl'] = df_sorted['profit_and_loss'].cumsum()
+        metrics["final_cum_pnl"] = df_sorted['cum_pnl'].iloc[-1]
+        
+        # Calculate drawdown
+        running_max = df_sorted['cum_pnl'].cummax()
+        drawdown = running_max - df_sorted['cum_pnl']
+        metrics["max_drawdown"] = drawdown.max()
+        
+        # Calculate simple Sharpe-like ratio if we have enough data points
+        if len(df) > 2 and df['profit_and_loss'].std() > 0:
+            metrics["pnl_sharpe"] = df['profit_and_loss'].mean() / df['profit_and_loss'].std()
+        
+        # Count of profitable vs unprofitable data points
+        profitable_points = (df['profit_and_loss'] > 0).sum()
+        metrics["profitable_points"] = profitable_points
+        metrics["profit_ratio"] = profitable_points / len(df) if len(df) > 0 else 0
+    
     return metrics
 
 if __name__ == "__main__":
@@ -201,4 +236,4 @@ if __name__ == "__main__":
         another = input("\nWould you like to process another file? (y/n): ").strip().lower()
         if another != 'y':
             print("Goodbye!")
-            break
+            # break
