@@ -5,3 +5,4 @@ vectordb
 .DS_Store
 processed_data
 algorithms
+processed_trading_data.json
