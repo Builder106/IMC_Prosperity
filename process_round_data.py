@@ -138,7 +138,30 @@ def calculate_metrics(df):
         df['spread'] = df['ask_price_1'] - df['bid_price_1']
         metrics["avg_spread"] = df['spread'].mean()
         metrics["max_spread"] = df['spread'].max()
+    
+    # Order book depth metrics
+    bid_cols = [col for col in df.columns if col.startswith('bid_volume_')]
+    ask_cols = [col for col in df.columns if col.startswith('ask_volume_')]
+    
+    if bid_cols and ask_cols:
+        # Total visible liquidity
+        df['total_bid_volume'] = df[bid_cols].sum(axis=1)
+        df['total_ask_volume'] = df[ask_cols].sum(axis=1)
+        metrics["avg_total_bid_volume"] = df['total_bid_volume'].mean()
+        metrics["avg_total_ask_volume"] = df['total_ask_volume'].mean()
         
+        # Order book imbalance
+        df['book_imbalance'] = (df['total_bid_volume'] - df['total_ask_volume']) / (df['total_bid_volume'] + df['total_ask_volume'])
+        metrics["avg_book_imbalance"] = df['book_imbalance'].mean()
+        metrics["book_pressure"] = metrics["avg_book_imbalance"] * 100  # as percentage
+        
+        # Top of book concentration
+        if 'bid_volume_1' in df.columns and 'ask_volume_1' in df.columns:
+            df['bid_top_concentration'] = df['bid_volume_1'] / df['total_bid_volume']
+            df['ask_top_concentration'] = df['ask_volume_1'] / df['total_ask_volume']
+            metrics["avg_bid_top_concentration"] = df['bid_top_concentration'].mean()
+            metrics["avg_ask_top_concentration"] = df['ask_top_concentration'].mean()
+    
     return metrics
 
 if __name__ == "__main__":

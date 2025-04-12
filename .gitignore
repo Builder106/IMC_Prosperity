@@ -4,3 +4,4 @@ __pycache__
 vectordb
 .DS_Store
 processed_data
+algorithms
