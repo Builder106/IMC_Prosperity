@@ -162,6 +162,69 @@ def calculate_metrics(df):
             metrics["avg_bid_top_concentration"] = df['bid_top_concentration'].mean()
             metrics["avg_ask_top_concentration"] = df['ask_top_concentration'].mean()
     
+    # TIME-BASED METRICS - NEW ADDITION
+    if 'timestamp' in df.columns:
+        # Ensure data is sorted by timestamp
+        df_sorted = df.sort_values('timestamp')
+        
+        # Time range metrics
+        metrics["time_span"] = df_sorted["timestamp"].max() - df_sorted["timestamp"].min()
+        
+        # Calculate average time between observations
+        if len(df_sorted) > 1 and metrics["time_span"] > 0:
+            metrics["avg_time_between_obs"] = metrics["time_span"] / (len(df_sorted) - 1)
+            metrics["data_frequency"] = (len(df_sorted) - 1) / metrics["time_span"] if metrics["time_span"] > 0 else 0
+        
+        # Price velocity (rate of change over time)
+        if 'mid_price' in df_sorted.columns:
+            df_sorted['price_diff'] = df_sorted['mid_price'].diff()
+            df_sorted['time_diff'] = df_sorted['timestamp'].diff()
+            
+            # Only calculate where we have valid differences
+            valid_idx = (df_sorted['time_diff'] > 0) & df_sorted['price_diff'].notna()
+            if valid_idx.any():
+                df_sorted.loc[valid_idx, 'price_velocity'] = df_sorted.loc[valid_idx, 'price_diff'] / df_sorted.loc[valid_idx, 'time_diff']
+                
+                metrics["avg_price_velocity"] = df_sorted.loc[valid_idx, 'price_velocity'].mean()
+                metrics["max_price_velocity"] = df_sorted.loc[valid_idx, 'price_velocity'].abs().max()
+                
+                # Price acceleration (second derivative)
+                df_sorted['velocity_diff'] = df_sorted['price_velocity'].diff()
+                valid_acc_idx = valid_idx & df_sorted['velocity_diff'].notna()
+                if valid_acc_idx.any():
+                    df_sorted.loc[valid_acc_idx, 'price_acceleration'] = df_sorted.loc[valid_acc_idx, 'velocity_diff'] / df_sorted.loc[valid_acc_idx, 'time_diff']
+                    metrics["avg_price_acceleration"] = df_sorted.loc[valid_acc_idx, 'price_acceleration'].mean()
+        
+        # Moving averages if enough data points
+        if 'mid_price' in df_sorted.columns and len(df_sorted) >= 5:
+            # Short term moving average (5 periods)
+            df_sorted['sma_5'] = df_sorted['mid_price'].rolling(window=5, min_periods=1).mean()
+            # Medium term moving average (10 periods)
+            if len(df_sorted) >= 10:
+                df_sorted['sma_10'] = df_sorted['mid_price'].rolling(window=10, min_periods=1).mean()
+                
+                # Moving average crossover analysis
+                if len(df_sorted) >= 10:
+                    # Detect crossovers (1 when short crosses above long, -1 when short crosses below long)
+                    df_sorted['ma_cross'] = ((df_sorted['sma_5'] > df_sorted['sma_10']) & 
+                                           (df_sorted['sma_5'].shift(1) <= df_sorted['sma_10'].shift(1))).astype(int) - \
+                                          ((df_sorted['sma_5'] < df_sorted['sma_10']) & 
+                                           (df_sorted['sma_5'].shift(1) >= df_sorted['sma_10'].shift(1))).astype(int)
+                    
+                    metrics["ma_crossovers_up"] = (df_sorted['ma_cross'] == 1).sum()
+                    metrics["ma_crossovers_down"] = (df_sorted['ma_cross'] == -1).sum()
+        
+        # Time-based volatility
+        if 'mid_price' in df_sorted.columns:
+            # Calculate rolling volatility over different windows
+            if len(df_sorted) >= 5:
+                df_sorted['rolling_vol_5'] = df_sorted['mid_price'].rolling(window=5, min_periods=3).std()
+                metrics["avg_rolling_volatility_5"] = df_sorted['rolling_vol_5'].mean()
+            
+            if len(df_sorted) >= 10:
+                df_sorted['rolling_vol_10'] = df_sorted['mid_price'].rolling(window=10, min_periods=5).std()
+                metrics["avg_rolling_volatility_10"] = df_sorted['rolling_vol_10'].mean()
+    
     # Profit and Loss metrics
     if 'profit_and_loss' in df.columns:
         # Basic P&L statistics
