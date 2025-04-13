@@ -457,28 +457,6 @@ class Trader:
             else:
                 print(f"  {product}: Could not calculate mid-price (likely insufficient order book data).")
             
-        def update_volatility_parameters(self, product: str, mid_price: float):
-            """Update volatility parameters based on recent price movements"""
-            if len(self.price_history[product]) < 10:
-                return
-                
-            # Calculate recent volatility
-            recent_prices = list(self.price_history[product])[-10:]
-            recent_volatility = np.std(recent_prices)
-            expected_volatility = PARAMS[product]["volatility"]
-            
-            # Adjust spread_capture based on observed volatility
-            volatility_ratio = recent_volatility / expected_volatility
-            if volatility_ratio > 1.5:
-                # Higher volatility - widen spread
-                PARAMS[product]["spread_capture"] *= 1.2
-            elif volatility_ratio < 0.7:
-                # Lower volatility - tighten spread
-                PARAMS[product]["spread_capture"] *= 0.9
-                
-            # Keep spread_capture within reasonable bounds
-            PARAMS[product]["spread_capture"] = max(1.0, min(10.0, PARAMS[product]["spread_capture"]))
-
             # Add orders to result if we have any
             if orders:
                 result[product] = orders
