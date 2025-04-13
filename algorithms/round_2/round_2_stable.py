@@ -101,7 +101,8 @@ PARAMS = {
 
 # Conversion parameters for baskets
 BASKET1_COMPONENTS = {
-    JAMS: 4,
+    DJEMBES: 1,
+    JAMS: 3,
     CROISSANTS: 6
 }
 
@@ -323,7 +324,7 @@ class Trader:
         conversions = 0
         
         # Only proceed if we have all required products
-        required_products = [JAMS, CROISSANTS, PICNIC_BASKET1, PICNIC_BASKET2]
+        required_products = [JAMS, CROISSANTS, DJEMBES, PICNIC_BASKET1, PICNIC_BASKET2]
         all_products_available = all(product in state.order_depths for product in required_products)
         
         if not all_products_available:
@@ -342,8 +343,8 @@ class Trader:
         }
         
         # Calculate basket arbitrage opportunities
-        # Basket 1: 4 JAMS + 6 CROISSANTS
-        basket1_cost = 4 * mid_prices[JAMS] + 6 * mid_prices[CROISSANTS]
+        # Basket 1: 3 JAMS + 6 CROISSANTS + 1 DJEMBE
+        basket1_cost = 3 * mid_prices[JAMS] + 6 * mid_prices[CROISSANTS] + 1 * mid_prices[DJEMBES]
         basket1_arb = mid_prices[PICNIC_BASKET1] - basket1_cost
         
         # Basket 2: 2 JAMS + 4 CROISSANTS  
@@ -357,9 +358,10 @@ class Trader:
         # Decision logic for Basket 1
         if basket1_arb > basket1_threshold:  # Create baskets
             # Check position limits
-            max_conversions_jams = current_positions[JAMS] // 4
+            max_conversions_jams = current_positions[JAMS] // 3
             max_conversions_croissants = current_positions[CROISSANTS] // 6
-            max_basket1_create = min(max_conversions_jams, max_conversions_croissants)
+            max_conversions_djembes = current_positions[DJEMBES] // 1
+            max_basket1_create = min(max_conversions_jams, max_conversions_croissants, max_conversions_djembes)
             
             # Check position limit for PICNIC_BASKET1
             basket1_headroom = POSITION_LIMITS[PICNIC_BASKET1] - current_positions[PICNIC_BASKET1]
@@ -373,9 +375,10 @@ class Trader:
             max_basket1_break = current_positions[PICNIC_BASKET1]
             
             # Check position limits for components
-            jams_headroom = (POSITION_LIMITS[JAMS] - current_positions[JAMS]) // 4
+            jams_headroom = (POSITION_LIMITS[JAMS] - current_positions[JAMS]) // 3
             croissants_headroom = (POSITION_LIMITS[CROISSANTS] - current_positions[CROISSANTS]) // 6
-            max_basket1_break = min(max_basket1_break, jams_headroom, croissants_headroom)
+            djembes_headroom = (POSITION_LIMITS[DJEMBES] - current_positions[DJEMBES]) // 1
+            max_basket1_break = min(max_basket1_break, jams_headroom, croissants_headroom, djembes_headroom)
             
             if max_basket1_break > 0:
                 conversions -= max_basket1_break
