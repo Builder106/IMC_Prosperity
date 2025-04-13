@@ -1,0 +1,126 @@
+[
+  {
+    "type": "h1",
+    "content": "Game mechanics overview"
+  },
+  {
+    "type": "h2",
+    "content": "Rounds"
+  },
+  {
+    "type": "p",
+    "content": "The 15 days of simulation of Prosperity are divided into 5 rounds. Each round lasts 72 hours. At the end of every round - before the timer runs out - all teams will have to submit their algorithmic and manual trades to be processed. The algorithms will then participate in a full day of trading against the Prosperity trading bots. Note that all algorithms are trading separately, there is no interaction between the algorithms of different players. When a new round starts, the results of the previous round will be disclosed and the leaderboard will be updated accordingly. During the game, you can always visit previous rounds in the dashboard, to review information and results. But once a round is closed, you can no longer change your submitted trades for that round. When round 5 ends, the final results will be processed and the winner of the Prosperity trading challenge will be announced."
+  },
+  {
+    "type": "h2",
+    "content": "Algorithmic trading"
+  },
+  {
+    "type": "p",
+    "content": "Every round contains an algorithmic trading challenge. You will have 72 hours to submit your (final) Python program. When the round ends, the last successfully processed submission will be locked in and processed for results."
+  },
+  {
+    "type": "p",
+    "content": "Uploading your program is as simple as dragging it into the treasure chestALT"
+  },
+  {
+    "type": "h2",
+    "content": "Manual trading"
+  },
+  {
+    "type": "p",
+    "content": "All rounds contain a manual trading challenge. Just like the algorithmic challenge, manual trading challenges last 72 hours to submit your (final) trade. When the round ends, the last submission will be locked in and processed for results. During the tutorial round, manual trading is inactive. Note that manual trades have no effect on your algorithmic trade and can be seen as separate challenges to gain additional profits."
+  },
+  {
+    "type": "h2",
+    "content": "Round timings"
+  },
+  {
+    "type": "p",
+    "content": "The challenge will start on April 7th, 2025 at 13:00 PM CET. There are five rounds and each round lasts 72 hours."
+  },
+  {
+    "type": "p",
+    "content": "Tutorial: February 24, 13:00 → April 7, 13:00"
+  },
+  {
+    "type": "p",
+    "content": "Round 1: April 7, 13:00 → April 10, 13:00"
+  },
+  {
+    "type": "p",
+    "content": "Round 2: April 10, 13:00 → April 13, 13:00"
+  },
+  {
+    "type": "p",
+    "content": "Round 3: April 13, 13:00 → April 16, 13:00"
+  },
+  {
+    "type": "p",
+    "content": "Round 4: April 16, 13:00 → April 19, 13:00"
+  },
+  {
+    "type": "p",
+    "content": "Round 5: April 19, 13:00 → April 22, 13:00"
+  },
+  {
+    "type": "h2",
+    "content": "Dashboard"
+  },
+  {
+    "type": "h2",
+    "content": "Algorithmic trading submissions"
+  },
+  {
+    "type": "p",
+    "content": "Submitting your algorithmic trading program (your Python script) is easily done through the dashboard, by clicking the “Upload algorithm” button. A window will open where you can drag & drop your file or search for it through a file browser. Here, you can also find all the previously uploaded programs with their respective status and who uploaded them. You can even download the debug logs. Handy!"
+  },
+  {
+    "type": "p",
+    "content": "Your team’s dashboardALT"
+  },
+  {
+    "type": "p",
+    "content": "You and your team can upload as many Python programs as you please, but only the one active algorithm will be processed and executed at the end of the round."
+  },
+  {
+    "type": "h2",
+    "content": "Manual trading submissions"
+  },
+  {
+    "type": "p",
+    "content": "Submitting your manual trades is done through the dashboard, by clicking the “Open manual trades” button. A window will open where you will find the controls to input your trading strategy. Once you are satisfied with the parameters, you can submit your manual trade by clicking the “Submit manual trade” button."
+  },
+  {
+    "type": "p",
+    "content": "You and your team can (re)submit strategies as many times as you please, but only the last submitted trade will be processed and executed at the end of the round."
+  },
+  {
+    "type": "h2",
+    "content": "Tropical TV"
+  },
+  {
+    "type": "p",
+    "content": "Tropical TV is the archipelago’s daily news broadcast, hosted by a chatty cockatoo. The news broadcasts will keep you up to date with all developments around the archipelago. It contains all the information you need to navigate your way through the trading challenges that are thrown at you. It’s a great way to start your day!"
+  },
+  {
+    "type": "p",
+    "content": "Tropical TV episodes will be available at the beginning of every round. You will be notified as soon as a new Tropical TV episode becomes available."
+  },
+  {
+    "type": "h2",
+    "content": "Archipelago"
+  },
+  {
+    "type": "p",
+    "content": "The archipelago is where you will find your island amidst the islands of all the other participating teams. The position of your island in the archipelago corresponds to your island’s performance throughout the game. The best-performing island will be at the dead center of the archipelago. The least performing islands will be at the outer rims of the archipelago. The current standing of an island - along with the island name and current amount of SeaShells - is also displayed in the small indicator above the island."
+  },
+  {
+    "type": "h2",
+    "content": "Leaderboard"
+  },
+  {
+    "type": "p",
+    "content": "Next to the archipelago, a handy leaderboard is available as well. Simply click on the Leaderboard button and you will see the top performing teams and, of course, your own island’s position amongst your competitors. Handy, for if you quickly want to see how many more SeaShells you need to overtake the next team."
+  }
+]

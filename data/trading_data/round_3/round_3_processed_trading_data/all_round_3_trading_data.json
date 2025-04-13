@@ -1,0 +1,1010 @@
+[
+  {
+    "metadata": {
+      "source": "prices_round_3_day_0.csv",
+      "day": 0,
+      "product": "CROISSANTS",
+      "type": "trading_data",
+      "file_type": "price",
+      "round": "round_3",
+      "basket": null
+    },
+    "content": "Trading data for CROISSANTS on day 0:\nAverage mid price: 4305.81\nPrice range: 4269.50 to 4328.50\nData points: 10000\n\nTrading metrics:\nvolatility: 14.8632\nprice_momentum: -0.0046\nvolume_weighted_price: 4305.8139\ntrading_activity: 10000.0000\navg_spread: 1.2051\nmax_spread: 2.0000\nmin_spread: 1.0000\nmarket_depth: 3.0000\n"
+  },
+  {
+    "metadata": {
+      "source": "prices_round_3_day_0.csv",
+      "day": 0,
+      "product": "DJEMBES",
+      "type": "trading_data",
+      "file_type": "price",
+      "round": "round_3",
+      "basket": null
+    },
+    "content": "Trading data for DJEMBES on day 0:\nAverage mid price: 13462.42\nPrice range: 13389.50 to 13519.50\nData points: 10000\n\nTrading metrics:\nvolatility: 33.9332\nprice_momentum: -0.0084\nvolume_weighted_price: 13462.4162\ntrading_activity: 10000.0000\navg_spread: 1.2705\nmax_spread: 2.0000\nmin_spread: 1.0000\nmarket_depth: 3.0000\n"
+  },
+  {
+    "metadata": {
+      "source": "prices_round_3_day_0.csv",
+      "day": 0,
+      "product": "JAMS",
+      "type": "trading_data",
+      "file_type": "price",
+      "round": "round_3",
+      "basket": null
+    },
+    "content": "Trading data for JAMS on day 0:\nAverage mid price: 6597.79\nPrice range: 6529.00 to 6641.50\nData points: 10000\n\nTrading metrics:\nvolatility: 31.9263\nprice_momentum: -0.0090\nvolume_weighted_price: 6597.7905\ntrading_activity: 10000.0000\navg_spread: 1.6311\nmax_spread: 2.0000\nmin_spread: 1.0000\nmarket_depth: 3.0000\n"
+  },
+  {
+    "metadata": {
+      "source": "prices_round_3_day_0.csv",
+      "day": 0,
+      "product": "KELP",
+      "type": "trading_data",
+      "file_type": "price",
+      "round": "round_3",
+      "basket": null
+    },
+    "content": "Trading data for KELP on day 0:\nAverage mid price: 2034.55\nPrice range: 2024.50 to 2044.50\nData points: 10000\n\nTrading metrics:\nvolatility: 2.4203\nprice_momentum: 0.0004\nvolume_weighted_price: 2034.5274\ntrading_activity: 10000.0000\navg_spread: 2.7292\nmax_spread: 4.0000\nmin_spread: 1.0000\nmarket_depth: 3.0000\n"
+  },
+  {
+    "metadata": {
+      "source": "prices_round_3_day_0.csv",
+      "day": 0,
+      "product": "PICNIC_BASKET1",
+      "type": "trading_data",
+      "file_type": "price",
+      "round": "round_3",
+      "basket": null
+    },
+    "content": "Trading data for PICNIC_BASKET1 on day 0:\nAverage mid price: 59134.60\nPrice range: 58689.50 to 59399.50\nData points: 10000\n\nTrading metrics:\nvolatility: 144.6685\nprice_momentum: -0.0508\nvolume_weighted_price: 59134.5937\ntrading_activity: 10000.0000\navg_spread: 9.2532\nmax_spread: 12.0000\nmin_spread: 1.0000\nmarket_depth: 3.0000\n"
+  },
+  {
+    "metadata": {
+      "source": "prices_round_3_day_0.csv",
+      "day": 0,
+      "product": "PICNIC_BASKET2",
+      "type": "trading_data",
+      "file_type": "price",
+      "round": "round_3",
+      "basket": null
+    },
+    "content": "Trading data for PICNIC_BASKET2 on day 0:\nAverage mid price: 30415.00\nPrice range: 30251.00 to 30536.50\nData points: 10000\n\nTrading metrics:\nvolatility: 71.9438\nprice_momentum: -0.0248\nvolume_weighted_price: 30415.0170\ntrading_activity: 10000.0000\navg_spread: 5.2233\nmax_spread: 7.0000\nmin_spread: 1.0000\nmarket_depth: 3.0000\n"
+  },
+  {
+    "metadata": {
+      "source": "prices_round_3_day_0.csv",
+      "day": 0,
+      "product": "RAINFOREST_RESIN",
+      "type": "trading_data",
+      "file_type": "price",
+      "round": "round_3",
+      "basket": null
+    },
+    "content": "Trading data for RAINFOREST_RESIN on day 0:\nAverage mid price: 10000.02\nPrice range: 9994.50 to 10005.50\nData points: 10000\n\nTrading metrics:\nvolatility: 2.1997\nprice_momentum: 0.0000\nvolume_weighted_price: 10000.0314\ntrading_activity: 10000.0000\navg_spread: 13.5050\nmax_spread: 16.0000\nmin_spread: 1.0000\nmarket_depth: 3.0000\n"
+  },
+  {
+    "metadata": {
+      "source": "prices_round_3_day_0.csv",
+      "day": 0,
+      "product": "SQUID_INK",
+      "type": "trading_data",
+      "file_type": "price",
+      "round": "round_3",
+      "basket": null
+    },
+    "content": "Trading data for SQUID_INK on day 0:\nAverage mid price: 1907.84\nPrice range: 1810.50 to 1986.50\nData points: 10000\n\nTrading metrics:\nvolatility: 42.6576\nprice_momentum: -0.0130\nvolume_weighted_price: 1907.8119\ntrading_activity: 10000.0000\navg_spread: 2.6187\nmax_spread: 4.0000\nmin_spread: 1.0000\nmarket_depth: 3.0000\n"
+  },
+  {
+    "metadata": {
+      "source": "prices_round_3_day_0.csv",
+      "day": 0,
+      "product": "VOLCANIC_ROCK",
+      "type": "trading_data",
+      "file_type": "price",
+      "round": "round_3",
+      "basket": null
+    },
+    "content": "Trading data for VOLCANIC_ROCK on day 0:\nAverage mid price: 10454.10\nPrice range: 10305.00 to 10585.50\nData points: 10000\n\nTrading metrics:\nvolatility: 50.6061\nprice_momentum: 0.0011\nvolume_weighted_price: 10454.1035\ntrading_activity: 10000.0000\navg_spread: 1.5013\nmax_spread: 2.0000\nmin_spread: 1.0000\nmarket_depth: 3.0000\n"
+  },
+  {
+    "metadata": {
+      "source": "prices_round_3_day_0.csv",
+      "day": 0,
+      "product": "VOLCANIC_ROCK_VOUCHER_10000",
+      "type": "trading_data",
+      "file_type": "price",
+      "round": "round_3",
+      "basket": null
+    },
+    "content": "Trading data for VOLCANIC_ROCK_VOUCHER_10000 on day 0:\nAverage mid price: 458.04\nPrice range: 316.50 to 587.50\nData points: 10000\n\nTrading metrics:\nvolatility: 48.9799\nprice_momentum: 0.0011\nvolume_weighted_price: 458.0081\ntrading_activity: 10000.0000\navg_spread: 1.0670\nmax_spread: 2.0000\nmin_spread: 1.0000\nmarket_depth: 3.0000\n"
+  },
+  {
+    "metadata": {
+      "source": "prices_round_3_day_0.csv",
+      "day": 0,
+      "product": "VOLCANIC_ROCK_VOUCHER_10250",
+      "type": "trading_data",
+      "file_type": "price",
+      "round": "round_3",
+      "basket": null
+    },
+    "content": "Trading data for VOLCANIC_ROCK_VOUCHER_10250 on day 0:\nAverage mid price: 229.89\nPrice range: 122.50 to 345.50\nData points: 10000\n\nTrading metrics:\nvolatility: 40.6611\nprice_momentum: 0.0004\nvolume_weighted_price: 229.8571\ntrading_activity: 10000.0000\navg_spread: 1.0335\nmax_spread: 2.0000\nmin_spread: 1.0000\nmarket_depth: 3.0000\n"
+  },
+  {
+    "metadata": {
+      "source": "prices_round_3_day_0.csv",
+      "day": 0,
+      "product": "VOLCANIC_ROCK_VOUCHER_10500",
+      "type": "trading_data",
+      "file_type": "price",
+      "round": "round_3",
+      "basket": null
+    },
+    "content": "Trading data for VOLCANIC_ROCK_VOUCHER_10500 on day 0:\nAverage mid price: 72.59\nPrice range: 27.50 to 144.50\nData points: 10000\n\nTrading metrics:\nvolatility: 19.9429\nprice_momentum: -0.0005\nvolume_weighted_price: 72.5782\ntrading_activity: 10000.0000\navg_spread: 1.0092\nmax_spread: 2.0000\nmin_spread: 1.0000\nmarket_depth: 3.0000\n"
+  },
+  {
+    "metadata": {
+      "source": "prices_round_3_day_0.csv",
+      "day": 0,
+      "product": "VOLCANIC_ROCK_VOUCHER_9500",
+      "type": "trading_data",
+      "file_type": "price",
+      "round": "round_3",
+      "basket": null
+    },
+    "content": "Trading data for VOLCANIC_ROCK_VOUCHER_9500 on day 0:\nAverage mid price: 954.40\nPrice range: 805.50 to 1085.50\nData points: 10000\n\nTrading metrics:\nvolatility: 50.5553\nprice_momentum: 0.0010\nvolume_weighted_price: 954.3886\ntrading_activity: 10000.0000\navg_spread: 1.1382\nmax_spread: 2.0000\nmin_spread: 1.0000\nmarket_depth: 3.0000\n"
+  },
+  {
+    "metadata": {
+      "source": "prices_round_3_day_0.csv",
+      "day": 0,
+      "product": "VOLCANIC_ROCK_VOUCHER_9750",
+      "type": "trading_data",
+      "file_type": "price",
+      "round": "round_3",
+      "basket": null
+    },
+    "content": "Trading data for VOLCANIC_ROCK_VOUCHER_9750 on day 0:\nAverage mid price: 704.86\nPrice range: 556.50 to 836.00\nData points: 10000\n\nTrading metrics:\nvolatility: 50.3638\nprice_momentum: 0.0010\nvolume_weighted_price: 704.8642\ntrading_activity: 10000.0000\navg_spread: 1.1032\nmax_spread: 2.0000\nmin_spread: 1.0000\nmarket_depth: 3.0000\n"
+  },
+  {
+    "metadata": {
+      "source": "prices_round_3_day_1.csv",
+      "day": 1,
+      "product": "CROISSANTS",
+      "type": "trading_data",
+      "file_type": "price",
+      "round": "round_3",
+      "basket": null
+    },
+    "content": "Trading data for CROISSANTS on day 1:\nAverage mid price: 4269.01\nPrice range: 4251.00 to 4296.50\nData points: 10000\n\nTrading metrics:\nvolatility: 9.0789\nprice_momentum: -0.0009\nvolume_weighted_price: 4269.0079\ntrading_activity: 10000.0000\navg_spread: 1.2127\nmax_spread: 2.0000\nmin_spread: 1.0000\nmarket_depth: 3.0000\n"
+  },
+  {
+    "metadata": {
+      "source": "prices_round_3_day_1.csv",
+      "day": 1,
+      "product": "DJEMBES",
+      "type": "trading_data",
+      "file_type": "price",
+      "round": "round_3",
+      "basket": null
+    },
+    "content": "Trading data for DJEMBES on day 1:\nAverage mid price: 13385.98\nPrice range: 13353.00 to 13433.50\nData points: 10000\n\nTrading metrics:\nvolatility: 14.9168\nprice_momentum: 0.0010\nvolume_weighted_price: 13385.9811\ntrading_activity: 10000.0000\navg_spread: 1.2576\nmax_spread: 2.0000\nmin_spread: 1.0000\nmarket_depth: 3.0000\n"
+  },
+  {
+    "metadata": {
+      "source": "prices_round_3_day_1.csv",
+      "day": 1,
+      "product": "JAMS",
+      "type": "trading_data",
+      "file_type": "price",
+      "round": "round_3",
+      "basket": null
+    },
+    "content": "Trading data for JAMS on day 1:\nAverage mid price: 6524.05\nPrice range: 6498.50 to 6552.50\nData points: 10000\n\nTrading metrics:\nvolatility: 9.5585\nprice_momentum: -0.0022\nvolume_weighted_price: 6524.0441\ntrading_activity: 10000.0000\navg_spread: 1.6148\nmax_spread: 2.0000\nmin_spread: 1.0000\nmarket_depth: 3.0000\n"
+  },
+  {
+    "metadata": {
+      "source": "prices_round_3_day_1.csv",
+      "day": 1,
+      "product": "KELP",
+      "type": "trading_data",
+      "file_type": "price",
+      "round": "round_3",
+      "basket": null
+    },
+    "content": "Trading data for KELP on day 1:\nAverage mid price: 2046.15\nPrice range: 2030.50 to 2065.50\nData points: 10000\n\nTrading metrics:\nvolatility: 9.5668\nprice_momentum: 0.0022\nvolume_weighted_price: 2046.1383\ntrading_activity: 10000.0000\navg_spread: 2.7259\nmax_spread: 4.0000\nmin_spread: 1.0000\nmarket_depth: 3.0000\n"
+  },
+  {
+    "metadata": {
+      "source": "prices_round_3_day_1.csv",
+      "day": 1,
+      "product": "PICNIC_BASKET1",
+      "type": "trading_data",
+      "file_type": "price",
+      "round": "round_3",
+      "basket": null
+    },
+    "content": "Trading data for PICNIC_BASKET1 on day 1:\nAverage mid price: 58604.49\nPrice range: 58397.50 to 58900.00\nData points: 10000\n\nTrading metrics:\nvolatility: 118.3793\nprice_momentum: 0.0008\nvolume_weighted_price: 58604.4433\ntrading_activity: 10000.0000\navg_spread: 9.1758\nmax_spread: 11.0000\nmin_spread: 1.0000\nmarket_depth: 3.0000\n"
+  },
+  {
+    "metadata": {
+      "source": "prices_round_3_day_1.csv",
+      "day": 1,
+      "product": "PICNIC_BASKET2",
+      "type": "trading_data",
+      "file_type": "price",
+      "round": "round_3",
+      "basket": null
+    },
+    "content": "Trading data for PICNIC_BASKET2 on day 1:\nAverage mid price: 30160.60\nPrice range: 29987.50 to 30316.50\nData points: 10000\n\nTrading metrics:\nvolatility: 86.0022\nprice_momentum: -0.0152\nvolume_weighted_price: 30160.5845\ntrading_activity: 10000.0000\navg_spread: 5.1883\nmax_spread: 7.0000\nmin_spread: 1.0000\nmarket_depth: 3.0000\n"
+  },
+  {
+    "metadata": {
+      "source": "prices_round_3_day_1.csv",
+      "day": 1,
+      "product": "RAINFOREST_RESIN",
+      "type": "trading_data",
+      "file_type": "price",
+      "round": "round_3",
+      "basket": null
+    },
+    "content": "Trading data for RAINFOREST_RESIN on day 1:\nAverage mid price: 10000.02\nPrice range: 9994.50 to 10005.50\nData points: 10000\n\nTrading metrics:\nvolatility: 2.2117\nprice_momentum: 0.0000\nvolume_weighted_price: 10000.0454\ntrading_activity: 10000.0000\navg_spread: 13.5007\nmax_spread: 16.0000\nmin_spread: 1.0000\nmarket_depth: 3.0000\n"
+  },
+  {
+    "metadata": {
+      "source": "prices_round_3_day_1.csv",
+      "day": 1,
+      "product": "SQUID_INK",
+      "type": "trading_data",
+      "file_type": "price",
+      "round": "round_3",
+      "basket": null
+    },
+    "content": "Trading data for SQUID_INK on day 1:\nAverage mid price: 1887.32\nPrice range: 1734.50 to 1942.50\nData points: 10000\n\nTrading metrics:\nvolatility: 23.9061\nprice_momentum: 0.0046\nvolume_weighted_price: 1887.3027\ntrading_activity: 10000.0000\navg_spread: 2.5836\nmax_spread: 4.0000\nmin_spread: 1.0000\nmarket_depth: 3.0000\n"
+  },
+  {
+    "metadata": {
+      "source": "prices_round_3_day_1.csv",
+      "day": 1,
+      "product": "VOLCANIC_ROCK",
+      "type": "trading_data",
+      "file_type": "price",
+      "round": "round_3",
+      "basket": null
+    },
+    "content": "Trading data for VOLCANIC_ROCK on day 1:\nAverage mid price: 10375.17\nPrice range: 10152.50 to 10519.50\nData points: 10000\n\nTrading metrics:\nvolatility: 99.3140\nprice_momentum: -0.0296\nvolume_weighted_price: 10375.1727\ntrading_activity: 10000.0000\navg_spread: 1.4969\nmax_spread: 2.0000\nmin_spread: 1.0000\nmarket_depth: 3.0000\n"
+  },
+  {
+    "metadata": {
+      "source": "prices_round_3_day_1.csv",
+      "day": 1,
+      "product": "VOLCANIC_ROCK_VOUCHER_10000",
+      "type": "trading_data",
+      "file_type": "price",
+      "round": "round_3",
+      "basket": null
+    },
+    "content": "Trading data for VOLCANIC_ROCK_VOUCHER_10000 on day 1:\nAverage mid price: 381.46\nPrice range: 177.50 to 521.50\nData points: 10000\n\nTrading metrics:\nvolatility: 94.0643\nprice_momentum: -0.0284\nvolume_weighted_price: 381.6257\ntrading_activity: 10000.0000\navg_spread: 1.0525\nmax_spread: 2.0000\nmin_spread: 1.0000\nmarket_depth: 3.0000\n"
+  },
+  {
+    "metadata": {
+      "source": "prices_round_3_day_1.csv",
+      "day": 1,
+      "product": "VOLCANIC_ROCK_VOUCHER_10250",
+      "type": "trading_data",
+      "file_type": "price",
+      "round": "round_3",
+      "basket": null
+    },
+    "content": "Trading data for VOLCANIC_ROCK_VOUCHER_10250 on day 1:\nAverage mid price: 168.75\nPrice range: 39.50 to 282.50\nData points: 10000\n\nTrading metrics:\nvolatility: 67.7494\nprice_momentum: -0.0215\nvolume_weighted_price: 168.8538\ntrading_activity: 10000.0000\navg_spread: 1.0236\nmax_spread: 2.0000\nmin_spread: 1.0000\nmarket_depth: 3.0000\n"
+  },
+  {
+    "metadata": {
+      "source": "prices_round_3_day_1.csv",
+      "day": 1,
+      "product": "VOLCANIC_ROCK_VOUCHER_10500",
+      "type": "trading_data",
+      "file_type": "price",
+      "round": "round_3",
+      "basket": null
+    },
+    "content": "Trading data for VOLCANIC_ROCK_VOUCHER_10500 on day 1:\nAverage mid price: 44.08\nPrice range: 5.00 to 97.50\nData points: 10000\n\nTrading metrics:\nvolatility: 24.6431\nprice_momentum: -0.0087\nvolume_weighted_price: 44.1227\ntrading_activity: 10000.0000\navg_spread: 1.0065\nmax_spread: 2.0000\nmin_spread: 1.0000\nmarket_depth: 3.0000\n"
+  },
+  {
+    "metadata": {
+      "source": "prices_round_3_day_1.csv",
+      "day": 1,
+      "product": "VOLCANIC_ROCK_VOUCHER_9500",
+      "type": "trading_data",
+      "file_type": "price",
+      "round": "round_3",
+      "basket": null
+    },
+    "content": "Trading data for VOLCANIC_ROCK_VOUCHER_9500 on day 1:\nAverage mid price: 875.44\nPrice range: 653.00 to 1019.50\nData points: 10000\n\nTrading metrics:\nvolatility: 99.2627\nprice_momentum: -0.0295\nvolume_weighted_price: 875.5265\ntrading_activity: 10000.0000\navg_spread: 1.1257\nmax_spread: 2.0000\nmin_spread: 1.0000\nmarket_depth: 3.0000\n"
+  },
+  {
+    "metadata": {
+      "source": "prices_round_3_day_1.csv",
+      "day": 1,
+      "product": "VOLCANIC_ROCK_VOUCHER_9750",
+      "type": "trading_data",
+      "file_type": "price",
+      "round": "round_3",
+      "basket": null
+    },
+    "content": "Trading data for VOLCANIC_ROCK_VOUCHER_9750 on day 1:\nAverage mid price: 626.04\nPrice range: 405.50 to 770.50\nData points: 10000\n\nTrading metrics:\nvolatility: 98.8038\nprice_momentum: -0.0294\nvolume_weighted_price: 626.2257\ntrading_activity: 10000.0000\navg_spread: 1.0882\nmax_spread: 2.0000\nmin_spread: 1.0000\nmarket_depth: 3.0000\n"
+  },
+  {
+    "metadata": {
+      "source": "prices_round_3_day_2.csv",
+      "day": 2,
+      "product": "CROISSANTS",
+      "type": "trading_data",
+      "file_type": "price",
+      "round": "round_3",
+      "basket": null
+    },
+    "content": "Trading data for CROISSANTS on day 2:\nAverage mid price: 4254.72\nPrice range: 4232.00 to 4278.50\nData points: 10000\n\nTrading metrics:\nvolatility: 10.6862\nprice_momentum: -0.0024\nvolume_weighted_price: 4254.7199\ntrading_activity: 10000.0000\navg_spread: 1.1995\nmax_spread: 2.0000\nmin_spread: 1.0000\nmarket_depth: 3.0000\n"
+  },
+  {
+    "metadata": {
+      "source": "prices_round_3_day_2.csv",
+      "day": 2,
+      "product": "DJEMBES",
+      "type": "trading_data",
+      "file_type": "price",
+      "round": "round_3",
+      "basket": null
+    },
+    "content": "Trading data for DJEMBES on day 2:\nAverage mid price: 13340.51\nPrice range: 13263.50 to 13498.50\nData points: 10000\n\nTrading metrics:\nvolatility: 60.2234\nprice_momentum: -0.0123\nvolume_weighted_price: 13340.5079\ntrading_activity: 10000.0000\navg_spread: 1.2653\nmax_spread: 2.0000\nmin_spread: 1.0000\nmarket_depth: 3.0000\n"
+  },
+  {
+    "metadata": {
+      "source": "prices_round_3_day_2.csv",
+      "day": 2,
+      "product": "JAMS",
+      "type": "trading_data",
+      "file_type": "price",
+      "round": "round_3",
+      "basket": null
+    },
+    "content": "Trading data for JAMS on day 2:\nAverage mid price: 6506.14\nPrice range: 6470.00 to 6554.00\nData points: 10000\n\nTrading metrics:\nvolatility: 19.1786\nprice_momentum: 0.0006\nvolume_weighted_price: 6506.1457\ntrading_activity: 10000.0000\navg_spread: 1.6074\nmax_spread: 2.0000\nmin_spread: 1.0000\nmarket_depth: 3.0000\n"
+  },
+  {
+    "metadata": {
+      "source": "prices_round_3_day_2.csv",
+      "day": 2,
+      "product": "KELP",
+      "type": "trading_data",
+      "file_type": "price",
+      "round": "round_3",
+      "basket": null
+    },
+    "content": "Trading data for KELP on day 2:\nAverage mid price: 2048.75\nPrice range: 2040.00 to 2052.50\nData points: 10000\n\nTrading metrics:\nvolatility: 1.5685\nprice_momentum: -0.0005\nvolume_weighted_price: 2048.7388\ntrading_activity: 10000.0000\navg_spread: 2.7382\nmax_spread: 4.0000\nmin_spread: 1.0000\nmarket_depth: 3.0000\n"
+  },
+  {
+    "metadata": {
+      "source": "prices_round_3_day_2.csv",
+      "day": 2,
+      "product": "PICNIC_BASKET1",
+      "type": "trading_data",
+      "file_type": "price",
+      "round": "round_3",
+      "basket": null
+    },
+    "content": "Trading data for PICNIC_BASKET1 on day 2:\nAverage mid price: 58483.95\nPrice range: 58169.50 to 58984.50\nData points: 10000\n\nTrading metrics:\nvolatility: 202.6560\nprice_momentum: -0.0280\nvolume_weighted_price: 58483.9461\ntrading_activity: 10000.0000\navg_spread: 9.1496\nmax_spread: 12.0000\nmin_spread: 1.0000\nmarket_depth: 3.0000\n"
+  },
+  {
+    "metadata": {
+      "source": "prices_round_3_day_2.csv",
+      "day": 2,
+      "product": "PICNIC_BASKET2",
+      "type": "trading_data",
+      "file_type": "price",
+      "round": "round_3",
+      "basket": null
+    },
+    "content": "Trading data for PICNIC_BASKET2 on day 2:\nAverage mid price: 30066.25\nPrice range: 29926.50 to 30182.50\nData points: 10000\n\nTrading metrics:\nvolatility: 54.4422\nprice_momentum: -0.0021\nvolume_weighted_price: 30066.2488\ntrading_activity: 10000.0000\navg_spread: 5.1812\nmax_spread: 7.0000\nmin_spread: 1.0000\nmarket_depth: 3.0000\n"
+  },
+  {
+    "metadata": {
+      "source": "prices_round_3_day_2.csv",
+      "day": 2,
+      "product": "RAINFOREST_RESIN",
+      "type": "trading_data",
+      "file_type": "price",
+      "round": "round_3",
+      "basket": null
+    },
+    "content": "Trading data for RAINFOREST_RESIN on day 2:\nAverage mid price: 10000.04\nPrice range: 9994.50 to 10005.50\nData points: 10000\n\nTrading metrics:\nvolatility: 2.1517\nprice_momentum: 0.0004\nvolume_weighted_price: 10000.0791\ntrading_activity: 10000.0000\navg_spread: 13.6119\nmax_spread: 16.0000\nmin_spread: 1.0000\nmarket_depth: 3.0000\n"
+  },
+  {
+    "metadata": {
+      "source": "prices_round_3_day_2.csv",
+      "day": 2,
+      "product": "SQUID_INK",
+      "type": "trading_data",
+      "file_type": "price",
+      "round": "round_3",
+      "basket": null
+    },
+    "content": "Trading data for SQUID_INK on day 2:\nAverage mid price: 1827.49\nPrice range: 1770.50 to 1927.00\nData points: 10000\n\nTrading metrics:\nvolatility: 28.6989\nprice_momentum: 0.0020\nvolume_weighted_price: 1827.4667\ntrading_activity: 10000.0000\navg_spread: 2.5361\nmax_spread: 4.0000\nmin_spread: 1.0000\nmarket_depth: 3.0000\n"
+  },
+  {
+    "metadata": {
+      "source": "prices_round_3_day_2.csv",
+      "day": 2,
+      "product": "VOLCANIC_ROCK",
+      "type": "trading_data",
+      "file_type": "price",
+      "round": "round_3",
+      "basket": null
+    },
+    "content": "Trading data for VOLCANIC_ROCK on day 2:\nAverage mid price: 10166.77\nPrice range: 10028.50 to 10312.50\nData points: 10000\n\nTrading metrics:\nvolatility: 61.2750\nprice_momentum: -0.0052\nvolume_weighted_price: 10166.7787\ntrading_activity: 10000.0000\navg_spread: 1.4784\nmax_spread: 2.0000\nmin_spread: 1.0000\nmarket_depth: 3.0000\n"
+  },
+  {
+    "metadata": {
+      "source": "prices_round_3_day_2.csv",
+      "day": 2,
+      "product": "VOLCANIC_ROCK_VOUCHER_10000",
+      "type": "trading_data",
+      "file_type": "price",
+      "round": "round_3",
+      "basket": null
+    },
+    "content": "Trading data for VOLCANIC_ROCK_VOUCHER_10000 on day 2:\nAverage mid price: 189.42\nPrice range: 88.50 to 318.50\nData points: 10000\n\nTrading metrics:\nvolatility: 49.2577\nprice_momentum: -0.0053\nvolume_weighted_price: 189.5489\ntrading_activity: 10000.0000\navg_spread: 1.0232\nmax_spread: 2.0000\nmin_spread: 1.0000\nmarket_depth: 3.0000\n"
+  },
+  {
+    "metadata": {
+      "source": "prices_round_3_day_2.csv",
+      "day": 2,
+      "product": "VOLCANIC_ROCK_VOUCHER_10250",
+      "type": "trading_data",
+      "file_type": "price",
+      "round": "round_3",
+      "basket": null
+    },
+    "content": "Trading data for VOLCANIC_ROCK_VOUCHER_10250 on day 2:\nAverage mid price: 44.32\nPrice range: 13.50 to 108.50\nData points: 10000\n\nTrading metrics:\nvolatility: 19.3962\nprice_momentum: -0.0027\nvolume_weighted_price: 44.3757\ntrading_activity: 10000.0000\navg_spread: 1.0049\nmax_spread: 2.0000\nmin_spread: 1.0000\nmarket_depth: 3.0000\n"
+  },
+  {
+    "metadata": {
+      "source": "prices_round_3_day_2.csv",
+      "day": 2,
+      "product": "VOLCANIC_ROCK_VOUCHER_10500",
+      "type": "trading_data",
+      "file_type": "price",
+      "round": "round_3",
+      "basket": null
+    },
+    "content": "Trading data for VOLCANIC_ROCK_VOUCHER_10500 on day 2:\nAverage mid price: 5.36\nPrice range: 1.00 to 16.50\nData points: 10000\n\nTrading metrics:\nvolatility: 2.6835\nprice_momentum: -0.0005\nvolume_weighted_price: 5.3834\ntrading_activity: 10000.0000\navg_spread: 1.0005\nmax_spread: 2.0000\nmin_spread: 1.0000\nmarket_depth: 3.0000\n"
+  },
+  {
+    "metadata": {
+      "source": "prices_round_3_day_2.csv",
+      "day": 2,
+      "product": "VOLCANIC_ROCK_VOUCHER_9500",
+      "type": "trading_data",
+      "file_type": "price",
+      "round": "round_3",
+      "basket": null
+    },
+    "content": "Trading data for VOLCANIC_ROCK_VOUCHER_9500 on day 2:\nAverage mid price: 667.15\nPrice range: 529.50 to 812.50\nData points: 10000\n\nTrading metrics:\nvolatility: 61.1319\nprice_momentum: -0.0052\nvolume_weighted_price: 667.2704\ntrading_activity: 10000.0000\navg_spread: 1.0915\nmax_spread: 2.0000\nmin_spread: 1.0000\nmarket_depth: 3.0000\n"
+  },
+  {
+    "metadata": {
+      "source": "prices_round_3_day_2.csv",
+      "day": 2,
+      "product": "VOLCANIC_ROCK_VOUCHER_9750",
+      "type": "trading_data",
+      "file_type": "price",
+      "round": "round_3",
+      "basket": null
+    },
+    "content": "Trading data for VOLCANIC_ROCK_VOUCHER_9750 on day 2:\nAverage mid price: 419.12\nPrice range: 285.50 to 562.50\nData points: 10000\n\nTrading metrics:\nvolatility: 59.9475\nprice_momentum: -0.0052\nvolume_weighted_price: 419.2154\ntrading_activity: 10000.0000\navg_spread: 1.0597\nmax_spread: 2.0000\nmin_spread: 1.0000\nmarket_depth: 3.0000\n"
+  },
+  {
+    "metadata": {
+      "source": "trades_round_3_day_0.csv",
+      "day": 0,
+      "product": "CROISSANTS",
+      "type": "trading_data",
+      "file_type": "trade",
+      "round": "round_3",
+      "basket": null
+    },
+    "content": "Trade data for CROISSANTS on day 0:\nAverage price: 4305.51\nPrice range: 4270.00 to 4329.00\nTimestamp range: 0 to 999200\nNumber of trades: 988\nTotal quantity traded: 6571\n\nTrade metrics:\navg_trade_size: 6.6508\nprice_volatility: 14.7423\nprice_mean: 4305.5132\nvwap: 4305.6783\navg_time_between_trades: 1012.3607\ntrade_frequency: 0.0010\nprice_change: -47.0000\nprice_change_pct: -1.0875\n"
+  },
+  {
+    "metadata": {
+      "source": "trades_round_3_day_0.csv",
+      "day": 0,
+      "product": "DJEMBES",
+      "type": "trading_data",
+      "file_type": "trade",
+      "round": "round_3",
+      "basket": null
+    },
+    "content": "Trade data for DJEMBES on day 0:\nAverage price: 13461.67\nPrice range: 13390.00 to 13519.00\nTimestamp range: 0 to 999800\nNumber of trades: 1091\nTotal quantity traded: 3620\n\nTrade metrics:\navg_trade_size: 3.3181\nprice_volatility: 33.6815\nprice_mean: 13461.6728\nvwap: 13461.7522\navg_time_between_trades: 917.2477\ntrade_frequency: 0.0011\nprice_change: -84.0000\nprice_change_pct: -0.6225\n"
+  },
+  {
+    "metadata": {
+      "source": "trades_round_3_day_0.csv",
+      "day": 0,
+      "product": "JAMS",
+      "type": "trading_data",
+      "file_type": "trade",
+      "round": "round_3",
+      "basket": null
+    },
+    "content": "Trade data for JAMS on day 0:\nAverage price: 6597.41\nPrice range: 6529.00 to 6642.00\nTimestamp range: 500 to 999300\nNumber of trades: 1174\nTotal quantity traded: 8266\n\nTrade metrics:\navg_trade_size: 7.0409\nprice_volatility: 32.1055\nprice_mean: 6597.4131\nvwap: 6597.9079\navg_time_between_trades: 851.4919\ntrade_frequency: 0.0012\nprice_change: -89.0000\nprice_change_pct: -1.3422\n"
+  },
+  {
+    "metadata": {
+      "source": "trades_round_3_day_0.csv",
+      "day": 0,
+      "product": "KELP",
+      "type": "trading_data",
+      "file_type": "trade",
+      "round": "round_3",
+      "basket": null
+    },
+    "content": "Trade data for KELP on day 0:\nAverage price: 2034.05\nPrice range: 2025.00 to 2043.00\nTimestamp range: 300 to 999600\nNumber of trades: 2876\nTotal quantity traded: 8283\n\nTrade metrics:\navg_trade_size: 2.8800\nprice_volatility: 2.7190\nprice_mean: 2034.0462\nvwap: 2034.1318\navg_time_between_trades: 347.5826\ntrade_frequency: 0.0029\nprice_change: 3.0000\nprice_change_pct: 0.1479\n"
+  },
+  {
+    "metadata": {
+      "source": "trades_round_3_day_0.csv",
+      "day": 0,
+      "product": "PICNIC_BASKET1",
+      "type": "trading_data",
+      "file_type": "trade",
+      "round": "round_3",
+      "basket": null
+    },
+    "content": "Trade data for PICNIC_BASKET1 on day 0:\nAverage price: 59133.86\nPrice range: 58700.00 to 59387.00\nTimestamp range: 1000 to 998500\nNumber of trades: 590\nTotal quantity traded: 1970\n\nTrade metrics:\navg_trade_size: 3.3390\nprice_volatility: 146.8677\nprice_mean: 59133.8559\nvwap: 59133.2782\navg_time_between_trades: 1693.5484\ntrade_frequency: 0.0006\nprice_change: -528.0000\nprice_change_pct: -0.8912\n"
+  },
+  {
+    "metadata": {
+      "source": "trades_round_3_day_0.csv",
+      "day": 0,
+      "product": "PICNIC_BASKET2",
+      "type": "trading_data",
+      "file_type": "trade",
+      "round": "round_3",
+      "basket": null
+    },
+    "content": "Trade data for PICNIC_BASKET2 on day 0:\nAverage price: 30414.56\nPrice range: 30253.00 to 30533.00\nTimestamp range: 1000 to 998500\nNumber of trades: 551\nTotal quantity traded: 2524\n\nTrade metrics:\navg_trade_size: 4.5808\nprice_volatility: 74.9220\nprice_mean: 30414.5554\nvwap: 30411.9917\navg_time_between_trades: 1813.6364\ntrade_frequency: 0.0006\nprice_change: -252.0000\nprice_change_pct: -0.8260\n"
+  },
+  {
+    "metadata": {
+      "source": "trades_round_3_day_0.csv",
+      "day": 0,
+      "product": "RAINFOREST_RESIN",
+      "type": "trading_data",
+      "file_type": "trade",
+      "round": "round_3",
+      "basket": null
+    },
+    "content": "Trade data for RAINFOREST_RESIN on day 0:\nAverage price: 10000.07\nPrice range: 9992.00 to 10008.00\nTimestamp range: 0 to 999400\nNumber of trades: 1926\nTotal quantity traded: 6663\n\nTrade metrics:\navg_trade_size: 3.4595\nprice_volatility: 5.9128\nprice_mean: 10000.0717\nvwap: 10000.0917\navg_time_between_trades: 519.1688\ntrade_frequency: 0.0019\nprice_change: 6.0000\nprice_change_pct: 0.0600\n"
+  },
+  {
+    "metadata": {
+      "source": "trades_round_3_day_0.csv",
+      "day": 0,
+      "product": "SQUID_INK",
+      "type": "trading_data",
+      "file_type": "trade",
+      "round": "round_3",
+      "basket": null
+    },
+    "content": "Trade data for SQUID_INK on day 0:\nAverage price: 1908.89\nPrice range: 1812.00 to 1986.00\nTimestamp range: 300 to 999600\nNumber of trades: 2899\nTotal quantity traded: 8403\n\nTrade metrics:\navg_trade_size: 2.8986\nprice_volatility: 42.7562\nprice_mean: 1908.8858\nvwap: 1908.8246\navg_time_between_trades: 344.8240\ntrade_frequency: 0.0029\nprice_change: -133.0000\nprice_change_pct: -6.7684\n"
+  },
+  {
+    "metadata": {
+      "source": "trades_round_3_day_0.csv",
+      "day": 0,
+      "product": "VOLCANIC_ROCK",
+      "type": "trading_data",
+      "file_type": "trade",
+      "round": "round_3",
+      "basket": null
+    },
+    "content": "Trade data for VOLCANIC_ROCK on day 0:\nAverage price: 10453.62\nPrice range: 10321.00 to 10584.00\nTimestamp range: 1200 to 998400\nNumber of trades: 637\nTotal quantity traded: 4099\n\nTrade metrics:\navg_trade_size: 6.4349\nprice_volatility: 52.5940\nprice_mean: 10453.6201\nvwap: 10453.3789\navg_time_between_trades: 1567.9245\ntrade_frequency: 0.0006\nprice_change: 13.0000\nprice_change_pct: 0.1238\n"
+  },
+  {
+    "metadata": {
+      "source": "trades_round_3_day_0.csv",
+      "day": 0,
+      "product": "VOLCANIC_ROCK_VOUCHER_10000",
+      "type": "trading_data",
+      "file_type": "trade",
+      "round": "round_3",
+      "basket": null
+    },
+    "content": "Trade data for VOLCANIC_ROCK_VOUCHER_10000 on day 0:\nAverage price: 458.05\nPrice range: 334.00 to 585.00\nTimestamp range: 2000 to 999900\nNumber of trades: 1100\nTotal quantity traded: 11091\n\nTrade metrics:\navg_trade_size: 10.0827\nprice_volatility: 48.5630\nprice_mean: 458.0518\nvwap: 457.4726\navg_time_between_trades: 908.0073\ntrade_frequency: 0.0011\nprice_change: 19.0000\nprice_change_pct: 3.8306\n"
+  },
+  {
+    "metadata": {
+      "source": "trades_round_3_day_0.csv",
+      "day": 0,
+      "product": "VOLCANIC_ROCK_VOUCHER_10250",
+      "type": "trading_data",
+      "file_type": "trade",
+      "round": "round_3",
+      "basket": null
+    },
+    "content": "Trade data for VOLCANIC_ROCK_VOUCHER_10250 on day 0:\nAverage price: 230.20\nPrice range: 134.00 to 344.00\nTimestamp range: 2000 to 999900\nNumber of trades: 1118\nTotal quantity traded: 11264\n\nTrade metrics:\navg_trade_size: 10.0751\nprice_volatility: 40.4504\nprice_mean: 230.2004\nvwap: 229.5619\navg_time_between_trades: 893.3751\ntrade_frequency: 0.0011\nprice_change: 13.0000\nprice_change_pct: 4.9242\n"
+  },
+  {
+    "metadata": {
+      "source": "trades_round_3_day_0.csv",
+      "day": 0,
+      "product": "VOLCANIC_ROCK_VOUCHER_10500",
+      "type": "trading_data",
+      "file_type": "trade",
+      "round": "round_3",
+      "basket": null
+    },
+    "content": "Trade data for VOLCANIC_ROCK_VOUCHER_10500 on day 0:\nAverage price: 73.36\nPrice range: 31.00 to 142.00\nTimestamp range: 2000 to 999900\nNumber of trades: 1040\nTotal quantity traded: 10457\n\nTrade metrics:\navg_trade_size: 10.0548\nprice_volatility: 19.9111\nprice_mean: 73.3635\nvwap: 73.0576\navg_time_between_trades: 960.4427\ntrade_frequency: 0.0010\nprice_change: 1.0000\nprice_change_pct: 1.0753\n"
+  },
+  {
+    "metadata": {
+      "source": "trades_round_3_day_0.csv",
+      "day": 0,
+      "product": "VOLCANIC_ROCK_VOUCHER_9500",
+      "type": "trading_data",
+      "file_type": "trade",
+      "round": "round_3",
+      "basket": null
+    },
+    "content": "Trade data for VOLCANIC_ROCK_VOUCHER_9500 on day 0:\nAverage price: 954.20\nPrice range: 825.00 to 1084.00\nTimestamp range: 2000 to 999000\nNumber of trades: 1060\nTotal quantity traded: 10631\n\nTrade metrics:\navg_trade_size: 10.0292\nprice_volatility: 50.3522\nprice_mean: 954.2000\nvwap: 953.2306\navg_time_between_trades: 941.4542\ntrade_frequency: 0.0011\nprice_change: 26.0000\nprice_change_pct: 2.6183\n"
+  },
+  {
+    "metadata": {
+      "source": "trades_round_3_day_0.csv",
+      "day": 0,
+      "product": "VOLCANIC_ROCK_VOUCHER_9750",
+      "type": "trading_data",
+      "file_type": "trade",
+      "round": "round_3",
+      "basket": null
+    },
+    "content": "Trade data for VOLCANIC_ROCK_VOUCHER_9750 on day 0:\nAverage price: 704.33\nPrice range: 576.00 to 834.00\nTimestamp range: 2000 to 999900\nNumber of trades: 1073\nTotal quantity traded: 10815\n\nTrade metrics:\navg_trade_size: 10.0792\nprice_volatility: 50.0819\nprice_mean: 704.3281\nvwap: 703.9331\navg_time_between_trades: 930.8769\ntrade_frequency: 0.0011\nprice_change: 21.0000\nprice_change_pct: 2.8264\n"
+  },
+  {
+    "metadata": {
+      "source": "trades_round_3_day_1.csv",
+      "day": 1,
+      "product": "CROISSANTS",
+      "type": "trading_data",
+      "file_type": "trade",
+      "round": "round_3",
+      "basket": null
+    },
+    "content": "Trade data for CROISSANTS on day 1:\nAverage price: 4268.93\nPrice range: 4251.00 to 4297.00\nTimestamp range: 1000 to 999700\nNumber of trades: 973\nTotal quantity traded: 6468\n\nTrade metrics:\navg_trade_size: 6.6475\nprice_volatility: 9.3115\nprice_mean: 4268.9322\nvwap: 4268.8822\navg_time_between_trades: 1027.4691\ntrade_frequency: 0.0010\nprice_change: -6.0000\nprice_change_pct: -0.1404\n"
+  },
+  {
+    "metadata": {
+      "source": "trades_round_3_day_1.csv",
+      "day": 1,
+      "product": "DJEMBES",
+      "type": "trading_data",
+      "file_type": "trade",
+      "round": "round_3",
+      "basket": null
+    },
+    "content": "Trade data for DJEMBES on day 1:\nAverage price: 13385.99\nPrice range: 13355.00 to 13431.00\nTimestamp range: 1000 to 999300\nNumber of trades: 992\nTotal quantity traded: 3427\n\nTrade metrics:\navg_trade_size: 3.4546\nprice_volatility: 14.8249\nprice_mean: 13385.9909\nvwap: 13385.9189\navg_time_between_trades: 1007.3663\ntrade_frequency: 0.0010\nprice_change: 4.0000\nprice_change_pct: 0.0298\n"
+  },
+  {
+    "metadata": {
+      "source": "trades_round_3_day_1.csv",
+      "day": 1,
+      "product": "JAMS",
+      "type": "trading_data",
+      "file_type": "trade",
+      "round": "round_3",
+      "basket": null
+    },
+    "content": "Trade data for JAMS on day 1:\nAverage price: 6523.60\nPrice range: 6498.00 to 6552.00\nTimestamp range: 200 to 999500\nNumber of trades: 1142\nTotal quantity traded: 8165\n\nTrade metrics:\navg_trade_size: 7.1497\nprice_volatility: 9.9743\nprice_mean: 6523.6042\nvwap: 6523.6371\navg_time_between_trades: 875.8107\ntrade_frequency: 0.0011\nprice_change: -23.0000\nprice_change_pct: -0.3516\n"
+  },
+  {
+    "metadata": {
+      "source": "trades_round_3_day_1.csv",
+      "day": 1,
+      "product": "KELP",
+      "type": "trading_data",
+      "file_type": "trade",
+      "round": "round_3",
+      "basket": null
+    },
+    "content": "Trade data for KELP on day 1:\nAverage price: 2045.92\nPrice range: 2030.00 to 2066.00\nTimestamp range: 100 to 999700\nNumber of trades: 2987\nTotal quantity traded: 8302\n\nTrade metrics:\navg_trade_size: 2.7794\nprice_volatility: 9.6100\nprice_mean: 2045.9160\nvwap: 2045.9240\navg_time_between_trades: 334.7622\ntrade_frequency: 0.0030\nprice_change: 20.0000\nprice_change_pct: 0.9833\n"
+  },
+  {
+    "metadata": {
+      "source": "trades_round_3_day_1.csv",
+      "day": 1,
+      "product": "PICNIC_BASKET1",
+      "type": "trading_data",
+      "file_type": "trade",
+      "round": "round_3",
+      "basket": null
+    },
+    "content": "Trade data for PICNIC_BASKET1 on day 1:\nAverage price: 58604.73\nPrice range: 58412.00 to 58903.00\nTimestamp range: 2300 to 997000\nNumber of trades: 542\nTotal quantity traded: 1862\n\nTrade metrics:\navg_trade_size: 3.4354\nprice_volatility: 121.5942\nprice_mean: 58604.7269\nvwap: 58603.3389\navg_time_between_trades: 1838.6322\ntrade_frequency: 0.0005\nprice_change: 36.0000\nprice_change_pct: 0.0614\n"
+  },
+  {
+    "metadata": {
+      "source": "trades_round_3_day_1.csv",
+      "day": 1,
+      "product": "PICNIC_BASKET2",
+      "type": "trading_data",
+      "file_type": "trade",
+      "round": "round_3",
+      "basket": null
+    },
+    "content": "Trade data for PICNIC_BASKET2 on day 1:\nAverage price: 30163.30\nPrice range: 29989.00 to 30316.00\nTimestamp range: 2300 to 997000\nNumber of trades: 511\nTotal quantity traded: 2192\n\nTrade metrics:\navg_trade_size: 4.2896\nprice_volatility: 85.3082\nprice_mean: 30163.3033\nvwap: 30160.8280\navg_time_between_trades: 1950.3922\ntrade_frequency: 0.0005\nprice_change: -150.0000\nprice_change_pct: -0.4961\n"
+  },
+  {
+    "metadata": {
+      "source": "trades_round_3_day_1.csv",
+      "day": 1,
+      "product": "RAINFOREST_RESIN",
+      "type": "trading_data",
+      "file_type": "trade",
+      "round": "round_3",
+      "basket": null
+    },
+    "content": "Trade data for RAINFOREST_RESIN on day 1:\nAverage price: 9999.84\nPrice range: 9992.00 to 10008.00\nTimestamp range: 0 to 999800\nNumber of trades: 1876\nTotal quantity traded: 6261\n\nTrade metrics:\navg_trade_size: 3.3374\nprice_volatility: 5.8417\nprice_mean: 9999.8412\nvwap: 9999.9136\navg_time_between_trades: 533.2267\ntrade_frequency: 0.0019\nprice_change: -16.0000\nprice_change_pct: -0.1599\n"
+  },
+  {
+    "metadata": {
+      "source": "trades_round_3_day_1.csv",
+      "day": 1,
+      "product": "SQUID_INK",
+      "type": "trading_data",
+      "file_type": "trade",
+      "round": "round_3",
+      "basket": null
+    },
+    "content": "Trade data for SQUID_INK on day 1:\nAverage price: 1887.46\nPrice range: 1736.00 to 1943.00\nTimestamp range: 100 to 999700\nNumber of trades: 2992\nTotal quantity traded: 8338\n\nTrade metrics:\navg_trade_size: 2.7868\nprice_volatility: 24.3341\nprice_mean: 1887.4582\nvwap: 1887.2045\navg_time_between_trades: 334.2026\ntrade_frequency: 0.0030\nprice_change: 41.0000\nprice_change_pct: 2.2307\n"
+  },
+  {
+    "metadata": {
+      "source": "trades_round_3_day_1.csv",
+      "day": 1,
+      "product": "VOLCANIC_ROCK",
+      "type": "trading_data",
+      "file_type": "trade",
+      "round": "round_3",
+      "basket": null
+    },
+    "content": "Trade data for VOLCANIC_ROCK on day 1:\nAverage price: 10376.58\nPrice range: 10157.00 to 10511.00\nTimestamp range: 7600 to 997100\nNumber of trades: 679\nTotal quantity traded: 4414\n\nTrade metrics:\navg_trade_size: 6.5007\nprice_volatility: 98.3879\nprice_mean: 10376.5832\nvwap: 10376.9520\navg_time_between_trades: 1459.4395\ntrade_frequency: 0.0007\nprice_change: -285.0000\nprice_change_pct: -2.7114\n"
+  },
+  {
+    "metadata": {
+      "source": "trades_round_3_day_1.csv",
+      "day": 1,
+      "product": "VOLCANIC_ROCK_VOUCHER_10000",
+      "type": "trading_data",
+      "file_type": "trade",
+      "round": "round_3",
+      "basket": null
+    },
+    "content": "Trade data for VOLCANIC_ROCK_VOUCHER_10000 on day 1:\nAverage price: 380.31\nPrice range: 186.00 to 519.00\nTimestamp range: 900 to 999600\nNumber of trades: 1090\nTotal quantity traded: 10875\n\nTrade metrics:\navg_trade_size: 9.9771\nprice_volatility: 94.6326\nprice_mean: 380.3064\nvwap: 380.9709\navg_time_between_trades: 917.0799\ntrade_frequency: 0.0011\nprice_change: -280.0000\nprice_change_pct: -54.0541\n"
+  },
+  {
+    "metadata": {
+      "source": "trades_round_3_day_1.csv",
+      "day": 1,
+      "product": "VOLCANIC_ROCK_VOUCHER_10250",
+      "type": "trading_data",
+      "file_type": "trade",
+      "round": "round_3",
+      "basket": null
+    },
+    "content": "Trade data for VOLCANIC_ROCK_VOUCHER_10250 on day 1:\nAverage price: 170.42\nPrice range: 43.00 to 280.00\nTimestamp range: 900 to 999600\nNumber of trades: 1079\nTotal quantity traded: 10795\n\nTrade metrics:\navg_trade_size: 10.0046\nprice_volatility: 67.0319\nprice_mean: 170.4180\nvwap: 171.2741\navg_time_between_trades: 926.4378\ntrade_frequency: 0.0011\nprice_change: -212.0000\nprice_change_pct: -75.9857\n"
+  },
+  {
+    "metadata": {
+      "source": "trades_round_3_day_1.csv",
+      "day": 1,
+      "product": "VOLCANIC_ROCK_VOUCHER_10500",
+      "type": "trading_data",
+      "file_type": "trade",
+      "round": "round_3",
+      "basket": null
+    },
+    "content": "Trade data for VOLCANIC_ROCK_VOUCHER_10500 on day 1:\nAverage price: 45.73\nPrice range: 5.00 to 96.00\nTimestamp range: 900 to 999200\nNumber of trades: 971\nTotal quantity traded: 9712\n\nTrade metrics:\navg_trade_size: 10.0021\nprice_volatility: 24.6400\nprice_mean: 45.7302\nvwap: 45.9143\navg_time_between_trades: 1029.1753\ntrade_frequency: 0.0010\nprice_change: -87.0000\nprice_change_pct: -91.5789\n"
+  },
+  {
+    "metadata": {
+      "source": "trades_round_3_day_1.csv",
+      "day": 1,
+      "product": "VOLCANIC_ROCK_VOUCHER_9500",
+      "type": "trading_data",
+      "file_type": "trade",
+      "round": "round_3",
+      "basket": null
+    },
+    "content": "Trade data for VOLCANIC_ROCK_VOUCHER_9500 on day 1:\nAverage price: 874.85\nPrice range: 662.00 to 1017.00\nTimestamp range: 900 to 999600\nNumber of trades: 1081\nTotal quantity traded: 10794\n\nTrade metrics:\navg_trade_size: 9.9852\nprice_volatility: 99.2857\nprice_mean: 874.8538\nvwap: 875.5967\navg_time_between_trades: 924.7222\ntrade_frequency: 0.0011\nprice_change: -290.0000\nprice_change_pct: -28.5433\n"
+  },
+  {
+    "metadata": {
+      "source": "trades_round_3_day_1.csv",
+      "day": 1,
+      "product": "VOLCANIC_ROCK_VOUCHER_9750",
+      "type": "trading_data",
+      "file_type": "trade",
+      "round": "round_3",
+      "basket": null
+    },
+    "content": "Trade data for VOLCANIC_ROCK_VOUCHER_9750 on day 1:\nAverage price: 624.81\nPrice range: 414.00 to 768.00\nTimestamp range: 900 to 999600\nNumber of trades: 1085\nTotal quantity traded: 10811\n\nTrade metrics:\navg_trade_size: 9.9641\nprice_volatility: 99.4935\nprice_mean: 624.8147\nvwap: 625.1175\navg_time_between_trades: 921.3100\ntrade_frequency: 0.0011\nprice_change: -289.0000\nprice_change_pct: -37.6793\n"
+  },
+  {
+    "metadata": {
+      "source": "trades_round_3_day_2.csv",
+      "day": 2,
+      "product": "CROISSANTS",
+      "type": "trading_data",
+      "file_type": "trade",
+      "round": "round_3",
+      "basket": null
+    },
+    "content": "Trade data for CROISSANTS on day 2:\nAverage price: 4254.57\nPrice range: 4232.00 to 4279.00\nTimestamp range: 0 to 998800\nNumber of trades: 989\nTotal quantity traded: 6556\n\nTrade metrics:\navg_trade_size: 6.6289\nprice_volatility: 10.7424\nprice_mean: 4254.5672\nvwap: 4254.4857\navg_time_between_trades: 1010.9312\ntrade_frequency: 0.0010\nprice_change: -26.0000\nprice_change_pct: -0.6096\n"
+  },
+  {
+    "metadata": {
+      "source": "trades_round_3_day_2.csv",
+      "day": 2,
+      "product": "DJEMBES",
+      "type": "trading_data",
+      "file_type": "trade",
+      "round": "round_3",
+      "basket": null
+    },
+    "content": "Trade data for DJEMBES on day 2:\nAverage price: 13340.68\nPrice range: 13266.00 to 13496.00\nTimestamp range: 1700 to 998900\nNumber of trades: 1016\nTotal quantity traded: 3454\n\nTrade metrics:\navg_trade_size: 3.3996\nprice_volatility: 61.1864\nprice_mean: 13340.6781\nvwap: 13338.4181\navg_time_between_trades: 982.4631\ntrade_frequency: 0.0010\nprice_change: -123.0000\nprice_change_pct: -0.9167\n"
+  },
+  {
+    "metadata": {
+      "source": "trades_round_3_day_2.csv",
+      "day": 2,
+      "product": "JAMS",
+      "type": "trading_data",
+      "file_type": "trade",
+      "round": "round_3",
+      "basket": null
+    },
+    "content": "Trade data for JAMS on day 2:\nAverage price: 6505.59\nPrice range: 6470.00 to 6553.00\nTimestamp range: 200 to 998400\nNumber of trades: 1165\nTotal quantity traded: 8144\n\nTrade metrics:\navg_trade_size: 6.9906\nprice_volatility: 18.7817\nprice_mean: 6505.5897\nvwap: 6505.4914\navg_time_between_trades: 857.5601\ntrade_frequency: 0.0012\nprice_change: 7.0000\nprice_change_pct: 0.1074\n"
+  },
+  {
+    "metadata": {
+      "source": "trades_round_3_day_2.csv",
+      "day": 2,
+      "product": "KELP",
+      "type": "trading_data",
+      "file_type": "trade",
+      "round": "round_3",
+      "basket": null
+    },
+    "content": "Trade data for KELP on day 2:\nAverage price: 2048.35\nPrice range: 2039.00 to 2053.00\nTimestamp range: 200 to 999400\nNumber of trades: 2899\nTotal quantity traded: 8437\n\nTrade metrics:\navg_trade_size: 2.9103\nprice_volatility: 1.9511\nprice_mean: 2048.3536\nvwap: 2048.6059\navg_time_between_trades: 344.7895\ntrade_frequency: 0.0029\nprice_change: -2.0000\nprice_change_pct: -0.0978\n"
+  },
+  {
+    "metadata": {
+      "source": "trades_round_3_day_2.csv",
+      "day": 2,
+      "product": "PICNIC_BASKET1",
+      "type": "trading_data",
+      "file_type": "trade",
+      "round": "round_3",
+      "basket": null
+    },
+    "content": "Trade data for PICNIC_BASKET1 on day 2:\nAverage price: 58499.74\nPrice range: 58172.00 to 58974.00\nTimestamp range: 1300 to 998900\nNumber of trades: 611\nTotal quantity traded: 2120\n\nTrade metrics:\navg_trade_size: 3.4697\nprice_volatility: 212.4417\nprice_mean: 58499.7381\nvwap: 58501.2203\navg_time_between_trades: 1635.4098\ntrade_frequency: 0.0006\nprice_change: -312.0000\nprice_change_pct: -0.5312\n"
+  },
+  {
+    "metadata": {
+      "source": "trades_round_3_day_2.csv",
+      "day": 2,
+      "product": "PICNIC_BASKET2",
+      "type": "trading_data",
+      "file_type": "trade",
+      "round": "round_3",
+      "basket": null
+    },
+    "content": "Trade data for PICNIC_BASKET2 on day 2:\nAverage price: 30062.73\nPrice range: 29924.00 to 30184.00\nTimestamp range: 1300 to 998900\nNumber of trades: 560\nTotal quantity traded: 2534\n\nTrade metrics:\navg_trade_size: 4.5250\nprice_volatility: 56.7788\nprice_mean: 30062.7339\nvwap: 30064.1843\navg_time_between_trades: 1784.6154\ntrade_frequency: 0.0006\nprice_change: -40.0000\nprice_change_pct: -0.1328\n"
+  },
+  {
+    "metadata": {
+      "source": "trades_round_3_day_2.csv",
+      "day": 2,
+      "product": "RAINFOREST_RESIN",
+      "type": "trading_data",
+      "file_type": "trade",
+      "round": "round_3",
+      "basket": null
+    },
+    "content": "Trade data for RAINFOREST_RESIN on day 2:\nAverage price: 10000.03\nPrice range: 9992.00 to 10008.00\nTimestamp range: 100 to 999500\nNumber of trades: 1843\nTotal quantity traded: 6177\n\nTrade metrics:\navg_trade_size: 3.3516\nprice_volatility: 5.9569\nprice_mean: 10000.0288\nvwap: 10000.0340\navg_time_between_trades: 542.5624\ntrade_frequency: 0.0018\nprice_change: 9.0000\nprice_change_pct: 0.0900\n"
+  },
+  {
+    "metadata": {
+      "source": "trades_round_3_day_2.csv",
+      "day": 2,
+      "product": "SQUID_INK",
+      "type": "trading_data",
+      "file_type": "trade",
+      "round": "round_3",
+      "basket": null
+    },
+    "content": "Trade data for SQUID_INK on day 2:\nAverage price: 1827.26\nPrice range: 1771.00 to 1926.00\nTimestamp range: 200 to 999400\nNumber of trades: 2929\nTotal quantity traded: 8519\n\nTrade metrics:\navg_trade_size: 2.9085\nprice_volatility: 28.7043\nprice_mean: 1827.2591\nvwap: 1827.6078\navg_time_between_trades: 341.2568\ntrade_frequency: 0.0029\nprice_change: 23.0000\nprice_change_pct: 1.2757\n"
+  },
+  {
+    "metadata": {
+      "source": "trades_round_3_day_2.csv",
+      "day": 2,
+      "product": "VOLCANIC_ROCK",
+      "type": "trading_data",
+      "file_type": "trade",
+      "round": "round_3",
+      "basket": null
+    },
+    "content": "Trade data for VOLCANIC_ROCK on day 2:\nAverage price: 10165.73\nPrice range: 10029.00 to 10300.00\nTimestamp range: 3900 to 998800\nNumber of trades: 644\nTotal quantity traded: 4231\n\nTrade metrics:\navg_trade_size: 6.5699\nprice_volatility: 59.9961\nprice_mean: 10165.7267\nvwap: 10166.4075\navg_time_between_trades: 1547.2784\ntrade_frequency: 0.0006\nprice_change: -52.0000\nprice_change_pct: -0.5090\n"
+  },
+  {
+    "metadata": {
+      "source": "trades_round_3_day_2.csv",
+      "day": 2,
+      "product": "VOLCANIC_ROCK_VOUCHER_10000",
+      "type": "trading_data",
+      "file_type": "trade",
+      "round": "round_3",
+      "basket": null
+    },
+    "content": "Trade data for VOLCANIC_ROCK_VOUCHER_10000 on day 2:\nAverage price: 184.73\nPrice range: 89.00 to 305.00\nTimestamp range: 3500 to 999500\nNumber of trades: 1143\nTotal quantity traded: 11817\n\nTrade metrics:\navg_trade_size: 10.3386\nprice_volatility: 48.8161\nprice_mean: 184.7279\nvwap: 184.3536\navg_time_between_trades: 872.1541\ntrade_frequency: 0.0011\nprice_change: -52.0000\nprice_change_pct: -22.2222\n"
+  },
+  {
+    "metadata": {
+      "source": "trades_round_3_day_2.csv",
+      "day": 2,
+      "product": "VOLCANIC_ROCK_VOUCHER_10250",
+      "type": "trading_data",
+      "file_type": "trade",
+      "round": "round_3",
+      "basket": null
+    },
+    "content": "Trade data for VOLCANIC_ROCK_VOUCHER_10250 on day 2:\nAverage price: 43.51\nPrice range: 13.00 to 100.00\nTimestamp range: 3500 to 999500\nNumber of trades: 985\nTotal quantity traded: 10090\n\nTrade metrics:\navg_trade_size: 10.2437\nprice_volatility: 19.7539\nprice_mean: 43.5107\nvwap: 43.2012\navg_time_between_trades: 1012.1951\ntrade_frequency: 0.0010\nprice_change: -28.0000\nprice_change_pct: -43.7500\n"
+  },
+  {
+    "metadata": {
+      "source": "trades_round_3_day_2.csv",
+      "day": 2,
+      "product": "VOLCANIC_ROCK_VOUCHER_10500",
+      "type": "trading_data",
+      "file_type": "trade",
+      "round": "round_3",
+      "basket": null
+    },
+    "content": "Trade data for VOLCANIC_ROCK_VOUCHER_10500 on day 2:\nAverage price: 4.73\nPrice range: 1.00 to 14.00\nTimestamp range: 3500 to 999500\nNumber of trades: 852\nTotal quantity traded: 8816\n\nTrade metrics:\navg_trade_size: 10.3474\nprice_volatility: 2.6843\nprice_mean: 4.7254\nvwap: 4.6998\navg_time_between_trades: 1170.3878\ntrade_frequency: 0.0009\nprice_change: -6.0000\nprice_change_pct: -66.6667\n"
+  },
+  {
+    "metadata": {
+      "source": "trades_round_3_day_2.csv",
+      "day": 2,
+      "product": "VOLCANIC_ROCK_VOUCHER_9500",
+      "type": "trading_data",
+      "file_type": "trade",
+      "round": "round_3",
+      "basket": null
+    },
+    "content": "Trade data for VOLCANIC_ROCK_VOUCHER_9500 on day 2:\nAverage price: 661.50\nPrice range: 529.00 to 799.00\nTimestamp range: 3500 to 999500\nNumber of trades: 1120\nTotal quantity traded: 11513\n\nTrade metrics:\navg_trade_size: 10.2795\nprice_volatility: 61.1490\nprice_mean: 661.5045\nvwap: 660.8253\navg_time_between_trades: 890.0804\ntrade_frequency: 0.0011\nprice_change: -55.0000\nprice_change_pct: -7.6177\n"
+  },
+  {
+    "metadata": {
+      "source": "trades_round_3_day_2.csv",
+      "day": 2,
+      "product": "VOLCANIC_ROCK_VOUCHER_9750",
+      "type": "trading_data",
+      "file_type": "trade",
+      "round": "round_3",
+      "basket": null
+    },
+    "content": "Trade data for VOLCANIC_ROCK_VOUCHER_9750 on day 2:\nAverage price: 414.29\nPrice range: 286.00 to 549.00\nTimestamp range: 3500 to 999500\nNumber of trades: 1145\nTotal quantity traded: 11822\n\nTrade metrics:\navg_trade_size: 10.3249\nprice_volatility: 59.8853\nprice_mean: 414.2900\nvwap: 413.4742\navg_time_between_trades: 870.6294\ntrade_frequency: 0.0011\nprice_change: -55.0000\nprice_change_pct: -11.6279\n"
+  }
+]

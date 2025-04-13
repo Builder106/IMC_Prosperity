@@ -1,0 +1,12 @@
+{
+  "metadata": {
+    "source": "prices_round_3_day_0.csv",
+    "day": 0,
+    "product": "VOLCANIC_ROCK",
+    "type": "trading_data",
+    "file_type": "price",
+    "round": "round_3",
+    "basket": null
+  },
+  "content": "Trading data for VOLCANIC_ROCK on day 0:\nAverage mid price: 10454.10\nPrice range: 10305.00 to 10585.50\nData points: 10000\n\nTrading metrics:\nvolatility: 50.6061\nprice_momentum: 0.0011\nvolume_weighted_price: 10454.1035\ntrading_activity: 10000.0000\navg_spread: 1.5013\nmax_spread: 2.0000\nmin_spread: 1.0000\nmarket_depth: 3.0000\n"
+}

@@ -1,0 +1,12 @@
+{
+  "metadata": {
+    "source": "trades_round_2_day_0.csv",
+    "day": 0,
+    "product": "CROISSANTS",
+    "type": "trading_data",
+    "file_type": "trade",
+    "round": "round_2",
+    "basket": null
+  },
+  "content": "Trade data for CROISSANTS on day 0:\nAverage price: 4305.51\nPrice range: 4270.00 to 4329.00\nTimestamp range: 0 to 999200\nNumber of trades: 988\nTotal quantity traded: 6571\n\nTrade metrics:\navg_trade_size: 6.6508\nprice_volatility: 14.7423\nprice_mean: 4305.5132\nvwap: 4305.6783\navg_time_between_trades: 1012.3607\ntrade_frequency: 0.0010\nprice_change: -47.0000\nprice_change_pct: -1.0875\n"
+}

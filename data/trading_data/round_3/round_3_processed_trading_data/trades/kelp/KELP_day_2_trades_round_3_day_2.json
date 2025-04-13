@@ -1,0 +1,12 @@
+{
+  "metadata": {
+    "source": "trades_round_3_day_2.csv",
+    "day": 2,
+    "product": "KELP",
+    "type": "trading_data",
+    "file_type": "trade",
+    "round": "round_3",
+    "basket": null
+  },
+  "content": "Trade data for KELP on day 2:\nAverage price: 2048.35\nPrice range: 2039.00 to 2053.00\nTimestamp range: 200 to 999400\nNumber of trades: 2899\nTotal quantity traded: 8437\n\nTrade metrics:\navg_trade_size: 2.9103\nprice_volatility: 1.9511\nprice_mean: 2048.3536\nvwap: 2048.6059\navg_time_between_trades: 344.7895\ntrade_frequency: 0.0029\nprice_change: -2.0000\nprice_change_pct: -0.0978\n"
+}

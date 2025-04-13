@@ -1,0 +1,12 @@
+{
+  "metadata": {
+    "source": "trades_round_3_day_0.csv",
+    "day": 0,
+    "product": "PICNIC_BASKET1",
+    "type": "trading_data",
+    "file_type": "trade",
+    "round": "round_3",
+    "basket": null
+  },
+  "content": "Trade data for PICNIC_BASKET1 on day 0:\nAverage price: 59133.86\nPrice range: 58700.00 to 59387.00\nTimestamp range: 1000 to 998500\nNumber of trades: 590\nTotal quantity traded: 1970\n\nTrade metrics:\navg_trade_size: 3.3390\nprice_volatility: 146.8677\nprice_mean: 59133.8559\nvwap: 59133.2782\navg_time_between_trades: 1693.5484\ntrade_frequency: 0.0006\nprice_change: -528.0000\nprice_change_pct: -0.8912\n"
+}

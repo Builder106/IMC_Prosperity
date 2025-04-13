@@ -1,0 +1,12 @@
+{
+  "metadata": {
+    "source": "trades_round_3_day_1.csv",
+    "day": 1,
+    "product": "RAINFOREST_RESIN",
+    "type": "trading_data",
+    "file_type": "trade",
+    "round": "round_3",
+    "basket": null
+  },
+  "content": "Trade data for RAINFOREST_RESIN on day 1:\nAverage price: 9999.84\nPrice range: 9992.00 to 10008.00\nTimestamp range: 0 to 999800\nNumber of trades: 1876\nTotal quantity traded: 6261\n\nTrade metrics:\navg_trade_size: 3.3374\nprice_volatility: 5.8417\nprice_mean: 9999.8412\nvwap: 9999.9136\navg_time_between_trades: 533.2267\ntrade_frequency: 0.0019\nprice_change: -16.0000\nprice_change_pct: -0.1599\n"
+}

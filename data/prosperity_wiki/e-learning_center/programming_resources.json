@@ -1,0 +1,46 @@
+[
+  {
+    "type": "h1",
+    "content": "Programming resources"
+  },
+  {
+    "type": "h2",
+    "content": "Online learning"
+  },
+  {
+    "type": "p",
+    "content": "To be able to participate in algorithmic trading you will need to have some programming skills. Python programming, specifically. Here you will find some resources that will help you get started on programming in Python."
+  },
+  {
+    "type": "h2",
+    "content": "IMC Trading | Python for beginners"
+  },
+  {
+    "type": "p",
+    "content": "Get it straight from the source. Follow IMC’s excellent Python for beginners videos to get up to speed and learn how to get started with Python specifically for trading."
+  },
+  {
+    "type": "h2",
+    "content": "Object-Oriented Programming in Python 3"
+  },
+  {
+    "type": "p",
+    "content": "Real Python has some excellent tutorials on Python 3. The Object-Oriented Programming in Python 3 course is a good starting point for getting familiar with both Python and the concept of object-oriented programming."
+  },
+  {
+    "type": "h2",
+    "content": "Tools needed"
+  },
+  {
+    "type": "p",
+    "content": "All algorithmic trading in Prosperity happens in Python. To get started with programming you will need to install Python 3.12. You can find specific releases of Python on the Python downloads page. Just scroll down a bit until you see Python 3.12 and install that."
+  },
+  {
+    "type": "p",
+    "content": "Next, you will need a way to write your Python script. It’s recommended to do this in a text editor or IDE that has syntax highlighting for Python. A popular IDE is VS Code."
+  },
+  {
+    "type": "p",
+    "content": "With Python installed, a good IDE and a nice cup of coffee or tea, you can start writing your program. Head on over to the Writing an Algorithm in Python page for detailed information on how the exchange works and how to interface with it using your program."
+  }
+]

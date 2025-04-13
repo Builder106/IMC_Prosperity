@@ -1,0 +1,12 @@
+{
+  "metadata": {
+    "source": "trades_round_3_day_0.csv",
+    "day": 0,
+    "product": "JAMS",
+    "type": "trading_data",
+    "file_type": "trade",
+    "round": "round_3",
+    "basket": null
+  },
+  "content": "Trade data for JAMS on day 0:\nAverage price: 6597.41\nPrice range: 6529.00 to 6642.00\nTimestamp range: 500 to 999300\nNumber of trades: 1174\nTotal quantity traded: 8266\n\nTrade metrics:\navg_trade_size: 7.0409\nprice_volatility: 32.1055\nprice_mean: 6597.4131\nvwap: 6597.9079\navg_time_between_trades: 851.4919\ntrade_frequency: 0.0012\nprice_change: -89.0000\nprice_change_pct: -1.3422\n"
+}

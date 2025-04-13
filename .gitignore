@@ -3,6 +3,7 @@ venv
 __pycache__
 vectordb
 .DS_Store
-processed_trading_data.json
-round_2_sandbox.log
+backtests
+processed_data
 prosperity3bt
+backtests
