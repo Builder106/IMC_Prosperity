@@ -44,8 +44,8 @@ PARAMS = {
     RAINFOREST_RESIN: {
         "volatility": 3.24,
         "spread_capture": 3,     # Higher than volatility to account for wide spreads
-        "mean_reversion_strength": 0.2,
-        "sma_window": 20,
+        "mean_reversion_strength": 0.3,  # Increase from 0.2
+        "sma_window": 15,               # Reduce from 20 for faster response
         "position_scale": 1.2    # Scale for position sizing
     },
     KELP: {
@@ -58,8 +58,8 @@ PARAMS = {
     SQUID_INK: {
         "volatility": 15.46,
         "spread_capture": 2.5,
-        "mean_reversion_strength": 1.0,  # High volatility indicates stronger mean reversion potential
-        "sma_window": 10, 
+        "mean_reversion_strength": 1.2,  # Increase from 1.0
+        "sma_window": 8,                # Faster response
         "position_scale": 1.0
     },
     CROISSANTS: {
@@ -93,7 +93,7 @@ PARAMS = {
     PICNIC_BASKET2: {
         "volatility": 18.92,
         "spread_capture": 5.0,   # Based on avg_spread from data
-        "mean_reversion_strength": 0.4,
+        "mean_reversion_strength": 0.5,  # Increase from 0.4
         "sma_window": 15,
         "position_scale": 0.6    # Lower position scale due to high volatility
     }
@@ -254,9 +254,15 @@ class Trader:
         best_ask = min(order_depth.sell_orders.keys())
         spread = best_ask - best_bid
         
-        # Calculate our bid and ask prices
-        our_bid = best_bid + 1 if best_bid < fair_value - params["spread_capture"] else best_bid
-        our_ask = best_ask - 1 if best_ask > fair_value + params["spread_capture"] else best_ask
+        # More dynamic bid/ask adjustment based on product performance
+        if product in [RAINFOREST_RESIN, JAMS, PICNIC_BASKET1]:
+            # More aggressive for highly profitable products
+            our_bid = best_bid + 1 if best_bid < fair_value - params["spread_capture"]/2 else best_bid
+            our_ask = best_ask - 1 if best_ask > fair_value + params["spread_capture"]/2 else best_ask
+        else:
+            # Standard approach for other products
+            our_bid = best_bid + 1 if best_bid < fair_value - params["spread_capture"] else best_bid
+            our_ask = best_ask - 1 if best_ask > fair_value + params["spread_capture"] else best_ask
         
         # Adjust for current position - be more aggressive on the side that reduces position
         if abs(current_position) > POSITION_LIMITS[product] * 0.7:
@@ -352,8 +358,8 @@ class Trader:
         basket2_arb = mid_prices[PICNIC_BASKET2] - basket2_cost
         
         # Conversion thresholds - based on typical spreads from data
-        basket1_threshold = mid_prices[PICNIC_BASKET1] * 0.0025  # 0.25% threshold
-        basket2_threshold = mid_prices[PICNIC_BASKET2] * 0.0025  # 0.25% threshold
+        basket1_threshold = mid_prices[PICNIC_BASKET1] * 0.002  # Reduce from 0.0025 to capture more opportunities
+        basket2_threshold = mid_prices[PICNIC_BASKET2] * 0.003  # Increase from 0.0025 for more conservative approach
         
         # Decision logic for Basket 1
         if basket1_arb > basket1_threshold:  # Create baskets
@@ -451,6 +457,28 @@ class Trader:
             else:
                 print(f"  {product}: Could not calculate mid-price (likely insufficient order book data).")
             
+        def update_volatility_parameters(self, product: str, mid_price: float):
+            """Update volatility parameters based on recent price movements"""
+            if len(self.price_history[product]) < 10:
+                return
+                
+            # Calculate recent volatility
+            recent_prices = list(self.price_history[product])[-10:]
+            recent_volatility = np.std(recent_prices)
+            expected_volatility = PARAMS[product]["volatility"]
+            
+            # Adjust spread_capture based on observed volatility
+            volatility_ratio = recent_volatility / expected_volatility
+            if volatility_ratio > 1.5:
+                # Higher volatility - widen spread
+                PARAMS[product]["spread_capture"] *= 1.2
+            elif volatility_ratio < 0.7:
+                # Lower volatility - tighten spread
+                PARAMS[product]["spread_capture"] *= 0.9
+                
+            # Keep spread_capture within reasonable bounds
+            PARAMS[product]["spread_capture"] = max(1.0, min(10.0, PARAMS[product]["spread_capture"]))
+
             # Add orders to result if we have any
             if orders:
                 result[product] = orders

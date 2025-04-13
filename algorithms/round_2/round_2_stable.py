@@ -29,14 +29,14 @@ POSITION_LIMITS = {
 
 # Product fair values (derived from data analysis)
 FAIR_VALUES = {
-    RAINFOREST_RESIN: 10000,  # Stable around 10000
-    KELP: 2035,               # Mean from data
-    SQUID_INK: 1887,          # Mean from data
-    CROISSANTS: 4272,         # Mean from data
-    JAMS: 6534,               # Mean from data
-    DJEMBES: 13393,           # Mean from data
-    PICNIC_BASKET1: 58644,    # Mean from data
-    PICNIC_BASKET2: 30251     # Mean from data
+    RAINFOREST_RESIN: 10000,  # Still seems accurate
+    KELP: 2035,               # Consider adjusting based on day-to-day performance
+    SQUID_INK: 1890,          # Slight adjustment from 1887
+    CROISSANTS: 4272,         # Appears accurate
+    JAMS: 6530,               # Adjust slightly down from 6534
+    DJEMBES: 13390,           # Adjust slightly from 13393
+    PICNIC_BASKET1: 58630,    # Adjust from 58644
+    PICNIC_BASKET2: 30260     # Adjust from 30251
 }
 
 # Volatility and strategy parameters (derived from data analysis)
@@ -46,14 +46,14 @@ PARAMS = {
         "spread_capture": 3,     # Higher than volatility to account for wide spreads
         "mean_reversion_strength": 0.2,
         "sma_window": 20,
-        "position_scale": 1.0    # Scale for position sizing
+        "position_scale": 1.2    # Scale for position sizing
     },
     KELP: {
         "volatility": 1.17,
         "spread_capture": 1.5,
         "mean_reversion_strength": 0.5,  # Stronger mean reversion due to lower volatility
         "sma_window": 15,
-        "position_scale": 1.0
+        "position_scale": 0.8    # Lower position scale due to underperforming
     },
     SQUID_INK: {
         "volatility": 15.46,
@@ -74,7 +74,7 @@ PARAMS = {
         "spread_capture": 2.5,
         "mean_reversion_strength": 0.5,
         "sma_window": 15,
-        "position_scale": 1.0
+        "position_scale": 1.2
     },
     DJEMBES: {
         "volatility": 16.57,
@@ -88,7 +88,7 @@ PARAMS = {
         "spread_capture": 7.5,   # Based on avg_spread from data
         "mean_reversion_strength": 0.3,
         "sma_window": 15,
-        "position_scale": 0.5    # Lower position scale due to very high volatility
+        "position_scale": 0.7    # Lower position scale due to very high volatility
     },
     PICNIC_BASKET2: {
         "volatility": 18.92,
