@@ -75,10 +75,11 @@ def extract_trade_history_to_csv(log_file_path, csv_file_path):
                  print(f"Error: Could not refine JSON block from extracted text:\n{json_string}", file=sys.stderr)
                  return
         
-        # Fix common JSON formatting issues
-        # Remove trailing commas (common in JavaScript but invalid in JSON)
+        # Clean up the JSON string to handle common formatting issues
         print("Cleaning JSON string to fix potential formatting issues...")
-        json_string = re.sub(r',\s*([}\]])', r'\1', json_string)  # Replace ',}' or ',]' with '}' or ']'
+        # Remove trailing commas (present in round_3_bt.log format but invalid in JSON)
+        json_string = re.sub(r',(\s*})', r'\1', json_string)  # Replace ',}' with '}'
+        json_string = re.sub(r',(\s*])', r'\1', json_string)  # Replace ',]' with ']'
 
 
         print("Attempting to parse JSON data...")
@@ -138,11 +139,42 @@ def extract_trade_history_to_csv(log_file_path, csv_file_path):
 
 # --- Script Execution ---
 if __name__ == "__main__":
-    # Prompt user for the input log file path
-    input_log_file = input("Enter the path to the log file: ")
-
-    # Define the output CSV file name (can also be made interactive if needed)
-    output_csv_file = 'trades_extracted.csv' # Changed name slightly to avoid overwriting original example
-
+    import os
+    import argparse
+    
+    # Set up command line argument parsing
+    parser = argparse.ArgumentParser(description='Extract trade history from log files to CSV')
+    parser.add_argument('-i', '--input', type=str, help='Input log file path')
+    parser.add_argument('-o', '--output', type=str, help='Output CSV file path')
+    parser.add_argument('-f', '--force', action='store_true', help='Overwrite output file if it exists')
+    args = parser.parse_args()
+    
+    # Prompt for input file if not provided as argument
+    input_log_file = args.input
+    if not input_log_file:
+        input_log_file = input("Enter the path to the log file: ")
+    
+    # Generate a default output file name based on input file if not provided
+    output_csv_file = args.output
+    if not output_csv_file:
+        # Extract base name without extension and append _trades.csv
+        base_name = os.path.basename(input_log_file)
+        name_without_ext, _ = os.path.splitext(base_name)
+        output_csv_file = f"{name_without_ext}_trades.csv"
+    
+    # Check if output file exists and confirm overwrite if not force flag
+    if os.path.exists(output_csv_file) and not args.force:
+        confirm = input(f"Output file {output_csv_file} already exists. Overwrite? (y/n): ")
+        if confirm.lower() != 'y':
+            print("Operation cancelled.")
+            sys.exit(0)
+    
     # Run the extraction function
     extract_trade_history_to_csv(input_log_file, output_csv_file)
+    
+    # After extraction, check if the user wants to process another file
+    another = input("Would you like to process another log file? (y/n): ")
+    if another.lower() == 'y':
+        # Create a recursive call with clean arguments
+        sys.argv = [sys.argv[0]]  # Reset args for clean interactive prompting
+        os.execv(sys.executable, [sys.executable] + sys.argv)

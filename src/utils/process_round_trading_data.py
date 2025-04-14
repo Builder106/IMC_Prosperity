@@ -149,9 +149,6 @@ def process_round_csv(file_path, output_dir="processed_data"):
 
 def process_group(day, product, group, file_path, output_dir, documents):
     """Process a group of data rows"""
-    product_dir = Path(output_dir) / product.lower()
-    os.makedirs(product_dir, exist_ok=True)
-    
     # Calculate metrics
     metrics = calculate_metrics(group)
     
@@ -201,10 +198,7 @@ def process_group(day, product, group, file_path, output_dir, documents):
     
     documents.append(document)
     
-    # Save individual document
-    doc_filename = product_dir / f"{product}_day_{day}_data.json"
-    with open(doc_filename, 'w') as f:
-        json.dump(document, f, indent=2)
+    # No longer saving individual document files
 
 def calculate_basic_metrics(df):
     """Calculate basic price and volume metrics"""
@@ -618,7 +612,7 @@ def calculate_metrics(df):
     metrics.update(calculate_price_impact_metrics(df))
     metrics.update(calculate_time_based_metrics(df))
     metrics.update(calculate_statistical_metrics(df))
-    metrics.update(calculate_pnl_metrics(df))
+    # PNL metrics calculation disabled
     
     return metrics
 
