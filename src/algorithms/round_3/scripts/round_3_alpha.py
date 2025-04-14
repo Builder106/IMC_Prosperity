@@ -407,85 +407,6 @@ class Trader:
         
         # Ensure signal remains between -1 and 1
         return max(-1, min(1, final_signal))
-
-    def calculate_momentum(self, product: str) -> float:
-        """Calculate a normalized momentum score based on recent price changes."""
-        params = PARAMS[product]
-        lookback = params.get("momentum_lookback", 5) # Default to 5 if not defined
-        prices_deque = self.price_history[product]
-
-        if len(prices_deque) < lookback:
-            return 0
-
-        # Use the last 'lookback' prices
-        recent_prices = list(prices_deque)[-lookback:]
-
-        # Simple linear regression to get trend slope
-        x = list(range(lookback))
-        y = recent_prices
-
-        if lookback < 2:
-            return 0
-
-        n = lookback
-        x_mean = sum(x) / n
-        y_mean = sum(y) / n
-
-        if y_mean == 0: # Avoid division by zero
-            return 0
-
-        numerator = sum((x[i] - x_mean) * (y[i] - y_mean) for i in range(n))
-        denominator = sum((x[i] - x_mean) ** 2 for i in range(n))
-
-        slope = numerator / denominator if denominator != 0 else 0
-
-        # Normalize the slope by the average price to get a relative momentum score
-        normalized_momentum = slope / y_mean
-        return normalized_momentum
-
-    def generate_momentum_orders(self, product: str, momentum_score: float, mid_price: float, current_position: int, order_depth: OrderDepth) -> List[Order]:
-        """Generate orders based on the momentum signal."""
-        orders = []
-        params = PARAMS[product]
-        max_position = POSITION_LIMITS[product]
-        position_scale = params["position_scale"]
-        momentum_scale = params["momentum_scale"]
-        aggressive_taking = params.get("aggressive_market_taking", False)
-
-        # Determine target position based on momentum
-        # Use tanh to scale momentum score smoothly between -1 and 1, then apply scales
-        momentum_signal = math.tanh(momentum_score * 1000) # Scale score before tanh
-        target_position = int(max_position * position_scale * momentum_scale * momentum_signal)
-
-        # Calculate required adjustment
-        position_adjustment = target_position - current_position
-
-        # Ensure adjustment doesn't violate limits
-        if current_position + position_adjustment > max_position:
-            position_adjustment = max_position - current_position
-        elif current_position + position_adjustment < -max_position:
-            position_adjustment = -max_position - current_position
-
-        if abs(position_adjustment) < 1: # Minimum order size
-            return orders
-
-        # Determine order price based on aggressive taking
-        price = mid_price # Default to mid_price
-        if position_adjustment > 0: # Buying
-            if order_depth.sell_orders:
-                best_ask = min(order_depth.sell_orders.keys())
-                price = best_ask + 1 if aggressive_taking else best_ask
-            else: # No sellers, place at a reasonable upper bound? Or skip? Let's skip for now.
-                return orders
-        else: # Selling
-            if order_depth.buy_orders:
-                best_bid = max(order_depth.buy_orders.keys())
-                price = best_bid - 1 if aggressive_taking else best_bid
-            else: # No buyers, skip for now.
-                return orders
-
-        orders.append(Order(product, int(round(price)), position_adjustment))
-        return orders
         
     def calculate_position_size(self, product: str, signal_strength: float, current_position: int) -> int:
         """Calculate the appropriate position size based on signal strength and current position."""
@@ -1247,22 +1168,8 @@ class Trader:
                 current_mid_prices[product] = mid_price
                 self.price_history[product].append(mid_price)
                 
-                # Apply specific strategy for VOLCANIC_ROCK
-                if product == VOLCANIC_ROCK:
-                    params = PARAMS[product]
-                    momentum_score = self.calculate_momentum(product)
-                    
-                    if abs(momentum_score) > params["momentum_threshold"]:
-                        # Momentum strategy takes priority
-                        momentum_orders = self.generate_momentum_orders(product, momentum_score, mid_price, current_position, order_depth)
-                        orders.extend(momentum_orders)
-                    else:
-                        # Fallback to tight-spread market making when momentum is weak
-                        mm_orders = self.market_make_orders(product, order_depth, current_position)
-                        orders.extend(mm_orders)
-                        
-                # Apply general strategies for other regular products
-                elif product in PARAMS:
+                # Skip options strategies for regular products
+                if product in PARAMS:
                     # Market making strategy
                     mm_orders = self.market_make_orders(product, order_depth, current_position)
                     orders.extend(mm_orders)
@@ -1322,7 +1229,7 @@ class Trader:
             product: state.position.get(product, 0) 
             for product in state.position.keys()
         }
-        
+                
         # Can include trader data if needed for state persistence
         trader_data = ""
         

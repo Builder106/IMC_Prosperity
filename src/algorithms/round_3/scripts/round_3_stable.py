@@ -1229,9 +1229,7 @@ class Trader:
             product: state.position.get(product, 0) 
             for product in state.position.keys()
         }
-        
-        # Print order summary
-        
+                
         # Can include trader data if needed for state persistence
         trader_data = ""
         
