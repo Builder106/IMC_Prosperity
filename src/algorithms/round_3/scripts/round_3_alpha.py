@@ -1256,12 +1256,10 @@ class Trader:
                         # Momentum strategy takes priority
                         momentum_orders = self.generate_momentum_orders(product, momentum_score, mid_price, current_position, order_depth)
                         orders.extend(momentum_orders)
-                        logger.print(f"VOLCANIC_ROCK Momentum: Score={momentum_score:.5f}, Orders={len(momentum_orders)}")
                     else:
                         # Fallback to tight-spread market making when momentum is weak
                         mm_orders = self.market_make_orders(product, order_depth, current_position)
                         orders.extend(mm_orders)
-                        # logger.print(f"VOLCANIC_ROCK Market Making: Orders={len(mm_orders)}")
                         
                 # Apply general strategies for other regular products
                 elif product in PARAMS:
@@ -1324,8 +1322,6 @@ class Trader:
             product: state.position.get(product, 0) 
             for product in state.position.keys()
         }
-        
-        # Print order summary
         
         # Can include trader data if needed for state persistence
         trader_data = ""
