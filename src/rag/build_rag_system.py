@@ -20,8 +20,8 @@ from process_raw_trading_data import process_round_data, discover_rounds
 load_dotenv()
 
 # Directory settings
-NOTION_WIKI_DIR = "../prosperity_wiki"
-TRADING_DATA_DIR = "../trading_data"
+NOTION_WIKI_DIR = "../data/prosperity_wiki"
+TRADING_DATA_DIR = "../data/trading_data"
 VECTOR_DB_DIR = "../vectordb"
 
 def process_notion_wiki_data(wiki_dir=NOTION_WIKI_DIR):
