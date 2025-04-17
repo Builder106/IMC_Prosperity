@@ -7,9 +7,9 @@ from playwright.sync_api import sync_playwright
 # Base URL of the Notion wiki
 BASE_URL = "https://imc-prosperity.notion.site/Prosperity-3-Wiki-19ee8453a09380529731c4e6fb697ea4"
 # Directory to save the JSON files
-SAVE_DIR = "../prosperity_wiki"
+SAVE_DIR = "../../../data/prosperity_wiki"
 # Directory to save code files
-CODE_DIR = "../prosperity_wiki/code"
+CODE_DIR = "../../../data/prosperity_wiki/code"
 
 # Make absolute paths for directories
 current_dir = os.path.dirname(os.path.abspath(__file__))
@@ -507,10 +507,6 @@ def scrape_notion_wiki():
             page.goto(BASE_URL, timeout=60000, wait_until='domcontentloaded')
             print("Page loaded successfully")
             
-            # Take a screenshot to see what's loaded
-            print("Taking an initial screenshot...")
-            os.makedirs("debug", exist_ok=True)
-            page.screenshot(path="debug/initial_load.png")
         except Exception as e:
             print(f"Error loading page: {e}")
             # Save the error information for debugging
@@ -546,8 +542,6 @@ def scrape_notion_wiki():
             except Exception as e:
                 print(f"No expand buttons found: {e}")
                 
-            # Take another screenshot after interactions
-            page.screenshot(path="debug/after_interaction.png")
         except Exception as e:
             print(f"Error during page interaction: {e}")
         

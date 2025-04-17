@@ -1,7 +1,127 @@
 [
   {
     "type": "h1",
-    "content": "Announcements"
+    "content": "🔔 Announcements"
+  },
+  {
+    "type": "h2",
+    "content": "Announcement 15 April, 14:48 CET"
+  },
+  {
+    "type": "p",
+    "content": "Dear Traders,"
+  },
+  {
+    "type": "p",
+    "content": "After a short maintenance break , the platform is back up for you to continue diving in to the last 24 hours within this third round."
+  },
+  {
+    "type": "p",
+    "content": "Platform performance upgrades completed"
+  },
+  {
+    "type": "p",
+    "content": "Hardcoded algo submissions done during round 1 and 2 have been removed and the leaderboard and archipelago views have been regenerated to reflect updated scores."
+  },
+  {
+    "type": "p",
+    "content": "Please be reminded hardcoding is not allowed and teams submitting such files from now on will be disqualified from Prosperity. \n\nLastly, please check out the Wiki for a hint on the algorithmic challenge.."
+  },
+  {
+    "type": "h2",
+    "content": "Announcement 14 April, 17:14 CET"
+  },
+  {
+    "type": "p",
+    "content": "Dear everyone,"
+  },
+  {
+    "type": "p",
+    "content": "As promised, we are sharing with you an update on the developments of the last day and answer some of the more pressing questions."
+  },
+  {
+    "type": "p",
+    "content": "Hardcoding algo file uploads"
+  },
+  {
+    "type": "p",
+    "content": "As announced this morning, hardcoding your algorithmic trades based on recognized patterns of bot behavior is not allowed. Teams doing this from round 3 onwards will be disqualified including all users within that team. If we see users moving to different teams, those teams will be disqualified as well."
+  },
+  {
+    "type": "p",
+    "content": "During round 1 and 2, there were some teams who hardcoded their algo files. We will be removing those files from the platform and update the leaderboard when we switch from Round 3 to Round 4, after which you will see the updated scores reflect. For those teams, we will be using a submission in round 1 and 2 that is not hardcoded. These teams have been reach out to individually to update them with above information."
+  },
+  {
+    "type": "p",
+    "content": "Platform performance issues"
+  },
+  {
+    "type": "p",
+    "content": "At the end of round 2, we experienced platform performance issues leading to the submissions section being unavailable to some. Unfortunately, we will not be reopening round 2. If you have a submission ID that was previously run for round 2 which you would like to count as your final submission for round 2, kindly DM that submission ID along with team name to @jack (on Discord) so he can run that one as your final submission."
+  },
+  {
+    "type": "p",
+    "content": "We are working hard to stabilize the platform so it is accessible for everyone. In addition to performance changes, we are making an update to the platform soon (before round 3 ends) allowing you to submit a one file at a time. You can only upload a new file once your previous file has stopped running (either accepted or rejected)."
+  },
+  {
+    "type": "p",
+    "content": "We apologize for any inconvenience regarding this matter."
+  },
+  {
+    "type": "p",
+    "content": "Fake accounts and bot traffic"
+  },
+  {
+    "type": "p",
+    "content": "We have noticed fake accounts and bot traffic on the platform. We are working on removing those. Please note these do not have an affect on the distributions in manual round 2."
+  },
+  {
+    "type": "p",
+    "content": "At the end of Prosperity, top teams eligible for prizes will be checked thoroughly, so creating fake emails and doing automated uploads will not get you far."
+  },
+  {
+    "type": "p",
+    "content": "Scheduled Maintenance"
+  },
+  {
+    "type": "p",
+    "content": "Tomorrow (15 April) at 1PM CET, we will have a short scheduled maintenance where we will do some platform performance upgrades, as well as regenerate the leaderboard and archipelago to update the scores with hardcoded file submissions removed. This scheduled maintenance period is expected to last 1-2 hours maximum."
+  },
+  {
+    "type": "p",
+    "content": "Behavior on Discord"
+  },
+  {
+    "type": "p",
+    "content": "We understand your frustration at certain situations. We are doing everything we can to make this a fun and fair experience for all of you. Please keep your behavior and language on Discord proper. We have a zero-tolerance policy and will remove you from Discord when we see inappropriate messages directed towards staff of IMC as well as fellow participants."
+  },
+  {
+    "type": "p",
+    "content": "Of course, we do value constructive feedback and we always welcome this. Although we do not respond to everything, we do read your messages and take them into account. So thank you for your constructive feedback!"
+  },
+  {
+    "type": "h2",
+    "content": "Announcement 14 April, 11:57 CET"
+  },
+  {
+    "type": "p",
+    "content": "Hi everyone,"
+  },
+  {
+    "type": "p",
+    "content": "Although a more extensive announcement will follow later today, we would already like to communicate that hardcoding algo submissions based on discovered trends in bot behavior is not allowed. IMC Prosperity stands for fair play and values skillsets and knowledge to write algorithms which could perform well in simulated real market conditions and not algorithms which exploits unfair advantage based on past participation or data leak or any form of look-ahead bias.\n\nEffective start of round 3, any teams doing hardcoded submissions will be disqualified from Prosperity with immediate effect, including all players in those teams. When those players move to different teams, those teams will be disqualified as well. \n\nWe will be taking retrospective action on teams that hardcoded their submissions during Round 2 so that those teams do not have an unfair disadvantage. We will send out more information about this later today."
+  },
+  {
+    "type": "h2",
+    "content": "Announcement 11 April, 17:10 CET"
+  },
+  {
+    "type": "p",
+    "content": "Hi all,"
+  },
+  {
+    "type": "p",
+    "content": "Data in a bottle for round 2 has been updated to reflect the updates we have done. Please make sure you refresh the browser so we are sure you are accessing the new file."
   },
   {
     "type": "h2",

@@ -9,7 +9,7 @@
   },
   {
     "type": "p",
-    "content": "Our inhabitants really like volcanic rock. So much even, that they invented a new tradable good, VOLCANIC ROCK VOUCHERS. The vouchers will give you the right to buy VOLCANIC ROCK at a certain price by the end of the round and can be traded as a separate item on the island’s exchange. Of course you will have to pay a premium for these coupons, but if your strategy is solid as a rock, SeaShells spoils will be waiting for you on the horizon."
+    "content": "Our inhabitants really like volcanic rock. So much even, that they invented a new tradable good, VOLCANIC ROCK VOUCHERS. The vouchers will give you the right but not obligation to buy VOLCANIC ROCK at a certain price (strike price) at voucher expiry timestamp. These vouchers can be traded as a separate item on the island’s exchange. Of course you will have to pay a premium for these vouchers, but if your strategy is solid as a rock, SeaShells spoils will be waiting for you on the horizon."
   },
   {
     "type": "p",
@@ -74,6 +74,46 @@
   {
     "type": "p",
     "content": "Strike Price: 10,500 SeaShells"
+  },
+  {
+    "type": "h2",
+    "content": "Hint for Algorithmic Challenge"
+  },
+  {
+    "type": "p",
+    "content": "Hello everyone, hope you're enjoying the VOLCANIC_ROCK vouchers and a variety of trading strategies these new products introduce. While digging for the rock, Archipelago residents found some ancient mathematics sharing insights into VOLCANIC_ROCK voucher trading. Here's what the message with obscure and advanced mathematics read,"
+  },
+  {
+    "type": "p",
+    "content": "Message begins,"
+  },
+  {
+    "type": "p",
+    "content": "I have discovered a strategy which will make ArchiCapital the biggest trading company ever. Here's how my thesis goes,"
+  },
+  {
+    "type": "p",
+    "content": "t: Timestamp\nSt: Voucher Underlying Price at t\nK: Strike\nTTE: Remaining Time till expiry at t\nVt: Voucher price of strike K at t"
+  },
+  {
+    "type": "p",
+    "content": "Compute,"
+  },
+  {
+    "type": "p",
+    "content": "m_t = log(K/St)/ sqrt(TTE)\nv_t = BlackScholes ImpliedVol(St, Vt, K, TTE)"
+  },
+  {
+    "type": "p",
+    "content": "for each t, plot v_t vs m_t and fit a parabolic curve to filter random noise."
+  },
+  {
+    "type": "p",
+    "content": "This fitted v_t(m_t) allows me to evaluate opportunities between different strikes. I also call fitted v_t(m_t=0) the base IV and I have identified interesting patterns in timeseries of base IV."
+  },
+  {
+    "type": "p",
+    "content": "Message ends."
   },
   {
     "type": "h2",
