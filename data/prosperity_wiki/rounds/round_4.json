@@ -25,6 +25,26 @@
   },
   {
     "type": "h2",
+    "content": "Hint - Algo"
+  },
+  {
+    "type": "p",
+    "content": "It was well understood lore in Archipelago that low sunlight index can impact sugar and MACARON production negatively causing prices to rise due to panic among residents. However, ArchiResearchers have identified existence of a CriticalSunlightIndex (CSI)."
+  },
+  {
+    "type": "p",
+    "content": "If sunlightIndex goes below this CSI with an anticipation to remain under this critical level for a long period of time, sugar and MACARON prices can increase by substantial amount with a strong correlation."
+  },
+  {
+    "type": "p",
+    "content": "When sunlightIndex is above this CSI, Sugar and MACARON prices tend to trade around their respective fair values and demonstrates market supply-demand dynamics."
+  },
+  {
+    "type": "p",
+    "content": "Can you find this CSI and use it to trade better than ever and make your island prosper? All the best!"
+  },
+  {
+    "type": "h2",
     "content": "Manual challenge"
   },
   {

@@ -531,68 +531,6 @@ def calculate_statistical_metrics(df):
     return metrics
 
 
-# def calculate_pnl_metrics(df):
-#     """Calculate profit and loss metrics, but only for SUBMISSION trades"""
-#     metrics = {}
-    
-#     # First filter for only SUBMISSION trades
-#     submission_trades = df[(df['buyer'] == 'SUBMISSION') | (df['seller'] == 'SUBMISSION')].copy()
-    
-#     if len(submission_trades) == 0:
-#         return metrics
-    
-#     # Calculate profit and loss for each trade
-#     submission_trades['profit_and_loss'] = 0.0
-    
-#     # When SUBMISSION is buyer (we bought)
-#     buy_trades = submission_trades[submission_trades['buyer'] == 'SUBMISSION']
-#     if not buy_trades.empty:
-#         buy_trades['profit_and_loss'] = -buy_trades['price'] * buy_trades['quantity']
-    
-#     # When SUBMISSION is seller (we sold)
-#     sell_trades = submission_trades[submission_trades['seller'] == 'SUBMISSION']
-#     if not sell_trades.empty:
-#         sell_trades['profit_and_loss'] = sell_trades['price'] * sell_trades['quantity']
-    
-#     # Combine the trades back
-#     submission_trades.update(buy_trades)
-#     submission_trades.update(sell_trades)
-    
-#     # Basic P&L statistics
-#     metrics["total_pnl"] = submission_trades['profit_and_loss'].sum()
-#     metrics["avg_pnl"] = submission_trades['profit_and_loss'].mean()
-#     metrics["pnl_volatility"] = submission_trades['profit_and_loss'].std()
-    
-#     # Min/Max P&L values
-#     metrics["max_pnl"] = submission_trades['profit_and_loss'].max()
-#     metrics["min_pnl"] = submission_trades['profit_and_loss'].min()
-    
-#     # Sort by timestamp for cumulative calculations if available
-#     if 'timestamp' in submission_trades.columns:
-#         df_sorted = submission_trades.sort_values('timestamp')
-#     else:
-#         df_sorted = submission_trades
-        
-#     # Cumulative P&L
-#     df_sorted['cum_pnl'] = df_sorted['profit_and_loss'].cumsum()
-#     metrics["final_cum_pnl"] = df_sorted['cum_pnl'].iloc[-1]
-    
-#     # Calculate drawdown
-#     running_max = df_sorted['cum_pnl'].cummax()
-#     drawdown = running_max - df_sorted['cum_pnl']
-#     metrics["max_drawdown"] = drawdown.max()
-    
-#     # Calculate simple Sharpe-like ratio if we have enough data points
-#     if len(submission_trades) > 2 and submission_trades['profit_and_loss'].std() > 0:
-#         metrics["pnl_sharpe"] = submission_trades['profit_and_loss'].mean() / submission_trades['profit_and_loss'].std()
-    
-#     # Count of profitable vs unprofitable data points
-#     profitable_points = (submission_trades['profit_and_loss'] > 0).sum()
-#     metrics["profit_ratio"] = profitable_points / len(submission_trades) if len(submission_trades) > 0 else 0
-    
-#     return metrics
-
-
 def calculate_metrics(df):
     """
     Calculate trading metrics for the data by combining metrics from different categories.
