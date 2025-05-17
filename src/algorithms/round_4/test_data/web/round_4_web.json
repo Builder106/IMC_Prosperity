@@ -1,0 +1,182 @@
+[
+  {
+    "metadata": {
+      "source": {
+        "prices": "prices_round_4_web.csv",
+        "trades": "trades_round_4_web.csv"
+      },
+      "day": 3,
+      "product": "SQUID_INK",
+      "type": "trading_data"
+    },
+    "content": "Trading data for SQUID_INK on day 3:\nAverage mid price: 1847.01\nPrice range: 1819.50 to 1859.50\nAverage price: 1846.94\nPrice range: 1819.00 to 1860.00\nData points: 545\n\nTrading metrics:\nvolatility: 6.8671\nprice_momentum: 0.0542\nprice_volatility: 6.9563\nprice_mean: 1846.9376\navg_trade_size: 2.6550\navg_spread: 1.9853\nmax_spread: 4.0000\navg_relative_spread: 0.1075\navg_effective_spread: 1.4679\nbuy_implementation_shortfall: 0.1921\navg_total_bid_volume: 26.9890\navg_total_ask_volume: 26.8972\navg_book_imbalance: 0.0013\nbook_pressure: 0.1347\navg_bid_top_concentration: 0.6351\navg_ask_top_concentration: 0.7160\navg_bid_slope: 0.0684\navg_ask_slope: 0.1234\nbook_slope: 0.0959\navg_bid_impact: 0.6000\navg_ask_impact: 0.5394\nkyles_lambda: 0.1099\namihud_illiquidity: 0.0005\nvpin: 1.0000\navg_time_between_obs: 181.0662\ndata_frequency: 0.0055\navg_price_velocity: 0.0005\nmax_price_velocity: 0.0300\navg_price_acceleration: -0.0000\navg_rolling_volatility_5: 1.0895\navg_rolling_volatility_10: 1.4861\nprice_skewness: -1.3935\nprice_kurtosis: 3.1622\nshapiro_normality_pvalue: 0.0000\njarque_bera_normality_pvalue: 0.0000\nprice_percentile_1: 1821.0000\nprice_percentile_5: 1835.5000\nprice_percentile_25: 1843.5000\nprice_percentile_50: 1848.5000\nprice_percentile_75: 1851.5000\nprice_percentile_95: 1855.5000\nprice_percentile_99: 1858.2800\nprice_iqr: 8.0000\nprice_outlier_count: 18.0000\nprice_outlier_percentage: 3.3028\nreturns_mean: 0.0000\nreturns_volatility: 0.0007\nreturns_skewness: 0.4981\nreturns_kurtosis: 3.2041\nreturns_autocorr_lag_1: -0.1229\nreturns_autocorr_lag_5: -0.0204\nreturns_autocorr_lag_10: -0.0223\nhurst_exponent: 0.2705\navg_price_correlation: 0.9974\n"
+  },
+  {
+    "metadata": {
+      "source": {
+        "prices": "prices_round_4_web.csv",
+        "trades": "trades_round_4_web.csv"
+      },
+      "day": 3,
+      "product": "VOLCANIC_ROCK_VOUCHER_10000",
+      "type": "trading_data"
+    },
+    "content": "Trading data for VOLCANIC_ROCK_VOUCHER_10000 on day 3:\nAverage mid price: 171.05\nPrice range: 137.50 to 192.50\nAverage price: 170.86\nPrice range: 138.00 to 192.00\nData points: 131\n\nTrading metrics:\nvolatility: 12.7517\nprice_momentum: 0.0577\nprice_volatility: 12.6769\nprice_mean: 170.8626\navg_trade_size: 9.7252\navg_spread: 1.0192\nmax_spread: 2.0000\navg_relative_spread: 0.5996\navg_effective_spread: 1.0192\nbuy_implementation_shortfall: -0.2704\navg_total_bid_volume: 8.7405\navg_total_ask_volume: 16.2977\navg_book_imbalance: -0.4059\nbook_pressure: -40.5941\navg_bid_top_concentration: 1.0000\navg_ask_top_concentration: 0.8353\navg_ask_slope: 0.0562\navg_bid_impact: 0.0000\navg_ask_impact: 0.1908\nkyles_lambda: 0.0040\namihud_illiquidity: 0.0026\nvpin: 1.0000\navg_time_between_obs: 763.8462\ndata_frequency: 0.0013\navg_price_velocity: -0.0007\nmax_price_velocity: 0.0600\navg_price_acceleration: -0.0000\navg_rolling_volatility_5: 3.9785\navg_rolling_volatility_10: 5.2006\nprice_outlier_count: 0.0000\nprice_outlier_percentage: 0.0000\nreturns_mean: -0.0016\nreturns_volatility: 0.0386\nreturns_skewness: -3.1317\nreturns_kurtosis: 21.0497\nreturns_autocorr_lag_1: 0.0082\nreturns_autocorr_lag_5: 0.0445\nreturns_autocorr_lag_10: -0.0035\nhurst_exponent: 0.1856\navg_price_correlation: 0.9998\n"
+  },
+  {
+    "metadata": {
+      "source": {
+        "prices": "prices_round_4_web.csv",
+        "trades": "trades_round_4_web.csv"
+      },
+      "day": 3,
+      "product": "KELP",
+      "type": "trading_data"
+    },
+    "content": "Trading data for KELP on day 3:\nAverage mid price: 2040.13\nPrice range: 2035.50 to 2045.50\nAverage price: 2039.94\nPrice range: 2036.00 to 2046.00\nData points: 433\n\nTrading metrics:\nvolatility: 2.4120\nprice_momentum: 0.0058\nprice_volatility: 2.5232\nprice_mean: 2039.9400\navg_trade_size: 3.0855\navg_spread: 2.1570\nmax_spread: 4.0000\navg_relative_spread: 0.1057\navg_effective_spread: 1.6397\nbuy_implementation_shortfall: 0.0105\navg_total_bid_volume: 26.7691\navg_total_ask_volume: 27.0046\navg_book_imbalance: -0.0049\nbook_pressure: -0.4926\navg_bid_top_concentration: 0.6615\navg_ask_top_concentration: 0.7185\navg_bid_slope: 0.1006\navg_ask_slope: 0.0771\nbook_slope: 0.0888\navg_bid_impact: 0.6374\navg_ask_impact: 0.5196\nkyles_lambda: 0.1012\namihud_illiquidity: 0.0003\nvpin: 1.0000\navg_time_between_obs: 229.6296\ndata_frequency: 0.0044\navg_price_velocity: 0.0002\nmax_price_velocity: 0.0200\navg_price_acceleration: 0.0000\navg_rolling_volatility_5: 0.6949\navg_rolling_volatility_10: 0.7904\nprice_skewness: 0.3584\nprice_kurtosis: -0.8704\nshapiro_normality_pvalue: 0.0000\njarque_bera_normality_pvalue: 0.0000\nprice_percentile_1: 2036.1600\nprice_percentile_5: 2036.8000\nprice_percentile_25: 2038.0000\nprice_percentile_50: 2039.5000\nprice_percentile_75: 2042.0000\nprice_percentile_95: 2044.5000\nprice_percentile_99: 2045.5000\nprice_iqr: 4.0000\nprice_outlier_count: 0.0000\nprice_outlier_percentage: 0.0000\nreturns_mean: 0.0000\nreturns_volatility: 0.0004\nreturns_skewness: 0.0444\nreturns_kurtosis: 0.7140\nreturns_autocorr_lag_1: -0.2448\nreturns_autocorr_lag_5: -0.0139\nreturns_autocorr_lag_10: -0.0291\nhurst_exponent: 0.0881\navg_price_correlation: 0.9670\n"
+  },
+  {
+    "metadata": {
+      "source": {
+        "prices": "prices_round_4_web.csv",
+        "trades": "trades_round_4_web.csv"
+      },
+      "day": 3,
+      "product": "RAINFOREST_RESIN",
+      "type": "trading_data"
+    },
+    "content": "Trading data for RAINFOREST_RESIN on day 3:\nAverage mid price: 9999.87\nPrice range: 9994.50 to 10005.50\nAverage price: 10000.60\nPrice range: 9992.00 to 10008.00\nData points: 123\n\nTrading metrics:\nvolatility: 3.1425\nprice_momentum: 0.0451\nprice_volatility: 5.5747\nprice_mean: 10000.6016\navg_trade_size: 3.2520\navg_spread: 11.5854\nmax_spread: 16.0000\navg_relative_spread: 0.1159\navg_effective_spread: 10.0407\nbuy_implementation_shortfall: 0.9587\navg_total_bid_volume: 31.7561\navg_total_ask_volume: 32.0081\navg_book_imbalance: -0.0034\nbook_pressure: -0.3380\navg_bid_top_concentration: 0.7768\navg_ask_top_concentration: 0.7838\navg_bid_slope: 0.2463\navg_ask_slope: 0.2982\nbook_slope: 0.2722\navg_bid_impact: 1.5935\navg_ask_impact: 1.7561\nkyles_lambda: 0.1625\namihud_illiquidity: 0.0002\nvpin: 1.0000\navg_time_between_obs: 804.9180\ndata_frequency: 0.0012\navg_price_velocity: 0.0010\nmax_price_velocity: 0.0950\navg_price_acceleration: 0.0000\navg_rolling_volatility_5: 2.8401\navg_rolling_volatility_10: 3.0790\nprice_skewness: -0.0616\nprice_kurtosis: -0.5205\nshapiro_normality_pvalue: 0.0000\njarque_bera_normality_pvalue: 0.4805\nprice_percentile_1: 9994.5000\nprice_percentile_5: 9995.0000\nprice_percentile_25: 10000.0000\nprice_percentile_50: 10000.0000\nprice_percentile_75: 10000.0000\nprice_percentile_95: 10005.5000\nprice_percentile_99: 10005.5000\nprice_iqr: 0.0000\nprice_outlier_count: 58.0000\nprice_outlier_percentage: 47.1545\nreturns_mean: 0.0000\nreturns_volatility: 0.0004\nreturns_skewness: -0.1330\nreturns_kurtosis: 0.4891\nreturns_autocorr_lag_1: -0.3527\nreturns_autocorr_lag_5: 0.0355\nreturns_autocorr_lag_10: 0.1007\nhurst_exponent: -0.0083\navg_price_correlation: 0.4554\n"
+  },
+  {
+    "metadata": {
+      "source": {
+        "prices": "prices_round_4_web.csv",
+        "trades": "trades_round_4_web.csv"
+      },
+      "day": 3,
+      "product": "VOLCANIC_ROCK_VOUCHER_10250",
+      "type": "trading_data"
+    },
+    "content": "Trading data for VOLCANIC_ROCK_VOUCHER_10250 on day 3:\nAverage mid price: 33.44\nPrice range: 25.50 to 39.50\nAverage price: 32.68\nPrice range: 25.00 to 39.00\nData points: 97\n\nTrading metrics:\nvolatility: 4.2063\nprice_momentum: 0.0156\nprice_volatility: 4.1497\nprice_mean: 32.6804\navg_trade_size: 10.1134\navg_spread: 1.0000\nmax_spread: 1.0000\navg_relative_spread: 3.0321\navg_effective_spread: 1.0000\nbuy_implementation_shortfall: -0.3175\navg_total_bid_volume: 6.4742\navg_total_ask_volume: 16.8247\navg_book_imbalance: -0.5508\nbook_pressure: -55.0807\navg_bid_top_concentration: 1.0000\navg_ask_top_concentration: 0.7865\navg_ask_slope: 0.0560\navg_bid_impact: 0.0000\navg_ask_impact: 0.2474\nkyles_lambda: 0.0054\namihud_illiquidity: 0.0030\nvpin: 1.0000\navg_time_between_obs: 1034.3750\ndata_frequency: 0.0010\navg_price_velocity: 0.0002\nmax_price_velocity: 0.0200\navg_price_acceleration: -0.0000\navg_rolling_volatility_5: 1.2263\navg_rolling_volatility_10: 1.6043\nprice_outlier_count: 0.0000\nprice_outlier_percentage: 0.0000\nreturns_mean: 0.0045\nreturns_volatility: 0.0492\nreturns_skewness: 0.3039\nreturns_kurtosis: 1.2966\nreturns_autocorr_lag_1: -0.0391\nreturns_autocorr_lag_5: -0.0908\nreturns_autocorr_lag_10: -0.1479\navg_price_correlation: 0.9993\n"
+  },
+  {
+    "metadata": {
+      "source": {
+        "prices": "prices_round_4_web.csv",
+        "trades": "trades_round_4_web.csv"
+      },
+      "day": 3,
+      "product": "JAMS",
+      "type": "trading_data"
+    },
+    "content": "Trading data for JAMS on day 3:\nAverage mid price: 6517.25\nPrice range: 6511.00 to 6525.00\nAverage price: 6517.02\nPrice range: 6510.00 to 6525.00\nData points: 151\n\nTrading metrics:\nvolatility: 3.4092\nprice_momentum: -0.0500\nprice_volatility: 3.5487\nprice_mean: 6517.0199\navg_trade_size: 8.6887\navg_spread: 1.4901\nmax_spread: 2.0000\navg_relative_spread: 0.0229\navg_effective_spread: 1.0927\nbuy_implementation_shortfall: -0.0652\navg_total_bid_volume: 224.5828\navg_total_ask_volume: 226.2450\navg_book_imbalance: -0.0039\nbook_pressure: -0.3941\navg_bid_top_concentration: 0.7050\navg_ask_top_concentration: 0.7038\navg_bid_slope: 0.0046\navg_ask_slope: 0.0045\nbook_slope: 0.0046\navg_bid_impact: 0.0132\navg_ask_impact: 0.0132\nkyles_lambda: 0.0054\namihud_illiquidity: 0.0000\nvpin: 1.0000\navg_time_between_obs: 665.3333\ndata_frequency: 0.0015\navg_price_velocity: 0.0000\nmax_price_velocity: 0.0200\navg_price_acceleration: 0.0000\navg_rolling_volatility_5: 0.8729\navg_rolling_volatility_10: 1.2564\nprice_skewness: 0.5041\nprice_kurtosis: -0.6516\nshapiro_normality_pvalue: 0.0000\njarque_bera_normality_pvalue: 0.0108\nprice_percentile_1: 6511.0000\nprice_percentile_5: 6512.5000\nprice_percentile_25: 6514.7500\nprice_percentile_50: 6516.5000\nprice_percentile_75: 6520.0000\nprice_percentile_95: 6523.0000\nprice_percentile_99: 6525.0000\nprice_iqr: 5.2500\nprice_outlier_count: 0.0000\nprice_outlier_percentage: 0.0000\nreturns_mean: -0.0000\nreturns_volatility: 0.0002\nreturns_skewness: -0.2782\nreturns_kurtosis: 3.0129\nreturns_autocorr_lag_1: 0.1026\nreturns_autocorr_lag_5: -0.0722\nreturns_autocorr_lag_10: -0.0164\nhurst_exponent: 0.2308\navg_price_correlation: 0.9961\n"
+  },
+  {
+    "metadata": {
+      "source": {
+        "prices": "prices_round_4_web.csv",
+        "trades": "trades_round_4_web.csv"
+      },
+      "day": 3,
+      "product": "MAGNIFICENT_MACARONS",
+      "type": "trading_data"
+    },
+    "content": "Trading data for MAGNIFICENT_MACARONS on day 3:\nAverage mid price: 608.96\nPrice range: 578.50 to 669.50\nAverage price: 609.13\nPrice range: 576.00 to 673.00\nData points: 63\n\nTrading metrics:\nvolatility: 24.2989\nprice_momentum: -1.2984\nprice_volatility: 24.6959\nprice_mean: 609.1270\navg_trade_size: 6.0317\navg_spread: 6.6825\nmax_spread: 9.0000\navg_relative_spread: 1.0971\navg_effective_spread: 5.2857\nbuy_implementation_shortfall: 0.2461\navg_total_bid_volume: 47.2698\navg_total_ask_volume: 46.9206\navg_book_imbalance: -0.0068\nbook_pressure: -0.6816\navg_bid_top_concentration: 0.2277\navg_ask_top_concentration: 0.1494\navg_bid_slope: 0.1432\navg_ask_slope: 0.2943\nbook_slope: 0.2188\navg_bid_impact: 1.6190\navg_ask_impact: 6.8413\nkyles_lambda: 0.0007\namihud_illiquidity: 0.0048\nvpin: 1.0000\navg_time_between_obs: 1590.3226\ndata_frequency: 0.0006\navg_price_velocity: -0.0030\nmax_price_velocity: 0.0500\navg_price_acceleration: -0.0000\navg_rolling_volatility_5: 8.6615\navg_rolling_volatility_10: 12.2253\nprice_skewness: 0.7152\nprice_kurtosis: -0.2706\nshapiro_normality_pvalue: 0.0005\njarque_bera_normality_pvalue: 0.0619\nprice_percentile_1: 579.1200\nprice_percentile_5: 580.5500\nprice_percentile_25: 589.0000\nprice_percentile_50: 602.5000\nprice_percentile_75: 624.0000\nprice_percentile_95: 658.5000\nprice_percentile_99: 668.2600\nprice_iqr: 35.0000\nprice_outlier_count: 0.0000\nprice_outlier_percentage: 0.0000\nreturns_mean: -0.0021\nreturns_volatility: 0.0161\nreturns_skewness: 0.1294\nreturns_kurtosis: 0.8490\nreturns_autocorr_lag_1: 0.0157\nreturns_autocorr_lag_5: 0.1408\nreturns_autocorr_lag_10: -0.0176\navg_price_correlation: 0.9974\n"
+  },
+  {
+    "metadata": {
+      "source": {
+        "prices": "prices_round_4_web.csv",
+        "trades": "trades_round_4_web.csv"
+      },
+      "day": 3,
+      "product": "DJEMBES",
+      "type": "trading_data"
+    },
+    "content": "Trading data for DJEMBES on day 3:\nAverage mid price: 13293.72\nPrice range: 13282.50 to 13306.00\nAverage price: 13293.69\nPrice range: 13282.00 to 13306.00\nData points: 143\n\nTrading metrics:\nvolatility: 5.6483\nprice_momentum: -0.0352\nprice_volatility: 5.7008\nprice_mean: 13293.6853\navg_trade_size: 3.6573\navg_spread: 1.2028\nmax_spread: 2.0000\navg_relative_spread: 0.0090\navg_effective_spread: 0.9510\nbuy_implementation_shortfall: -0.0994\navg_total_bid_volume: 61.6294\navg_total_ask_volume: 62.4685\navg_book_imbalance: -0.0080\nbook_pressure: -0.7972\navg_bid_top_concentration: 0.8567\navg_ask_top_concentration: 0.8555\navg_bid_slope: 0.0164\navg_ask_slope: 0.0157\nbook_slope: 0.0161\navg_bid_impact: 0.0000\navg_ask_impact: 0.0000\nkyles_lambda: 0.1061\namihud_illiquidity: 0.0001\nvpin: 1.0000\navg_time_between_obs: 700.0000\ndata_frequency: 0.0014\navg_price_velocity: -0.0005\nmax_price_velocity: 0.0350\navg_price_acceleration: -0.0000\navg_rolling_volatility_5: 1.7783\navg_rolling_volatility_10: 2.2739\nprice_skewness: 0.1464\nprice_kurtosis: -0.7370\nshapiro_normality_pvalue: 0.0479\njarque_bera_normality_pvalue: 0.1536\nprice_percentile_1: 13282.5000\nprice_percentile_5: 13284.5500\nprice_percentile_25: 13289.5000\nprice_percentile_50: 13293.0000\nprice_percentile_75: 13297.5000\nprice_percentile_95: 13303.0000\nprice_percentile_99: 13305.5800\nprice_iqr: 8.0000\nprice_outlier_count: 0.0000\nprice_outlier_percentage: 0.0000\nreturns_mean: -0.0000\nreturns_volatility: 0.0002\nreturns_skewness: 0.4205\nreturns_kurtosis: 4.0709\nreturns_autocorr_lag_1: -0.1114\nreturns_autocorr_lag_5: -0.0175\nreturns_autocorr_lag_10: 0.1013\nhurst_exponent: 0.1795\navg_price_correlation: 0.9989\n"
+  },
+  {
+    "metadata": {
+      "source": {
+        "prices": "prices_round_4_web.csv",
+        "trades": "trades_round_4_web.csv"
+      },
+      "day": 3,
+      "product": "VOLCANIC_ROCK",
+      "type": "trading_data"
+    },
+    "content": "Trading data for VOLCANIC_ROCK on day 3:\nAverage mid price: 10157.47\nPrice range: 10112.50 to 10181.00\nAverage price: 10157.11\nPrice range: 10112.00 to 10181.00\nData points: 114\n\nTrading metrics:\nvolatility: 15.9407\nprice_momentum: 0.0973\nprice_volatility: 16.1335\nprice_mean: 10157.1053\navg_trade_size: 12.7193\navg_spread: 1.2456\nmax_spread: 2.0000\navg_relative_spread: 0.0123\navg_effective_spread: 1.2982\nbuy_implementation_shortfall: -0.0748\navg_total_bid_volume: 181.7544\navg_total_ask_volume: 184.5877\navg_book_imbalance: -0.0080\nbook_pressure: -0.8003\navg_bid_top_concentration: 0.6711\navg_ask_top_concentration: 0.7159\navg_bid_slope: 0.0056\navg_ask_slope: 0.0055\nbook_slope: 0.0055\navg_bid_impact: 0.0439\navg_ask_impact: 0.0000\nkyles_lambda: 0.0173\namihud_illiquidity: 0.0001\nvpin: 1.0000\navg_time_between_obs: 883.1858\ndata_frequency: 0.0011\navg_price_velocity: 0.0006\nmax_price_velocity: 0.0450\navg_price_acceleration: -0.0000\navg_rolling_volatility_5: 3.9021\navg_rolling_volatility_10: 5.4675\nprice_skewness: -0.5771\nprice_kurtosis: -0.6477\nshapiro_normality_pvalue: 0.0000\njarque_bera_normality_pvalue: 0.0156\nprice_percentile_1: 10119.1700\nprice_percentile_5: 10131.1500\nprice_percentile_25: 10144.6250\nprice_percentile_50: 10159.2500\nprice_percentile_75: 10170.5000\nprice_percentile_95: 10176.7000\nprice_percentile_99: 10179.9350\nprice_iqr: 25.8750\nprice_outlier_count: 0.0000\nprice_outlier_percentage: 0.0000\nreturns_mean: 0.0000\nreturns_volatility: 0.0006\nreturns_skewness: -4.7592\nreturns_kurtosis: 38.0524\nreturns_autocorr_lag_1: -0.0934\nreturns_autocorr_lag_5: -0.0330\nreturns_autocorr_lag_10: -0.1037\nhurst_exponent: 0.1833\navg_price_correlation: 0.9998\n"
+  },
+  {
+    "metadata": {
+      "source": {
+        "prices": "prices_round_4_web.csv",
+        "trades": "trades_round_4_web.csv"
+      },
+      "day": 3,
+      "product": "VOLCANIC_ROCK_VOUCHER_10500",
+      "type": "trading_data"
+    },
+    "content": "Trading data for VOLCANIC_ROCK_VOUCHER_10500 on day 3:\nAverage mid price: 3.11\nPrice range: 2.50 to 3.50\nAverage price: 2.57\nPrice range: 2.00 to 3.00\nData points: 91\n\nTrading metrics:\nvolatility: 0.5912\nprice_momentum: -0.0056\nprice_volatility: 0.4976\nprice_mean: 2.5714\navg_trade_size: 10.1209\navg_spread: 1.0000\nmax_spread: 1.0000\navg_relative_spread: 33.0357\navg_effective_spread: 1.0000\nbuy_implementation_shortfall: -0.3458\navg_total_bid_volume: 5.9121\navg_total_ask_volume: 16.9451\navg_book_imbalance: -0.5871\nbook_pressure: -58.7124\navg_bid_top_concentration: 1.0000\navg_ask_top_concentration: 0.7725\navg_ask_slope: 0.0560\navg_bid_impact: 0.0000\navg_ask_impact: 0.2637\nkyles_lambda: 0.0049\namihud_illiquidity: 0.0047\nvpin: 1.0000\navg_time_between_obs: 1103.3333\ndata_frequency: 0.0009\navg_price_velocity: 0.0000\nmax_price_velocity: 0.0005\navg_price_acceleration: -0.0000\navg_rolling_volatility_5: 0.1242\navg_rolling_volatility_10: 0.1692\nprice_outlier_count: 0.0000\nprice_outlier_percentage: 0.0000\nreturns_mean: 0.0129\nreturns_volatility: 0.0933\nreturns_skewness: 1.4332\nreturns_kurtosis: 9.5940\nreturns_autocorr_lag_1: -0.0200\nreturns_autocorr_lag_5: -0.3053\nreturns_autocorr_lag_10: -0.0349\navg_price_correlation: 0.9892\n"
+  },
+  {
+    "metadata": {
+      "source": {
+        "prices": "prices_round_4_web.csv",
+        "trades": "trades_round_4_web.csv"
+      },
+      "day": 3,
+      "product": "VOLCANIC_ROCK_VOUCHER_9750",
+      "type": "trading_data"
+    },
+    "content": "Trading data for VOLCANIC_ROCK_VOUCHER_9750 on day 3:\nAverage mid price: 403.84\nPrice range: 365.50 to 429.50\nAverage price: 403.28\nPrice range: 366.00 to 429.00\nData points: 128\n\nTrading metrics:\nvolatility: 15.1362\nprice_momentum: 0.0827\nprice_volatility: 15.0416\nprice_mean: 403.2812\navg_trade_size: 9.4766\navg_spread: 1.0097\nmax_spread: 2.0000\navg_relative_spread: 0.2504\navg_effective_spread: 0.9903\nbuy_implementation_shortfall: -0.2543\navg_total_bid_volume: 9.1641\navg_total_ask_volume: 16.3906\navg_book_imbalance: -0.3807\nbook_pressure: -38.0722\navg_bid_top_concentration: 1.0000\navg_ask_top_concentration: 0.8487\navg_ask_slope: 0.0545\navg_bid_impact: 0.0000\navg_ask_impact: 0.1719\nkyles_lambda: 0.0137\namihud_illiquidity: 0.0015\nvpin: 1.0000\navg_time_between_obs: 781.8898\ndata_frequency: 0.0013\navg_price_velocity: 0.0011\nmax_price_velocity: 0.0500\navg_price_acceleration: -0.0000\navg_rolling_volatility_5: 4.3794\navg_rolling_volatility_10: 5.9626\nprice_outlier_count: 0.0000\nprice_outlier_percentage: 0.0000\nreturns_mean: -0.0004\nreturns_volatility: 0.0177\nreturns_skewness: -3.4047\nreturns_kurtosis: 22.4655\nreturns_autocorr_lag_1: 0.0015\nreturns_autocorr_lag_5: 0.0324\nreturns_autocorr_lag_10: -0.0264\nhurst_exponent: 0.1932\navg_price_correlation: 0.9999\n"
+  },
+  {
+    "metadata": {
+      "source": {
+        "prices": "prices_round_4_web.csv",
+        "trades": "trades_round_4_web.csv"
+      },
+      "day": 3,
+      "product": "PICNIC_BASKET1",
+      "type": "trading_data"
+    },
+    "content": "Trading data for PICNIC_BASKET1 on day 3:\nAverage mid price: 58291.77\nPrice range: 58223.50 to 58409.50\nAverage price: 58291.13\nPrice range: 58224.00 to 58415.00\nData points: 71\n\nTrading metrics:\nvolatility: 36.3987\nprice_momentum: -2.5857\nprice_volatility: 36.9455\nprice_mean: 58291.1268\navg_trade_size: 3.8169\navg_spread: 6.0845\nmax_spread: 11.0000\navg_relative_spread: 0.0104\navg_effective_spread: 5.4648\nbuy_implementation_shortfall: -0.8893\navg_total_bid_volume: 34.2958\navg_total_ask_volume: 38.2254\navg_book_imbalance: -0.0654\nbook_pressure: -6.5434\navg_bid_top_concentration: 0.2534\navg_ask_top_concentration: 0.2386\navg_bid_slope: 0.5394\navg_ask_slope: 0.1988\nbook_slope: 0.3691\navg_bid_impact: 3.3521\navg_ask_impact: 1.1972\nkyles_lambda: 1.5894\namihud_illiquidity: 0.0001\nvpin: 1.0000\navg_time_between_obs: 1387.1429\ndata_frequency: 0.0007\navg_price_velocity: -0.0047\nmax_price_velocity: 0.1050\navg_price_acceleration: 0.0000\navg_rolling_volatility_5: 14.0980\navg_rolling_volatility_10: 18.1659\nprice_skewness: 0.9105\nprice_kurtosis: 1.7202\nshapiro_normality_pvalue: 0.0009\njarque_bera_normality_pvalue: 0.0001\nprice_percentile_1: 58226.3000\nprice_percentile_5: 58244.0000\nprice_percentile_25: 58275.7500\nprice_percentile_50: 58292.0000\nprice_percentile_75: 58305.0000\nprice_percentile_95: 58358.2500\nprice_percentile_99: 58408.1000\nprice_iqr: 29.2500\nprice_outlier_count: 8.0000\nprice_outlier_percentage: 11.2676\nreturns_mean: -0.0000\nreturns_volatility: 0.0003\nreturns_skewness: -0.1244\nreturns_kurtosis: 2.1566\nreturns_autocorr_lag_1: 0.0115\nreturns_autocorr_lag_5: 0.0609\nreturns_autocorr_lag_10: 0.0393\navg_price_correlation: 0.9978\n"
+  },
+  {
+    "metadata": {
+      "source": {
+        "prices": "prices_round_4_web.csv",
+        "trades": "trades_round_4_web.csv"
+      },
+      "day": 3,
+      "product": "PICNIC_BASKET2",
+      "type": "trading_data"
+    },
+    "content": "Trading data for PICNIC_BASKET2 on day 3:\nAverage mid price: 30074.06\nPrice range: 30043.00 to 30102.50\nAverage price: 30073.75\nPrice range: 30041.00 to 30102.00\nData points: 61\n\nTrading metrics:\nvolatility: 16.1864\nprice_momentum: 0.3417\nprice_volatility: 15.8152\nprice_mean: 30073.7541\navg_trade_size: 5.0000\navg_spread: 4.0820\nmax_spread: 7.0000\navg_relative_spread: 0.0136\navg_effective_spread: 3.3607\nbuy_implementation_shortfall: -0.0885\navg_total_bid_volume: 40.4590\navg_total_ask_volume: 40.6393\navg_book_imbalance: -0.0038\nbook_pressure: -0.3788\navg_bid_top_concentration: 0.4424\navg_ask_top_concentration: 0.4764\navg_bid_slope: 0.1599\navg_ask_slope: 0.0335\nbook_slope: 0.0967\navg_bid_impact: 1.4098\navg_ask_impact: 0.4918\nkyles_lambda: 0.1107\namihud_illiquidity: 0.0001\nvpin: 1.0000\navg_time_between_obs: 1455.0000\ndata_frequency: 0.0007\navg_price_velocity: -0.0001\nmax_price_velocity: 0.0383\navg_price_acceleration: -0.0000\navg_rolling_volatility_5: 6.5049\navg_rolling_volatility_10: 8.8105\nprice_skewness: 0.3276\nprice_kurtosis: -1.0053\nshapiro_normality_pvalue: 0.0057\njarque_bera_normality_pvalue: 0.1604\nprice_percentile_1: 30045.7000\nprice_percentile_5: 30054.5000\nprice_percentile_25: 30061.0000\nprice_percentile_50: 30071.0000\nprice_percentile_75: 30087.5000\nprice_percentile_95: 30102.0000\nprice_percentile_99: 30102.5000\nprice_iqr: 26.5000\nprice_outlier_count: 0.0000\nprice_outlier_percentage: 0.0000\nreturns_mean: 0.0000\nreturns_volatility: 0.0003\nreturns_skewness: 0.9583\nreturns_kurtosis: 4.0363\nreturns_autocorr_lag_1: -0.0119\nreturns_autocorr_lag_5: 0.1779\nreturns_autocorr_lag_10: -0.0217\navg_price_correlation: 0.9975\n"
+  },
+  {
+    "metadata": {
+      "source": {
+        "prices": "prices_round_4_web.csv",
+        "trades": "trades_round_4_web.csv"
+      },
+      "day": 3,
+      "product": "CROISSANTS",
+      "type": "trading_data"
+    },
+    "content": "Trading data for CROISSANTS on day 3:\nAverage mid price: 4237.13\nPrice range: 4231.50 to 4241.50\nAverage price: 4237.04\nPrice range: 4231.00 to 4242.00\nData points: 124\n\nTrading metrics:\nvolatility: 2.6891\nprice_momentum: -0.0407\nprice_volatility: 2.7803\nprice_mean: 4237.0403\navg_trade_size: 8.0242\navg_spread: 1.1129\nmax_spread: 2.0000\navg_relative_spread: 0.0263\navg_effective_spread: 1.0323\nbuy_implementation_shortfall: 0.0111\navg_total_bid_volume: 122.4194\navg_total_ask_volume: 124.0645\navg_book_imbalance: -0.0071\nbook_pressure: -0.7145\navg_bid_top_concentration: 0.8585\navg_ask_top_concentration: 0.8381\navg_bid_slope: 0.0080\navg_ask_slope: 0.0084\nbook_slope: 0.0082\navg_bid_impact: 0.0000\navg_ask_impact: 0.0000\nkyles_lambda: 0.0136\namihud_illiquidity: 0.0000\nvpin: 1.0000\navg_time_between_obs: 799.1870\ndata_frequency: 0.0013\navg_price_velocity: -0.0000\nmax_price_velocity: 0.0100\navg_price_acceleration: -0.0000\navg_rolling_volatility_5: 0.6464\navg_rolling_volatility_10: 0.8818\nprice_skewness: -0.2248\nprice_kurtosis: -0.2450\nshapiro_normality_pvalue: 0.0000\njarque_bera_normality_pvalue: 0.5079\nprice_percentile_1: 4231.5000\nprice_percentile_5: 4231.5000\nprice_percentile_25: 4235.8750\nprice_percentile_50: 4236.5000\nprice_percentile_75: 4239.1250\nprice_percentile_95: 4241.5000\nprice_percentile_99: 4241.5000\nprice_iqr: 3.2500\nprice_outlier_count: 0.0000\nprice_outlier_percentage: 0.0000\nreturns_mean: -0.0000\nreturns_volatility: 0.0002\nreturns_skewness: -0.4621\nreturns_kurtosis: 1.2998\nreturns_autocorr_lag_1: -0.0826\nreturns_autocorr_lag_5: 0.0111\nreturns_autocorr_lag_10: 0.0235\nhurst_exponent: 0.2657\navg_price_correlation: 0.9956\n"
+  },
+  {
+    "metadata": {
+      "source": {
+        "prices": "prices_round_4_web.csv",
+        "trades": "trades_round_4_web.csv"
+      },
+      "day": 3,
+      "product": "VOLCANIC_ROCK_VOUCHER_9500",
+      "type": "trading_data"
+    },
+    "content": "Trading data for VOLCANIC_ROCK_VOUCHER_9500 on day 3:\nAverage mid price: 652.94\nPrice range: 613.50 to 677.50\nAverage price: 652.48\nPrice range: 614.00 to 677.00\nData points: 130\n\nTrading metrics:\nvolatility: 15.2595\nprice_momentum: 0.0814\nprice_volatility: 15.1608\nprice_mean: 652.4846\navg_trade_size: 9.6154\navg_spread: 1.0577\nmax_spread: 2.0000\navg_relative_spread: 0.1621\navg_effective_spread: 1.0577\nbuy_implementation_shortfall: -0.2768\navg_total_bid_volume: 9.0615\navg_total_ask_volume: 16.3000\navg_book_imbalance: -0.3868\nbook_pressure: -38.6827\navg_bid_top_concentration: 1.0000\navg_ask_top_concentration: 0.8480\navg_ask_slope: 0.0561\navg_bid_impact: 0.0000\navg_ask_impact: 0.1769\nkyles_lambda: 0.0071\namihud_illiquidity: 0.0008\nvpin: 1.0000\navg_time_between_obs: 769.7674\ndata_frequency: 0.0013\navg_price_velocity: -0.0001\nmax_price_velocity: 0.0500\navg_price_acceleration: 0.0000\navg_rolling_volatility_5: 4.5483\navg_rolling_volatility_10: 6.1540\nprice_outlier_count: 0.0000\nprice_outlier_percentage: 0.0000\nreturns_mean: -0.0003\nreturns_volatility: 0.0114\nreturns_skewness: -2.6140\nreturns_kurtosis: 17.6628\nreturns_autocorr_lag_1: -0.0237\nreturns_autocorr_lag_5: 0.0288\nreturns_autocorr_lag_10: -0.0679\nhurst_exponent: 0.1826\navg_price_correlation: 0.9998\n"
+  }
+]

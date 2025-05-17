@@ -1,0 +1,26 @@
+[
+  {
+    "metadata": {
+      "source": "observations_round_4_day_1.csv",
+      "product": "MAGNIFICENT_MACARONS",
+      "type": "observation_data"
+    },
+    "content": "Magnificent Macarons Observation Data:\n\nObservation metrics:\navg_bid_price: 665.8482\navg_ask_price: 667.3626\navg_spread: 1.5144\nspread_volatility: 0.0836\navg_transport_fees: 1.0948\ntransport_fees_volatility: 0.1079\navg_export_tariff: 9.9939\nexport_tariff_volatility: 0.6081\navg_import_tariff: -3.3071\nimport_tariff_volatility: 0.2990\navg_sugar_price: 207.2325\nsugar_price_volatility: 7.3077\nsugar_price_momentum: 0.0009\navg_sunlight_index: 49.7518\nsunlight_volatility: 10.8005\nsugar_price_correlation: 0.6685\nsunlight_correlation: -0.7013\n"
+  },
+  {
+    "metadata": {
+      "source": "observations_round_4_day_2.csv",
+      "product": "MAGNIFICENT_MACARONS",
+      "type": "observation_data"
+    },
+    "content": "Magnificent Macarons Observation Data:\n\nObservation metrics:\navg_bid_price: 637.2758\navg_ask_price: 638.7903\navg_spread: 1.5146\nspread_volatility: 0.0840\navg_transport_fees: 1.8788\ntransport_fees_volatility: 0.1383\navg_export_tariff: 9.7541\nexport_tariff_volatility: 0.4497\navg_import_tariff: -2.8624\nimport_tariff_volatility: 0.4519\navg_sugar_price: 200.5853\nsugar_price_volatility: 3.4314\nsugar_price_momentum: -0.0010\navg_sunlight_index: 61.5005\nsunlight_volatility: 6.7887\nsugar_price_correlation: -0.2829\nsunlight_correlation: 0.1348\n"
+  },
+  {
+    "metadata": {
+      "source": "observations_round_4_day_3.csv",
+      "product": "MAGNIFICENT_MACARONS",
+      "type": "observation_data"
+    },
+    "content": "Magnificent Macarons Observation Data:\n\nObservation metrics:\navg_bid_price: 685.5164\navg_ask_price: 687.0319\navg_spread: 1.5155\nspread_volatility: 0.0867\navg_transport_fees: 1.7592\ntransport_fees_volatility: 0.1853\navg_export_tariff: 10.7463\nexport_tariff_volatility: 0.5548\navg_import_tariff: -4.8639\nimport_tariff_volatility: 1.0957\navg_sugar_price: 198.7879\nsugar_price_volatility: 5.4988\nsugar_price_momentum: 0.0013\navg_sunlight_index: 54.2500\nsunlight_volatility: 9.3245\nsugar_price_correlation: 0.8119\nsunlight_correlation: -0.6933\n"
+  }
+]

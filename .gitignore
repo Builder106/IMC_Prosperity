@@ -1,10 +1,4 @@
-venv
+.DS_Store
 .env
 __pycache__
 vectordb
-.DS_Store
-backtests
-processed_data
-prosperity3bt
-backtests
-**/test_data/
