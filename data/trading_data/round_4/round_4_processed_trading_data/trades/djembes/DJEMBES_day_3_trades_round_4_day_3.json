@@ -1,0 +1,12 @@
+{
+  "metadata": {
+    "source": "trades_round_4_day_3.csv",
+    "day": 3,
+    "product": "DJEMBES",
+    "type": "trading_data",
+    "file_type": "trade",
+    "round": "round_4",
+    "basket": null
+  },
+  "content": "Trade data for DJEMBES on day 3:\nAverage price: 13320.04\nPrice range: 13249.00 to 13378.00\nTimestamp range: 200 to 999100\nNumber of trades: 1038\nTotal quantity traded: 3468\n\nTrade metrics:\navg_trade_size: 3.3410\nprice_volatility: 28.4511\nprice_mean: 13320.0356\nvwap: 13320.0043\navg_time_between_trades: 963.2594\ntrade_frequency: 0.0010\nprice_change: 73.0000\nprice_change_pct: 0.5490\n"
+}

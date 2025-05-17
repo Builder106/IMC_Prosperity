@@ -1,0 +1,12 @@
+{
+  "metadata": {
+    "source": "prices_round_4_day_3.csv",
+    "day": 3,
+    "product": "JAMS",
+    "type": "trading_data",
+    "file_type": "price",
+    "round": "round_4",
+    "basket": null
+  },
+  "content": "Trading data for JAMS on day 3:\nAverage mid price: 6499.04\nPrice range: 6438.00 to 6540.50\nData points: 10000\n\nTrading metrics:\nvolatility: 23.8304\nprice_momentum: -0.0077\nvolume_weighted_price: 6499.0356\ntrading_activity: 10000.0000\navg_spread: 1.6326\nmax_spread: 2.0000\nmin_spread: 1.0000\nmarket_depth: 3.0000\n"
+}

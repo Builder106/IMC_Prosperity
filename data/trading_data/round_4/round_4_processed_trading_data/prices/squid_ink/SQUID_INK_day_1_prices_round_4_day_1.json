@@ -1,0 +1,12 @@
+{
+  "metadata": {
+    "source": "prices_round_4_day_1.csv",
+    "day": 1,
+    "product": "SQUID_INK",
+    "type": "trading_data",
+    "file_type": "price",
+    "round": "round_4",
+    "basket": null
+  },
+  "content": "Trading data for SQUID_INK on day 1:\nAverage mid price: 1887.32\nPrice range: 1734.50 to 1942.50\nData points: 10000\n\nTrading metrics:\nvolatility: 23.9061\nprice_momentum: 0.0046\nvolume_weighted_price: 1887.3027\ntrading_activity: 10000.0000\navg_spread: 2.5836\nmax_spread: 4.0000\nmin_spread: 1.0000\nmarket_depth: 3.0000\n"
+}

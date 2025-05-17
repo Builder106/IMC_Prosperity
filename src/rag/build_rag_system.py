@@ -14,15 +14,19 @@ from langchain.chains import RetrievalQA
 from langchain_google_genai import ChatGoogleGenerativeAI
 from langchain.prompts import PromptTemplate
 from dotenv import load_dotenv
-from process_raw_trading_data import process_round_data, discover_rounds
+from .process_raw_trading_data import process_round_data, discover_rounds
 
 # Load environment variables
 load_dotenv()
 
 # Directory settings
-NOTION_WIKI_DIR = "../data/prosperity_wiki"
-TRADING_DATA_DIR = "../data/trading_data"
-VECTOR_DB_DIR = "../vectordb"
+# SCRIPT_DIR should be defined before it's used for other constants
+SCRIPT_DIR = Path(__file__).resolve().parent  # Gets the directory of the current script (src/rag)
+PROJECT_ROOT = SCRIPT_DIR.parent.parent    # Goes up two levels to the project root (imc_prosperity)
+
+NOTION_WIKI_DIR = PROJECT_ROOT / "data" / "prosperity_wiki"
+TRADING_DATA_DIR = PROJECT_ROOT / "data" / "trading_data"
+VECTOR_DB_DIR = PROJECT_ROOT / "vectordb"
 
 def process_notion_wiki_data(wiki_dir=NOTION_WIKI_DIR):
     """
@@ -38,7 +42,7 @@ def process_notion_wiki_data(wiki_dir=NOTION_WIKI_DIR):
     
     def load_code_file(file_path):
         """Load code from external file referenced in the JSON"""
-        full_path = os.path.join(wiki_dir, file_path)
+        full_path = wiki_dir / file_path
         try:
             if os.path.exists(full_path):
                 with open(full_path, 'r', encoding='utf-8') as f:
@@ -275,9 +279,9 @@ def create_vector_stores(notion_documents, trading_documents):
     )
     
     # Create directories for vector stores
-    os.makedirs(f"{VECTOR_DB_DIR}/notion", exist_ok=True)
-    os.makedirs(f"{VECTOR_DB_DIR}/trading", exist_ok=True)
-    os.makedirs(f"{VECTOR_DB_DIR}/code", exist_ok=True)
+    os.makedirs(VECTOR_DB_DIR / "notion", exist_ok=True)
+    os.makedirs(VECTOR_DB_DIR / "trading", exist_ok=True)
+    os.makedirs(VECTOR_DB_DIR / "code", exist_ok=True)
     
     # Create text splitter optimized for code and general content
     text_splitter = RecursiveCharacterTextSplitter.from_language(
@@ -368,12 +372,12 @@ def create_vector_stores(notion_documents, trading_documents):
                             minimal_metadata = {"source": doc.metadata.get("source", "unknown")} if hasattr(doc, "metadata") else {}
                             filtered_notion_docs.append(Document(page_content=doc.page_content, metadata=minimal_metadata))
                 
-                print(f"Creating notion vector store with {len(filtered_notion_docs)} documents")
+                print(f"[DEBUG build_rag_system.py] Creating notion vector store with {len(filtered_notion_docs)} documents")
                 # Create notion vector store
                 notion_vectorstore = Chroma.from_documents(
                     documents=filtered_notion_docs,
                     embedding=embeddings,
-                    persist_directory=f"{VECTOR_DB_DIR}/notion"
+                    persist_directory=str(VECTOR_DB_DIR / "notion")
                 )
                 
                 # Extract code blocks for specialized code search
@@ -387,11 +391,11 @@ def create_vector_stores(notion_documents, trading_documents):
                         except Exception as e:
                             print(f"Error filtering code block metadata: {e}")
                     
-                    print(f"Creating specialized code vector store with {len(filtered_code_blocks)} code blocks")
+                    print(f"[DEBUG build_rag_system.py] Creating specialized code vector store with {len(filtered_code_blocks)} code blocks")
                     code_vectorstore = Chroma.from_documents(
                         documents=filtered_code_blocks,
                         embedding=embeddings,
-                        persist_directory=f"{VECTOR_DB_DIR}/code"
+                        persist_directory=str(VECTOR_DB_DIR / "code")
                     )
         except Exception as e:
             print(f"Error processing notion documents: {e}")
@@ -436,12 +440,12 @@ def create_vector_stores(notion_documents, trading_documents):
                             minimal_metadata = {"source": doc.metadata.get("source", "unknown")} if hasattr(doc, "metadata") else {}
                             filtered_trading_docs.append(Document(page_content=doc.page_content, metadata=minimal_metadata))
                 
-                print(f"Creating trading vector store with {len(filtered_trading_docs)} documents")
+                print(f"[DEBUG build_rag_system.py] Creating trading vector store with {len(filtered_trading_docs)} documents")
                 # Create trading data vector store
                 trading_vectorstore = Chroma.from_documents(
                     documents=filtered_trading_docs,
                     embedding=embeddings,
-                    persist_directory=f"{VECTOR_DB_DIR}/trading"
+                    persist_directory=str(VECTOR_DB_DIR / "trading")
                 )
         except Exception as e:
             print(f"Error processing trading documents: {e}")
@@ -455,7 +459,10 @@ def create_vector_stores(notion_documents, trading_documents):
     return notion_vectorstore, trading_vectorstore, code_vectorstore
 
 def create_combined_retriever(notion_vectorstore, trading_vectorstore, code_vectorstore=None):
-    print("Creating combined retriever...")
+    print("[DEBUG build_rag_system.py] Creating combined retriever...")
+    print(f"[DEBUG build_rag_system.py] Notion vectorstore is None: {notion_vectorstore is None}")
+    print(f"[DEBUG build_rag_system.py] Trading vectorstore is None: {trading_vectorstore is None}")
+    print(f"[DEBUG build_rag_system.py] Code vectorstore is None: {code_vectorstore is None}")
     
     # Handle case where one or both vector stores might be None
     retrievers = []
@@ -533,7 +540,7 @@ def create_rag_chain(retriever):
     
     # Initialize Google Gemini model
     llm = ChatGoogleGenerativeAI(
-        model="gemini-2.5-pro-exp-03-25",
+        model="gemini-2.5-flash-preview-04-17",
         temperature=0.2  # Slightly increased temperature for more creative code generation
     )
     
@@ -542,7 +549,8 @@ def create_rag_chain(retriever):
         llm=llm,
         chain_type="stuff",
         retriever=retriever,
-        chain_type_kwargs={"prompt": prompt}
+        chain_type_kwargs={"prompt": prompt},
+        return_source_documents=True
     )
     
     return rag_chain

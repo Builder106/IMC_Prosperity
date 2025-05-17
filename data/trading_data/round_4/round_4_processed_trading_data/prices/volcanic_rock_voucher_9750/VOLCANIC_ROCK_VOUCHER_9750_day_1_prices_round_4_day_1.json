@@ -1,0 +1,12 @@
+{
+  "metadata": {
+    "source": "prices_round_4_day_1.csv",
+    "day": 1,
+    "product": "VOLCANIC_ROCK_VOUCHER_9750",
+    "type": "trading_data",
+    "file_type": "price",
+    "round": "round_4",
+    "basket": null
+  },
+  "content": "Trading data for VOLCANIC_ROCK_VOUCHER_9750 on day 1:\nAverage mid price: 626.04\nPrice range: 405.50 to 770.50\nData points: 10000\n\nTrading metrics:\nvolatility: 98.8038\nprice_momentum: -0.0294\nvolume_weighted_price: 626.2257\ntrading_activity: 10000.0000\navg_spread: 1.0882\nmax_spread: 2.0000\nmin_spread: 1.0000\nmarket_depth: 3.0000\n"
+}

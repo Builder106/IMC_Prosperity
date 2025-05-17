@@ -1,0 +1,12 @@
+{
+  "metadata": {
+    "source": "trades_round_4_day_1.csv",
+    "day": 1,
+    "product": "VOLCANIC_ROCK",
+    "type": "trading_data",
+    "file_type": "trade",
+    "round": "round_4",
+    "basket": null
+  },
+  "content": "Trade data for VOLCANIC_ROCK on day 1:\nAverage price: 10376.58\nPrice range: 10157.00 to 10511.00\nTimestamp range: 7600 to 997100\nNumber of trades: 679\nTotal quantity traded: 4414\n\nTrade metrics:\navg_trade_size: 6.5007\nprice_volatility: 98.3879\nprice_mean: 10376.5832\nvwap: 10376.9520\navg_time_between_trades: 1459.4395\ntrade_frequency: 0.0007\nprice_change: -285.0000\nprice_change_pct: -2.7114\n"
+}

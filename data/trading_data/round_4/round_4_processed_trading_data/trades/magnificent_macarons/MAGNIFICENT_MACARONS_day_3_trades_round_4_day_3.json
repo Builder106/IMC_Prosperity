@@ -1,0 +1,12 @@
+{
+  "metadata": {
+    "source": "trades_round_4_day_3.csv",
+    "day": 3,
+    "product": "MAGNIFICENT_MACARONS",
+    "type": "trading_data",
+    "file_type": "trade",
+    "round": "round_4",
+    "basket": null
+  },
+  "content": "Trade data for MAGNIFICENT_MACARONS on day 3:\nAverage price: 682.05\nPrice range: 535.00 to 936.00\nTimestamp range: 4200 to 998300\nNumber of trades: 363\nTotal quantity traded: 1686\n\nTrade metrics:\navg_trade_size: 4.6446\nprice_volatility: 91.7718\nprice_mean: 682.0523\nvwap: 683.7586\navg_time_between_trades: 2746.1326\ntrade_frequency: 0.0004\nprice_change: 149.0000\nprice_change_pct: 22.8879\n"
+}

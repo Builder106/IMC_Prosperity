@@ -1,0 +1,12 @@
+{
+  "metadata": {
+    "source": "prices_round_4_day_1.csv",
+    "day": 1,
+    "product": "KELP",
+    "type": "trading_data",
+    "file_type": "price",
+    "round": "round_4",
+    "basket": null
+  },
+  "content": "Trading data for KELP on day 1:\nAverage mid price: 2046.15\nPrice range: 2030.50 to 2065.50\nData points: 10000\n\nTrading metrics:\nvolatility: 9.5668\nprice_momentum: 0.0022\nvolume_weighted_price: 2046.1383\ntrading_activity: 10000.0000\navg_spread: 2.7259\nmax_spread: 4.0000\nmin_spread: 1.0000\nmarket_depth: 3.0000\n"
+}

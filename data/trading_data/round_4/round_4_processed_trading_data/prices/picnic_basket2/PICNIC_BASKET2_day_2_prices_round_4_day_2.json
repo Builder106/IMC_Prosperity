@@ -1,0 +1,12 @@
+{
+  "metadata": {
+    "source": "prices_round_4_day_2.csv",
+    "day": 2,
+    "product": "PICNIC_BASKET2",
+    "type": "trading_data",
+    "file_type": "price",
+    "round": "round_4",
+    "basket": null
+  },
+  "content": "Trading data for PICNIC_BASKET2 on day 2:\nAverage mid price: 30066.25\nPrice range: 29926.50 to 30182.50\nData points: 10000\n\nTrading metrics:\nvolatility: 54.4422\nprice_momentum: -0.0021\nvolume_weighted_price: 30066.2488\ntrading_activity: 10000.0000\navg_spread: 5.1812\nmax_spread: 7.0000\nmin_spread: 1.0000\nmarket_depth: 3.0000\n"
+}

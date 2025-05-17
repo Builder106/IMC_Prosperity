@@ -1,0 +1,12 @@
+{
+  "metadata": {
+    "source": "prices_round_4_day_3.csv",
+    "day": 3,
+    "product": "DJEMBES",
+    "type": "trading_data",
+    "file_type": "price",
+    "round": "round_4",
+    "basket": null
+  },
+  "content": "Trading data for DJEMBES on day 3:\nAverage mid price: 13319.94\nPrice range: 13242.50 to 13379.50\nData points: 10000\n\nTrading metrics:\nvolatility: 28.1421\nprice_momentum: 0.0076\nvolume_weighted_price: 13319.9442\ntrading_activity: 10000.0000\navg_spread: 1.2611\nmax_spread: 2.0000\nmin_spread: 1.0000\nmarket_depth: 3.0000\n"
+}

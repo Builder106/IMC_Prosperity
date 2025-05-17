@@ -1,0 +1,12 @@
+{
+  "metadata": {
+    "source": "trades_round_4_day_3.csv",
+    "day": 3,
+    "product": "SQUID_INK",
+    "type": "trading_data",
+    "file_type": "trade",
+    "round": "round_4",
+    "basket": null
+  },
+  "content": "Trade data for SQUID_INK on day 3:\nAverage price: 1841.64\nPrice range: 1760.00 to 1988.00\nTimestamp range: 100 to 999800\nNumber of trades: 2914\nTotal quantity traded: 8288\n\nTrade metrics:\navg_trade_size: 2.8442\nprice_volatility: 58.1259\nprice_mean: 1841.6376\nvwap: 1841.2939\navg_time_between_trades: 343.1857\ntrade_frequency: 0.0029\nprice_change: 110.0000\nprice_change_pct: 6.0506\n"
+}

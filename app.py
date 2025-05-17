@@ -1,5 +1,5 @@
 import streamlit as st
-from build_rag_system import (
+from src.rag.build_rag_system import (
     process_notion_wiki_data,
     process_trading_data,
     create_vector_stores,
@@ -16,11 +16,17 @@ st.set_page_config(
 def initialize_rag_system():
     # Load data and create RAG system (only done once)
     notion_documents = process_notion_wiki_data()
+    print(f"[DEBUG app.py] Number of Notion documents processed: {len(notion_documents)}")
     trading_documents = process_trading_data()
-    notion_vectorstore, trading_vectorstore = create_vector_stores(
+    print(f"[DEBUG app.py] Number of Trading documents processed: {len(trading_documents)}")
+    notion_vectorstore, trading_vectorstore, code_vectorstore = create_vector_stores(
         notion_documents, trading_documents
     )
-    retriever = create_combined_retriever(notion_vectorstore, trading_vectorstore)
+    retriever = create_combined_retriever(notion_vectorstore, trading_vectorstore, code_vectorstore)
+    if retriever is None:
+        print("[DEBUG app.py] Retriever is None before calling create_rag_chain.")
+    else:
+        print(f"[DEBUG app.py] Retriever type: {type(retriever)}")
     rag_chain = create_rag_chain(retriever)
     return rag_chain
 

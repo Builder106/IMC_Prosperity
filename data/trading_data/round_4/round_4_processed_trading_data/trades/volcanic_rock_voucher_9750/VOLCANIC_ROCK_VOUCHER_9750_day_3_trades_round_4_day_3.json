@@ -1,0 +1,12 @@
+{
+  "metadata": {
+    "source": "trades_round_4_day_3.csv",
+    "day": 3,
+    "product": "VOLCANIC_ROCK_VOUCHER_9750",
+    "type": "trading_data",
+    "file_type": "trade",
+    "round": "round_4",
+    "basket": null
+  },
+  "content": "Trade data for VOLCANIC_ROCK_VOUCHER_9750 on day 3:\nAverage price: 353.18\nPrice range: 141.00 to 501.00\nTimestamp range: 1200 to 999800\nNumber of trades: 1141\nTotal quantity traded: 11297\n\nTrade metrics:\navg_trade_size: 9.9010\nprice_volatility: 112.5032\nprice_mean: 353.1797\nvwap: 352.0767\navg_time_between_trades: 875.9649\ntrade_frequency: 0.0011\nprice_change: -236.0000\nprice_change_pct: -56.1905\n"
+}
