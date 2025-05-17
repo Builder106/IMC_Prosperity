@@ -1,4 +1,14 @@
+import sys
+import os
 import streamlit as st
+
+print(f"--- DEBUG: app.py execution started ---")
+print(f"Current working directory (os.getcwd()): {os.getcwd()}")
+print(f"Python sys.path:")
+for p in sys.path:
+    print(f"  - {p}")
+print(f"--- END DEBUG ---")
+
 from src.rag.build_rag_system import (
     process_notion_wiki_data,
     process_trading_data,
