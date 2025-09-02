@@ -86,10 +86,6 @@ python src/utils/summarize_trading_logs.py
 ```
 Follow the prompts to input your log file path and receive a detailed summary.
 
-## License
-
-[Add your license information here]
-
 ## Acknowledgments
 
 - IMC Prosperity for the trading competition
