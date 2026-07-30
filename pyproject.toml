@@ -33,6 +33,7 @@ dependencies = [
 dev = [
     "pytest",
     "playwright",
+    "ruff",
 ]
 
 [tool.uv]
