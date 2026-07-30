@@ -1,6 +1,0 @@
-# Dev/test-only dependencies. Kept out of requirements.txt so the deployed
-# Streamlit Cloud app doesn't install pytest/playwright in production.
-# CI installs this file; local dev/test should too: pip install -r requirements-dev.txt
--r requirements.txt
-pytest
-playwright

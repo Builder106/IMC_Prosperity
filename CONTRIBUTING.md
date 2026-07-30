@@ -9,8 +9,7 @@ Python 3.9+ (the deploy runs on 3.14; 3.12 is a safe local choice).
 ```bash
 git clone https://github.com/Builder106/IMC_Prosperity.git
 cd IMC_Prosperity
-python -m venv .venv && source .venv/bin/activate
-python -m pip install -r requirements.txt
+uv sync --group dev
 ```
 
 Create a `.env` with your Groq API key ([console.groq.com/keys](https://console.groq.com/keys)):

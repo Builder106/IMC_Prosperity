@@ -80,8 +80,8 @@ first query after a cold start re-embeds the corpus and is slower than the rest.
 
 ### Prerequisites
 
-- Python 3.9+
-- Required packages (`pip install -r requirements.txt`)
+- Python 3.11+
+- Installed dependencies (`uv sync --group dev`)
 - A Groq API key ([console.groq.com/keys](https://console.groq.com/keys))
 
 ### Installation
@@ -89,8 +89,7 @@ first query after a cold start re-embeds the corpus and is slower than the rest.
 ```bash
 git clone https://github.com/Builder106/IMC_Prosperity.git
 cd IMC_Prosperity
-python -m venv .venv && source .venv/bin/activate
-pip install -r requirements.txt
+uv sync --group dev
 ```
 
 Create a `.env` in the project root with your Groq API key:
