@@ -7,7 +7,7 @@ Thanks for your interest in the IMC Prosperity Trading Assistant.
 Python 3.9+ (the deploy runs on 3.14; 3.12 is a safe local choice).
 
 ```bash
-git clone https://github.com/Builder106/IMC_Prosperity.git
+git clone https://github.com/Builder106/imc-prosperity.git
 cd IMC_Prosperity
 uv sync --group dev
 ```

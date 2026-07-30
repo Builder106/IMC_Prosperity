@@ -6,7 +6,7 @@
   </picture>
 </p>
 
-[![CI](https://github.com/Builder106/IMC_Prosperity/actions/workflows/ci.yml/badge.svg)](https://github.com/Builder106/IMC_Prosperity/actions/workflows/ci.yml)
+[![CI](https://github.com/Builder106/imc-prosperity/actions/workflows/ci.yml/badge.svg)](https://github.com/Builder106/imc-prosperity/actions/workflows/ci.yml)
 [![Python](https://img.shields.io/badge/python-3.9%2B-blue.svg)](https://www.python.org/)
 [![License: MIT](https://img.shields.io/badge/license-MIT-green.svg)](#license)
 [![Live demo](https://img.shields.io/badge/demo-live-success.svg)](https://tradetell.streamlit.app)
@@ -87,7 +87,7 @@ first query after a cold start re-embeds the corpus and is slower than the rest.
 ### Installation
 
 ```bash
-git clone https://github.com/Builder106/IMC_Prosperity.git
+git clone https://github.com/Builder106/imc-prosperity.git
 cd IMC_Prosperity
 uv sync --group dev
 ```
