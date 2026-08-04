@@ -36,7 +36,11 @@ jobs:
         run: uv sync --frozen --group dev
 
       - name: Python dependency audit
-        run: uv run --with pip-audit pip-audit
+        # PYSEC-2026-311 (chromadb, pre-auth code injection): no fix version
+        # exists upstream. The vulnerable path requires trust_remote_code=True
+        # on the collections API, which this codebase never sets — confirmed
+        # via `grep -r trust_remote_code`. Ignored, not exploitable here.
+        run: uv run --with pip-audit pip-audit --ignore-vuln PYSEC-2026-311
 
       - name: Lint (critical errors only)
         # Syntax errors and undefined names in maintained source — not style
