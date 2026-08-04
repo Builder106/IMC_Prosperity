@@ -14,7 +14,7 @@ uv sync --group dev
 
 Create a `.env` with your Groq API key ([console.groq.com/keys](https://console.groq.com/keys)):
 
-```
+```bash
 GROQ_API_KEY=your_key_here
 ```
 

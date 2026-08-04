@@ -94,13 +94,13 @@ uv sync --group dev
 
 Create a `.env` in the project root with your Groq API key:
 
-```
+```bash
 GROQ_API_KEY=your_groq_api_key_here
 ```
 
 Optional overrides (defaults shown):
 
-```
+```bash
 LLM_MODEL=llama-3.3-70b-versatile
 LLM_TEMPERATURE=0.2
 GROQ_TIMEOUT_SECONDS=180
