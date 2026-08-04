@@ -22,6 +22,6 @@ EMERALDS: 80
 
 TOMATOES: 80
 
-## Manual:
+## Manual
 
 N/A

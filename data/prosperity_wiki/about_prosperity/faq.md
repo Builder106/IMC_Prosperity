@@ -18,7 +18,7 @@ Proof that they were enrolled at a university at the time of registration, and a
 
 Proof that they were enrolled at a university at the time of registration, and are at least 18 years of age, upon request.Teams that include any participant who placed in the Top 10 of a previous edition of IMC Prosperity will be removed from the rankings.If any member of a team fails to meet the eligibility requirements, the entire team may be disqualified at IMC's sole discretion.Top 5 Teams and the Manual Trading Winner must additionally:Make themselves available for a verification call with IMC to confirm their genuine and active participation in the challenge.⚠️Eligibility for prizes, and recognition is limited to participants resident in EMEA, North America, South America, India, Australia, or Hong Kong at the time of registration. Participants resident outside these regions may participate in the challenge and appear on the leaderboard, but are not eligible to receive prizes.In team settings, prizes are distributed equally among team members who meet the residency eligibility setting, granted the other requirements are met. This restriction is due to legal and compliance requirements that apply to awarding prizes in different countries. To ensure the competition is run in a consistent and compliant way, we have limited prize eligibility to these regions but understand a desire to form multinational teams may complicate this and our priority is to provide a beneficial learning environment for students.
 
-### Ineligible affiliation:
+### Ineligible affiliation
 
 Participants resident outside these regions may participate in the challenge and appear on the leaderboard, but are not eligible to receive prizes.
 
@@ -95,7 +95,7 @@ Your signup process must be completed before Round 1 begins on at 12:00 CEST (UT
 
 ## Can I participate if my university is not listed in the drop-down list during the sign-up process?
 
-Yes, no problem. We try to keep a comprehensive list, but new players are joining from every corner of the globe. Simply select “Other” and continue on. This will not impact your ability to participate in Prosperity. Validation and other eligibility criteria will only be requested when the final leaderboard reveals the Top 25 teams. You may email prosperity@imc.com to request your university be added for future editions of Prosperity.
+Yes, no problem. We try to keep a comprehensive list, but new players are joining from every corner of the globe. Simply select “Other” and continue on. This will not impact your ability to participate in Prosperity. Validation and other eligibility criteria will only be requested when the final leaderboard reveals the Top 25 teams. You may email <prosperity@imc.com> to request your university be added for future editions of Prosperity.
 
 ## How can I connect with fellow players?
 

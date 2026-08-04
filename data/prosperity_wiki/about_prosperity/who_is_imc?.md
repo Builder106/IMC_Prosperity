@@ -10,4 +10,4 @@ We have 10 global offices with >1900 employees, covering all time zones and 90+ 
 
 ## Careers
 
-Please visit our website to check our open positions and apply via www.imc.com.
+Please visit our website to check our open positions and apply via <www.imc.com>.

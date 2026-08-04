@@ -36,4 +36,4 @@ Avoid off-topic conversations to ensure the channels remain focused and helpful 
 
 Repeated violations will trigger warnings, temporary mutes, or bans. Failure to adhere to these rules may result in removal from the Discord server and potentially the game.
 
-Let’s create a positive environment for everyone! If you experience any issues, please reach out at prosperity@imc.com
+Let’s create a positive environment for everyone! If you experience any issues, please reach out at <prosperity@imc.com>
