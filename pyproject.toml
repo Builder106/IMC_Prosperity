@@ -46,3 +46,5 @@ py-modules = []
 [tool.pytest.ini_options]
 pythonpath = ["."]
 testpaths = ["tests"]
+norecursedirs = ["tools", ".venv", "vectordb", "data", "backtests"]
+
