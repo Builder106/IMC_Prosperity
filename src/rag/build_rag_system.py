@@ -37,7 +37,8 @@ PROJECT_ROOT = SCRIPT_DIR.parent.parent    # Goes up two levels to the project r
 NOTION_WIKI_DIR = PROJECT_ROOT / "data" / "prosperity_wiki"
 TRADING_DATA_DIR = PROJECT_ROOT / "data" / "trading_data"
 DISCORD_DATA_DIR = PROJECT_ROOT / "data" / "discord" / "raw"
-VECTOR_DB_DIR = PROJECT_ROOT / "vectordb"
+PERSIST_DIR = PROJECT_ROOT / "data" / "vectordb_persisted"
+VECTOR_DB_DIR = PERSIST_DIR
 
 def process_notion_wiki_data(wiki_dir=NOTION_WIKI_DIR):
     """
@@ -495,6 +496,7 @@ def create_vector_stores(notion_documents, trading_documents):
                 notion_vectorstore = Chroma.from_documents(
                     documents=filtered_notion_docs,
                     embedding=embeddings,
+                    persist_directory=str(PERSIST_DIR / "notion"),
                 )
                 
                 # Extract code blocks for specialized code search
@@ -512,6 +514,7 @@ def create_vector_stores(notion_documents, trading_documents):
                     code_vectorstore = Chroma.from_documents(
                         documents=filtered_code_blocks,
                         embedding=embeddings,
+                        persist_directory=str(PERSIST_DIR / "code"),
                     )
         except Exception as e:
             print(f"Error processing notion documents: {e}")
@@ -563,6 +566,7 @@ def create_vector_stores(notion_documents, trading_documents):
                 trading_vectorstore = Chroma.from_documents(
                     documents=filtered_trading_docs,
                     embedding=embeddings,
+                    persist_directory=str(PERSIST_DIR / "trading"),
                 )
         except Exception as e:
             print(f"Error processing trading documents: {e}")
