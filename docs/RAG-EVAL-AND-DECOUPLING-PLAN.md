@@ -16,7 +16,8 @@ This document outlines the engineering plan for upgrading **TradeTell** (the AI 
 
 Currently, `src/rag/build_rag_system.py` processes raw Markdown files, Discord exports, and code samples into Chroma vector stores at runtime startup.
 
-### Changes:
+### Changes
+
 - Update `Chroma` initialization in `build_rag_system.py` to specify `persist_directory="data/vectordb_persisted"`.
 - Implement a CLI indexing script (`python -m src.rag.index_corpus`) to pre-build vector collections offline.
 - Modify runtime initialization to attempt loading existing disk collections before attempting re-indexing.
@@ -27,7 +28,8 @@ Currently, `src/rag/build_rag_system.py` processes raw Markdown files, Discord e
 
 Separate UI state and streaming LLM inference from Python application code.
 
-### Backend Architecture (FastAPI):
+### Backend Architecture (FastAPI)
+
 - **`/api/v1/health`**: Diagnostic check for vector database availability and Groq API key validity.
 - **`/api/v1/chat`**: Standard JSON payload endpoint returning response, source document citations, and retrieval scores.
 - **`/api/v1/chat/stream`**: Server-Sent Events (SSE) endpoint delivering real-time answer tokens to the frontend.
@@ -39,7 +41,8 @@ Separate UI state and streaming LLM inference from Python application code.
 
 Continuous quality gate running alongside pytest in CI (`pytest tests/test_rag_eval.py`).
 
-### Evaluation Metrics:
+### Evaluation Metrics
+
 1. **Context Recall & Precision:** Percentage of top-k retrieved chunks containing ground-truth answers for competition rules (e.g. position limits, trading round schedules).
 2. **Answer Faithfulness:** LLM score assessing whether generated claims strictly derive from retrieved context without hallucination.
 3. **Code Syntax Validity:** AST validation ensuring generated `Trader` classes compile without syntax errors.
