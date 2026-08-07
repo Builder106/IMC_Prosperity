@@ -27,6 +27,7 @@ dependencies = [
     "beautifulsoup4",
     "jsonpickle",
     "scipy",
+    "gitpython>=3.1.58",
 ]
 
 [dependency-groups]
