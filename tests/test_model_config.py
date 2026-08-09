@@ -8,7 +8,7 @@ if str(ROOT_DIR) not in sys.path:
 
 
 def _reload_module():
-    import src.rag.model_config as model_config
+    from src.rag import model_config
 
     return importlib.reload(model_config)
 

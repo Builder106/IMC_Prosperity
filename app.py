@@ -14,12 +14,12 @@ except ImportError:
 import streamlit as st
 
 from src.rag.build_rag_system import (
-    process_notion_wiki_data,
-    process_discord_data,
-    process_trading_data,
-    create_vector_stores,
     create_combined_retriever,
     create_rag_chain,
+    create_vector_stores,
+    process_discord_data,
+    process_notion_wiki_data,
+    process_trading_data,
 )
 
 # --------------------------------------------------------------------------- #
@@ -156,7 +156,8 @@ try:
     for _key in ("GROQ_API_KEY", "LLM_MODEL", "LLM_TEMPERATURE", "GROQ_TIMEOUT_SECONDS", "EMBEDDING_MODEL", "HF_TOKEN"):
         if _key in st.secrets:
             os.environ.setdefault(_key, str(st.secrets[_key]))
-except Exception:
+except ImportError:
+    # st.secrets may not be available in all contexts
     pass
 
 try:
@@ -168,7 +169,7 @@ except Exception as exc:  # surface setup problems instead of a raw traceback
     )
     st.exception(exc)
     st.stop()
-    raise exc # Help Pyright understand execution stops here
+    raise  # Help Pyright understand execution stops here
 
 if "messages" not in st.session_state:
     st.session_state.messages = []
@@ -197,7 +198,7 @@ if prompt:
                 result = rag_chain.invoke({"query": prompt})
                 answer = result["result"]
                 sources = result.get("source_documents", [])
-            except Exception as exc:
+            except Exception as exc:  # noqa: BLE001
                 answer = f"⚠️ Something went wrong while answering: `{exc}`"
                 sources = []
         st.markdown(answer)

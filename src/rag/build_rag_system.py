@@ -1,30 +1,33 @@
-import os
 import json
+import os
 import re
 from pathlib import Path
+
+from dotenv import load_dotenv
+from langchain_chroma import Chroma
+from langchain_classic.retrievers import EnsembleRetriever
+from langchain_community.vectorstores.utils import filter_complex_metadata
+from langchain_core.documents import Document
+
 # langchain 1.x: embeddings + vectorstores live in dedicated integration
 # packages; Document moved to langchain_core; the legacy EnsembleRetriever
 # moved to langchain-classic. filter_complex_metadata + the text splitter
 # kept their homes.
 from langchain_huggingface import HuggingFaceEmbeddings
-from langchain_chroma import Chroma
-from langchain_community.vectorstores.utils import filter_complex_metadata
 from langchain_text_splitters import RecursiveCharacterTextSplitter
-from langchain_classic.retrievers import EnsembleRetriever
-from langchain_core.documents import Document
-from dotenv import load_dotenv
-from .process_raw_trading_data import process_round_data, discover_rounds
-from .groq_llm import GroqRagChain
+
 from .discord_data import load_discord_exports
+from .groq_llm import GroqRagChain
 from .model_config import (
+    get_embedding_model_name,
     get_groq_api_key,
     get_groq_timeout_seconds,
     get_llm_model_name,
     get_llm_temperature,
-    get_embedding_model_name,
     get_max_completion_tokens,
     get_max_context_chars,
 )
+from .process_raw_trading_data import discover_rounds, process_round_data
 
 # Load environment variables
 load_dotenv()
@@ -62,7 +65,7 @@ def process_notion_wiki_data(wiki_dir=NOTION_WIKI_DIR):
             else:
                 print(f"Warning: Referenced code file not found: {full_path}")
                 return None
-        except Exception as e:
+        except OSError as e:
             print(f"Error loading code file {full_path}: {e}")
             return None
     
@@ -94,7 +97,7 @@ def process_notion_wiki_data(wiki_dir=NOTION_WIKI_DIR):
     def load_markdown_file(md_file, category):
         try:
             content = md_file.read_text(encoding='utf-8')
-        except Exception as e:
+        except OSError as e:
             print(f"Error reading markdown file {md_file}: {e}")
             return None
         return Document(
@@ -113,7 +116,7 @@ def process_notion_wiki_data(wiki_dir=NOTION_WIKI_DIR):
         try:
             with open(json_file, 'r', encoding='utf-8') as f:
                 data = json.load(f)
-        except Exception as e:
+        except (OSError, json.JSONDecodeError) as e:
             print(f"Error reading JSON file {json_file}: {e}")
             return None
         
@@ -275,8 +278,8 @@ def process_notion_wiki_data(wiki_dir=NOTION_WIKI_DIR):
                 
                 documents.append(doc)
                 print(f"Processed {json_file.name}")
-                
-            except Exception as e:
+
+            except (OSError, ValueError, KeyError) as e:
                 print(f"Error processing {json_file}: {e}")
         
         for md_file in category_path.rglob("*.md"):
@@ -296,7 +299,7 @@ def process_list_items(items, style="bulleted"):
             # Calculate indentation based on nesting level
             indent = "  " * (item.get("level", 0))
             # Add appropriate marker based on list style
-            marker = "- " if style == "bulleted" else f"1. "
+            marker = "- " if style == "bulleted" else "1. "
             result += f"{indent}{marker}{item['content']}\n"
     result += "\n"  # Add extra line after list
     return result
@@ -466,7 +469,7 @@ def create_vector_stores(notion_documents, trading_documents):
                     try:
                         doc = ensure_document(item)
                         valid_notion_docs.append(doc)
-                    except Exception as e:
+                    except (ValueError, TypeError, AttributeError) as e:
                         print(f"Error processing notion document: {e}")
                 
                 # Now clean and normalize the metadata
@@ -479,13 +482,13 @@ def create_vector_stores(notion_documents, trading_documents):
                             metadata=clean_metadata(doc.metadata)
                         )
                         filtered_notion_docs.append(cleaned_doc)
-                    except Exception as e:
+                    except (ValueError, TypeError, AttributeError) as e:
                         print(f"Error cleaning notion document metadata: {e}")
                         # If cleaning fails, try filter_complex_metadata as fallback
                         try:
                             filtered_doc = filter_complex_metadata(doc)
                             filtered_notion_docs.append(filtered_doc)
-                        except Exception as e2:
+                        except (ValueError, TypeError, AttributeError) as e2:
                             print(f"Error filtering notion document metadata: {e2}")
                             # Last resort: create a document with minimal metadata
                             minimal_metadata = {"source": doc.metadata.get("source", "unknown")} if hasattr(doc, "metadata") else {}
@@ -507,7 +510,7 @@ def create_vector_stores(notion_documents, trading_documents):
                     for doc in code_blocks:
                         try:
                             filtered_code_blocks.append(filter_complex_metadata(ensure_document(doc)))  # type: ignore
-                        except Exception as e:
+                        except (ValueError, TypeError, AttributeError) as e:
                             print(f"Error filtering code block metadata: {e}")
                     
                     print(f"[DEBUG build_rag_system.py] Creating specialized code vector store with {len(filtered_code_blocks)} code blocks")
@@ -516,7 +519,7 @@ def create_vector_stores(notion_documents, trading_documents):
                         embedding=embeddings,
                         persist_directory=str(PERSIST_DIR / "code"),
                     )
-        except Exception as e:
+        except (OSError, ValueError, TypeError, AttributeError, RuntimeError) as e:
             print(f"Error processing notion documents: {e}")
             import traceback
             build_errors.append(f"notion: {e!r}\n{traceback.format_exc()}")
@@ -536,7 +539,7 @@ def create_vector_stores(notion_documents, trading_documents):
                     try:
                         doc = ensure_document(item)
                         valid_trading_docs.append(doc)
-                    except Exception as e:
+                    except (ValueError, TypeError, AttributeError) as e:
                         print(f"Error processing trading document: {e}")
                 
                 # Now clean and normalize the metadata
@@ -549,13 +552,13 @@ def create_vector_stores(notion_documents, trading_documents):
                             metadata=clean_metadata(doc.metadata)
                         )
                         filtered_trading_docs.append(cleaned_doc)
-                    except Exception as e:
+                    except (ValueError, TypeError, AttributeError) as e:
                         print(f"Error cleaning trading document metadata: {e}")
                         # If cleaning fails, try filter_complex_metadata as fallback
                         try:
                             filtered_doc = filter_complex_metadata(doc)
                             filtered_trading_docs.append(filtered_doc)
-                        except Exception as e2:
+                        except (ValueError, TypeError, AttributeError) as e2:
                             print(f"Error filtering trading document metadata: {e2}")
                             # Last resort: create a document with minimal metadata
                             minimal_metadata = {"source": doc.metadata.get("source", "unknown")} if hasattr(doc, "metadata") else {}
@@ -568,7 +571,7 @@ def create_vector_stores(notion_documents, trading_documents):
                     embedding=embeddings,
                     persist_directory=str(PERSIST_DIR / "trading"),
                 )
-        except Exception as e:
+        except (OSError, ValueError, TypeError, AttributeError, RuntimeError) as e:
             print(f"Error processing trading documents: {e}")
             import traceback
             build_errors.append(f"trading: {e!r}\n{traceback.format_exc()}")
@@ -721,10 +724,10 @@ def main():
                 # Using invoke() instead of run() to address deprecation warning
                 response = rag_chain.invoke({"query": query})
                 result = response.get("result", "No result found")
-                
+
                 print("\nAnswer:")
                 print(result)
-            except Exception as e:
+            except (ValueError, TypeError, AttributeError, RuntimeError, KeyError) as e:
                 print(f"\nError processing your question: {e}")
                 print("Please try again with a different question.")
     else:

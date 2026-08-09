@@ -1,6 +1,6 @@
-import os
-from pathlib import Path
 import sys
+from pathlib import Path
+
 
 def list_directory_structure(startpath):
     """
@@ -29,7 +29,7 @@ def list_directory_structure(startpath):
         # Handle cases where the script might not have read permissions
         # for the root directory itself (less common)
         print(f"Error: Permission denied for directory: {startpath}", file=sys.stderr)
-    except Exception as e:
+    except OSError as e:
         # Catch any other unexpected errors during initial setup
         print(f"An unexpected error occurred: {e}", file=sys.stderr)
 
@@ -47,7 +47,7 @@ def _list_dir_recursive(directory_path, prefix=""):
         # Get directory contents, convert iterator to list to easily check the last item
         # Sort entries for consistent output (folders might appear before/after files depending on OS default)
         # Here, we sort alphabetically; you could sort folders first if desired.
-        entries = sorted(list(directory_path.iterdir()), key=lambda x: x.name)
+        entries = sorted(directory_path.iterdir(), key=lambda x: x.name)
         # entries = sorted(list(directory_path.iterdir()), key=lambda x: (not x.is_dir(), x.name)) # Sort folders first
 
         # Define the connectors for tree branches
@@ -71,7 +71,7 @@ def _list_dir_recursive(directory_path, prefix=""):
     except PermissionError:
         # Handle permission errors for subdirectories gracefully
         print(f"{prefix}└── [Permission Denied: {directory_path.name}/]", file=sys.stderr)
-    except Exception as e:
+    except OSError as e:
         # Catch other errors during listing (e.g., broken symlinks if not handled)
         print(f"{prefix}└── [Error listing {directory_path.name}/: {e}]", file=sys.stderr)
 

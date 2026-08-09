@@ -1,9 +1,18 @@
 import json
-from typing import Dict, List, Any, Tuple
-from datamodel import OrderDepth, TradingState, Order, Symbol, Listing, Observation, Trade, ProsperityEncoder
-from collections import deque
-import numpy as np
 import math
+from collections import deque
+from typing import Any
+
+from datamodel import (
+    Listing,
+    Observation,
+    Order,
+    OrderDepth,
+    ProsperityEncoder,
+    Symbol,
+    Trade,
+    TradingState,
+)
 
 
 class Logger:
@@ -234,7 +243,7 @@ class Trader:
         # Store price history for all products
         self.price_history = {
             product: deque(maxlen=max([p["sma_window"] for p in PARAMS.values()]))
-            for product in POSITION_LIMITS.keys()
+            for product in POSITION_LIMITS
         }
         
         # Store mid prices from last iteration
@@ -367,11 +376,10 @@ class Trader:
         # Skip if insufficient data in the order book
         if not order_depth.buy_orders or not order_depth.sell_orders:
             return orders
-            
+
         best_bid = max(order_depth.buy_orders.keys())
         best_ask = min(order_depth.sell_orders.keys())
-        spread = best_ask - best_bid
-        
+
         # More dynamic bid/ask adjustment based on product performance
         if product in [RAINFOREST_RESIN, JAMS, PICNIC_BASKET1]:
             # More aggressive for highly profitable products
@@ -535,7 +543,7 @@ class Trader:
                 
         return conversions
         
-    def run(self, state: TradingState) -> Tuple[Dict[Symbol, List[Order]], int, str]:
+    def run(self, state: TradingState) -> tuple[dict[Symbol, list[Order]], int, str]:
         """
         Main method to generate trading decisions.
         """
@@ -546,7 +554,7 @@ class Trader:
         current_mid_prices = {}
         
         # Process each product
-        for product in state.order_depths.keys():
+        for product in state.order_depths:
             order_depth = state.order_depths[product]
             orders: list[Order] = []
             current_position = state.position.get(product, 0)
@@ -588,8 +596,8 @@ class Trader:
         
         # Store position for next iteration
         self.previous_position = {
-            product: state.position.get(product, 0) 
-            for product in state.position.keys()
+            product: state.position.get(product, 0)
+            for product in state.position
         }
         
         # Print order summary

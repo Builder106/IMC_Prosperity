@@ -1,7 +1,8 @@
-import json
 import csv
-import sys
+import json
 import re
+import sys
+
 
 def extract_trade_history_to_csv(log_file_path, csv_file_path):
     """
@@ -65,7 +66,7 @@ def extract_trade_history_to_csv(log_file_path, csv_file_path):
         # Clean up potential extra characters before/after JSON if needed (though the bracket counting should handle it)
         # Basic check: ensure it starts with '[' and ends with ']'
         if not (json_string.startswith('[') and json_string.endswith(']')):
-             print(f"Warning: Extracted text might not be a valid JSON array. Attempting parse anyway.", file=sys.stderr)
+             print("Warning: Extracted text might not be a valid JSON array. Attempting parse anyway.", file=sys.stderr)
              # Attempt to find the main JSON array using regex if simple extraction failed
              match = re.search(r'(\[.*\])', json_string, re.DOTALL)
              if match:
@@ -87,7 +88,7 @@ def extract_trade_history_to_csv(log_file_path, csv_file_path):
             # Parse the JSON string
             trade_data = json.loads(json_string)
             if not isinstance(trade_data, list):
-                print(f"Error: Parsed JSON is not a list (array).", file=sys.stderr)
+                print("Error: Parsed JSON is not a list (array).", file=sys.stderr)
                 return
             print(f"Successfully parsed {len(trade_data)} trade records.")
 
@@ -97,7 +98,7 @@ def extract_trade_history_to_csv(log_file_path, csv_file_path):
             print(json_string[:500] + "..." if len(json_string) > 500 else json_string, file=sys.stderr) # Print partial string if too long
             print("------------------------------------", file=sys.stderr)
             return
-        except Exception as e:
+        except (ValueError, TypeError) as e:
             print(f"An unexpected error occurred during JSON parsing: {e}", file=sys.stderr)
             return
 
@@ -134,13 +135,13 @@ def extract_trade_history_to_csv(log_file_path, csv_file_path):
 
     except FileNotFoundError:
         print(f"Error: Log file not found at {log_file_path}", file=sys.stderr)
-    except Exception as e:
+    except OSError as e:
         print(f"An unexpected error occurred: {e}", file=sys.stderr)
 
 # --- Script Execution ---
 if __name__ == "__main__":
-    import os
     import argparse
+    import os
     
     # Set up command line argument parsing
     parser = argparse.ArgumentParser(description='Extract trade history from log files to CSV')

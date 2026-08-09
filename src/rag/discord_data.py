@@ -1,10 +1,10 @@
 import json
-from pathlib import Path
 from dataclasses import dataclass
+from pathlib import Path
 
 try:
     from langchain_core.documents import Document  # type: ignore
-except Exception:
+except ImportError:
     @dataclass
     class Document:
         page_content: str
@@ -64,7 +64,7 @@ def load_discord_exports(discord_dir, chunk_size=1200):
     for export_file in sorted(discord_path.glob("*.json")):
         try:
             data = json.loads(export_file.read_text(encoding="utf-8"))
-        except Exception:
+        except (json.JSONDecodeError, OSError):
             continue
 
         guild_name = ((data.get("guild") or {}).get("name")) or ""

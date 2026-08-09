@@ -1,23 +1,22 @@
 import json
-from typing import Dict, List, Tuple
 
 from datamodel import Order, OrderDepth, TradingState
 
 ASH = "ASH_COATED_OSMIUM"
 PEPPER = "INTARIAN_PEPPER_ROOT"
 
-DEFAULT_FAIR_VALUE: Dict[str, int] = {ASH: 10000, PEPPER: 13000}
-POSITION_LIMIT: Dict[str, int] = {ASH: 80, PEPPER: 80}
-TAKE_EDGE: Dict[str, int] = {ASH: 1, PEPPER: 2}
-MAKE_EDGE: Dict[str, int] = {ASH: 2, PEPPER: 3}
-SKEW_COEFF: Dict[str, float] = {ASH: 0.02, PEPPER: 0.03}
-MAX_TAKE_QTY: Dict[str, int] = {ASH: 12, PEPPER: 8}
-MAX_MAKE_QTY: Dict[str, int] = {ASH: 10, PEPPER: 8}
+DEFAULT_FAIR_VALUE: dict[str, int] = {ASH: 10000, PEPPER: 13000}
+POSITION_LIMIT: dict[str, int] = {ASH: 80, PEPPER: 80}
+TAKE_EDGE: dict[str, int] = {ASH: 1, PEPPER: 2}
+MAKE_EDGE: dict[str, int] = {ASH: 2, PEPPER: 3}
+SKEW_COEFF: dict[str, float] = {ASH: 0.02, PEPPER: 0.03}
+MAX_TAKE_QTY: dict[str, int] = {ASH: 12, PEPPER: 8}
+MAX_MAKE_QTY: dict[str, int] = {ASH: 10, PEPPER: 8}
 EWMA_ALPHA = 0.3
 
 
 class Trader:
-    def _load_fair_values(self, trader_data: str) -> Dict[str, float]:
+    def _load_fair_values(self, trader_data: str) -> dict[str, float]:
         if not trader_data:
             return {}
         try:
@@ -25,7 +24,7 @@ class Trader:
         except json.JSONDecodeError:
             return {}
         fairs = parsed.get("fair_values", {})
-        result: Dict[str, float] = {}
+        result: dict[str, float] = {}
         for product, value in fairs.items():
             if product in POSITION_LIMIT:
                 result[product] = float(value)
@@ -56,8 +55,8 @@ class Trader:
         order_depth: OrderDepth,
         fair: float,
         position: int,
-    ) -> Tuple[List[Order], int]:
-        orders: List[Order] = []
+    ) -> tuple[list[Order], int]:
+        orders: list[Order] = []
         limit = POSITION_LIMIT[product]
         skew = position * SKEW_COEFF[product]
         buy_trigger = fair - TAKE_EDGE[product] - skew
@@ -97,8 +96,8 @@ class Trader:
         order_depth: OrderDepth,
         fair: float,
         position: int,
-    ) -> List[Order]:
-        orders: List[Order] = []
+    ) -> list[Order]:
+        orders: list[Order] = []
         limit = POSITION_LIMIT[product]
         skew = position * SKEW_COEFF[product]
         bid_quote = int(fair - MAKE_EDGE[product] - skew)
@@ -120,9 +119,9 @@ class Trader:
         return orders
 
     def run(self, state: TradingState):
-        result: Dict[str, List[Order]] = {}
+        result: dict[str, list[Order]] = {}
         previous_fairs = self._load_fair_values(state.traderData)
-        next_fairs: Dict[str, float] = {}
+        next_fairs: dict[str, float] = {}
 
         for product in (ASH, PEPPER):
             if product not in state.order_depths:

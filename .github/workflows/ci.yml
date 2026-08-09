@@ -43,10 +43,8 @@ jobs:
         # via `grep -r trust_remote_code`. Ignored, not exploitable here.
         run: uv run --with pip-audit pip-audit --ignore-vuln PYSEC-2026-311
 
-      - name: Lint (critical errors only)
-        # Syntax errors and undefined names in maintained source — not style
-        # nitpicks, and not the scraped code snippets under data/.
-        run: uv run --frozen ruff check --select E9,F63,F7,F82 src app.py tests
+      - name: Lint
+        run: uv run --frozen ruff check src app.py tests
 
       - name: Run tests
         run: uv run --frozen pytest

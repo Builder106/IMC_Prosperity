@@ -1,8 +1,7 @@
 import csv
-import os
-import sys
-import json
 import io
+import os
+
 
 def extract_price_data_to_csv(log_filepath, csv_filepath):
     """
@@ -64,7 +63,7 @@ def extract_price_data_to_csv(log_filepath, csv_filepath):
                             print(f"Warning: Skipping malformed line: {stripped_line}")
                     except StopIteration:  # Handle empty lines
                         continue
-                    except Exception as e:
+                    except (csv.Error, ValueError, IndexError) as e:
                         print(f"Error processing line: {stripped_line} - {e}")
         
         if not price_data:
@@ -84,7 +83,7 @@ def extract_price_data_to_csv(log_filepath, csv_filepath):
     except FileNotFoundError:
         print(f"Error: Log file not found at {log_filepath}")
         return False
-    except Exception as e:
+    except OSError as e:
         print(f"An unexpected error occurred: {e}")
         return False
 
@@ -138,7 +137,7 @@ def main():
                     print("\nSample of extracted data:")
                     for line in sample_lines:
                         print(line.strip())
-            except Exception as e:
+            except OSError as e:
                 print(f"Error displaying sample data: {e}")
                 
         # Ask if user wants to process another file

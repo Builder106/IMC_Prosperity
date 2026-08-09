@@ -1,10 +1,11 @@
-import pandas as pd
+import argparse
 import json
 import os
 from pathlib import Path
+
 import numpy as np
-import scipy
-import argparse
+import pandas as pd
+
 
 def process_prices_and_trades(prices_file_path, trades_file_path, output_dir="processed_data"):
     """
@@ -450,8 +451,8 @@ def calculate_statistical_metrics(df):
     if 'mid_price' not in df.columns or len(df) < 4:
         return metrics
         
-    from scipy import stats
     import numpy as np
+    from scipy import stats
     
     # Higher-order moments of price distribution
     metrics["price_skewness"] = stats.skew(df['mid_price'])

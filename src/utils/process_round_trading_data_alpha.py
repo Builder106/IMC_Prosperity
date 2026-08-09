@@ -1,10 +1,12 @@
-import pandas as pd
+import argparse
 import json
 import os
+import sys
 from pathlib import Path
+
 import numpy as np
-import scipy
-import argparse
+import pandas as pd
+
 
 def process_prices_and_trades(prices_file_path, trades_file_path, output_dir="processed_data"):
     """
@@ -57,10 +59,8 @@ def process_prices_and_trades(prices_file_path, trades_file_path, output_dir="pr
                 # Filter trades for this product
                 product_trades = trades_df[trades_df['product'] == product] if 'product' in trades_df.columns else None
                 
-                if product_trades is None or len(product_trades) == 0:
-                    # Try matching with symbol instead if no product column in trades
-                    if 'symbol' in trades_df.columns:
-                        product_trades = trades_df[trades_df['symbol'] == product]
+                if product_trades is None or (len(product_trades) == 0 and 'symbol' in trades_df.columns):
+                    product_trades = trades_df[trades_df['symbol'] == product]
                 
                 # Merge prices and trades data if both are available
                 if product_trades is not None and len(product_trades) > 0:
@@ -84,7 +84,7 @@ def process_prices_and_trades(prices_file_path, trades_file_path, output_dir="pr
             
         return documents
         
-    except Exception as e:
+    except (OSError, pd.errors.ParserError, ValueError) as e:
         print(f"Error processing data: {e}")
         import traceback
         traceback.print_exc()
@@ -144,7 +144,7 @@ def process_round_csv(file_path, output_dir="processed_data"):
             
         return documents
         
-    except Exception as e:
+    except (OSError, pd.errors.ParserError, ValueError) as e:
         print(f"Error processing {file_path}: {e}")
         return []
 
@@ -419,12 +419,9 @@ def calculate_time_based_metrics(df):
                 metrics["avg_price_acceleration"] = df_sorted.loc[valid_acc_idx, 'price_acceleration'].mean()
     
     # Moving averages and volatility if enough data points
-    if 'mid_price' in df_sorted.columns:
+    if 'mid_price' in df_sorted.columns and len(df_sorted) >= 5:
         # Calculate moving averages if enough data
-        if len(df_sorted) >= 5:
-            df_sorted['sma_5'] = df_sorted['mid_price'].rolling(window=5, min_periods=1).mean()
-            df_sorted['rolling_vol_5'] = df_sorted['mid_price'].rolling(window=5, min_periods=3).std()
-            metrics["avg_rolling_volatility_5"] = df_sorted['rolling_vol_5'].mean()
+        metrics["avg_rolling_volatility_5"] = df_sorted['rolling_vol_5'].mean()
             
             if len(df_sorted) >= 10:
                 df_sorted['sma_10'] = df_sorted['mid_price'].rolling(window=10, min_periods=1).mean()
@@ -450,16 +447,16 @@ def calculate_statistical_metrics(df):
     if 'mid_price' not in df.columns or len(df) < 4:
         return metrics
         
-    from scipy import stats
     import numpy as np
+    from scipy import stats
     
     # Higher-order moments of price distribution
     metrics["price_skewness"] = stats.skew(df['mid_price'])
     metrics["price_kurtosis"] = stats.kurtosis(df['mid_price'])  # Excess kurtosis (normal = 0)
     
     # Normality tests
-    shapiro_stat, shapiro_pval = stats.shapiro(df['mid_price']) if len(df) <= 5000 else (np.nan, np.nan)
-    jb_stat, jb_pval = stats.jarque_bera(df['mid_price'])
+    _, shapiro_pval = stats.shapiro(df['mid_price']) if len(df) <= 5000 else (np.nan, np.nan)
+    _, jb_pval = stats.jarque_bera(df['mid_price'])
     metrics["shapiro_normality_pvalue"] = shapiro_pval
     metrics["jarque_bera_normality_pvalue"] = jb_pval
     
@@ -495,14 +492,14 @@ def calculate_statistical_metrics(df):
             # Ljung-Box test for autocorrelation (p < 0.05 suggests autocorrelation)
             try:
                 # Try newer scipy versions
-                lb_stat, lb_pval = stats.acorr_ljungbox(valid_returns, lags=[5], return_df=False)  # type: ignore
+                _, lb_pval = stats.acorr_ljungbox(valid_returns, lags=[5], return_df=False)  # type: ignore
                 metrics["returns_autocorr_pvalue"] = lb_pval[0]
             except (AttributeError, TypeError):
                 try:
                     # Try older scipy versions
-                    lb_stat, lb_pval = stats.acorr_ljungbox(valid_returns, nlags=5)  # type: ignore
+                    _, lb_pval = stats.acorr_ljungbox(valid_returns, nlags=5)  # type: ignore
                     metrics["returns_autocorr_pvalue"] = lb_pval[0]
-                except:
+                except (AttributeError, TypeError):
                     # Fallback if function not available
                     metrics["returns_autocorr_pvalue"] = np.nan
             
@@ -515,7 +512,7 @@ def calculate_statistical_metrics(df):
     if len(df) > 100:
         try:
             metrics["hurst_exponent"] = calculate_hurst_exponent(df['mid_price'])
-        except:
+        except (AttributeError, TypeError, ValueError):
             metrics["hurst_exponent"] = np.nan
             
     # Correlation metrics if multiple price columns exist
@@ -757,7 +754,7 @@ def process_observation_data(observation_file_path, output_dir="processed_data")
             
         return documents
         
-    except Exception as e:
+    except (OSError, pd.errors.ParserError, ValueError) as e:
         print(f"Error processing observation data: {e}")
         import traceback
         traceback.print_exc()

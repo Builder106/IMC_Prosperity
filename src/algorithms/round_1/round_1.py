@@ -1,8 +1,7 @@
-import json
-from typing import Dict, List, Any
-from datamodel import OrderDepth, TradingState, Order
 from collections import deque
+
 import numpy as np
+from datamodel import Order, OrderDepth, TradingState
 
 # Define product names as constants
 RAINFOREST_RESIN = "RAINFOREST_RESIN"
@@ -121,20 +120,18 @@ class Trader:
                             buy_volume = min(SQUID_ORDER_VOLUME, SQUID_POS_LIMIT - current_position)
                             if buy_volume > 0:
                                 # Place buy order slightly above mid-price to increase fill chance, or at calculated threshold
-                                buy_order_price = int(round(sma - SQUID_DEVIATION_THRESHOLD)) # Or potentially mid_price + 1
+                                buy_order_price = round(sma - SQUID_DEVIATION_THRESHOLD)  # Or potentially mid_price + 1
                                 orders.append(Order(product, buy_order_price, buy_volume))
                                 print(f"    Mean Reversion BUY Signal: Price ({mid_price:.2f}) < SMA ({sma:.2f}) - Threshold ({SQUID_DEVIATION_THRESHOLD}). Placing BUY: {buy_volume} at {buy_order_price}")
 
                     # Sell Signal: Price significantly above SMA
-                    elif deviation > SQUID_DEVIATION_THRESHOLD:
-                         # Sell only if above negative position limit
-                        if current_position > -SQUID_POS_LIMIT:
-                            sell_volume = min(SQUID_ORDER_VOLUME, SQUID_POS_LIMIT + current_position)
-                            if sell_volume > 0:
-                                # Place sell order slightly below mid-price, or at calculated threshold
-                                sell_order_price = int(round(sma + SQUID_DEVIATION_THRESHOLD)) # Or potentially mid_price - 1
-                                orders.append(Order(product, sell_order_price, -sell_volume))
-                                print(f"    Mean Reversion SELL Signal: Price ({mid_price:.2f}) > SMA ({sma:.2f}) + Threshold ({SQUID_DEVIATION_THRESHOLD}). Placing SELL: {sell_volume} at {sell_order_price}")
+                    elif deviation > SQUID_DEVIATION_THRESHOLD and current_position > -SQUID_POS_LIMIT:
+                        sell_volume = min(SQUID_ORDER_VOLUME, SQUID_POS_LIMIT + current_position)
+                        if sell_volume > 0:
+                            # Place sell order slightly below mid-price, or at calculated threshold
+                            sell_order_price = round(sma + SQUID_DEVIATION_THRESHOLD)  # Or potentially mid_price - 1
+                            orders.append(Order(product, sell_order_price, -sell_volume))
+                            print(f"    Mean Reversion SELL Signal: Price ({mid_price:.2f}) > SMA ({sma:.2f}) + Threshold ({SQUID_DEVIATION_THRESHOLD}). Placing SELL: {sell_volume} at {sell_order_price}")
 
                     # Optional: Logic to close positions when price reverts closer to SMA
                     # (Could add logic here to place smaller orders in the opposite direction

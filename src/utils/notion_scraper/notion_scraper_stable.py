@@ -1,7 +1,9 @@
-import os
 import json
+import os
 import re
+
 from bs4 import BeautifulSoup
+from playwright.sync_api import Error as PlaywrightError
 from playwright.sync_api import sync_playwright
 
 # Base URL of the Notion wiki
@@ -22,19 +24,19 @@ def load_code_file_mapping(mapping_file="codefile_names.md"):
     try:
         current_dir = os.path.dirname(os.path.abspath(__file__))
         full_path = os.path.join(current_dir, mapping_file)
-        
+
         if not os.path.exists(full_path):
             print(f"Warning: Code file mapping not found at {full_path}")
             return mapping
-            
+
         with open(full_path, 'r', encoding='utf-8') as f:
             lines = f.readlines()
-            
+
         # Skip header rows (first two lines)
         for line in lines[2:]:
             if '|' not in line:
                 continue
-                
+
             parts = line.strip().split('|')
             if len(parts) >= 4:  # With proper formatting, we should have ['', 'code_X', 'Description', '']
                 code_id = parts[1].strip()
@@ -45,11 +47,11 @@ def load_code_file_mapping(mapping_file="codefile_names.md"):
                 # Store with code_id as the key (like "code_1")
                 mapping[code_id] = safe_filename
                 print(f"Loaded mapping: {code_id} -> {safe_filename}")
-        
+
         print(f"Loaded {len(mapping)} code file mappings")
-    except Exception as e:
+    except OSError as e:
         print(f"Error loading code file mapping: {e}")
-    
+
     return mapping
 
 # Load the code file mapping
@@ -62,7 +64,7 @@ def safe_goto(page, url, timeout=30000, wait_until="domcontentloaded", retries=2
         try:
             page.goto(url, timeout=timeout, wait_until=wait_until)
             return True
-        except Exception as e:
+        except PlaywrightError as e:
             attempt += 1
             if attempt > retries:
                 print(f"Failed to navigate to {url} after {retries + 1} attempts: {e}")
@@ -140,7 +142,7 @@ def save_code_file(code_content, language, page_title, code_id):
         with open(file_path, "w", encoding="utf-8") as f:
             f.write(processed_code)
         print(f"Successfully saved code file to: {file_path}")
-    except Exception as e:
+    except OSError as e:
         print(f"Error saving code file: {e}")
     
     # Return the relative path from the project root
@@ -205,10 +207,20 @@ def process_code_content(code_content, language):
                 processed_lines.append(indented_line)
                 
                 # Check for end of blocks (like return, pass, etc.) to decrease indentation
-                if stripped_line.startswith("return ") or stripped_line == "return" or stripped_line == "pass" or stripped_line == "break" or stripped_line == "continue":
-                    # These might signal the end of a block
-                    if i+1 < len(lines) and lines[i+1].strip() and not lines[i+1].strip().startswith(("else:", "elif", "except:", "finally:")):
-                        current_indent = max(0, current_indent - indent_size)
+                is_end_statement = (
+                    stripped_line.startswith("return ")
+                    or stripped_line == "return"
+                    or stripped_line == "pass"
+                    or stripped_line == "break"
+                    or stripped_line == "continue"
+                )
+                next_line_not_continuation = (
+                    i + 1 < len(lines)
+                    and lines[i + 1].strip()
+                    and not lines[i + 1].strip().startswith(("else:", "elif", "except:", "finally:"))
+                )
+                if is_end_statement and next_line_not_continuation:
+                    current_indent = max(0, current_indent - indent_size)
         
         return '\n'.join(processed_lines)
     else:
@@ -231,7 +243,6 @@ def process_code_content(code_content, language):
 def extract_content(soup, page_title):
     """Extract content blocks from the Notion page in their natural order."""
     blocks = []
-    code_block_counter = 1  # Counter for code blocks
     seen_content = set()  # Track seen content to avoid duplicates
     
     # First get the page title (h1) which is special
@@ -272,11 +283,7 @@ def extract_content(soup, page_title):
     
     if not content_container:
         return blocks  # Early return if no content found
-    
-    # Track consecutive list elements to combine them later
-    current_list_type = None
-    current_list_items = []
-    
+
     # First, try to find all the header blocks (h2) in the document
     header_blocks = content_container.find_all(
         lambda tag: tag.name == 'h2' or 
@@ -523,8 +530,8 @@ def scrape_notion_wiki():
                 browser.close()
                 return
             print("Page loaded successfully")
-            
-        except Exception as e:
+
+        except (OSError, PlaywrightError) as e:
             print(f"Error loading page: {e}")
             # Save the error information for debugging
             with open("debug/error_log.txt", "w") as f:
@@ -532,7 +539,7 @@ def scrape_notion_wiki():
             # Try to take screenshot of whatever did load
             try:
                 page.screenshot(path="debug/error_state.png")
-            except:
+            except PlaywrightError:
                 pass
         
         # Wait for content to load and interact with the page
@@ -556,10 +563,10 @@ def scrape_notion_wiki():
                 for button in expand_buttons:
                     button.click()
                     page.wait_for_timeout(1000)
-            except Exception as e:
+            except PlaywrightError as e:
                 print(f"No expand buttons found: {e}")
-                
-        except Exception as e:
+
+        except PlaywrightError as e:
             print(f"Error during page interaction: {e}")
         
         # Try multiple selector strategies to find links
@@ -573,9 +580,9 @@ def scrape_notion_wiki():
                 href = link.get_attribute('href')
                 if href and "notion.site" in href and "prosperity-4" in href.lower():
                     internal_links.add(href.split('?')[0])  # Remove URL parameters
-        except Exception as e:
+        except PlaywrightError as e:
             print(f"Error with standard link selector: {e}")
-            
+
         # Strategy 2: Notion specific selectors
         try:
             print("Looking for links with Notion-specific selectors...")
@@ -584,9 +591,9 @@ def scrape_notion_wiki():
                 href = link.get_attribute('href')
                 if href and "notion.site" in href:
                     internal_links.add(href.split('?')[0])
-        except Exception as e:
+        except PlaywrightError as e:
             print(f"Error with Notion-specific selector: {e}")
-            
+
         # Strategy 3: JavaScript execution to extract links
         try:
             print("Extracting links using JavaScript...")
@@ -601,7 +608,7 @@ def scrape_notion_wiki():
             for link in links_from_js:
                 if "prosperity-4" in link.lower():
                     internal_links.add(link)
-        except Exception as e:
+        except PlaywrightError as e:
             print(f"Error extracting links with JavaScript: {e}")
         
         print(f"Found {len(internal_links)} internal pages.")

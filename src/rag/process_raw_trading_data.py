@@ -1,10 +1,12 @@
-import pandas as pd
+import argparse
 import json
 import os
-from pathlib import Path
-import numpy as np
-import argparse
 import re
+from pathlib import Path
+
+import numpy as np
+import pandas as pd
+
 
 def process_trading_csv(file_path, output_dir):
     """
@@ -63,7 +65,7 @@ def process_trading_csv(file_path, output_dir):
             
         return documents
         
-    except Exception as e:
+    except (OSError, pd.errors.ParserError, ValueError) as e:
         print(f"Error processing {file_path}: {e}")
         return []
 
@@ -200,7 +202,7 @@ def calculate_trading_metrics(df):
                                           df["ask_volume_1"] * df["ask_price_1"]) / \
                                          (df["bid_volume_1"] + df["ask_volume_1"])
             metrics["volume_weighted_price"] = metrics["volume_weighted_price"].mean()
-        except:
+        except (ZeroDivisionError, ValueError, KeyError):
             metrics["volume_weighted_price"] = np.nan
     
     # Trading activity
@@ -319,7 +321,7 @@ def process_round_data(round_name, trading_data_dir="trading_data"):
             documents = process_trading_csv(csv_file, output_dir)
             all_documents.extend(documents)
             print(f"Processed {len(documents)} documents from {csv_file}")
-        except Exception as e:
+        except (OSError, pd.errors.ParserError, ValueError) as e:
             print(f"Error processing {csv_file}: {e}")
     
     # Save all documents for this round in one file for convenience
@@ -349,7 +351,7 @@ def discover_rounds(trading_data_dir="trading_data"):
         # Sort by round number
         round_dirs.sort(key=get_round_number)        
         return [d.name for d in round_dirs]
-    except Exception as e:
+    except (OSError, re.error) as e:
         print(f"Error discovering rounds: {e}")
         return []
 

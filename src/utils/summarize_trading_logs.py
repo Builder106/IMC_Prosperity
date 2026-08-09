@@ -1,7 +1,7 @@
-import re
-import json
 import os
+import re
 from collections import defaultdict
+
 
 def summarize_trading_logs(log_file_path):
     """Summarize IMC Prosperity trading logs to make them digestible for an LLM."""

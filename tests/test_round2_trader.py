@@ -3,7 +3,6 @@ import sys
 import types
 from pathlib import Path
 
-
 ROOT = Path(__file__).resolve().parents[1]
 ROUND1_DIR = ROOT / "src" / "algorithms" / "round_1"
 ROUND2_DIR = ROOT / "src" / "algorithms" / "round_2"
@@ -20,7 +19,7 @@ def _load_module(module_name: str, path: Path):
 
 if "jsonpickle" not in sys.modules:
     jsonpickle_stub = types.ModuleType("jsonpickle")
-    setattr(jsonpickle_stub, "encode", lambda value: str(value))
+    jsonpickle_stub.encode = lambda value: str(value)
     sys.modules["jsonpickle"] = jsonpickle_stub
 
 datamodel = _load_module("round2_datamodel_base", ROUND1_DIR / "datamodel.py")

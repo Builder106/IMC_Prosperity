@@ -1,6 +1,5 @@
 import json
 from json import JSONEncoder
-from typing import Dict, List
 
 import jsonpickle
 
@@ -42,8 +41,8 @@ class ConversionObservation:
 class Observation:
     def __init__(
         self,
-        plainValueObservations: Dict[Product, ObservationValue],
-        conversionObservations: Dict[Product, ConversionObservation],
+        plainValueObservations: dict[Product, ObservationValue],
+        conversionObservations: dict[Product, ConversionObservation],
     ) -> None:
         self.plainValueObservations = plainValueObservations
         self.conversionObservations = conversionObservations
@@ -73,8 +72,8 @@ class Order:
 
 class OrderDepth:
     def __init__(self):
-        self.buy_orders: Dict[int, int] = {}
-        self.sell_orders: Dict[int, int] = {}
+        self.buy_orders: dict[int, int] = {}
+        self.sell_orders: dict[int, int] = {}
 
 
 class Trade:
@@ -123,16 +122,16 @@ class Trade:
         )
 
 
-class TradingState(object):
+class TradingState:
     def __init__(
         self,
         traderData: str,
         timestamp: Time,
-        listings: Dict[Symbol, Listing],
-        order_depths: Dict[Symbol, OrderDepth],
-        own_trades: Dict[Symbol, List[Trade]],
-        market_trades: Dict[Symbol, List[Trade]],
-        position: Dict[Product, Position],
+        listings: dict[Symbol, Listing],
+        order_depths: dict[Symbol, OrderDepth],
+        own_trades: dict[Symbol, list[Trade]],
+        market_trades: dict[Symbol, list[Trade]],
+        position: dict[Product, Position],
         observations: Observation,
     ):
         self.traderData = traderData
