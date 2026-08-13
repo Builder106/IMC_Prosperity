@@ -30,7 +30,7 @@ streamlit run app.py
 pytest
 ```
 
-`pytest.ini` scopes collection to `tests/`, so the vendored `tools/` tree is
+`pytest.ini`scopes collection to`tests/`, so the vendored `tools/` tree is
 ignored. Add tests under `tests/` mirroring the module under test
 (e.g. `tests/test_groq_llm.py`). Network calls — Groq and the embedding model —
 must be mocked; the suite runs offline.
@@ -38,18 +38,25 @@ must be mocked; the suite runs offline.
 ## Project guardrails
 
 - **Pin dependencies only where a version is known to break.** `requirements.txt`
+
   pins the langchain 0.2.x stack, a recent OpenTelemetry, and `protobuf<7`;
   everything else is intentionally unpinned so the deploy resolver can pick
   wheels for its Python version. A full freeze broke the Streamlit Cloud install
   once — don't reintroduce blanket pins.
+
 - **The vector store is built in-memory** (`Chroma.from_documents` with no
+
   `persist_directory`). It's rebuilt on every cold start under
   `@st.cache_resource`; don't reintroduce on-disk persistence — the SQLite path
   fails on Streamlit Cloud.
+
 - **LLM calls go through `GroqRagChain`** (`src/rag/groq_llm.py`), behind the
+
   contract `invoke({"query": ...}) -> {"result", "source_documents"}`. Keep that
   contract so the backend stays swappable.
-- **Secrets are never committed.** `GROQ_API_KEY` lives in `.env` locally or in
+
+- **Secrets are never committed.** `GROQ_API_KEY`lives in`.env` locally or in
+
   Streamlit secrets on Cloud. The repo is public.
 
 ## Commit messages
@@ -66,9 +73,14 @@ Conventional-commit style: `type: summary` (`feat`, `fix`, `chore`, `data`,
 ## Out of scope
 
 - **`tools/`** — a vendored third-party backtester clone. Gitignored; don't
+
   commit it or build features against it here.
+
 - **`data/competition_rounds/`, `*.zip`** — local competition data dumps.
+
   Gitignored.
+
 - **End-to-end / demo-video suite** — deliberately omitted. The app needs a Groq
+
   key and a runtime-built vector store, which makes headless E2E impractical;
   unit tests cover the logic instead.

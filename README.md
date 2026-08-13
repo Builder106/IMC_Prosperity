@@ -73,7 +73,7 @@ first query after a cold start re-embeds the corpus and is slower than the rest.
     - **`process_raw_trading_data.py`** — trading-data processing
   - **`algorithms/`** — round-by-round trading algorithms
   - **`utils/`** — Notion scraper and trading-log tools
-- **`data/`** — `prosperity_wiki/` (Markdown), `trading_data/`, processed datasets
+- **`data/`** — `prosperity_wiki/`(Markdown),`trading_data/`, processed datasets
 - **`tests/`** — pytest suite (offline; network mocked)
 
 ## Getting started

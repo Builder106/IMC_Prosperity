@@ -1,4 +1,4 @@
-# Who is IMC?
+# Who is IMC
 
 ## Introduction
 

@@ -13,7 +13,7 @@ Trading days on Intara last 72 hours.
 
 ## Round objective
 
-Translate your first trading strategy into a Python program that trades `ASH_COATED_OSMIUM` and `INTARIAN_PEPPER_ROOT` on your behalf. Participate in the Exchange Auction to generate additional profit.
+Translate your first trading strategy into a Python program that trades `ASH_COATED_OSMIUM`and`INTARIAN_PEPPER_ROOT` on your behalf. Participate in the Exchange Auction to generate additional profit.
 
 ## Algorithmic trading challenge: First Intarian Goods
 

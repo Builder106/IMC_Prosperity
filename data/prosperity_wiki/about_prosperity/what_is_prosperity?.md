@@ -1,4 +1,4 @@
-# What is Prosperity?
+# What is Prosperity
 
 Prosperity 4 is IMC's global online trading challenge, designed for university students who want to get familiar with algorithmic trading and financial markets. A unique simulation game developed by a team of IMC traders, quantitative researchers, and software engineers to provide an accessible, life-like experience of what it takes to be a trader.
 

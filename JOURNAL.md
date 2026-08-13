@@ -6,11 +6,11 @@
 
 ## 2026-08-07 — Disk-persisted vector storage & RAG evaluation harness #milestone
 
-Configured Chroma vector stores in `src/rag/build_rag_system.py` to persist index artifacts to `data/vectordb_persisted/`, eliminating cold-start re-embedding overhead. Created `docs/RAG-EVAL-AND-DECOUPLING-PLAN.md` detailing the roadmap for decoupling Streamlit to a FastAPI backend + React frontend, and added a automated RAG evaluation test suite in `tests/test_rag_eval.py`.
+Configured Chroma vector stores in `src/rag/build_rag_system.py`to persist index artifacts to`data/vectordb_persisted/`, eliminating cold-start re-embedding overhead. Created `docs/RAG-EVAL-AND-DECOUPLING-PLAN.md`detailing the roadmap for decoupling Streamlit to a FastAPI backend + React frontend, and added a automated RAG evaluation test suite in`tests/test_rag_eval.py`.
 
 ## 2026-06-13 — Demo suite was non-executable; wrote the missing step library #incident
 
-A test audit found `e2e/demo/steps/` completely empty while `playwright.demo.config.ts` pointed `steps` at it — so every Gherkin step in the TradeTell tour was undefined and the demo suite couldn't run at all. The `01-tradetell-tour.feature` scenario was also truncated, ending on a dangling `When I open the retrieved sources` with no `Then`. Wrote `tradetell.steps.ts` reusing the selectors the two `probe*.mjs` scripts had already validated against the live app (`.app-title`, `[data-testid="stChatInput"] textarea`, `[data-testid="stChatMessage"]`, the "Retrieving context…" spinner text, and the `📚 N source document(s)` expander), plus a `dwell()` helper for demo pacing and 360s timeouts to absorb the RAG warm-up. Closed the feature with `Then I see the retrieved source documents`. `bddgen` + `playwright test --list` now resolve all steps and discover all 3 scenarios; `tsc --noEmit` is clean.
+A test audit found `e2e/demo/steps/`completely empty while`playwright.demo.config.ts`pointed`steps`at it — so every Gherkin step in the TradeTell tour was undefined and the demo suite couldn't run at all. The`01-tradetell-tour.feature`scenario was also truncated, ending on a dangling`When I open the retrieved sources`with no`Then`. Wrote `tradetell.steps.ts`reusing the selectors the two`probe*.mjs` scripts had already validated against the live app (`.app-title`, `[data-testid="stChatInput"] textarea`, `[data-testid="stChatMessage"]`, the "Retrieving context…" spinner text, and the `📚 N source document(s)`expander), plus a`dwell()`helper for demo pacing and 360s timeouts to absorb the RAG warm-up. Closed the feature with`Then I see the retrieved source documents`. `bddgen`+`playwright test --list`now resolve all steps and discover all 3 scenarios;`tsc --noEmit` is clean.
 
 ## 2026-06-10 — Repo brought up to the standard baseline #milestone
 
@@ -23,7 +23,7 @@ deploy with essentially a stock README; this closes that gap.
 ## 2026-06-10 — The Streamlit Cloud deploy cascade #incident
 
 Reviving the deployed app surfaced a chain of failures, each hiding the next. The
-GitHub repo rename (`imc_prosperity` → `IMC_Prosperity`) had severed the Streamlit↔GitHub
+GitHub repo rename (`imc_prosperity`→`IMC_Prosperity`) had severed the Streamlit↔GitHub
 link, so Cloud was frozen on an ancient commit. Once reconnected: unpinned `langchain`
 pulled 1.x and broke `langchain.retrievers`; Chroma's on-disk SQLite persistence failed
 on `/mount`; and `import chromadb` crashed because the resolver pulled a 2022-era

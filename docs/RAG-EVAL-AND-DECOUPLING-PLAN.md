@@ -7,7 +7,7 @@ This document outlines the engineering plan for upgrading **TradeTell** (the AI 
 ## 1. Objectives
 
 1. **Eliminate Cold-Start Overhead:** Replace in-memory Chroma DB rebuilding with disk-persisted vector store collections (`data/vectordb_persisted/`).
-2. **Decouple Frontend & Backend:** Transition from a unified Streamlit application to a dedicated **FastAPI** REST/SSE backend and a **React/Vite** frontend.
+2. **Decouple Frontend & Backend:**Transition from a unified Streamlit application to a dedicated**FastAPI**REST/SSE backend and a**React/Vite** frontend.
 3. **Automated RAG Evaluation:** Establish continuous quality benchmarks measuring Retrieval Context Precision, Answer Faithfulness, and Groundedness.
 
 ---
@@ -18,7 +18,7 @@ Currently, `src/rag/build_rag_system.py` processes raw Markdown files, Discord e
 
 ### Changes
 
-- Update `Chroma` initialization in `build_rag_system.py` to specify `persist_directory="data/vectordb_persisted"`.
+- Update `Chroma`initialization in`build_rag_system.py`to specify`persist_directory="data/vectordb_persisted"`.
 - Implement a CLI indexing script (`python -m src.rag.index_corpus`) to pre-build vector collections offline.
 - Modify runtime initialization to attempt loading existing disk collections before attempting re-indexing.
 
