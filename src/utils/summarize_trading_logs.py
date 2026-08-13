@@ -13,7 +13,7 @@ def summarize_trading_logs(log_file_path):
     special_order_patterns = defaultdict(int)
     
     # Read log file
-    with open(log_file_path, 'r') as file:
+    with open(log_file_path) as file:
         log_content = file.read()
     
     # Extract timestamps and log blocks
@@ -78,8 +78,8 @@ def format_summary_for_llm(summary):
     # Position trends section
     output += "## Position Trends\n"
     for product, positions in summary["position_trends"].items():
-        start_ts, start_pos = positions[0]
-        end_ts, end_pos = positions[1]
+        _start_ts, start_pos = positions[0]
+        _end_ts, end_pos = positions[1]
         change = end_pos - start_pos
         direction = "↑" if change > 0 else "↓" if change < 0 else "→"
         output += f"{product}: {start_pos} → {end_pos} ({direction} {abs(change)})\n"

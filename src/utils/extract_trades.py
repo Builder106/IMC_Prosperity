@@ -20,7 +20,7 @@ def extract_trade_history_to_csv(log_file_path, csv_file_path):
 
     print(f"Reading log file: {log_file_path}")
     try:
-        with open(log_file_path, 'r', encoding='utf-8') as log_file:
+        with open(log_file_path, encoding='utf-8') as log_file:
             for line in log_file:
                 stripped_line = line.strip()
 
@@ -178,4 +178,4 @@ if __name__ == "__main__":
     if another.lower() == 'y':
         # Create a recursive call with clean arguments
         sys.argv = [sys.argv[0]]  # Reset args for clean interactive prompting
-        os.execv(sys.executable, [sys.executable] + sys.argv)
+        os.execv(sys.executable, [sys.executable, *sys.argv])

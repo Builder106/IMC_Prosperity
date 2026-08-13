@@ -18,7 +18,7 @@ def extract_price_data_to_csv(log_filepath, csv_filepath):
     
     print(f"Reading log file: {log_filepath}")
     try:
-        with open(log_filepath, 'r', encoding='utf-8') as log_file:
+        with open(log_filepath, encoding='utf-8') as log_file:
             for line in log_file:
                 stripped_line = line.strip()
                 
@@ -34,7 +34,7 @@ def extract_price_data_to_csv(log_filepath, csv_filepath):
                 # If we're in the Activities log section, process data lines
                 if reading_activities and stripped_line:
                     # Skip if we encounter a new section
-                    if stripped_line == "Trade History:" or stripped_line == "Sandbox logs:":
+                    if stripped_line in {"Trade History:", "Sandbox logs:"}:
                         reading_activities = False
                         break
                     
@@ -109,7 +109,7 @@ def main():
     # Allow user to specify output path or use default
     use_default = input(f"Use default output path ({output_dir}/{name_part}_prices.csv)? (y/n): ").strip().lower()
     
-    if use_default == 'y' or use_default == '':
+    if use_default in {'y', ''}:
         csv_file = os.path.join(output_dir, f"{name_part}_prices.csv")
     else:
         csv_file = input("Enter the path for the output CSV file: ").strip()
@@ -132,7 +132,7 @@ def main():
         show_sample = input("Would you like to display a sample of the extracted data? (y/n): ").strip().lower()
         if show_sample == 'y':
             try:
-                with open(csv_file, 'r', encoding='utf-8') as f:
+                with open(csv_file, encoding='utf-8') as f:
                     sample_lines = [f.readline() for _ in range(6)]  # Header + 5 data lines
                     print("\nSample of extracted data:")
                     for line in sample_lines:

@@ -29,7 +29,7 @@ def load_code_file_mapping(mapping_file="codefile_names.md"):
             print(f"Warning: Code file mapping not found at {full_path}")
             return mapping
 
-        with open(full_path, 'r', encoding='utf-8') as f:
+        with open(full_path, encoding='utf-8') as f:
             lines = f.readlines()
 
         # Skip header rows (first two lines)
@@ -208,11 +208,7 @@ def process_code_content(code_content, language):
                 
                 # Check for end of blocks (like return, pass, etc.) to decrease indentation
                 is_end_statement = (
-                    stripped_line.startswith("return ")
-                    or stripped_line == "return"
-                    or stripped_line == "pass"
-                    or stripped_line == "break"
-                    or stripped_line == "continue"
+                    stripped_line.startswith("return ") or stripped_line in {"return", "pass", "break", "continue"}
                 )
                 next_line_not_continuation = (
                     i + 1 < len(lines)
@@ -414,7 +410,7 @@ def extract_text_content_from_container(container):
             
         # Check if this looks like a heading
         if (len(text) < 50 and (
-                div.get('style') and ('font-weight:' in div.get('style') or 'font-size:' in div.get('style')) or
+                (div.get('style') and ('font-weight:' in div.get('style') or 'font-size:' in div.get('style'))) or
                 text.strip().endswith(':'))):
             blocks.append({
                 "type": "h3",  # Assume it's a subheading

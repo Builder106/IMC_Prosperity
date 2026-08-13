@@ -374,7 +374,7 @@ def calculate_price_impact_metrics(df):
         
         if len(buy_volumes) >= 5:  # Need enough buckets
             # Calculate VPIN (Volume-Synchronized Probability of Informed Trading)
-            imbalances = [abs(b - s) / (b + s) if b + s > 0 else 0 for b, s in zip(buy_volumes, sell_volumes)]
+            imbalances = [abs(b - s) / (b + s) if b + s > 0 else 0 for b, s in zip(buy_volumes, sell_volumes, strict=False)]
             metrics["vpin"] = sum(imbalances) / len(imbalances)
     
     return metrics
@@ -422,20 +422,20 @@ def calculate_time_based_metrics(df):
     if 'mid_price' in df_sorted.columns and len(df_sorted) >= 5:
         # Calculate moving averages if enough data
         metrics["avg_rolling_volatility_5"] = df_sorted['rolling_vol_5'].mean()
-            
-            if len(df_sorted) >= 10:
-                df_sorted['sma_10'] = df_sorted['mid_price'].rolling(window=10, min_periods=1).mean()
-                df_sorted['rolling_vol_10'] = df_sorted['mid_price'].rolling(window=10, min_periods=5).std()
-                metrics["avg_rolling_volatility_10"] = df_sorted['rolling_vol_10'].mean()
-                
-                # Moving average crossover analysis
-                df_sorted['ma_cross'] = ((df_sorted['sma_5'] > df_sorted['sma_10']) & 
-                                       (df_sorted['sma_5'].shift(1) <= df_sorted['sma_10'].shift(1))).astype(int) - \
-                                      ((df_sorted['sma_5'] < df_sorted['sma_10']) & 
-                                       (df_sorted['sma_5'].shift(1) >= df_sorted['sma_10'].shift(1))).astype(int)
-                
-                metrics["ma_crossovers_up"] = (df_sorted['ma_cross'] == 1).sum()
-                metrics["ma_crossovers_down"] = (df_sorted['ma_cross'] == -1).sum()
+
+        if len(df_sorted) >= 10:
+            df_sorted['sma_10'] = df_sorted['mid_price'].rolling(window=10, min_periods=1).mean()
+            df_sorted['rolling_vol_10'] = df_sorted['mid_price'].rolling(window=10, min_periods=5).std()
+            metrics["avg_rolling_volatility_10"] = df_sorted['rolling_vol_10'].mean()
+
+            # Moving average crossover analysis
+            df_sorted['ma_cross'] = ((df_sorted['sma_5'] > df_sorted['sma_10']) &
+                                   (df_sorted['sma_5'].shift(1) <= df_sorted['sma_10'].shift(1))).astype(int) - \
+                                  ((df_sorted['sma_5'] < df_sorted['sma_10']) &
+                                   (df_sorted['sma_5'].shift(1) >= df_sorted['sma_10'].shift(1))).astype(int)
+
+            metrics["ma_crossovers_up"] = (df_sorted['ma_cross'] == 1).sum()
+            metrics["ma_crossovers_down"] = (df_sorted['ma_cross'] == -1).sum()
     
     return metrics
 
@@ -776,14 +776,14 @@ if __name__ == "__main__":
             # Process a single file (legacy mode)
             if not os.path.exists(args.single):
                 print(f"Error: File {args.single} does not exist.")
-                exit(1)
+                sys.exit(1)
                 
             try:
                 process_round_csv(args.single, args.output)
                 print(f"Processing complete! Output saved to {args.output}")
             except Exception as e:
                 print(f"Error processing file: {e}")
-                exit(1)
+                sys.exit(1)
                 
         else:
             try:
@@ -791,11 +791,11 @@ if __name__ == "__main__":
                 if args.prices and args.trades:
                     if not os.path.exists(args.prices):
                         print(f"Error: Prices file {args.prices} does not exist.")
-                        exit(1)
+                        sys.exit(1)
                         
                     if not os.path.exists(args.trades):
                         print(f"Error: Trades file {args.trades} does not exist.")
-                        exit(1)
+                        sys.exit(1)
                         
                     process_prices_and_trades(args.prices, args.trades, args.output)
                     
@@ -803,7 +803,7 @@ if __name__ == "__main__":
                 if args.observations:
                     if not os.path.exists(args.observations):
                         print(f"Error: Observations file {args.observations} does not exist.")
-                        exit(1)
+                        sys.exit(1)
                         
                     process_observation_data(args.observations, args.output)
                     
@@ -811,7 +811,7 @@ if __name__ == "__main__":
                 
             except Exception as e:
                 print(f"Error processing files: {e}")
-                exit(1)
+                sys.exit(1)
                 
     else:
         # Interactive mode

@@ -60,7 +60,7 @@ def process_notion_wiki_data(wiki_dir=NOTION_WIKI_DIR):
         full_path = wiki_dir / file_path
         try:
             if os.path.exists(full_path):
-                with open(full_path, 'r', encoding='utf-8') as f:
+                with open(full_path, encoding='utf-8') as f:
                     return f.read()
             else:
                 print(f"Warning: Referenced code file not found: {full_path}")
@@ -114,7 +114,7 @@ def process_notion_wiki_data(wiki_dir=NOTION_WIKI_DIR):
     
     def load_json_file(json_file, category):
         try:
-            with open(json_file, 'r', encoding='utf-8') as f:
+            with open(json_file, encoding='utf-8') as f:
                 data = json.load(f)
         except (OSError, json.JSONDecodeError) as e:
             print(f"Error reading JSON file {json_file}: {e}")
@@ -200,7 +200,7 @@ def process_notion_wiki_data(wiki_dir=NOTION_WIKI_DIR):
         # Process each JSON file in the category directory
         for json_file in category_path.rglob("*.json"):
             try:
-                with open(json_file, 'r', encoding='utf-8') as f:
+                with open(json_file, encoding='utf-8') as f:
                     data = json.load(f)
                     
                 # Extract content from the JSON structure

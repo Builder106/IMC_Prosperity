@@ -1,6 +1,7 @@
 import argparse
 import json
 import os
+import sys
 from pathlib import Path
 
 import numpy as np
@@ -58,10 +59,9 @@ def process_prices_and_trades(prices_file_path, trades_file_path, output_dir="pr
                 # Filter trades for this product
                 product_trades = trades_df[trades_df['product'] == product] if 'product' in trades_df.columns else None
                 
-                if product_trades is None or len(product_trades) == 0:
+                if product_trades is None or (len(product_trades) == 0 and 'symbol' in trades_df.columns):
                     # Try matching with symbol instead if no product column in trades
-                    if 'symbol' in trades_df.columns:
-                        product_trades = trades_df[trades_df['symbol'] == product]
+                    product_trades = trades_df[trades_df['symbol'] == product]
                 
                 # Merge prices and trades data if both are available
                 if product_trades is not None and len(product_trades) > 0:
@@ -375,7 +375,7 @@ def calculate_price_impact_metrics(df):
         
         if len(buy_volumes) >= 5:  # Need enough buckets
             # Calculate VPIN (Volume-Synchronized Probability of Informed Trading)
-            imbalances = [abs(b - s) / (b + s) if b + s > 0 else 0 for b, s in zip(buy_volumes, sell_volumes)]
+            imbalances = [abs(b - s) / (b + s) if b + s > 0 else 0 for b, s in zip(buy_volumes, sell_volumes, strict=False)]
             metrics["vpin"] = sum(imbalances) / len(imbalances)
     
     return metrics
@@ -420,14 +420,13 @@ def calculate_time_based_metrics(df):
                 metrics["avg_price_acceleration"] = df_sorted.loc[valid_acc_idx, 'price_acceleration'].mean()
     
     # Moving averages and volatility if enough data points
-    if 'mid_price' in df_sorted.columns:
+    if 'mid_price' in df_sorted.columns and len(df_sorted) >= 5:
         # Calculate moving averages if enough data
-        if len(df_sorted) >= 5:
-            df_sorted['sma_5'] = df_sorted['mid_price'].rolling(window=5, min_periods=1).mean()
-            df_sorted['rolling_vol_5'] = df_sorted['mid_price'].rolling(window=5, min_periods=3).std()
-            metrics["avg_rolling_volatility_5"] = df_sorted['rolling_vol_5'].mean()
-            
-            if len(df_sorted) >= 10:
+        df_sorted['sma_5'] = df_sorted['mid_price'].rolling(window=5, min_periods=1).mean()
+        df_sorted['rolling_vol_5'] = df_sorted['mid_price'].rolling(window=5, min_periods=3).std()
+        metrics["avg_rolling_volatility_5"] = df_sorted['rolling_vol_5'].mean()
+
+        if len(df_sorted) >= 10:
                 df_sorted['sma_10'] = df_sorted['mid_price'].rolling(window=10, min_periods=1).mean()
                 df_sorted['rolling_vol_10'] = df_sorted['mid_price'].rolling(window=10, min_periods=5).std()
                 metrics["avg_rolling_volatility_10"] = df_sorted['rolling_vol_10'].mean()
@@ -459,8 +458,8 @@ def calculate_statistical_metrics(df):
     metrics["price_kurtosis"] = stats.kurtosis(df['mid_price'])  # Excess kurtosis (normal = 0)
     
     # Normality tests
-    shapiro_stat, shapiro_pval = stats.shapiro(df['mid_price']) if len(df) <= 5000 else (np.nan, np.nan)
-    jb_stat, jb_pval = stats.jarque_bera(df['mid_price'])
+    _shapiro_stat, shapiro_pval = stats.shapiro(df['mid_price']) if len(df) <= 5000 else (np.nan, np.nan)
+    _jb_stat, jb_pval = stats.jarque_bera(df['mid_price'])
     metrics["shapiro_normality_pvalue"] = shapiro_pval
     metrics["jarque_bera_normality_pvalue"] = jb_pval
     
@@ -496,14 +495,14 @@ def calculate_statistical_metrics(df):
             # Ljung-Box test for autocorrelation (p < 0.05 suggests autocorrelation)
             try:
                 # Try newer scipy versions
-                lb_stat, lb_pval = stats.acorr_ljungbox(valid_returns, lags=[5], return_df=False)  # type: ignore
+                _lb_stat, lb_pval = stats.acorr_ljungbox(valid_returns, lags=[5], return_df=False)  # type: ignore
                 metrics["returns_autocorr_pvalue"] = lb_pval[0]
             except (AttributeError, TypeError):
                 try:
                     # Try older scipy versions
-                    lb_stat, lb_pval = stats.acorr_ljungbox(valid_returns, nlags=5)  # type: ignore
+                    _lb_stat, lb_pval = stats.acorr_ljungbox(valid_returns, nlags=5)  # type: ignore
                     metrics["returns_autocorr_pvalue"] = lb_pval[0]
-                except:
+                except Exception:
                     # Fallback if function not available
                     metrics["returns_autocorr_pvalue"] = np.nan
             
@@ -516,7 +515,7 @@ def calculate_statistical_metrics(df):
     if len(df) > 100:
         try:
             metrics["hurst_exponent"] = calculate_hurst_exponent(df['mid_price'])
-        except:
+        except Exception:
             metrics["hurst_exponent"] = np.nan
             
     # Correlation metrics if multiple price columns exist
@@ -607,35 +606,35 @@ if __name__ == "__main__":
             # Process a single file (legacy mode)
             if not os.path.exists(args.single):
                 print(f"Error: File {args.single} does not exist.")
-                exit(1)
+                sys.exit(1)
                 
             try:
                 process_round_csv(args.single, args.output)
                 print(f"Processing complete! Output saved to {args.output}")
             except Exception as e:
                 print(f"Error processing file: {e}")
-                exit(1)
+                sys.exit(1)
                 
         elif args.prices and args.trades:
             # Process prices and trades files
             if not os.path.exists(args.prices):
                 print(f"Error: Prices file {args.prices} does not exist.")
-                exit(1)
+                sys.exit(1)
                 
             if not os.path.exists(args.trades):
                 print(f"Error: Trades file {args.trades} does not exist.")
-                exit(1)
+                sys.exit(1)
                 
             try:
                 process_prices_and_trades(args.prices, args.trades, args.output)
                 print(f"Processing complete! Output saved to {args.output}")
             except Exception as e:
                 print(f"Error processing files: {e}")
-                exit(1)
+                sys.exit(1)
                 
         else:
             print("Error: You must provide either both --prices and --trades or a --single file.")
-            exit(1)
+            sys.exit(1)
             
     else:
         # Interactive mode
