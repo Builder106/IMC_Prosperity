@@ -28,6 +28,30 @@ jobs:
     steps:
       - uses: actions/checkout@v7
 
+      - name: Cache uv
+        uses: actions/cache@v4
+        with:
+          path: ~/.cache/uv
+          key: uv-${{ runner.os }}-${{ hashFiles('uv.lock') }}
+          restore-keys: |
+            uv-${{ runner.os }}-
+
+      - name: Cache pip
+        uses: actions/cache@v4
+        with:
+          path: ~/.cache/pip
+          key: pip-${{ runner.os }}-${{ hashFiles('uv.lock') }}
+          restore-keys: |
+            pip-${{ runner.os }}-
+
+      - name: Cache Hugging Face
+        uses: actions/cache@v4
+        with:
+          path: ~/.cache/huggingface
+          key: hf-${{ runner.os }}-${{ hashFiles('uv.lock') }}
+          restore-keys: |
+            hf-${{ runner.os }}-
+
       - name: Set up uv
         uses: astral-sh/setup-uv@v7
         with:
