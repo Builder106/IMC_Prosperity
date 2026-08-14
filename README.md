@@ -2,7 +2,7 @@
   <picture>
     <source media="(prefers-color-scheme: dark)" srcset="assets/banner-dark.svg">
     <source media="(prefers-color-scheme: light)" srcset="assets/banner-light.svg">
-    <img alt="IMC Prosperity Trading Assistant — RAG-powered trading insights" src="assets/banner-dark.svg" width="100%">
+    <img alt="IMC Prosperity Trading Assistant: RAG-powered trading insights" src="assets/banner-dark.svg" width="100%">
   </picture>
 </p>
 
@@ -12,17 +12,19 @@
 [![Live demo](https://img.shields.io/badge/demo-live-success.svg)](https://tradetell.streamlit.app)
 [![Built with Streamlit](https://img.shields.io/badge/built%20with-Streamlit-FF4B4B.svg)](https://streamlit.io)
 
-An AI assistant for the **IMC Prosperity** trading competition: ask about products,
-position limits, and strategies — or request a ready-to-run trading algorithm —
-and get answers grounded in the competition wiki, community Discord, and historical
-market data via retrieval-augmented generation.
+> **An AI assistant for competitive algorithmic trading.** Turns rules, market data, and community knowledge into automated trading bots.
+
+## 💡 What is this Assistant?
+
+In algorithmic trading competitions, participants write code that buys and sells assets automatically in simulated markets. This assistant acts like a trading coach and strategy generator. It reads competition rulebooks, historical trade data, and community discussions to answer technical questions and generate working trading algorithms.
+
+Ask about products, position limits, and market mechanics, or request a ready-to-run trading algorithm grounded in competition rules via retrieval-augmented generation (RAG).
 
 **Live app:** [tradetell.streamlit.app](https://tradetell.streamlit.app)
 
-## Overview
+## 🛠 Technical Overview
 
-This project combines Notion wiki content, trading logs, and code examples into a
-RAG (Retrieval-Augmented Generation) system that can:
+This project combines Notion wiki documentation, trading logs, and code examples into a multi-vector RAG system that can:
 
 - Answer questions about IMC Prosperity rules, mechanics, and concepts
 - Analyze trading logs and surface insights

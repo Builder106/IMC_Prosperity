@@ -4,6 +4,10 @@
 > happen — retrospectives need this raw material to land. Reverse-chronological;
 > one paragraph max per entry.
 
+## 2026-08-14: Accessible plain-English documentation update #decision
+
+Updated the README headline, summary tagline, and introduction to explain the trading assistant as an automated strategy coach for trading competitions. Replaced specialized jargon with intuitive concepts and removed all em dashes from the introductory prose.
+
 ## 2026-08-07 — Disk-persisted vector storage & RAG evaluation harness #milestone
 
 Configured Chroma vector stores in `src/rag/build_rag_system.py`to persist index artifacts to`data/vectordb_persisted/`, eliminating cold-start re-embedding overhead. Created `docs/RAG-EVAL-AND-DECOUPLING-PLAN.md`detailing the roadmap for decoupling Streamlit to a FastAPI backend + React frontend, and added a automated RAG evaluation test suite in`tests/test_rag_eval.py`.
