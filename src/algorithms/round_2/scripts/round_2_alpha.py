@@ -1,7 +1,6 @@
 import json
 import math
 from collections import deque
-from typing import Any
 
 from datamodel import (
     Listing,
@@ -20,7 +19,7 @@ class Logger:
         self.logs = ""
         self.max_log_length = 3750
 
-    def print(self, *objects: Any, sep: str = " ", end: str = "\n") -> None:
+    def print(self, *objects: object, sep: str = " ", end: str = "\n") -> None:
         self.logs += sep.join(map(str, objects)) + end
 
     def flush(self, state: TradingState, orders: dict[Symbol, list[Order]], conversions: int, trader_data: str) -> None:
@@ -53,7 +52,7 @@ class Logger:
 
         self.logs = ""
 
-    def compress_state(self, state: TradingState, trader_data: str) -> list[Any]:
+    def compress_state(self, state: TradingState, trader_data: str) -> list[object]:
         return [
             state.timestamp,
             trader_data,
@@ -65,21 +64,21 @@ class Logger:
             self.compress_observations(state.observations),
         ]
 
-    def compress_listings(self, listings: dict[Symbol, Listing]) -> list[list[Any]]:
+    def compress_listings(self, listings: dict[Symbol, Listing]) -> list[list[object]]:
         compressed = []
         for listing in listings.values():
             compressed.append([listing.symbol, listing.product, listing.denomination])
 
         return compressed
 
-    def compress_order_depths(self, order_depths: dict[Symbol, OrderDepth]) -> dict[Symbol, list[Any]]:
+    def compress_order_depths(self, order_depths: dict[Symbol, OrderDepth]) -> dict[Symbol, list[object]]:
         compressed = {}
         for symbol, order_depth in order_depths.items():
             compressed[symbol] = [order_depth.buy_orders, order_depth.sell_orders]
 
         return compressed
 
-    def compress_trades(self, trades: dict[Symbol, list[Trade]]) -> list[list[Any]]:
+    def compress_trades(self, trades: dict[Symbol, list[Trade]]) -> list[list[object]]:
         compressed = []
         for arr in trades.values():
             for trade in arr:
@@ -96,7 +95,7 @@ class Logger:
 
         return compressed
 
-    def compress_observations(self, observations: Observation) -> list[Any]:
+    def compress_observations(self, observations: Observation) -> list[object]:
         conversion_observations = {}
         for product, observation in observations.conversionObservations.items():
             conversion_observations[product] = [
@@ -111,7 +110,7 @@ class Logger:
 
         return [observations.plainValueObservations, conversion_observations]
 
-    def compress_orders(self, orders: dict[Symbol, list[Order]]) -> list[list[Any]]:
+    def compress_orders(self, orders: dict[Symbol, list[Order]]) -> list[list[object]]:
         compressed = []
         for arr in orders.values():
             for order in arr:
@@ -119,7 +118,7 @@ class Logger:
 
         return compressed
 
-    def to_json(self, value: Any) -> str:
+    def to_json(self, value: object) -> str:
         return json.dumps(value, cls=ProsperityEncoder, separators=(",", ":"))
 
     def truncate(self, value: str, max_length: int) -> str:
