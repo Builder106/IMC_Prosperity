@@ -5,6 +5,7 @@ from pathlib import Path
 try:
     from langchain_core.documents import Document  # type: ignore
 except ImportError:
+
     @dataclass
     class Document:
         page_content: str
@@ -35,7 +36,7 @@ def _chunk_lines(lines, chunk_size):
             continue
         start = 0
         while start < len(line):
-            prepared_lines.append(line[start:start + chunk_size])
+            prepared_lines.append(line[start : start + chunk_size])
             start += chunk_size
 
     chunks = []

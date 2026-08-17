@@ -1,5 +1,5 @@
-from src.utils.notion_scraper import notion_scraper_stable as scraper
 from playwright.sync_api import Error as PlaywrightError
+from src.utils.notion_scraper import notion_scraper_stable as scraper
 
 
 class FakePage:
@@ -39,7 +39,9 @@ def test_safe_goto_retries_then_succeeds():
 
 
 def test_safe_goto_fails_after_all_retries():
-    page = FakePage([PlaywrightError("timeout"), PlaywrightError("timeout"), PlaywrightError("timeout")])
+    page = FakePage(
+        [PlaywrightError("timeout"), PlaywrightError("timeout"), PlaywrightError("timeout")]
+    )
     result = scraper.safe_goto(page, "https://example.com", retries=2)
     assert result is False
     assert len(page.calls) == 3

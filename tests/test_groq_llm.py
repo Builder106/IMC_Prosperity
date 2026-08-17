@@ -1,7 +1,6 @@
 from unittest.mock import MagicMock, patch
 
 import pytest
-
 from src.rag.groq_llm import run_groq_chat
 
 

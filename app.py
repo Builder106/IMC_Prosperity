@@ -12,7 +12,6 @@ except ImportError:
     pass
 
 import streamlit as st
-
 from src.rag.build_rag_system import (
     create_combined_retriever,
     create_rag_chain,
@@ -84,9 +83,7 @@ def initialize_rag_system():
     notion_vectorstore, trading_vectorstore, code_vectorstore = create_vector_stores(
         notion_documents, trading_documents
     )
-    retriever = create_combined_retriever(
-        notion_vectorstore, trading_vectorstore, code_vectorstore
-    )
+    retriever = create_combined_retriever(notion_vectorstore, trading_vectorstore, code_vectorstore)
     return create_rag_chain(retriever)
 
 
@@ -143,7 +140,14 @@ try:
     # HF_TOKEN is read by huggingface-hub when sentence-transformers pulls the
     # embedding model; bridging it authenticates the download (higher rate limit,
     # no "unauthenticated requests to the HF Hub" warning).
-    for _key in ("GROQ_API_KEY", "LLM_MODEL", "LLM_TEMPERATURE", "GROQ_TIMEOUT_SECONDS", "EMBEDDING_MODEL", "HF_TOKEN"):
+    for _key in (
+        "GROQ_API_KEY",
+        "LLM_MODEL",
+        "LLM_TEMPERATURE",
+        "GROQ_TIMEOUT_SECONDS",
+        "EMBEDDING_MODEL",
+        "HF_TOKEN",
+    ):
         if _key in st.secrets:
             os.environ.setdefault(_key, str(st.secrets[_key]))
 except ImportError:
@@ -194,6 +198,4 @@ if prompt:
         st.markdown(answer)
         render_sources(sources)
 
-    st.session_state.messages.append(
-        {"role": "assistant", "content": answer, "sources": sources}
-    )
+    st.session_state.messages.append({"role": "assistant", "content": answer, "sources": sources})

@@ -80,5 +80,5 @@ def _list_dir_recursive(directory_path, prefix=""):
 if __name__ == "__main__":
     folder_path_input = input("Enter the path to the folder: ")
     # Basic input cleaning (remove potential surrounding quotes)
-    folder_path_input = folder_path_input.strip('\'"')
+    folder_path_input = folder_path_input.strip("'\"")
     list_directory_structure(folder_path_input)

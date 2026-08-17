@@ -53,6 +53,8 @@ norecursedirs = ["tools", ".venv", "vectordb", "data", "backtests"]
 target-version = "py311"
 src = ["src", "app.py", "tests"]
 line-length = 100
+
+[tool.ruff.lint]
 select = [
     "E",    # pycodestyle errors
     "W",    # pycodestyle warnings
@@ -88,11 +90,12 @@ ignore = [
 fixable = ["ALL"]
 unfixable = []
 
+[tool.ruff.lint.per-file-ignores]
+"src/algorithms/round_*/**/*.py" = ["N801", "N802", "N803", "PLR0913", "PLR0917"]
+"src/algorithms/round_2/scripts/datamodel.py" = ["N801", "N802", "N803", "PLR0913", "PLR0917"]
+
 [tool.ruff.format]
 quote-style = "double"
 indent-style = "space"
 
-[tool.ruff.lint.per-file-ignores]
-"src/algorithms/round_*/**/*.py" = ["N801", "N802", "N803", "PLR0913", "PLR0917"]
-"src/algorithms/round_2/scripts/datamodel.py" = ["N801", "N802", "N803", "PLR0913", "PLR0917"]
 

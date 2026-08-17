@@ -19,7 +19,6 @@ SQUID_POS_LIMIT = 50
 
 
 class Trader:
-
     def __init__(self):
         self.squid_ink_mid_price_history = deque(maxlen=SQUID_SMA_WINDOW)
         print("Trader initialized.")
@@ -45,7 +44,9 @@ class Trader:
             buy_price = RESIN_FAIR_VALUE - RESIN_SPREAD_CAPTURE
             sell_price = RESIN_FAIR_VALUE + RESIN_SPREAD_CAPTURE
 
-            print(f"  {product}: Fair Value={RESIN_FAIR_VALUE}, Target Buy={buy_price}, Target Sell={sell_price}, Position={current_position}")
+            print(
+                f"  {product}: Fair Value={RESIN_FAIR_VALUE}, Target Buy={buy_price}, Target Sell={sell_price}, Position={current_position}"
+            )
 
             if current_position < RESIN_POS_LIMIT:
                 buy_volume = min(RESIN_ORDER_VOLUME, RESIN_POS_LIMIT - current_position)
@@ -61,10 +62,12 @@ class Trader:
 
             result[product] = orders
         else:
-             print(f"  {RAINFOREST_RESIN}: No order depth data available.")
+            print(f"  {RAINFOREST_RESIN}: No order depth data available.")
 
         if KELP in state.order_depths:
-             print(f"  {KELP}: Insufficient information provided for a trading strategy. No orders placed.")
+            print(
+                f"  {KELP}: Insufficient information provided for a trading strategy. No orders placed."
+            )
 
         if SQUID_INK in state.order_depths:
             product = SQUID_INK
@@ -89,26 +92,37 @@ class Trader:
                             if buy_volume > 0:
                                 buy_order_price = round(sma - SQUID_DEVIATION_THRESHOLD)
                                 orders.append(Order(product, buy_order_price, buy_volume))
-                                print(f"    Mean Reversion BUY Signal: Price ({mid_price:.2f}) < SMA ({sma:.2f}) - Threshold ({SQUID_DEVIATION_THRESHOLD}). Placing BUY: {buy_volume} at {buy_order_price}")
+                                print(
+                                    f"    Mean Reversion BUY Signal: Price ({mid_price:.2f}) < SMA ({sma:.2f}) - Threshold ({SQUID_DEVIATION_THRESHOLD}). Placing BUY: {buy_volume} at {buy_order_price}"
+                                )
 
-                    elif deviation > SQUID_DEVIATION_THRESHOLD and current_position > -SQUID_POS_LIMIT:
+                    elif (
+                        deviation > SQUID_DEVIATION_THRESHOLD
+                        and current_position > -SQUID_POS_LIMIT
+                    ):
                         sell_volume = min(SQUID_ORDER_VOLUME, SQUID_POS_LIMIT + current_position)
                         if sell_volume > 0:
                             sell_order_price = round(sma + SQUID_DEVIATION_THRESHOLD)
                             orders.append(Order(product, sell_order_price, -sell_volume))
-                            print(f"    Mean Reversion SELL Signal: Price ({mid_price:.2f}) > SMA ({sma:.2f}) + Threshold ({SQUID_DEVIATION_THRESHOLD}). Placing SELL: {sell_volume} at {sell_order_price}")
+                            print(
+                                f"    Mean Reversion SELL Signal: Price ({mid_price:.2f}) > SMA ({sma:.2f}) + Threshold ({SQUID_DEVIATION_THRESHOLD}). Placing SELL: {sell_volume} at {sell_order_price}"
+                            )
 
                 else:
-                    print(f"    Collecting price history for SMA calculation ({len(self.squid_ink_mid_price_history)}/{SQUID_SMA_WINDOW}).")
+                    print(
+                        f"    Collecting price history for SMA calculation ({len(self.squid_ink_mid_price_history)}/{SQUID_SMA_WINDOW})."
+                    )
 
             else:
-                 print(f"  {product}: Could not calculate mid-price (likely thin order book).")
+                print(f"  {product}: Could not calculate mid-price (likely thin order book).")
 
             result[product] = orders
         else:
             print(f"  {SQUID_INK}: No order depth data available.")
 
-        print(f"--- Orders Generated: {[(k, [(o.symbol, o.price, o.quantity) for o in v]) for k, v in result.items()]} ---")
+        print(
+            f"--- Orders Generated: {[(k, [(o.symbol, o.price, o.quantity) for o in v]) for k, v in result.items()]} ---"
+        )
         traderData = ""
         conversions = 0
         return result, conversions, traderData

@@ -111,9 +111,13 @@ class Trader:
         buy_capacity = max(0, limit - position)
         sell_capacity = max(0, limit + position)
 
-        if buy_capacity > 0 and (not order_depth.sell_orders or bid_quote < min(order_depth.sell_orders)):
+        if buy_capacity > 0 and (
+            not order_depth.sell_orders or bid_quote < min(order_depth.sell_orders)
+        ):
             orders.append(Order(product, bid_quote, min(buy_capacity, MAX_MAKE_QTY[product])))
-        if sell_capacity > 0 and (not order_depth.buy_orders or ask_quote > max(order_depth.buy_orders)):
+        if sell_capacity > 0 and (
+            not order_depth.buy_orders or ask_quote > max(order_depth.buy_orders)
+        ):
             orders.append(Order(product, ask_quote, -min(sell_capacity, MAX_MAKE_QTY[product])))
 
         return orders

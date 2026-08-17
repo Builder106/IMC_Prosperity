@@ -2,6 +2,7 @@ import pytest
 
 # Mock test suite evaluating RAG retrieval and answer precision for IMC Prosperity wiki rules
 
+
 @pytest.fixture
 def sample_ground_truth_queries():
     return [
@@ -22,12 +23,14 @@ def sample_ground_truth_queries():
         },
     ]
 
+
 def test_ground_truth_query_structure(sample_ground_truth_queries):
     assert len(sample_ground_truth_queries) == 3
     for item in sample_ground_truth_queries:
         assert "query" in item
         assert "expected_keyword" in item
         assert "category" in item
+
 
 def test_mock_rag_precision_scoring(sample_ground_truth_queries):
     # Simulated top-1 retrieval evaluation
@@ -36,11 +39,11 @@ def test_mock_rag_precision_scoring(sample_ground_truth_queries):
         "STARFRUIT position limit is capped at 20 contracts.",
         "IMC Prosperity consists of 5 main trading rounds over 10 days.",
     ]
-    
+
     hits = 0
     for idx, item in enumerate(sample_ground_truth_queries):
         if item["expected_keyword"] in retrieved_mock_docs[idx]:
             hits += 1
-            
+
     precision = hits / len(sample_ground_truth_queries)
     assert precision == 1.0, f"Expected 100% precision on mock benchmark, got {precision}"

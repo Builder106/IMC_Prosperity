@@ -35,7 +35,7 @@ load_dotenv()
 # Directory settings
 # SCRIPT_DIR should be defined before it's used for other constants
 SCRIPT_DIR = Path(__file__).resolve().parent  # Gets the directory of the current script (src/rag)
-PROJECT_ROOT = SCRIPT_DIR.parent.parent    # Goes up two levels to the project root (imc_prosperity)
+PROJECT_ROOT = SCRIPT_DIR.parent.parent  # Goes up two levels to the project root (imc_prosperity)
 
 NOTION_WIKI_DIR = PROJECT_ROOT / "data" / "prosperity_wiki"
 TRADING_DATA_DIR = PROJECT_ROOT / "data" / "trading_data"
@@ -43,24 +43,25 @@ DISCORD_DATA_DIR = PROJECT_ROOT / "data" / "discord" / "raw"
 PERSIST_DIR = PROJECT_ROOT / "data" / "vectordb_persisted"
 VECTOR_DB_DIR = PERSIST_DIR
 
+
 def process_notion_wiki_data(wiki_dir=NOTION_WIKI_DIR):
     """
     Process Notion Wiki JSON data
-    
+
     Args:
         wiki_dir: Directory containing Notion Wiki data
-        
+
     Returns:
         List of Document objects suitable for vector store
     """
     print(f"Processing Notion Wiki data from {wiki_dir}...")
-    
+
     def load_code_file(file_path):
         """Load code from external file referenced in the JSON"""
         full_path = wiki_dir / file_path
         try:
             if os.path.exists(full_path):
-                with open(full_path, encoding='utf-8') as f:
+                with open(full_path, encoding="utf-8") as f:
                     return f.read()
             else:
                 print(f"Warning: Referenced code file not found: {full_path}")
@@ -68,35 +69,35 @@ def process_notion_wiki_data(wiki_dir=NOTION_WIKI_DIR):
         except OSError as e:
             print(f"Error loading code file {full_path}: {e}")
             return None
-    
+
     def extract_code_languages(data):
         """Extract programming languages used in code blocks"""
         languages = set()
-        
+
         # Handle list structure
         if isinstance(data, list):
             for item in data:
                 if isinstance(item, dict) and item.get("type") == "code" and "language" in item:
                     languages.add(item["language"])
-        
+
         # Handle dictionary structure
         elif isinstance(data, dict) and "content_blocks" in data:
             for block in data["content_blocks"]:
                 if "code" in block and "language" in block:
                     languages.add(block["language"])
-                    
+
         return list(languages) if languages else []
-    
+
     def extract_title_from_markdown(text, file_path):
         for line in text.splitlines():
             stripped = line.strip()
             if stripped.startswith("#"):
                 return stripped.lstrip("#").strip()
         return file_path.stem.replace("_", " ").replace("-", " ").strip()
-    
+
     def load_markdown_file(md_file, category):
         try:
-            content = md_file.read_text(encoding='utf-8')
+            content = md_file.read_text(encoding="utf-8")
         except OSError as e:
             print(f"Error reading markdown file {md_file}: {e}")
             return None
@@ -108,31 +109,33 @@ def process_notion_wiki_data(wiki_dir=NOTION_WIKI_DIR):
                 "type": "notion_wiki",
                 "title": extract_title_from_markdown(content, md_file),
                 "contains_code": "```" in content,
-                "code_languages": list({lang for lang in re.findall(r'```(\w*)', content) if lang})
-            }
+                "code_languages": list({lang for lang in re.findall(r"```(\w*)", content) if lang}),
+            },
         )
-    
+
     def load_json_file(json_file, category):
         try:
-            with open(json_file, encoding='utf-8') as f:
+            with open(json_file, encoding="utf-8") as f:
                 data = json.load(f)
         except (OSError, json.JSONDecodeError) as e:
             print(f"Error reading JSON file {json_file}: {e}")
             return None
-        
+
         content = ""
-        
+
         if isinstance(data, list):
             for item in data:
                 if isinstance(item, dict):
                     if "type" in item:
                         if item["type"].startswith("h"):
                             heading_level = item["type"][1:]
-                            content += f"{ '#' * int(heading_level)} {item['content']}\n\n"
+                            content += f"{'#' * int(heading_level)} {item['content']}\n\n"
                         elif item["type"] == "p":
                             content += f"{item['content']}\n\n"
                         elif item["type"] == "list" and "items" in item:
-                            content += process_list_items(item["items"], item.get("style", "bulleted"))
+                            content += process_list_items(
+                                item["items"], item.get("style", "bulleted")
+                            )
                         elif item["type"] == "code" and "file_path" in item:
                             code_content = load_code_file(item["file_path"])
                             if code_content:
@@ -165,7 +168,7 @@ def process_notion_wiki_data(wiki_dir=NOTION_WIKI_DIR):
                         else:
                             preview = block.get("preview", "Code content unavailable")
                             content += f"```\n{preview}\n```\n\n"
-        
+
         return Document(
             page_content=content,
             metadata={
@@ -174,38 +177,38 @@ def process_notion_wiki_data(wiki_dir=NOTION_WIKI_DIR):
                 "type": "notion_wiki",
                 "title": extract_title(data),
                 "contains_code": "```" in content,
-                "code_languages": extract_code_languages(data)
-            }
+                "code_languages": extract_code_languages(data),
+            },
         )
-    
+
     wiki_path = Path(wiki_dir)
     documents = []
-    
+
     # Categories to process
     categories = ["about_prosperity", "e-learning_center", "rounds"]
-    
+
     for md_file in wiki_path.glob("*.md"):
         doc = load_markdown_file(md_file, "root")
         if doc:
             documents.append(doc)
             print(f"Processed {md_file.name}")
-    
+
     for category in categories:
         category_path = wiki_path / category
-        
+
         if not category_path.exists():
             print(f"Category directory {category} not found")
             continue
-            
+
         # Process each JSON file in the category directory
         for json_file in category_path.rglob("*.json"):
             try:
-                with open(json_file, encoding='utf-8') as f:
+                with open(json_file, encoding="utf-8") as f:
                     data = json.load(f)
-                    
+
                 # Extract content from the JSON structure
                 content = ""
-                
+
                 # Process the list structure with proper type handling
                 if isinstance(data, list):
                     for item in data:
@@ -221,7 +224,9 @@ def process_notion_wiki_data(wiki_dir=NOTION_WIKI_DIR):
                                     content += f"{item['content']}\n\n"
                                 elif item["type"] == "list" and "items" in item:
                                     # Handle lists with nested items
-                                    content += process_list_items(item["items"], item.get("style", "bulleted"))
+                                    content += process_list_items(
+                                        item["items"], item.get("style", "bulleted")
+                                    )
                                 elif item["type"] == "code" and "file_path" in item:
                                     # Load external code file
                                     code_content = load_code_file(item["file_path"])
@@ -244,7 +249,7 @@ def process_notion_wiki_data(wiki_dir=NOTION_WIKI_DIR):
                     # Handle dictionary structure (if exists)
                     if "title" in data:
                         content += f"# {data['title']}\n\n"
-                    
+
                     if "content_blocks" in data:
                         for block in data["content_blocks"]:
                             if "text" in block:
@@ -262,7 +267,7 @@ def process_notion_wiki_data(wiki_dir=NOTION_WIKI_DIR):
                                     # Fallback to preview if available
                                     preview = block.get("preview", "Code content unavailable")
                                     content += f"```\n{preview}\n```\n\n"
-                
+
                 # Create Document with enhanced metadata
                 doc = Document(
                     page_content=content,
@@ -272,24 +277,25 @@ def process_notion_wiki_data(wiki_dir=NOTION_WIKI_DIR):
                         "type": "notion_wiki",
                         "title": extract_title(data),
                         "contains_code": "```" in content,
-                        "code_languages": extract_code_languages(data)
-                    }
+                        "code_languages": extract_code_languages(data),
+                    },
                 )
-                
+
                 documents.append(doc)
                 print(f"Processed {json_file.name}")
 
             except (OSError, ValueError, KeyError) as e:
                 print(f"Error processing {json_file}: {e}")
-        
+
         for md_file in category_path.rglob("*.md"):
             doc = load_markdown_file(md_file, category)
             if doc:
                 documents.append(doc)
                 print(f"Processed {md_file.name}")
-    
+
     print(f"Processed {len(documents)} Notion Wiki documents")
     return documents
+
 
 def process_list_items(items, style="bulleted"):
     """Process nested list items and return formatted content"""
@@ -304,6 +310,7 @@ def process_list_items(items, style="bulleted"):
     result += "\n"  # Add extra line after list
     return result
 
+
 def extract_title(data):
     """Extract title from the data structure"""
     if isinstance(data, list):
@@ -315,68 +322,70 @@ def extract_title(data):
         return data["title"]
     return ""
 
+
 def extract_code_blocks(documents):
     """
     Extract code blocks from documents for specialized code search
-    
+
     Args:
         documents: List of Document objects
-        
+
     Returns:
         List of Document objects containing only code blocks
     """
     code_docs = []
-    code_pattern = r'```(?:(\w+))?\n(.*?)\n```'
-    
+    code_pattern = r"```(?:(\w+))?\n(.*?)\n```"
+
     for doc in documents:
         # Use regex to find code blocks with optional language specification
         matches = re.findall(code_pattern, doc.page_content, re.DOTALL)
-        
+
         if matches:
             for i, (language, code) in enumerate(matches):
                 if code.strip():  # Only add non-empty code blocks
-                    code_docs.append(Document(
-                        page_content=code,
-                        metadata={
-                            **doc.metadata,
-                            "content_type": "code_block",
-                            "language": language if language else "unknown",
-                            "block_index": i
-                        }
-                    ))
-    
+                    code_docs.append(
+                        Document(
+                            page_content=code,
+                            metadata={
+                                **doc.metadata,
+                                "content_type": "code_block",
+                                "language": language if language else "unknown",
+                                "block_index": i,
+                            },
+                        )
+                    )
+
     return code_docs
+
 
 def process_trading_data():
     """
     Process trading data CSV files into documents
-    
+
     Returns:
         List of Document objects from trading data
     """
     print(f"Processing trading data from {TRADING_DATA_DIR}...")
-    
+
     all_documents = []
-    
+
     # Discover available rounds
     available_rounds = discover_rounds(str(TRADING_DATA_DIR))
     print(f"Discovered rounds: {available_rounds}")
-    
+
     # Process each available round
     for round_name in available_rounds:
         print(f"Processing {round_name}...")
         json_documents = process_round_data(round_name, str(TRADING_DATA_DIR))
-        
+
         # Convert JSON documents to LangChain Document objects
         for json_doc in json_documents:
-            doc = Document(
-                page_content=json_doc["content"],
-                metadata=json_doc["metadata"]
-            )
+            doc = Document(page_content=json_doc["content"], metadata=json_doc["metadata"])
             all_documents.append(doc)
-    
+
     print(f"Processed a total of {len(all_documents)} trading data documents")
     return all_documents
+
 
 def process_discord_data(discord_dir=DISCORD_DATA_DIR):
     print(f"Processing Discord data from {discord_dir}...")
@@ -386,24 +395,25 @@ def process_discord_data(discord_dir=DISCORD_DATA_DIR):
     print(f"Processed {len(documents)} Discord documents")
     return documents
 
+
 def create_vector_stores(notion_documents, trading_documents):
     """
     Create vector stores for both document types
-    
+
     Args:
         notion_documents: List of Notion Wiki documents
         trading_documents: List of trading data documents
-        
+
     Returns:
         Tuple of (notion_vectorstore, trading_vectorstore, code_vectorstore)
     """
     print("Creating vector stores...")
-    
+
     # Initialize the embedding model with Google's generative embeddings
     embeddings = HuggingFaceEmbeddings(
         model_name=get_embedding_model_name(),
     )
-    
+
     # Create text splitter optimized for code and general content
     text_splitter = RecursiveCharacterTextSplitter.from_language(
         language="python",  # type: ignore
@@ -418,7 +428,7 @@ def create_vector_stores(notion_documents, trading_documents):
     # Capture any per-store build failures so a total failure can be surfaced
     # instead of silently returning a None retriever.
     build_errors = []
-    
+
     def ensure_document(item):
         if isinstance(item, Document):
             return item
@@ -428,14 +438,14 @@ def create_vector_stores(notion_documents, trading_documents):
                 content = str(item[0]) if item[0] is not None else ""
                 metadata = item[1] if len(item) > 1 and isinstance(item[1], dict) else {}
                 return Document(page_content=content, metadata=metadata)
-        elif hasattr(item, 'page_content'):
+        elif hasattr(item, "page_content"):
             # Handle case where it has page_content but isn't a Document instance
-            metadata = item.metadata if hasattr(item, 'metadata') else {}
+            metadata = item.metadata if hasattr(item, "metadata") else {}
             return Document(page_content=item.page_content, metadata=metadata)
         else:
             # Last resort - convert to string
             return Document(page_content=str(item), metadata={})
-    
+
     def clean_metadata(metadata):
         cleaned = {}
         for key, value in metadata.items():
@@ -455,13 +465,13 @@ def create_vector_stores(notion_documents, trading_documents):
                 # Convert any other type to string
                 cleaned[key] = str(value)
         return cleaned
-    
+
     # Only create notion vector store if there are documents
     if notion_documents:
         try:
             # Split notion documents if needed
             split_notion_docs = text_splitter.split_documents(notion_documents)
-            
+
             if split_notion_docs:
                 # Process all documents to ensure they're valid Document objects
                 valid_notion_docs = []
@@ -471,15 +481,14 @@ def create_vector_stores(notion_documents, trading_documents):
                         valid_notion_docs.append(doc)
                     except (ValueError, TypeError, AttributeError) as e:
                         print(f"Error processing notion document: {e}")
-                
+
                 # Now clean and normalize the metadata
                 filtered_notion_docs = []
                 for doc in valid_notion_docs:
                     try:
                         # First create a document with cleaned metadata
                         cleaned_doc = Document(
-                            page_content=doc.page_content,
-                            metadata=clean_metadata(doc.metadata)
+                            page_content=doc.page_content, metadata=clean_metadata(doc.metadata)
                         )
                         filtered_notion_docs.append(cleaned_doc)
                     except (ValueError, TypeError, AttributeError) as e:
@@ -491,17 +500,25 @@ def create_vector_stores(notion_documents, trading_documents):
                         except (ValueError, TypeError, AttributeError) as e2:
                             print(f"Error filtering notion document metadata: {e2}")
                             # Last resort: create a document with minimal metadata
-                            minimal_metadata = {"source": doc.metadata.get("source", "unknown")} if hasattr(doc, "metadata") else {}
-                            filtered_notion_docs.append(Document(page_content=doc.page_content, metadata=minimal_metadata))
-                
-                print(f"[DEBUG build_rag_system.py] Creating notion vector store with {len(filtered_notion_docs)} documents")
+                            minimal_metadata = (
+                                {"source": doc.metadata.get("source", "unknown")}
+                                if hasattr(doc, "metadata")
+                                else {}
+                            )
+                            filtered_notion_docs.append(
+                                Document(page_content=doc.page_content, metadata=minimal_metadata)
+                            )
+
+                print(
+                    f"[DEBUG build_rag_system.py] Creating notion vector store with {len(filtered_notion_docs)} documents"
+                )
                 # Create notion vector store
                 notion_vectorstore = Chroma.from_documents(
                     documents=filtered_notion_docs,
                     embedding=embeddings,
                     persist_directory=str(PERSIST_DIR / "notion"),
                 )
-                
+
                 # Extract code blocks for specialized code search
                 code_blocks = extract_code_blocks(notion_documents)
                 if code_blocks:
@@ -509,11 +526,15 @@ def create_vector_stores(notion_documents, trading_documents):
                     filtered_code_blocks = []
                     for doc in code_blocks:
                         try:
-                            filtered_code_blocks.append(filter_complex_metadata(ensure_document(doc)))  # type: ignore
+                            filtered_code_blocks.append(
+                                filter_complex_metadata(ensure_document(doc))
+                            )  # type: ignore
                         except (ValueError, TypeError, AttributeError) as e:
                             print(f"Error filtering code block metadata: {e}")
-                    
-                    print(f"[DEBUG build_rag_system.py] Creating specialized code vector store with {len(filtered_code_blocks)} code blocks")
+
+                    print(
+                        f"[DEBUG build_rag_system.py] Creating specialized code vector store with {len(filtered_code_blocks)} code blocks"
+                    )
                     code_vectorstore = Chroma.from_documents(
                         documents=filtered_code_blocks,
                         embedding=embeddings,
@@ -522,16 +543,17 @@ def create_vector_stores(notion_documents, trading_documents):
         except (OSError, ValueError, TypeError, AttributeError, RuntimeError) as e:
             print(f"Error processing notion documents: {e}")
             import traceback
+
             build_errors.append(f"notion: {e!r}\n{traceback.format_exc()}")
     else:
         print("No notion documents to process")
-    
+
     # Only create trading vector store if there are documents
     if trading_documents:
         try:
             # Split trading documents if needed
             split_trading_docs = text_splitter.split_documents(trading_documents)
-            
+
             if split_trading_docs:
                 # Process all documents to ensure they're valid Document objects
                 valid_trading_docs = []
@@ -541,15 +563,14 @@ def create_vector_stores(notion_documents, trading_documents):
                         valid_trading_docs.append(doc)
                     except (ValueError, TypeError, AttributeError) as e:
                         print(f"Error processing trading document: {e}")
-                
+
                 # Now clean and normalize the metadata
                 filtered_trading_docs = []
                 for doc in valid_trading_docs:
                     try:
                         # First create a document with cleaned metadata
                         cleaned_doc = Document(
-                            page_content=doc.page_content,
-                            metadata=clean_metadata(doc.metadata)
+                            page_content=doc.page_content, metadata=clean_metadata(doc.metadata)
                         )
                         filtered_trading_docs.append(cleaned_doc)
                     except (ValueError, TypeError, AttributeError) as e:
@@ -561,10 +582,18 @@ def create_vector_stores(notion_documents, trading_documents):
                         except (ValueError, TypeError, AttributeError) as e2:
                             print(f"Error filtering trading document metadata: {e2}")
                             # Last resort: create a document with minimal metadata
-                            minimal_metadata = {"source": doc.metadata.get("source", "unknown")} if hasattr(doc, "metadata") else {}
-                            filtered_trading_docs.append(Document(page_content=doc.page_content, metadata=minimal_metadata))
-                
-                print(f"[DEBUG build_rag_system.py] Creating trading vector store with {len(filtered_trading_docs)} documents")
+                            minimal_metadata = (
+                                {"source": doc.metadata.get("source", "unknown")}
+                                if hasattr(doc, "metadata")
+                                else {}
+                            )
+                            filtered_trading_docs.append(
+                                Document(page_content=doc.page_content, metadata=minimal_metadata)
+                            )
+
+                print(
+                    f"[DEBUG build_rag_system.py] Creating trading vector store with {len(filtered_trading_docs)} documents"
+                )
                 # Create trading data vector store
                 trading_vectorstore = Chroma.from_documents(
                     documents=filtered_trading_docs,
@@ -574,95 +603,99 @@ def create_vector_stores(notion_documents, trading_documents):
         except (OSError, ValueError, TypeError, AttributeError, RuntimeError) as e:
             print(f"Error processing trading documents: {e}")
             import traceback
+
             build_errors.append(f"trading: {e!r}\n{traceback.format_exc()}")
     else:
         print("No trading documents to process")
-    
+
     # Documents are automatically persisted in Chroma 0.4.x+
     # No need to call persist() method anymore
-    
+
     print("Vector stores created")
     # If we had documents but built nothing, surface the captured cause instead
     # of letting the caller fall over later on a None retriever.
-    if (notion_documents or trading_documents) and notion_vectorstore is None and trading_vectorstore is None:
+    if (
+        (notion_documents or trading_documents)
+        and notion_vectorstore is None
+        and trading_vectorstore is None
+    ):
         raise RuntimeError(
             "Failed to build any vector store from the available documents.\n"
             + "\n".join(build_errors)
         )
     return notion_vectorstore, trading_vectorstore, code_vectorstore
 
+
 def create_combined_retriever(notion_vectorstore, trading_vectorstore, code_vectorstore=None):
     print("[DEBUG build_rag_system.py] Creating combined retriever...")
     print(f"[DEBUG build_rag_system.py] Notion vectorstore is None: {notion_vectorstore is None}")
     print(f"[DEBUG build_rag_system.py] Trading vectorstore is None: {trading_vectorstore is None}")
     print(f"[DEBUG build_rag_system.py] Code vectorstore is None: {code_vectorstore is None}")
-    
+
     # Handle case where one or both vector stores might be None
     retrievers = []
     weights = []
-    
+
     if notion_vectorstore:
         notion_retriever = notion_vectorstore.as_retriever(search_kwargs={"k": 10})
         retrievers.append(notion_retriever)
         weights.append(0.2)
-    
+
     if trading_vectorstore:
         trading_retriever = trading_vectorstore.as_retriever(search_kwargs={"k": 15})
         retrievers.append(trading_retriever)
         weights.append(0.3)
-        
+
     if code_vectorstore:
         code_retriever = code_vectorstore.as_retriever(search_kwargs={"k": 12})
         retrievers.append(code_retriever)
         weights.append(0.5)
-    
+
     # Normalize weights if we have at least one retriever
     if retrievers:
         total_weight = sum(weights)
-        weights = [w/total_weight for w in weights]
-        
+        weights = [w / total_weight for w in weights]
+
         # Create an ensemble retriever with weights
-        ensemble_retriever = EnsembleRetriever(
-            retrievers=retrievers,
-            weights=weights
-        )
+        ensemble_retriever = EnsembleRetriever(retrievers=retrievers, weights=weights)
         return ensemble_retriever
     else:
         print("Warning: No retrievers available. Cannot create ensemble retriever.")
         return None
 
+
 def create_rag_chain(retriever):
     """
     Create a RAG chain with the retriever
-    
+
     Args:
         retriever: Retriever to use in the chain
-        
+
     Returns:
         RAG chain
     """
     print("Creating RAG chain...")
-    
+
     # Create a prompt template with code generation instructions
     rag_prompt_template = """
     You are an expert algorithmic trading developer specializing in IMC Prosperity trading algorithms.
     Use the following retrieved information to generate a complete, executable trading algorithm.
-    
+
     When asked to create a trading algorithm:
     1. Generate a complete `Trader` class with all necessary methods and proper implementation
     2. Include detailed docstrings and comments explaining the strategy
     3. Implement proper position management and risk controls based on position limits
     4. Format the output as a single Python file that can be executed directly
     5. Ensure the code follows best practices and handles edge cases
-    
-    If the retrieved information doesn't provide enough details for certain products, 
+
+    If the retrieved information doesn't provide enough details for certain products,
     use reasonable default strategies based on similar products and clearly mark these assumptions.
-    
+
     Retrieved information:
     {context}
-    
+
     User question: {question}
-    
+
     Start by providing a brief overview of the strategy, then generate the complete algorithm as a Python file:
     """
 
@@ -677,47 +710,52 @@ def create_rag_chain(retriever):
         max_completion_tokens=get_max_completion_tokens(),
     )
 
+
 def main():
     """Main execution function"""
     # 1. Process notion wiki data
     notion_documents = process_notion_wiki_data()
     discord_documents = process_discord_data()
     notion_documents.extend(discord_documents)
-    
+
     # 2. Process trading data
     trading_documents = process_trading_data()
-    
+
     # 3. Create vector stores
     notion_vectorstore, trading_vectorstore, code_vectorstore = create_vector_stores(
         notion_documents, trading_documents
     )
-    
+
     # 4. Create combined retriever if possible
     retriever = None
     if notion_vectorstore or trading_vectorstore or code_vectorstore:
-        retriever = create_combined_retriever(notion_vectorstore, trading_vectorstore, code_vectorstore)
-    
+        retriever = create_combined_retriever(
+            notion_vectorstore, trading_vectorstore, code_vectorstore
+        )
+
     # 5. Create RAG chain and start interactive query session if retriever exists
     if retriever:
         rag_chain = create_rag_chain(retriever)
-        
+
         print("\nRAG system is ready for use!")
-        print("You can now query it with your own questions about IMC Prosperity trading data and Notion Wiki.")
+        print(
+            "You can now query it with your own questions about IMC Prosperity trading data and Notion Wiki."
+        )
         print("Enter 'quit', 'exit', or 'q' to end the session.")
-        
+
         # Interactive query loop
         while True:
             query = input("\nEnter your question: ")
-            
+
             # Check for exit commands
             if query.lower() in ["quit", "exit", "q"]:
                 print("Exiting RAG query session. Goodbye!")
                 break
-                
+
             if not query.strip():
                 print("Please enter a valid question.")
                 continue
-                
+
             # Process the query
             try:
                 print("\nProcessing your question...")
@@ -732,6 +770,7 @@ def main():
                 print("Please try again with a different question.")
     else:
         print("\nCould not create RAG system: No retrievers available")
+
 
 if __name__ == "__main__":
     main()
