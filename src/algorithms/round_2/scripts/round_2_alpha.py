@@ -131,7 +131,6 @@ class Logger:
 # Global logger instance
 logger = Logger()
 
-# Define product names as constants
 RAINFOREST_RESIN = "RAINFOREST_RESIN"
 KELP = "KELP"
 SQUID_INK = "SQUID_INK"
@@ -239,16 +238,12 @@ BASKET2_COMPONENTS = {
 
 class Trader:
     def __init__(self):
-        # Store price history for all products
         self.price_history = {
             product: deque(maxlen=max([p["sma_window"] for p in PARAMS.values()]))
             for product in POSITION_LIMITS
         }
         
-        # Store mid prices from last iteration
         self.last_mid_prices = {}
-        
-        # Store position history for basket conversion analysis
         self.previous_position = {}
         
         logger.print("Trader initialized with strategies for all products.")
@@ -272,7 +267,7 @@ class Trader:
             for price, volume in order_depth.buy_orders.items():
                 weighted_sum += price * volume
                 total_volume += volume
-        else:  # sell
+        else:
             if not order_depth.sell_orders:
                 return None  # type: ignore
             total_volume = 0

@@ -22,9 +22,7 @@ from src.rag.build_rag_system import (
     process_trading_data,
 )
 
-# --------------------------------------------------------------------------- #
 # Page configuration
-# --------------------------------------------------------------------------- #
 # Custom browser-tab favicon: the candlestick logo (assets/logo.png). Resolved
 # relative to this file so it works regardless of the working directory the app
 # is launched from (Streamlit Cloud runs from the repo root). Streamlit's
@@ -39,9 +37,7 @@ st.set_page_config(
     initial_sidebar_state="expanded",
 )
 
-# --------------------------------------------------------------------------- #
 # Styling
-# --------------------------------------------------------------------------- #
 st.markdown(
     """
     <style>
@@ -79,9 +75,7 @@ EXAMPLE_PROMPTS = [
 ]
 
 
-# --------------------------------------------------------------------------- #
 # RAG system (built once, cached for the session)
-# --------------------------------------------------------------------------- #
 @st.cache_resource(show_spinner="Loading knowledge base and building the RAG system…")
 def initialize_rag_system():
     notion_documents = process_notion_wiki_data()
@@ -108,9 +102,7 @@ def render_sources(source_documents):
             st.code(doc.page_content, language="text")
 
 
-# --------------------------------------------------------------------------- #
 # Sidebar
-# --------------------------------------------------------------------------- #
 with st.sidebar:
     st.markdown("### 📈 Prosperity Assistant")
     st.caption("RAG-powered insights over IMC Prosperity wiki, Discord, and trading data.")
@@ -136,9 +128,7 @@ with st.sidebar:
     st.caption("Built for the IMC Prosperity trading competition.")
 
 
-# --------------------------------------------------------------------------- #
 # Main panel
-# --------------------------------------------------------------------------- #
 st.markdown('<div class="app-title">IMC Prosperity Trading Assistant</div>', unsafe_allow_html=True)
 st.markdown(
     '<div class="app-subtitle">Ask about products, position limits, and strategies — '
