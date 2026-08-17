@@ -72,15 +72,11 @@ ignore = [
     "BLE001",     # Allow broad exception handling in CLI scripts
     "PLR1722",    # Allow exit() in CLI scripts
     "E501",       # Line too long - we use 100, some existing lines exceed
-    "W291",       # Trailing whitespace
-    "W292",       # No newline at end of file
-    "W293",       # Blank line contains whitespace
     "N803",       # Argument names in external API (IMC datamodel)
     "N802",       # Function names in external API
     "N801",       # Class names in external API
     "PLR0913",    # Too many arguments - external API
     "PLR0917",    # Too many positional arguments - external API
-    "I001",       # Import sorting - will fix separately
     "PLR0912",    # Too many branches - complex trading logic
     "PLR0915",    # Too many statements - complex trading logic
     "N806",       # Variable naming in external API
