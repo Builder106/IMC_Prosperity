@@ -29,7 +29,7 @@ jobs:
       - uses: actions/checkout@v7
 
       - name: Cache uv
-        uses: actions/cache@v4
+        uses: actions/cache@v6
         with:
           path: ~/.cache/uv
           key: uv-${{ runner.os }}-${{ hashFiles('uv.lock') }}
@@ -37,7 +37,7 @@ jobs:
             uv-${{ runner.os }}-
 
       - name: Cache pip
-        uses: actions/cache@v4
+        uses: actions/cache@v6
         with:
           path: ~/.cache/pip
           key: pip-${{ runner.os }}-${{ hashFiles('uv.lock') }}
@@ -45,7 +45,7 @@ jobs:
             pip-${{ runner.os }}-
 
       - name: Cache Hugging Face
-        uses: actions/cache@v4
+        uses: actions/cache@v6
         with:
           path: ~/.cache/huggingface
           key: hf-${{ runner.os }}-${{ hashFiles('uv.lock') }}
