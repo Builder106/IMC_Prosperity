@@ -4,11 +4,6 @@
       <stop offset="0" stop-color="#0B0F14"/>
       <stop offset="1" stop-color="#11202A"/>
     </linearGradient>
-    <linearGradient id="word" x1="300" y1="0" x2="980" y2="0" gradientUnits="userSpaceOnUse">
-      <stop offset="0" stop-color="#10B981"/>
-      <stop offset="0.6" stop-color="#34D399"/>
-      <stop offset="1" stop-color="#6EE7B7"/>
-    </linearGradient>
     <linearGradient id="tile" x1="0" y1="290" x2="160" y2="130" gradientUnits="userSpaceOnUse">
       <stop offset="0" stop-color="#059669"/>
       <stop offset="1" stop-color="#34D399"/>
@@ -28,7 +23,7 @@
       <rect x="100" y="46" width="24" height="42" rx="6"/>
     </g>
   </g>
-  <text x="300" y="182" font-family="system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif" font-size="68" font-weight="700" fill="url(#word)">IMC Prosperity</text>
+  <text x="300" y="182" font-family="system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif" font-size="68" font-weight="700" fill="#10B981">IMC Prosperity</text>
   <text x="302" y="240" font-family="system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif" font-size="40" font-weight="600" fill="#E6EDF3">Trading Assistant</text>
   <text x="303" y="290" font-family="system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif" font-size="22" fill="#8B98A5">RAG-powered insights over the Prosperity wiki, Discord &amp; market data.</text>
 </svg>
