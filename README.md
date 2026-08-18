@@ -18,26 +18,26 @@
 
 In algorithmic trading competitions, participants write code that buys and sells assets automatically in simulated markets. This assistant acts like a trading coach and strategy generator. It reads competition rulebooks, historical trade data, and community discussions to answer technical questions and generate working trading algorithms.
 
-Ask about products, position limits, and market mechanics, or request a ready-to-run trading algorithm grounded in competition rules via retrieval-augmented generation (RAG).
+Ask about products, position limits, and market mechanics, or request a ready-to-run trading algorithm grounded in competition rules via search-augmented AI (RAG).
 
 **Live app:** [tradetell.streamlit.app](https://tradetell.streamlit.app)
 
 ## 🛠 Technical Overview
 
-This project combines Notion wiki documentation, trading logs, and code examples into a multi-vector RAG system that can:
+This project combines documentation wikis, trading logs, and code examples into an AI search system that can:
 
-- Answer questions about IMC Prosperity rules, mechanics, and concepts
-- Analyze trading logs and surface insights
-- Help develop and improve trading algorithms (it generates complete `Trader` classes)
-- Retrieve relevant market data and code examples for grounding
+- Answer questions about IMC Prosperity rules, mechanics, and market concepts
+- Analyze trading logs and highlight key performance insights
+- Help develop and improve trading algorithms by generating complete Python trading classes
+- Retrieve relevant historical market data and verified code examples to back up its answers
 
 ## Features
 
-- **Streamlit chat interface** — conversational UI with history, per-answer sources, and example prompts
-- **RAG system** — ensemble retrieval over three weighted vector stores (wiki, trading data, code)
-- **Groq-backed generation** — fast inference via the Groq API (`llama-3.3-70b-versatile` by default)
-- **Knowledge base** — Notion wiki (Markdown), Discord exports, and processed trading data
-- **Trading log analysis** — summarizes and extracts insights from competition logs
+- **Interactive chat interface**: Conversational web UI with chat history, verified source documents, and example prompts
+- **Multi-source search**: Searches across three knowledge stores (rules wiki, historical trading data, and code examples)
+- **Fast cloud inference**: Powered by the Groq API (`llama-3.3-70b-versatile` by default)
+- **Comprehensive knowledge base**: Includes competition guides, community discussions, and processed market datasets
+- **Trading log analyzer**: Summarizes and extracts actionable insights from competition logs
 
 ## How it works
 
@@ -66,17 +66,17 @@ first query after a cold start re-embeds the corpus and is slower than the rest.
 
 ## Project structure
 
-- **`app.py`** — Streamlit application entry point (chat UI + RAG wiring)
-- **`src/`** — source code
-  - **`rag/`** — RAG system
-    - **`build_rag_system.py`** — document processing, vector stores, retriever, chain
-    - **`groq_llm.py`** — `GroqRagChain` (Groq-backed, swappable backend)
-    - **`model_config.py`** — env-driven model/embedding configuration
-    - **`process_raw_trading_data.py`** — trading-data processing
-  - **`algorithms/`** — round-by-round trading algorithms
-  - **`utils/`** — Notion scraper and trading-log tools
-- **`data/`** — `prosperity_wiki/`(Markdown),`trading_data/`, processed datasets
-- **`tests/`** — pytest suite (offline; network mocked)
+- **`app.py`**: Streamlit application entry point (chat UI + RAG wiring)
+- **`src/`**: source code
+  - **`rag/`**: RAG system
+    - **`build_rag_system.py`**: document processing, vector stores, retriever, chain
+    - **`groq_llm.py`**: `GroqRagChain` (Groq-backed, swappable backend)
+    - **`model_config.py`**: env-driven model/embedding configuration
+    - **`process_raw_trading_data.py`**: trading-data processing
+  - **`algorithms/`**: round-by-round trading algorithms
+  - **`utils/`**: Notion scraper and trading-log tools
+- **`data/`**: `prosperity_wiki/` (Markdown), `trading_data/`, processed datasets
+- **`tests/`**: pytest suite (offline; network mocked)
 
 ## Getting started
 
@@ -120,7 +120,7 @@ streamlit run app.py
 
 ## Usage
 
-1. Ask a question about products, position limits, or strategies — or request a trading algorithm.
+1. Ask a question about products, position limits, or strategies, or request a trading algorithm.
 2. Read the AI-generated answer; expand **sources** to see the retrieved context.
 3. Use the sidebar example prompts as starting points.
 
