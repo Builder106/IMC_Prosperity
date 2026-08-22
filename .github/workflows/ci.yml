@@ -74,4 +74,6 @@ jobs:
         run: uv run --frozen ruff check src app.py tests
 
       - name: Run tests
-        run: uv run --frozen pytest
+        env:
+          PYTHONWARNINGS: "error"
+        run: uv run --frozen pytest -W error
