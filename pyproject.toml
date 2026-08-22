@@ -48,6 +48,11 @@ py-modules = []
 pythonpath = ["."]
 testpaths = ["tests"]
 norecursedirs = ["tools", ".venv", "vectordb", "data", "backtests"]
+filterwarnings = [
+    "error",
+    "ignore:.*langchain-community is being sunset.*:DeprecationWarning",
+    "ignore::DeprecationWarning:langchain_community.*",
+]
 
 [tool.ruff]
 target-version = "py311"
