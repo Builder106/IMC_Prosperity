@@ -6,13 +6,7 @@ from pathlib import Path
 from dotenv import load_dotenv
 from langchain_chroma import Chroma
 from langchain_classic.retrievers import EnsembleRetriever
-from langchain_community.vectorstores.utils import filter_complex_metadata
 from langchain_core.documents import Document
-
-# langchain 1.x: embeddings + vectorstores live in dedicated integration
-# packages; Document moved to langchain_core; the legacy EnsembleRetriever
-# moved to langchain-classic. filter_complex_metadata + the text splitter
-# kept their homes.
 from langchain_huggingface import HuggingFaceEmbeddings
 from langchain_text_splitters import RecursiveCharacterTextSplitter
 
@@ -465,6 +459,13 @@ def create_vector_stores(notion_documents, trading_documents):
                 # Convert any other type to string
                 cleaned[key] = str(value)
         return cleaned
+
+    def filter_complex_metadata(doc_or_docs):
+        if isinstance(doc_or_docs, list):
+            return [filter_complex_metadata(d) for d in doc_or_docs]
+        d = ensure_document(doc_or_docs)
+        meta = getattr(d, "metadata", {}) or {}
+        return Document(page_content=d.page_content, metadata=clean_metadata(meta))
 
     # Only create notion vector store if there are documents
     if notion_documents:
