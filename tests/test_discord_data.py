@@ -6,7 +6,7 @@ from src.rag.discord_data import load_discord_exports
 
 
 def test_discord_document_fallback_when_langchain_is_unavailable(monkeypatch):
-    import src.rag.discord_data as discord_data
+    from src.rag import discord_data
 
     original_import = builtins.__import__
 
