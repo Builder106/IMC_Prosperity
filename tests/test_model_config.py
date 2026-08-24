@@ -39,3 +39,27 @@ def test_env_overrides_model_selection(monkeypatch):
     assert module.get_embedding_model_name() == "sentence-transformers/all-mpnet-base-v2"
     assert module.get_groq_api_key() == "gsk_test_key"
     assert module.get_groq_timeout_seconds() == 240
+
+
+def test_numeric_defaults_and_overrides(monkeypatch):
+    for name in (
+        "LLM_TEMPERATURE",
+        "LLM_MAX_TOKENS",
+        "RAG_MAX_CONTEXT_CHARS",
+    ):
+        monkeypatch.delenv(name, raising=False)
+
+    module = _reload_module()
+
+    assert module.get_llm_temperature() == 0.2
+    assert module.get_max_completion_tokens() == 4096
+    assert module.get_max_context_chars() == 12000
+
+    monkeypatch.setenv("LLM_TEMPERATURE", "0.75")
+    monkeypatch.setenv("LLM_MAX_TOKENS", "2048")
+    monkeypatch.setenv("RAG_MAX_CONTEXT_CHARS", "6000")
+    module = _reload_module()
+
+    assert module.get_llm_temperature() == 0.75
+    assert module.get_max_completion_tokens() == 2048
+    assert module.get_max_context_chars() == 6000

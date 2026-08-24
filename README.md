@@ -141,6 +141,12 @@ guardrails. Run the suite with:
 pytest
 ```
 
+The deterministic unit coverage gate is:
+
+```bash
+uv run pytest --cov-report=term-missing
+```
+
 ## Acknowledgments
 
 - IMC Prosperity for the trading competition

@@ -32,13 +32,14 @@ dependencies = [
 [dependency-groups]
 dev = [
     "pytest",
+    "pytest-cov",
     "playwright",
     "ruff",
 ]
 
 [tool.uv]
 package = false
-default-groups = []
+default-groups = ["dev"]
 
 [tool.setuptools]
 py-modules = []
@@ -47,8 +48,23 @@ py-modules = []
 pythonpath = ["."]
 testpaths = ["tests"]
 norecursedirs = ["tools", ".venv", "vectordb", "data", "backtests"]
+addopts = "--cov --cov-report=term-missing"
 filterwarnings = [
     "error",
+]
+
+[tool.coverage.run]
+source = [
+    "src.rag.model_config",
+    "src.rag.discord_data",
+    "src.utils.dir_structure",
+]
+
+[tool.coverage.report]
+fail_under = 100
+show_missing = true
+exclude_lines = [
+    "if __name__ == .__main__.:",
 ]
 
 [tool.ruff]
@@ -99,5 +115,3 @@ unfixable = []
 [tool.ruff.format]
 quote-style = "double"
 indent-style = "space"
-
-
