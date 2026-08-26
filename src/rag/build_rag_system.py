@@ -464,6 +464,8 @@ def create_vector_stores(notion_documents, trading_documents):
         if isinstance(doc_or_docs, list):
             return [filter_complex_metadata(d) for d in doc_or_docs]
         d = ensure_document(doc_or_docs)
+        if d is None:
+            return Document(page_content="", metadata={})
         meta = getattr(d, "metadata", {}) or {}
         return Document(page_content=d.page_content, metadata=clean_metadata(meta))
 

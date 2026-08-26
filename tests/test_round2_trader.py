@@ -19,7 +19,7 @@ def _load_module(module_name: str, path: Path):
 
 if "jsonpickle" not in sys.modules:
     jsonpickle_stub = types.ModuleType("jsonpickle")
-    jsonpickle_stub.encode = lambda value: str(value)
+    setattr(jsonpickle_stub, "encode", lambda value: str(value))
     sys.modules["jsonpickle"] = jsonpickle_stub
 
 datamodel = _load_module("round2_datamodel_base", ROUND1_DIR / "datamodel.py")
