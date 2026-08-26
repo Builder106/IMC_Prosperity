@@ -1,6 +1,8 @@
 {
   "venvPath": ".",
   "venv": ".venv",
+  "reportMissingTypeStubs": false,
+  "reportMissingImports": false,
   "exclude": [
     "tools",
     "data/prosperity_wiki/code",
