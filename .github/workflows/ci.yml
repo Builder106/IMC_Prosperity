@@ -10,6 +10,9 @@ concurrency:
   group: ci-${{ github.ref }}
   cancel-in-progress: true
 
+permissions:
+  contents: read
+
 jobs:
   secrets:
     name: Secret scan
@@ -53,7 +56,7 @@ jobs:
             hf-${{ runner.os }}-
 
       - name: Set up uv
-        uses: astral-sh/setup-uv@v7
+        uses: astral-sh/setup-uv@v10
         with:
           enable-cache: true
 
@@ -72,6 +75,12 @@ jobs:
 
       - name: Lint
         run: uv run --frozen ruff check src app.py tests
+
+      - name: Format check
+        run: uv run --frozen ruff format --check src app.py tests
+
+      - name: Type check (pyright)
+        run: uv run --with pyright pyright
 
       - name: Run tests
         run: uv run --frozen pytest
