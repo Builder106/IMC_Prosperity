@@ -6,7 +6,7 @@
     "demo": "bddgen --config playwright.demo.config.ts && playwright test --config playwright.demo.config.ts"
   },
   "devDependencies": {
-    "@playwright/test": "^1.61.1",
+    "@playwright/test": "^1.62.1",
     "@types/node": "^26.1.1",
     "playwright-bdd": "^9.2.0",
     "typescript": "^7.0.2"
