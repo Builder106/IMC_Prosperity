@@ -1,32 +1,48 @@
-# OS / editor
-
-# Secrets
+# Environment & credentials
 .env
+.env.*
+!.env.example
 
 # Python
-__pycache__
+__pycache__/
+*.py[cod]
+*$py.class
 .pytest_cache/
+.ruff_cache/
+.mypy_cache/
 
-# Virtualenv / vector store
-.venv
-vectordb
+# Coverage
+.coverage
+coverage/
+htmlcov/
+coverage.xml
+
+# Virtualenv & vector store
+.venv/
+vectordb/
 
 # Vendored third-party tooling (kept local, not committed)
-# Anchored to repo root so it never matches nested source dirs.
 /tools/
 
 # Competition data dumps & archives (kept local, not committed)
-# Root-anchored: avoids case-insensitive collisions with src/algorithms/round_*/
 *.zip
 /267453/
 /data/competition_rounds/
 /backtests/
 
-# Generated logs
+# Logs
 *.log
 
-# Node modules
+# Node modules & Playwright
 node_modules/
-
-# playwright-bdd generated specs
+test-results/
+playwright-report/
+playwright/.cache/
 e2e/.features-gen/
+
+# Deployments & editor
+.vercel
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
