@@ -61,8 +61,9 @@ sequenceDiagram
     UI-->>User: rendered answer with sources
 ```
 
-The vector stores are built in-memory at startup (cached for the session), so the
-first query after a cold start re-embeds the corpus and is slower than the rest.
+The vector stores are built at startup and persisted under
+`data/vectordb_persisted/`. Streamlit caches the assembled retriever for the
+session, but a cold start still processes and embeds the corpus as needed.
 
 ## Project structure
 

@@ -44,11 +44,10 @@ must be mocked; the suite runs offline.
   wheels for its Python version. A full freeze broke the Streamlit Cloud install
   once — don't reintroduce blanket pins.
 
-- **The vector store is built in-memory** (`Chroma.from_documents` with no
-
-  `persist_directory`). It's rebuilt on every cold start under
-  `@st.cache_resource`; don't reintroduce on-disk persistence — the SQLite path
-  fails on Streamlit Cloud.
+- **The vector stores use local Chroma persistence** under
+  `data/vectordb_persisted/`. The application builds them during startup and
+  caches the assembled retriever with `@st.cache_resource`. Keep the target
+  deployment's filesystem and SQLite support in mind when changing this path.
 
 - **LLM calls go through `GroqRagChain`** (`src/rag/groq_llm.py`), behind the
 

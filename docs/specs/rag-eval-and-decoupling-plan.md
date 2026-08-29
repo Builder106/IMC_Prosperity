@@ -1,12 +1,12 @@
 # TradeTell (IMC Prosperity): RAG Evaluation & Decoupling Architecture Roadmap
 
-This document outlines the engineering plan for upgrading **TradeTell** (the AI assistant for IMC Prosperity) from an in-memory prototype to a decoupled, high-performance RAG application with continuous retrieval/generation evaluation.
+This document outlines the engineering plan for upgrading **TradeTell** (the AI assistant for IMC Prosperity) from a Streamlit application with disk-persisted Chroma stores to a decoupled RAG application with continuous retrieval and generation evaluation.
 
 ---
 
 ## 1. Objectives
 
-1. **Eliminate Cold-Start Overhead:** Replace in-memory Chroma DB rebuilding with disk-persisted vector store collections (`data/vectordb_persisted/`).
+1. **Finish persistent indexing:** Add offline indexing and loading of existing vector store collections under `data/vectordb_persisted/` so cold starts do not rebuild the corpus unnecessarily.
 2. **Decouple Frontend & Backend:**Transition from a unified Streamlit application to a dedicated**FastAPI**REST/SSE backend and a**React/Vite** frontend.
 3. **Automated RAG Evaluation:** Establish continuous quality benchmarks measuring Retrieval Context Precision, Answer Faithfulness, and Groundedness.
 
@@ -14,11 +14,11 @@ This document outlines the engineering plan for upgrading **TradeTell** (the AI 
 
 ## 2. Phase 1: Persistent Vector Indexing
 
-Currently, `src/rag/build_rag_system.py` processes raw Markdown files, Discord exports, and code samples into Chroma vector stores at runtime startup.
+`src/rag/build_rag_system.py` processes raw Markdown files, Discord exports, and code samples into disk-persisted Chroma vector stores at runtime startup.
 
 ### Changes
 
-- Update `Chroma`initialization in`build_rag_system.py`to specify`persist_directory="data/vectordb_persisted"`.
+- Chroma initialization already writes the stores below `data/vectordb_persisted/`.
 - Implement a CLI indexing script (`python -m src.rag.index_corpus`) to pre-build vector collections offline.
 - Modify runtime initialization to attempt loading existing disk collections before attempting re-indexing.
 

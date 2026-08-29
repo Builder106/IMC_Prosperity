@@ -8,6 +8,10 @@
 
 Updated the README headline, summary tagline, and introduction to explain the trading assistant as an automated strategy coach for trading competitions. Replaced specialized jargon with intuitive concepts and removed all em dashes from the introductory prose.
 
+## 2026-08-29: ChromaDB advisory review #security
+
+The app uses ChromaDB 1.5.9 through LangChain for three local persistent stores. GitHub reports four unpatched advisories. The app does not start a Chroma HTTP server or enable Hugging Face remote code execution, so CI records a temporary, exact-ID exception while Chroma remains in use. Revisit the exception when an upstream fix is available.
+
 ## 2026-08-07 — Disk-persisted vector storage & RAG evaluation harness #milestone
 
 Configured Chroma vector stores in `src/rag/build_rag_system.py`to persist index artifacts to`data/vectordb_persisted/`, eliminating cold-start re-embedding overhead. Created `docs/RAG-EVAL-AND-DECOUPLING-PLAN.md`detailing the roadmap for decoupling Streamlit to a FastAPI backend + React frontend, and added a automated RAG evaluation test suite in`tests/test_rag_eval.py`.
