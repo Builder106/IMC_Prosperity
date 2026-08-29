@@ -406,6 +406,7 @@ def create_vector_stores(notion_documents, trading_documents):
     # Initialize the embedding model with Google's generative embeddings
     embeddings = HuggingFaceEmbeddings(
         model_name=get_embedding_model_name(),
+        model_kwargs={"trust_remote_code": False},
     )
 
     # Create text splitter optimized for code and general content
