@@ -7,7 +7,7 @@
 </p>
 
 [![CI](https://github.com/Builder106/imc-prosperity/actions/workflows/ci.yml/badge.svg)](https://github.com/Builder106/imc-prosperity/actions/workflows/ci.yml)
-[![Python](https://img.shields.io/badge/python-3.9%2B-blue.svg)](https://www.python.org/)
+[![Python](https://img.shields.io/badge/python-3.11%2B-blue.svg)](https://www.python.org/)
 [![License: MIT](https://img.shields.io/badge/license-MIT-green.svg)](#license)
 [![Live demo](https://img.shields.io/badge/demo-live-success.svg)](https://tradetell.streamlit.app)
 [![Built with Streamlit](https://img.shields.io/badge/built%20with-Streamlit-FF4B4B.svg)](https://streamlit.io)
@@ -52,7 +52,7 @@ sequenceDiagram
     User->>UI: Ask a question
     UI->>RAG: invoke({ query })
     RAG->>R: retrieve(query)
-    R->>VS: similarity search (wiki · trading · code)
+    R->>VS: similarity search (wiki | trading | code)
     VS-->>R: top-k documents
     R-->>RAG: ranked, weighted context
     RAG->>Groq: prompt + context (llama-3.3-70b)
