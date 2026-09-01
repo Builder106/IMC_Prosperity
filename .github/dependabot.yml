@@ -1,17 +1,22 @@
 version: 2
 updates:
-  # Python dependencies are managed deliberately. The E2E npm project is
-  # tracked separately below. requirements.txt pins the deploy-critical packages
-  # (langchain 0.2.x, recent opentelemetry, protobuf<7) and intentionally leaves
-  # the heavy stack unpinned for the Cloud resolver. Automated bumps there
-  # reintroduce the install/import failures that were just stabilized, so the uv
-  # ecosystem is excluded.
   - package-ecosystem: github-actions
     directory: "/"
     schedule:
       interval: weekly
+    groups:
+      actions:
+        patterns:
+          - "*"
 
   - package-ecosystem: "npm"
     directory: "/e2e"
     schedule:
       interval: "weekly"
+    groups:
+      minor-and-patch:
+        patterns:
+          - "*"
+        update-types:
+          - minor
+          - patch
