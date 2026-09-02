@@ -2,8 +2,7 @@ import json
 import os
 import re
 from pathlib import Path
-
-from typing import Any, Union
+from typing import Any
 
 from dotenv import load_dotenv
 from langchain_chroma import Chroma
@@ -303,7 +302,7 @@ def process_trading_data():
     return all_documents
 
 
-def process_discord_data(discord_dir: Union[str, Path] = DISCORD_DATA_DIR):
+def process_discord_data(discord_dir: str | Path = DISCORD_DATA_DIR):
     print(f"Processing Discord data from {discord_dir}...")
     discord_path = Path(discord_dir)
     discord_path.mkdir(parents=True, exist_ok=True)
