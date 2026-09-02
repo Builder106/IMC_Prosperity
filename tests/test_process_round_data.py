@@ -1,9 +1,6 @@
-from pathlib import Path
-
 import numpy as np
 import pandas as pd
 from src.utils.process_round_trading_data_alpha import (
-    calculate_hurst_exponent as alpha_hurst,
     calculate_metrics as alpha_metrics,
 )
 from src.utils.process_round_trading_data_stable_prices_trades import (
