@@ -2,6 +2,7 @@ import json
 import os
 import re
 from pathlib import Path
+from typing import Any
 
 from dotenv import load_dotenv
 from langchain_chroma import Chroma
@@ -196,90 +197,10 @@ def process_notion_wiki_data(wiki_dir=NOTION_WIKI_DIR):
 
         # Process each JSON file in the category directory
         for json_file in category_path.rglob("*.json"):
-            try:
-                with open(json_file, encoding="utf-8") as f:
-                    data = json.load(f)
-
-                # Extract content from the JSON structure
-                content = ""
-
-                # Process the list structure with proper type handling
-                if isinstance(data, list):
-                    for item in data:
-                        if isinstance(item, dict):
-                            # Handle different content types
-                            if "type" in item:
-                                if item["type"].startswith("h"):
-                                    # Handle headings (h1, h2, h3, etc.)
-                                    heading_level = item["type"][1:]
-                                    content += f"{'#' * int(heading_level)} {item['content']}\n\n"
-                                elif item["type"] == "p":
-                                    # Handle paragraphs
-                                    content += f"{item['content']}\n\n"
-                                elif item["type"] == "list" and "items" in item:
-                                    # Handle lists with nested items
-                                    content += process_list_items(
-                                        item["items"], item.get("style", "bulleted")
-                                    )
-                                elif item["type"] == "code" and "file_path" in item:
-                                    # Load external code file
-                                    code_content = load_code_file(item["file_path"])
-                                    if code_content:
-                                        language = item.get("language", "")
-                                        content += f"```{language}\n{code_content}\n```\n\n"
-                                    else:
-                                        # Fallback to preview if available
-                                        preview = item.get("preview", "Code content unavailable")
-                                        content += f"```\n{preview}\n```\n\n"
-                                elif item["type"] == "code":
-                                    # Handle inline code
-                                    code = item.get("code", "")
-                                    language = item.get("language", "")
-                                    content += f"```{language}\n{code}\n```\n\n"
-                            # Fallback for any other structure
-                            elif "content" in item:
-                                content += f"{item['content']}\n\n"
-                else:
-                    # Handle dictionary structure (if exists)
-                    if "title" in data:
-                        content += f"# {data['title']}\n\n"
-
-                    if "content_blocks" in data:
-                        for block in data["content_blocks"]:
-                            if "text" in block:
-                                content += f"{block['text']}\n\n"
-                            elif "code" in block:
-                                language = block.get("language", "")
-                                content += f"```{language}\n{block['code']}\n```\n\n"
-                            elif "file_path" in block:
-                                # Load external code file
-                                code_content = load_code_file(block["file_path"])
-                                if code_content:
-                                    language = block.get("language", "")
-                                    content += f"```{language}\n{code_content}\n```\n\n"
-                                else:
-                                    # Fallback to preview if available
-                                    preview = block.get("preview", "Code content unavailable")
-                                    content += f"```\n{preview}\n```\n\n"
-
-                # Create Document with enhanced metadata
-                doc = Document(
-                    page_content=content,
-                    metadata={
-                        "source": str(json_file),
-                        "category": category,
-                        "type": "notion_wiki",
-                        "title": extract_title(data),
-                        "contains_code": "```" in content,
-                        "code_languages": extract_code_languages(data),
-                    },
-                )
-
+            doc = load_json_file(json_file, category)
+            if doc:
                 documents.append(doc)
                 print(f"Processed {json_file.name}")
-
-            except (OSError, ValueError, KeyError) as e:
-                print(f"Error processing {json_file}: {e}")
 
         for md_file in category_path.rglob("*.md"):
             doc = load_markdown_file(md_file, category)
@@ -381,7 +302,7 @@ def process_trading_data():
     return all_documents
 
 
-def process_discord_data(discord_dir=DISCORD_DATA_DIR):
+def process_discord_data(discord_dir: str | Path = DISCORD_DATA_DIR):
     print(f"Processing Discord data from {discord_dir}...")
     discord_path = Path(discord_dir)
     discord_path.mkdir(parents=True, exist_ok=True)
@@ -461,9 +382,7 @@ def create_vector_stores(notion_documents, trading_documents):
                 cleaned[key] = str(value)
         return cleaned
 
-    def filter_complex_metadata(doc_or_docs):
-        if isinstance(doc_or_docs, list):
-            return [filter_complex_metadata(d) for d in doc_or_docs]
+    def filter_complex_metadata(doc_or_docs: Any) -> Document:
         d = ensure_document(doc_or_docs)
         if d is None:
             return Document(page_content="", metadata={})
@@ -477,41 +396,7 @@ def create_vector_stores(notion_documents, trading_documents):
             split_notion_docs = text_splitter.split_documents(notion_documents)
 
             if split_notion_docs:
-                # Process all documents to ensure they're valid Document objects
-                valid_notion_docs = []
-                for item in split_notion_docs:
-                    try:
-                        doc = ensure_document(item)
-                        valid_notion_docs.append(doc)
-                    except (ValueError, TypeError, AttributeError) as e:
-                        print(f"Error processing notion document: {e}")
-
-                # Now clean and normalize the metadata
-                filtered_notion_docs = []
-                for doc in valid_notion_docs:
-                    try:
-                        # First create a document with cleaned metadata
-                        cleaned_doc = Document(
-                            page_content=doc.page_content, metadata=clean_metadata(doc.metadata)
-                        )
-                        filtered_notion_docs.append(cleaned_doc)
-                    except (ValueError, TypeError, AttributeError) as e:
-                        print(f"Error cleaning notion document metadata: {e}")
-                        # If cleaning fails, try filter_complex_metadata as fallback
-                        try:
-                            filtered_doc = filter_complex_metadata(doc)
-                            filtered_notion_docs.append(filtered_doc)
-                        except (ValueError, TypeError, AttributeError) as e2:
-                            print(f"Error filtering notion document metadata: {e2}")
-                            # Last resort: create a document with minimal metadata
-                            minimal_metadata = (
-                                {"source": doc.metadata.get("source", "unknown")}
-                                if hasattr(doc, "metadata")
-                                else {}
-                            )
-                            filtered_notion_docs.append(
-                                Document(page_content=doc.page_content, metadata=minimal_metadata)
-                            )
+                filtered_notion_docs = [filter_complex_metadata(d) for d in split_notion_docs]
 
                 print(
                     f"[DEBUG build_rag_system.py] Creating notion vector store with {len(filtered_notion_docs)} documents"
@@ -526,15 +411,7 @@ def create_vector_stores(notion_documents, trading_documents):
                 # Extract code blocks for specialized code search
                 code_blocks = extract_code_blocks(notion_documents)
                 if code_blocks:
-                    # Filter complex metadata structures from code blocks
-                    filtered_code_blocks = []
-                    for doc in code_blocks:
-                        try:
-                            filtered_code_blocks.append(
-                                filter_complex_metadata(ensure_document(doc))
-                            )  # type: ignore
-                        except (ValueError, TypeError, AttributeError) as e:
-                            print(f"Error filtering code block metadata: {e}")
+                    filtered_code_blocks = [filter_complex_metadata(d) for d in code_blocks]
 
                     print(
                         f"[DEBUG build_rag_system.py] Creating specialized code vector store with {len(filtered_code_blocks)} code blocks"
@@ -559,41 +436,7 @@ def create_vector_stores(notion_documents, trading_documents):
             split_trading_docs = text_splitter.split_documents(trading_documents)
 
             if split_trading_docs:
-                # Process all documents to ensure they're valid Document objects
-                valid_trading_docs = []
-                for item in split_trading_docs:
-                    try:
-                        doc = ensure_document(item)
-                        valid_trading_docs.append(doc)
-                    except (ValueError, TypeError, AttributeError) as e:
-                        print(f"Error processing trading document: {e}")
-
-                # Now clean and normalize the metadata
-                filtered_trading_docs = []
-                for doc in valid_trading_docs:
-                    try:
-                        # First create a document with cleaned metadata
-                        cleaned_doc = Document(
-                            page_content=doc.page_content, metadata=clean_metadata(doc.metadata)
-                        )
-                        filtered_trading_docs.append(cleaned_doc)
-                    except (ValueError, TypeError, AttributeError) as e:
-                        print(f"Error cleaning trading document metadata: {e}")
-                        # If cleaning fails, try filter_complex_metadata as fallback
-                        try:
-                            filtered_doc = filter_complex_metadata(doc)
-                            filtered_trading_docs.append(filtered_doc)
-                        except (ValueError, TypeError, AttributeError) as e2:
-                            print(f"Error filtering trading document metadata: {e2}")
-                            # Last resort: create a document with minimal metadata
-                            minimal_metadata = (
-                                {"source": doc.metadata.get("source", "unknown")}
-                                if hasattr(doc, "metadata")
-                                else {}
-                            )
-                            filtered_trading_docs.append(
-                                Document(page_content=doc.page_content, metadata=minimal_metadata)
-                            )
+                filtered_trading_docs = [filter_complex_metadata(d) for d in split_trading_docs]
 
                 print(
                     f"[DEBUG build_rag_system.py] Creating trading vector store with {len(filtered_trading_docs)} documents"

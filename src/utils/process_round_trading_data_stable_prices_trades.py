@@ -150,7 +150,7 @@ def process_round_csv(file_path, output_dir="processed_data"):
 
         elif "symbol" in df.columns:
             # Trade data format with symbol instead of product
-            if "timestamp" in df.columns and not "day" in df.columns:
+            if "timestamp" in df.columns and "day" not in df.columns:
                 # Try to extract day from timestamp if possible
                 # This is a simplified assumption - adjust based on actual data
                 for symbol, group in df.groupby("symbol"):
@@ -654,14 +654,21 @@ def calculate_hurst_exponent(time_series, max_lag=20):
     if len(ts) < max_lag + 10:  # Need enough data
         return np.nan
 
-    # Calculate range of lags
-    lags = range(2, max_lag)
-
     # Calculate variance of the log return
-    tau = [np.sqrt(np.std(np.subtract(ts[lag:], ts[:-lag]))) for lag in lags]
+    lags = range(2, max_lag)
+    valid_lags = []
+    valid_tau = []
+    for lag in lags:
+        std_val = np.std(np.subtract(ts[lag:], ts[:-lag]))
+        if std_val > 0:
+            valid_lags.append(lag)
+            valid_tau.append(np.sqrt(std_val))
+
+    if len(valid_lags) < 2:
+        return np.nan
 
     # Calculate the Hurst exponent as the slope
-    poly = np.polyfit(np.log(lags), np.log(tau), 1)
+    poly = np.polyfit(np.log(valid_lags), np.log(valid_tau), 1)
 
     return poly[0]  # Hurst exponent is the slope
 

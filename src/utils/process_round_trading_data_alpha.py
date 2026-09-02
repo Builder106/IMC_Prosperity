@@ -487,6 +487,8 @@ def calculate_time_based_metrics(df):
     # Moving averages and volatility if enough data points
     if "mid_price" in df_sorted.columns and len(df_sorted) >= 5:
         # Calculate moving averages if enough data
+        df_sorted["sma_5"] = df_sorted["mid_price"].rolling(window=5, min_periods=1).mean()
+        df_sorted["rolling_vol_5"] = df_sorted["mid_price"].rolling(window=5, min_periods=3).std()
         metrics["avg_rolling_volatility_5"] = df_sorted["rolling_vol_5"].mean()
 
         if len(df_sorted) >= 10:
@@ -565,12 +567,12 @@ def calculate_statistical_metrics(df):
                 # Try newer scipy versions
                 _, lb_pval = stats.acorr_ljungbox(valid_returns, lags=[5], return_df=False)  # type: ignore
                 metrics["returns_autocorr_pvalue"] = lb_pval[0]
-            except (AttributeError, TypeError):
+            except Exception:
                 try:
                     # Try older scipy versions
                     _, lb_pval = stats.acorr_ljungbox(valid_returns, nlags=5)  # type: ignore
                     metrics["returns_autocorr_pvalue"] = lb_pval[0]
-                except (AttributeError, TypeError):
+                except Exception:
                     # Fallback if function not available
                     metrics["returns_autocorr_pvalue"] = np.nan
 
@@ -711,14 +713,21 @@ def calculate_hurst_exponent(time_series, max_lag=20):
     if len(ts) < max_lag + 10:  # Need enough data
         return np.nan
 
-    # Calculate range of lags
-    lags = range(2, max_lag)
-
     # Calculate variance of the log return
-    tau = [np.sqrt(np.std(np.subtract(ts[lag:], ts[:-lag]))) for lag in lags]
+    lags = range(2, max_lag)
+    valid_lags = []
+    valid_tau = []
+    for lag in lags:
+        std_val = np.std(np.subtract(ts[lag:], ts[:-lag]))
+        if std_val > 0:
+            valid_lags.append(lag)
+            valid_tau.append(np.sqrt(std_val))
+
+    if len(valid_lags) < 2:
+        return np.nan
 
     # Calculate the Hurst exponent as the slope
-    poly = np.polyfit(np.log(lags), np.log(tau), 1)
+    poly = np.polyfit(np.log(valid_lags), np.log(valid_tau), 1)
 
     return poly[0]  # Hurst exponent is the slope
 

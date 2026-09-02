@@ -100,13 +100,13 @@ def format_summary_for_llm(summary):
         product = pattern.split("_")[0]
         output += f"{product}: Standard 2-order pattern executed {count} times\n"
 
-    for pattern, count in summary["special_order_patterns"].items():
+    for pattern, count in summary.get("special_order_handling", {}).items():
         product = pattern.split("_")[0]
         output += f"{product}: Special order pattern executed {count} times\n"
 
     # Example section (truncated)
     output += "\n## Representative Examples\n"
-    for example_type, text in summary["examples"].items():
+    for example_type, text in summary.get("representative_examples", {}).items():
         output += f"### {example_type}\n```\n{text}\n```\n"
 
     return output

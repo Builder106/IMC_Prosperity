@@ -48,7 +48,7 @@ py-modules = []
 pythonpath = ["."]
 testpaths = ["tests"]
 norecursedirs = ["tools", ".venv", "vectordb", "data", "backtests"]
-addopts = "--cov --cov-report=term-missing"
+addopts = "--cov --cov-report=term-missing --cov-fail-under=100"
 filterwarnings = [
     "error",
     "ignore::DeprecationWarning",
