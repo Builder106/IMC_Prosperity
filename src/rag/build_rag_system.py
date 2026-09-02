@@ -381,9 +381,7 @@ def create_vector_stores(notion_documents, trading_documents):
                 cleaned[key] = str(value)
         return cleaned
 
-    def filter_complex_metadata(doc_or_docs):
-        if isinstance(doc_or_docs, list):
-            return [filter_complex_metadata(d) for d in doc_or_docs]
+    def filter_complex_metadata(doc_or_docs: Any) -> Document:
         d = ensure_document(doc_or_docs)
         if d is None:
             return Document(page_content="", metadata={})

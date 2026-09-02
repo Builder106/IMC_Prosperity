@@ -94,7 +94,7 @@ def test_process_discord_data(tmp_path):
     }
     (discord_dir / "general.json").write_text(json.dumps(json_data), encoding="utf-8")
 
-    docs = process_discord_data(str(discord_dir))
+    docs = process_discord_data(discord_dir)
     assert len(docs) == 1
     assert "TraderJoe: Resin prices are surging!" in docs[0].page_content
 
