@@ -108,7 +108,9 @@ def test_discover_rounds_and_process_round_data(tmp_path):
 
     docs = process_round_data("round_1", str(trading_dir))
     assert len(docs) == 1
-    assert (round1_dir / "round_1_processed_trading_data" / "all_round_1_trading_data.json").exists()
+    assert (
+        round1_dir / "round_1_processed_trading_data" / "all_round_1_trading_data.json"
+    ).exists()
 
 
 def test_main_cli(tmp_path):
@@ -122,5 +124,7 @@ def test_main_cli(tmp_path):
 """
     (raw_dir / "prices_day_1.csv").write_text(csv_content, encoding="utf-8")
 
-    with patch("sys.argv", ["process_raw_trading_data", "--data_dir", str(trading_dir), "--rounds", "all"]):
+    with patch(
+        "sys.argv", ["process_raw_trading_data", "--data_dir", str(trading_dir), "--rounds", "all"]
+    ):
         main()

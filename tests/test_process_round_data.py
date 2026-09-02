@@ -77,8 +77,7 @@ def test_process_prices_and_trades(tmp_path):
 
     trades_csv = tmp_path / "trades.csv"
     trades_csv.write_text(
-        "timestamp;buyer;seller;symbol;currency;price;quantity\n"
-        "1000;B;S;RESIN;SEASHELLS;100;5\n",
+        "timestamp;buyer;seller;symbol;currency;price;quantity\n1000;B;S;RESIN;SEASHELLS;100;5\n",
         encoding="utf-8",
     )
 

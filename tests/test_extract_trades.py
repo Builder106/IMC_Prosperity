@@ -29,8 +29,24 @@ Trade History:
         reader = csv.reader(f, delimiter=";")
         rows = list(reader)
         assert len(rows) == 2
-        assert rows[0] == ["timestamp", "buyer", "seller", "symbol", "currency", "price", "quantity"]
-        assert rows[1] == ["1000", "BUYER_1", "SELLER_1", "RAINFOREST_RESIN", "SEASHELLS", "10000", "2"]
+        assert rows[0] == [
+            "timestamp",
+            "buyer",
+            "seller",
+            "symbol",
+            "currency",
+            "price",
+            "quantity",
+        ]
+        assert rows[1] == [
+            "1000",
+            "BUYER_1",
+            "SELLER_1",
+            "RAINFOREST_RESIN",
+            "SEASHELLS",
+            "10000",
+            "2",
+        ]
 
 
 def test_extract_trade_history_to_csv_empty_trade_data(tmp_path):

@@ -38,7 +38,10 @@ def test_extract_title():
 
 def test_extract_code_blocks():
     docs = [
-        Document(page_content="Some intro text\n```python\nprint('hello')\n```\nMore text", metadata={"source": "doc1"}),
+        Document(
+            page_content="Some intro text\n```python\nprint('hello')\n```\nMore text",
+            metadata={"source": "doc1"},
+        ),
         Document(page_content="No code here", metadata={"source": "doc2"}),
     ]
     code_docs = extract_code_blocks(docs)
@@ -97,9 +100,10 @@ def test_process_discord_data(tmp_path):
 
 
 def test_process_trading_data():
-    with patch("src.rag.build_rag_system.discover_rounds") as mock_discover, patch(
-        "src.rag.build_rag_system.process_round_data"
-    ) as mock_process:
+    with (
+        patch("src.rag.build_rag_system.discover_rounds") as mock_discover,
+        patch("src.rag.build_rag_system.process_round_data") as mock_process,
+    ):
         mock_discover.return_value = ["round_1"]
         mock_process.return_value = [
             {"content": "Trading data for RESIN", "metadata": {"product": "RESIN", "day": 1}}
@@ -111,14 +115,18 @@ def test_process_trading_data():
 
 
 def test_create_vector_stores_and_retrievers():
-    with patch("src.rag.build_rag_system.HuggingFaceEmbeddings"), patch(
-        "src.rag.build_rag_system.Chroma"
-    ) as mock_chroma, patch("src.rag.build_rag_system.EnsembleRetriever") as mock_ensemble:
+    with (
+        patch("src.rag.build_rag_system.HuggingFaceEmbeddings"),
+        patch("src.rag.build_rag_system.Chroma") as mock_chroma,
+        patch("src.rag.build_rag_system.EnsembleRetriever") as mock_ensemble,
+    ):
         mock_vs = MagicMock()
         mock_chroma.from_documents.return_value = mock_vs
         mock_ensemble.return_value = MagicMock()
 
-        notion_docs = [Document(page_content="Notion doc ```python\nx = 1\n```", metadata={"source": "notion"})]
+        notion_docs = [
+            Document(page_content="Notion doc ```python\nx = 1\n```", metadata={"source": "notion"})
+        ]
         trading_docs = [Document(page_content="Trading doc", metadata={"source": "trading"})]
 
         notion_vs, trading_vs, code_vs = create_vector_stores(notion_docs, trading_docs)

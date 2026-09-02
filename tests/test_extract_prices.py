@@ -36,5 +36,7 @@ def test_extract_price_data_to_csv_no_activity_log(tmp_path):
 
 
 def test_extract_price_data_to_csv_os_error(tmp_path):
-    success = extract_price_data_to_csv(str(tmp_path / "non_existent.log"), str(tmp_path / "out.csv"))
+    success = extract_price_data_to_csv(
+        str(tmp_path / "non_existent.log"), str(tmp_path / "out.csv")
+    )
     assert success is False
