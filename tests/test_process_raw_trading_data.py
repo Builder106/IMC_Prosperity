@@ -1,7 +1,5 @@
-import json
 from unittest.mock import patch
 
-import numpy as np
 import pandas as pd
 from src.rag.process_raw_trading_data import (
     calculate_trade_metrics,

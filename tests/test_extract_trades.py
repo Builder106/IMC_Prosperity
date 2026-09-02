@@ -1,4 +1,5 @@
 import csv
+
 from src.utils.extract_trades import extract_trade_history_to_csv
 
 

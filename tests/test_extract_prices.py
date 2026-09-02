@@ -1,4 +1,5 @@
 import csv
+
 from src.utils.extract_prices import extract_price_data_to_csv
 
 
