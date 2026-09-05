@@ -28,6 +28,7 @@ vectordb/
 *.zip
 /267453/
 /data/competition_rounds/
+/data/trading_data/
 /backtests/
 
 # Logs
