@@ -56,7 +56,7 @@ jobs:
             hf-${{ runner.os }}-
 
       - name: Set up uv
-        uses: astral-sh/setup-uv@v10
+        uses: astral-sh/setup-uv@v10.0.1
         with:
           enable-cache: true
 
